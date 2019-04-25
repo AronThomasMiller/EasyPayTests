@@ -7,26 +7,27 @@
         WebElementWrapper dropdownProfile;
 
         public override void Init(DriverWrapper driver)
-        {
-            btnProfile = driver.GetByXpath("//a[@href='/profile']");
-            btnLogOut = driver.GetByXpath("//a[@href='/logout']");
-            dropdownProfile = driver.GetByXpath("//a[@class='user-profile dropdown-toggle']");
+        {            
             base.Init(driver);
         }
 
         public void ClickOnProfileDropdown()
         {
+            dropdownProfile = driver.GetByXpath("//a[@class='user-profile dropdown-toggle']");
             dropdownProfile.ClickOnIt();
         }
 
-        public void GoToProfile()
+        public ProfilePage GoToProfile()
         {
-            ClickOnProfileDropdown();             
+            ClickOnProfileDropdown();
+            btnProfile = driver.GetByXpath("//a[@href='/profile']");                       
             btnProfile.ClickOnIt();
+            return GetPOM<ProfilePage>(driver);
         }
 
         public void LogOut()
         {
+            btnLogOut = driver.GetByXpath("//a[@href='/logout']");
             ClickOnProfileDropdown();  
             btnLogOut.ClickOnIt();
         }       

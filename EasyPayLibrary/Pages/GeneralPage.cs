@@ -22,7 +22,5 @@
             header.LogOut();
             return GetPOM<LoginPage>(driver);
         }
-
-        
     }
 }

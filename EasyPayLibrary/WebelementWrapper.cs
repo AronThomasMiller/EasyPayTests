@@ -46,6 +46,11 @@ namespace EasyPayLibrary
         {
             throw new NotImplementedException();
         }
+
+        public string GetAttribute(string attribute)
+        {
+            return element.GetAttribute(attribute);
+        }
         //private By selector;
         //private string XPath;
         //public IWebElement WebElement { get; set; }

@@ -19,6 +19,7 @@ namespace EasyPayLibrary
 
         public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
         {
+            GetByXpath(xpath);
             var elements = driver.FindElements(By.XPath(xpath));
             var result = elements.Select(x => new WebElementWrapper(x));
             return result.ToList();
