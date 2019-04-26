@@ -3,7 +3,6 @@
     public class GeneralPage:BasePageObject
     {
         protected Header header;
-        //HeaderPOM Header { get; set; }
         
         public override void Init(DriverWrapper driver)
         {

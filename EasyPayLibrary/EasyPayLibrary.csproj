@@ -61,8 +61,19 @@
   <ItemGroup>
     <Compile Include="DriverFactory.cs" />
     <Compile Include="DriverWrapper.cs" />
+    <Compile Include="Pages\SideBarAdmin\SideBarAdmin.cs" />
     <Compile Include="Pages\BasePageObject.cs" />
+    <Compile Include="Pages\SidebarBase.cs" />
     <Compile Include="Pages\GeneralPage.cs" />
+    <Compile Include="Pages\Header\Header.cs" />
+    <Compile Include="Pages\Header\HeaderPOM.cs" />
+    <Compile Include="Pages\HomePageAdmin.cs" />
+    <Compile Include="Pages\Login\LoginPage.cs" />
+    <Compile Include="Pages\Header\ProfilePage\ProfilePage.cs" />
+    <Compile Include="Pages\SideBarAdmin\RegisterUser.cs" />
+    <Compile Include="Pages\SideBarAdmin\Users.cs" />
+    <Compile Include="Pages\SideBarAdmin\Utilities.cs" />
+    <Compile Include="Pages\Login\WelcomePage.cs" />
     <Compile Include="Pages\Header.cs" />
     <Compile Include="Pages\LanguageChanger.cs" />
     <Compile Include="Pages\Translation.cs" />

@@ -27,8 +27,8 @@
 
         public void LogOut()
         {
+            ClickOnProfileDropdown();
             btnLogOut = driver.GetByXpath("//a[@href='/logout']");
-            ClickOnProfileDropdown();  
             btnLogOut.ClickOnIt();
         }       
     }
