@@ -1,11 +1,14 @@
 ﻿using EasyPayLibrary;
 using EasyPayLibrary.Pages;
+using EasyPayLibrary.Translations;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,13 +18,31 @@ namespace EasyPayTests
     public class UserTest
     {
         DriverWrapper driver;
+        TranslationValues t;
 
         [SetUp]
         public void PreCondition()
         {
+            t = TranslationProvider.GetTranslation("ua");
             driver = new DriverFactory().GetDriver();
             driver.Maximaze();
             driver.GoToURL();
+        }
+        
+        [Test]
+        /// <summary>
+        /// коли буде мерж з адміновскькою пейджою
+        /// тоді і хпаси перейдуть на адмін пейдж в ПОМ
+        /// </summary>
+        public void IsUserSignedUp()
+        {
+            WelcomePage welcome = new WelcomePage();
+            welcome.Init(driver);
+            var login = welcome.SignIn();
+            var home = login.Login("admin1@gmail.com", "Admin123");
+            driver.GetByXpath("//*[@href='/admin/management-users']").ClickOnIt();
+            var user = driver.GetByXpath("//td[text()='user1@gmail.com']");
+            Assert.IsTrue(user.IsDisplayed());
         }
 
         [Test]
@@ -65,9 +86,9 @@ namespace EasyPayTests
             var login = welcome.SignIn();
             var home = login.Login("user1@gmail.com", "Admin123");
             var profile = home.GoToProfile();
-            Assert.AreEqual("Mariya",profile.GetName("value"));
-            Assert.AreEqual("Chuikina", profile.GetSurname("value"));
-            Assert.AreEqual("+380968780876", profile.GetPhoneNumber("value"));
+            Assert.AreEqual("Masha",profile.GetName());
+            Assert.AreEqual("Chuikina", profile.GetSurname());
+            Assert.AreEqual("+380968780876", profile.GetPhoneNumber());
         }
 
         [Test]
@@ -78,8 +99,11 @@ namespace EasyPayTests
             var login = welcome.SignIn();
             var home = login.Login("user1@gmail.com", "Admin123");
             var profile = home.GoToProfile();            
-            profile.SetValue("Vasia");
-            Assert.AreEqual("Vasia", profile.GetName("value"));
+            profile.SetName("Masha");            
+            profile.UpdateProfile();
+            profile.UpdateProfile();
+            Assert.True(profile.IsSuccessAlertDisplayed());
+            Assert.AreEqual("Masha", profile.GetName());
         }
 
         [Test]
@@ -92,10 +116,23 @@ namespace EasyPayTests
             var profile = home.GoToProfile();
             profile.ChangeToUKR();
             profile.Init(driver);
-            var name = profile.GetName("value");
-            Assert.IsTrue(profile.TranslateToUA(name));
-            var surname = profile.GetSurname("value");
-            Assert.IsTrue(profile.TranslateToUA(surname));
+            var name = profile.GetName();            
+            Assert.AreEqual(t.Mariya.ToLower(),name.ToLower());
+            var surname = profile.GetSurname();
+            Assert.AreEqual(t.Chuikina.ToLower(), surname.ToLower());
+        }
+
+        [Test]
+        public void NameCanContainUALetters()
+        {
+            WelcomePage welcome = new WelcomePage();
+            welcome.Init(driver);
+            var login = welcome.SignIn();
+            var home = login.Login("user1@gmail.com","Admin123");
+            var profile = home.GoToProfile();
+            profile.SetName("Вася");
+            profile.UpdateProfile();
+            Assert.False(profile.IsErrorAlertDisplayed());            
         }
 
         [Test]
@@ -107,19 +144,22 @@ namespace EasyPayTests
             var home = login.Login("user1@gmail.com", "Admin123");
             home.ChangeToUKR();
             home.Init(driver);
-            var role = home.GetRoleText();
-            Assert.IsTrue(home.TranslateToUA(role));
+            var role = home.GetRoleText();            
+            Assert.AreEqual(t.User.ToLower(),role.ToLower());            
             var addresses = home.GetAddressesText();
-            Assert.IsTrue(home.TranslateToUA(addresses));
+            Assert.AreEqual(t.Addresses.ToLower(), addresses.ToLower());
             var connectedUtilities = home.GetConnectedUtilitiesText();
-            Assert.IsTrue(home.TranslateToUA(connectedUtilities));
+            Assert.AreEqual(t.ConnectedUtilities.ToLower(), connectedUtilities.ToLower());
             var payments = home.GetPaymentsText();
-            Assert.IsTrue(home.TranslateToUA(payments));
+            Assert.AreEqual(t.Payments.ToLower(), payments.ToLower());
             var paymentsHistory = home.GetPaymentsHistoryText();
-            Assert.IsTrue(home.TranslateToUA(paymentsHistory));
+            Assert.AreEqual(t.PaymentsHistory.ToLower(), paymentsHistory.ToLower());
             var rateInspectors = home.GetRateInspectorsText();
-            Assert.IsTrue(home.TranslateToUA(rateInspectors));
-
+            Assert.AreEqual(t.RateInspectors.ToLower(), rateInspectors.ToLower());
+            var mainPageTitle = home.GetMainPageTitleText();
+            Assert.AreEqual(t.MainPage.ToLower(), mainPageTitle.ToLower());
+            var xTitle = home.GetXTitleText();
+            Assert.AreEqual(t.SomeText.ToLower(), xTitle.ToLower());
         }
 
 

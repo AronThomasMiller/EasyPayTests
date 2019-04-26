@@ -11,13 +11,13 @@ namespace EasyPayLibrary.Pages
         private WebElementWrapper btnLanguage;
 
         public override void Init(DriverWrapper driver)
-        {
-            btnLanguage = driver.GetByXpath("//*[@id='language-dropdown']");
+        {            
             base.Init(driver);
         }
 
         public void ClickOnDropdown()
         {
+            btnLanguage = driver.GetByXpath("//*[@id='language-dropdown']");
             btnLanguage.ClickOnIt();
         }
 
@@ -28,10 +28,11 @@ namespace EasyPayLibrary.Pages
             return GetPOM<BasePageObject>(driver);
         }
 
-        public void ChangeToEN()
+        public BasePageObject ChangeToEN()
         {
             ClickOnDropdown();
             driver.GetByXpath("//a[@href='?lang=en']").ClickOnIt();
+            return GetPOM<BasePageObject>(driver);
         }
     }
 }

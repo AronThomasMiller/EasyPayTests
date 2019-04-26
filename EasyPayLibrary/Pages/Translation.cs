@@ -12,35 +12,13 @@ namespace EasyPayLibrary.Pages
     {
         public Dictionary<string,string> Deserialize()
         {
-            //using (StreamWriter file = File.CreateText("dictionary.json"))
-            //{
-            //    var dict = new Dictionary<string, string>();
-            //    dict.Add("Name", "Ім’я");
-            //    dict.Add("Surname", "Прізвище");
-            //    JsonSerializer formatter = new JsonSerializer();
-            //    formatter.Serialize(file, dict);
-            //}
-
-            //var dict = new Dictionary<string, string>();
-            //dict.Add("Name", "Ім’я");
-            //dict.Add("Surname", "Прізвище");
-            //string output = Newtonsoft.Json.JsonConvert.SerializeObject(dict, Newtonsoft.Json.Formatting.Indented);
-            //File.WriteAllText("E:\\dict.json", output);
-
             Dictionary<string,string> dicter;
             using (StreamReader sr = new StreamReader("E:\\dict.json", Encoding.UTF8))
             {
                 string json = sr.ReadToEnd();
                 dicter = JsonConvert.DeserializeObject<Dictionary<string,string>>(json);
             }
-            return dicter;
-
-            //using (StreamReader file = File.OpenText("dictionary.json"))
-            //{
-            //    JsonSerializer formatter = new JsonSerializer();
-            //    Dictionary<string, string> dict = (Dictionary<string, string>)formatter.Deserialize(file, typeof(Dictionary<string, string>));
-            //    return dict;
-            //}
+            return dicter;          
         }
 
         public bool CheckEN(string attributeToCheck)
@@ -61,7 +39,7 @@ namespace EasyPayLibrary.Pages
             var dict = Deserialize();
             foreach (var k in dict)
             {
-                if(k.Value.ToLower() == attributeToCheck)
+                if(k.Value.ToLower() == attributeToCheck.ToLower())
                 {
                     return true;
                 }                

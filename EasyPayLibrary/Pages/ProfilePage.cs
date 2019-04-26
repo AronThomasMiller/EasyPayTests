@@ -9,17 +9,19 @@ namespace EasyPayLibrary
         WebElementWrapper phoneNumberInput;
         WebElementWrapper labelName;
         WebElementWrapper changeAvatar;
+        WebElementWrapper updateProfile;
+        WebElementWrapper errorAlert;
+        WebElementWrapper successAlert;
         
         LanguageChanger language;
         
         public override void Init(DriverWrapper driver)
-        {
-            
+        { 
             language = GetPOM<LanguageChanger>(driver);
+            updateProfile = driver.GetByXpath("//*[@data-locale-item='updateProfile']");
             nameInput = driver.GetByXpath("//*[@id='name']");
             surnameInput = driver.GetByXpath("//*[@id='surname']");
-            phoneNumberInput = driver.GetByXpath("//*[@id='phone-number']");
-            
+            phoneNumberInput = driver.GetByXpath("//*[@id='phone-number']");            
             base.Init(driver);
         }
 
@@ -38,20 +40,19 @@ namespace EasyPayLibrary
             return nameInput.IsDisplayed();
         }
 
-        public string GetName(string value)
-        {
-            
-            return nameInput.GetAttribute(value);
+        public string GetName()
+        {            
+            return nameInput.GetAttribute("value");
         }
 
-        public string GetSurname(string value)
+        public string GetSurname()
         {
-            return surnameInput.GetAttribute(value);
+            return surnameInput.GetAttribute("value");
         }
 
-        public string GetPhoneNumber(string value)
+        public string GetPhoneNumber()
         {
-            return phoneNumberInput.GetAttribute(value);
+            return phoneNumberInput.GetAttribute("value");
         }
 
         public string GetNameLabel()
@@ -65,7 +66,7 @@ namespace EasyPayLibrary
             return changeAvatar.GetText();
         }
 
-        public void SetValue(string text)
+        public void SetName(string text)
         {
             nameInput.SendText(text);
         }
@@ -75,10 +76,29 @@ namespace EasyPayLibrary
             language.ChangeToUA();
             return GetPOM<LanguageChanger>(driver);
         }
-        public bool TranslateToUA(string value)
+
+        public void ClickOnUpdateProfile()
         {
-            Translation translation = new Translation();
-            return translation.CheckUA(value);
+            updateProfile.ClickOnIt();
         }
+
+        public ProfilePage UpdateProfile()
+        {
+            ClickOnUpdateProfile();
+            return GetPOM<ProfilePage>(driver);
+        }
+
+        public bool IsErrorAlertDisplayed()
+        {
+            errorAlert = driver.GetByXpath("//*[@class='alert ui-pnotify-container alert-danger ui-pnotify-shadow']");
+            return errorAlert.IsDisplayed();
+        }
+
+        public bool IsSuccessAlertDisplayed()
+        {
+            successAlert = driver.GetByXpath("//*[@class='alert ui-pnotify-container alert-success ui-pnotify-shadow']");
+            return successAlert.IsDisplayed();
+        }
+       
     }
 }

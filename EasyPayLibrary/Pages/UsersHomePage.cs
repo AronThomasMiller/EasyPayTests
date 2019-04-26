@@ -5,6 +5,8 @@ namespace EasyPayLibrary
     public class UsersHomePage : GeneralPage
     {
         WebElementWrapper role;
+        WebElementWrapper mainPageTitle;
+        WebElementWrapper xTitle;
 
         UsersSidebar sidebar;
         LanguageChanger language;
@@ -57,10 +59,21 @@ namespace EasyPayLibrary
             return GetPOM<LanguageChanger>(driver);
         }
 
-        public bool TranslateToUA(string value)
+        public string GetMainPageTitleText()
         {
-            Translation translation = new Translation();
-            return translation.CheckUA(value);
+            mainPageTitle = driver.GetByXpath("//*[@data-locale-item='mainPage']/span");
+            return mainPageTitle.GetText();
         }
+        public string GetXTitleText()
+        {
+            xTitle = driver.GetByXpath("//*[@class='x_title']/h2");
+            return xTitle.GetText();
+        }
+
+        //public bool TranslateToUA(string value)
+        //{
+        //    Translation translation = new Translation();
+        //    return translation.CheckUA(value);
+        //}
     }
 }
