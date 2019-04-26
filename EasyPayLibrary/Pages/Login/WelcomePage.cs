@@ -14,8 +14,8 @@ namespace EasyPayLibrary
 
         public override void Init(DriverWrapper driver)
         {
-            btnSignIn = driver.GetByXpath("//a[@id='Sign_in']");
-            btnSignUp = driver.GetByXpath("//a[@id='Sign_up']");
+            btnSignIn = driver.GetByXpath("//a[@id='Sign_in']",10);
+            btnSignUp = driver.GetByXpath("//a[@id='Sign_up']",10);
             base.Init(driver);
         }
 

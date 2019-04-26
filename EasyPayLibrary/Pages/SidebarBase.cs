@@ -2,7 +2,7 @@
 
 namespace EasyPayLibrary
 {
-    public class BaseSidebar:BasePageObject
+    public class SidebarBase:BasePageObject
     {
         public List<WebElementWrapper> sidebar;
 

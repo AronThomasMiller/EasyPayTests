@@ -30,12 +30,12 @@
             btnLogin.ClickOnIt();
         }
 
-        public HomePage Login(string email, string password)
+        public HomePageAdmin Login(string email, string password)
         {
             SetEmail(email);
             SetPassword(password);
             ClickOnLoginButton();
-            return GetPOM<HomePage>(driver);
+            return GetPOM<HomePageAdmin>(driver);
         }
 
 

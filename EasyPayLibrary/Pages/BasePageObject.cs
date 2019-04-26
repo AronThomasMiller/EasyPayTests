@@ -14,10 +14,7 @@ namespace EasyPayLibrary
         public virtual void Init(DriverWrapper driver)
         {
             this.driver = driver;
-            //InitDriver(driver);
         }
-
-        //private void InitDriver(DriverWrapper driver) => this.driver = driver;
 
         public static T GetPOM<T>(DriverWrapper driver) where T: BasePageObject, new()
         {
@@ -25,5 +22,10 @@ namespace EasyPayLibrary
             pom.Init(driver);
             return pom;
         }
+
+        //public static bool Notify(DriverWrapper driver)
+        //{
+        //    return driver.GetByXpath("/html/body/div[2]").GetCssValue("background-color").Contains("rgba(38, 185, 154, 0.88)");
+        //}
     }
 }

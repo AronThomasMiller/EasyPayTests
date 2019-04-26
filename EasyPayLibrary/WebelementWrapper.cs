@@ -16,6 +16,11 @@ namespace EasyPayLibrary
             element.SendKeys(text);
         }
 
+        public string GetCssValue(string name)
+        {
+            return element.GetCssValue(name);
+        }
+
         public string GetText() => element.Text;
 
         public void ClickOnIt()

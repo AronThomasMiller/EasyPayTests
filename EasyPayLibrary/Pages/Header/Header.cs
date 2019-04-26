@@ -8,9 +8,7 @@
 
         public override void Init(DriverWrapper driver)
         {
-            btnProfile = driver.GetByXpath("//a[@href='/profile']");
-            btnLogOut = driver.GetByXpath("//a[@href='/logout']");
-            dropdownProfile = driver.GetByXpath("//a[@class='user-profile dropdown-toggle']");
+            dropdownProfile = driver.GetByXpath(".//li[@id='user-menu-header']//a[@class='user-profile dropdown-toggle']");
             base.Init(driver);
         }
 
@@ -21,13 +19,15 @@
 
         public void GoToProfile()
         {
-            ClickOnProfileDropdown();             
+            ClickOnProfileDropdown();
+            btnProfile = driver.GetByXpath("//a[@href='/profile']");
             btnProfile.ClickOnIt();
         }
 
         public void LogOut()
         {
-            ClickOnProfileDropdown();  
+            ClickOnProfileDropdown();
+            btnLogOut = driver.GetByXpath("//a[@href='/logout']");
             btnLogOut.ClickOnIt();
         }       
     }
