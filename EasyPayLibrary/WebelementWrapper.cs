@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace EasyPayLibrary
     public class WebElementWrapper
     {
         IWebElement element;
+
         public void SendText(string text)
         {
             element.Clear();
@@ -44,21 +46,13 @@ namespace EasyPayLibrary
 
         public WebElementWrapper GetByXpath(string xpath)
         {
-            throw new NotImplementedException();
+            return new WebElementWrapper(element.FindElement(By.XPath(xpath)));
         }
-        //private By selector;
-        //private string XPath;
-        //public IWebElement WebElement { get; set; }
-        //public WebElementWrapper(IWebElement element)
-        //{
-        //    WebElement = element;
-        //}
-        //public WebElementWrapper ByXpath(string xpath)
-        //{
-        //    selector = By.XPath(xpath);
-        //    XPath = xpath;
-        //    return this;
-        //}
+
+        public SelectElement SelectElement()
+        {
+            return new SelectElement(element);
+        }
 
     }
 }

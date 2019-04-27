@@ -17,14 +17,16 @@ namespace EasyPayLibrary
             driver = Driver;
         }
 
-        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
+        public string getUrl() { return driver.Url; }
+
+        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 20)
         {
             var elements = driver.FindElements(By.XPath(xpath));
             var result = elements.Select(x => new WebElementWrapper(x));
             return result.ToList();
         }
 
-        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 5)
+        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 20)
         {
             if (timeoutInSeconds > 0)
             {
@@ -47,6 +49,11 @@ namespace EasyPayLibrary
             driver.Url = url;            
         }
 
+        public void GoToURL(string url)
+        {
+            driver.Url = url;
+        }
+
         public void Refresh()
         {
             driver.Navigate().Refresh();
@@ -62,6 +69,19 @@ namespace EasyPayLibrary
         public void Maximaze()
         {
             driver.Manage().Window.Maximize();
+        }
+
+        public void ChangeFrame(string name)
+        {
+            driver.SwitchTo().Frame(name);
+        }
+
+        public void WaitUtillUrlContainString(string str, int timeInSec)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));
+#pragma warning disable CS0618 // Type or member is obsolete
+            wait.Until(condition: ExpectedConditions.UrlContains(str));
+#pragma warning restore CS0618 // Type or member is obsolete
         }
     }
 }

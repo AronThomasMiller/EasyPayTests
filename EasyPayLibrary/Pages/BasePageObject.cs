@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using EasyPayLibrary.Pages;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,15 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary
 {
-    public class BasePageObject
+    public class BasePageObject:IBasePageObject
     {
         protected DriverWrapper driver;
+
+        public BasePageObject()
+        {
+        }
+
+        public GeneralPage GetPage() { return GetPOM<GeneralPage>(driver);}
 
         public virtual void Init(DriverWrapper driver)
         {

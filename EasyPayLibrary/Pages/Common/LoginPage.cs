@@ -1,11 +1,12 @@
-﻿namespace EasyPayLibrary
+﻿using EasyPayLibrary.Pages;
+
+namespace EasyPayLibrary
 {
     public class LoginPage : BasePageObject
     {
         WebElementWrapper fieldEmail;
         WebElementWrapper fieldPassword;
         WebElementWrapper btnLogin;
-
 
         public override void Init(DriverWrapper driver)
         {
@@ -30,12 +31,17 @@
             btnLogin.ClickOnIt();
         }
 
-        public HomePage Login(string email, string password)
+        public BasePageObject Login(string email, string password)
         {
             SetEmail(email);
             SetPassword(password);
             ClickOnLoginButton();
-            return GetPOM<HomePage>(driver);
+            switch (HomePage.GetRole(driver))
+            {
+                case "USER": return GetPOM<HomePageUser>(driver);
+                case "MANAGER": return GetPOM<HomePageUser>(driver);
+            }
+            return GetPOM<LoginPage>(driver);
         }
 
 

@@ -1,33 +1,32 @@
 ﻿using EasyPayLibrary;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyPayTests
 {
-    public class UserTest
+    public class UserTest:BaseTest
     {
-        DriverWrapper driver;
-        [SetUp]
-        public void PreCondition()
+        //[TestCase("user1@gmail.com","Admin123", (float)12.4, "4242424242424242", "012020","434","58004", "Чернівецька область", "Чернівці", "вулиця Шевченка 44/54", "Pat \"Chernivtsihaz\"")]
+        public void PayAndCheckOneInPaymentHistory(string userEmail, string userPass, float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {
-            driver = new DriverFactory().GetDriver();
-            driver.Maximaze();
-        }
-        [Test]
-        public void Test()
-        {
-        }
+            driver.GoToURL();
+            WelcomePage welcomePage = new WelcomePage();
+            welcomePage.Init(driver);
 
-        [TearDown]
-        public void PostCondition()
-        {
-            driver.Quit();
+            var loginPage = welcomePage.SignIn();
+
+            var homePage = (HomePageUser)loginPage.Login(userEmail, userPass);
+
+            var payPage = homePage.NavigateToPayment();
+
+            payPage.ChooseAddress(street + ", " + city + ", " + region);
+            var tempPage = payPage.Pay(utility, sumToPay, userEmail, cardNumber, dateOfCard, cvc,zipCode);
+
+            var paymentHistoryPage = tempPage.NavigateToPaymentHistory();
+
+            paymentHistoryPage.ChooseAddress(region + ", " + city + ", " + street);
+            paymentHistoryPage.ChooseUtility(utility);
+            Assert.AreEqual(DateTime.Today.ToString("d") + "_" + sumToPay.ToString().Replace(',','.'), paymentHistoryPage.GetLastPayInString());
         }
     }
 }

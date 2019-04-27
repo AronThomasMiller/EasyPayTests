@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyPayLibrary.Pages
+namespace EasyPayTests
 {
-    public class HeaderPOM : BasePageObject
+    class UnauthorizedUser
     {
 
     }
