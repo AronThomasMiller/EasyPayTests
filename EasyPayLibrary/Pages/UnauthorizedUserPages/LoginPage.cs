@@ -1,4 +1,8 @@
 ﻿using EasyPayLibrary.Pages;
+using EasyPayLibrary.Pages.Manager;
+using EasyPayLibrary.Pages.UnauthorizedUserPages;
+using EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail;
+using OpenQA.Selenium;
 
 namespace EasyPayLibrary
 {
@@ -33,19 +37,27 @@ namespace EasyPayLibrary
 
         public BasePageObject Login(string email, string password)
         {
+
             SetEmail(email);
             SetPassword(password);
             ClickOnLoginButton();
-            switch (HomePage.GetRole(driver))
+
+            try
             {
-                case "USER": return GetPOM<HomePageUser>(driver);
-                case "MANAGER": return GetPOM<HomePageUser>(driver);
+                RedirectModalWindow.ClickOnRedirectButton(driver,1);
+                driver.GoToURL("https://accounts.google.com");
+                return GetPOM<GmailEmailPage>(driver);
             }
-            return GetPOM<LoginPage>(driver);
+            catch (WebDriverTimeoutException)
+            {
+                switch (GeneralPage.GetRole(driver))
+                {
+                    case "USER": return GetPOM<HomePageUser>(driver);
+                    case "MANAGER": return GetPOM<HomePageManager>(driver);
+                }
+            }
+            return GetPOM<BasePageObject>(driver);
         }
-
-
-
     }
 
 }

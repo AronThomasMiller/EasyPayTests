@@ -16,8 +16,8 @@ namespace EasyPayLibrary
 
         public void ChooseAddress(string address)
         {
-            SelectElement list;
-            list = addressesDropdown.SelectElement();
+            SelectElementWrapper list;
+            list = new SelectElementWrapper(addressesDropdown);
             list.SelectByText(address);
         }
 
@@ -34,8 +34,9 @@ namespace EasyPayLibrary
             return GetPOM<SelectPaymentSumPage>(driver);
         }
 
-        public HomePageUser Pay(string utility, float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
+        public HomePageUser Pay(string address, string utility, float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
         {
+            ChooseAddress(address);
             var page = NavigateToUtilityDetails(utility);
             page.PayForSum(sum, email, cardNumber, dateOfCard, cvc, zipCode);
             return GetPOM<HomePageUser>(driver);

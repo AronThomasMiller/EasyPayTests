@@ -8,15 +8,9 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary
 {
-    public class BasePageObject:IBasePageObject
+    public class BasePageObject
     {
         protected DriverWrapper driver;
-
-        public BasePageObject()
-        {
-        }
-
-        public GeneralPage GetPage() { return GetPOM<GeneralPage>(driver);}
 
         public virtual void Init(DriverWrapper driver)
         {

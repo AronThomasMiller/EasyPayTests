@@ -53,17 +53,21 @@
   <ItemGroup>
     <Compile Include="DriverFactory.cs" />
     <Compile Include="DriverWrapper.cs" />
-    <Compile Include="Pages\BasePageObject.cs" />
-    <Compile Include="Pages\BaseSidebar.cs" />
-    <Compile Include="Pages\GeneralPage.cs" />
+    <Compile Include="Pages\Base\BasePageObject.cs" />
+    <Compile Include="Pages\Base\BaseSidebar.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\Gmail\MailPage.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\Gmail\GmailEmailPage.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\Gmail\GmailPage.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\Gmail\GmailPasswordPage.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\RedirectModalWindow.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\RegisterPage.cs" />
+    <Compile Include="Pages\Base\GeneralPage.cs" />
     <Compile Include="Pages\Common\Header.cs" />
-    <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\Manager\HomePageManager.cs" />
     <Compile Include="Pages\Manager\InspectorsListPage.cs" />
     <Compile Include="Pages\Manager\ManagerSidebar.cs" />
     <Compile Include="Pages\User\HomePageUser.cs" />
-    <Compile Include="Pages\IBasePageObject.cs" />
-    <Compile Include="Pages\Common\LoginPage.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\LoginPage.cs" />
     <Compile Include="Pages\User\PaymentHistory\PaymentHistory.cs" />
     <Compile Include="Pages\User\PaymentHistory\PaymentHistoryTable.cs" />
     <Compile Include="Pages\User\PaymentHistory\PaymentHistoryTableRows.cs" />
@@ -74,8 +78,9 @@
     <Compile Include="Pages\Common\ProfilePage.cs" />
     <Compile Include="Pages\User\UserSidebar.cs" />
     <Compile Include="Pages\User\PaymentPage\UtilityDetailsPage.cs" />
-    <Compile Include="Pages\Common\WelcomePage.cs" />
+    <Compile Include="Pages\UnauthorizedUserPages\WelcomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectElementWrapper.cs" />
     <Compile Include="WebelementWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

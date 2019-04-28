@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.Pages.Manager
 {
-    class HomePageManager:HomePage
+    public class HomePageManager:GeneralPage
     {
         ManagerSidebar sidebar;
+
+        public override void Init(DriverWrapper driver)
+        {
+            sidebar = GetPOM<ManagerSidebar>(driver);
+            base.Init(driver);
+        }
+
         public InspectorsListPage NavigateToInspectorsListPage()
         {
             sidebar.ClickOnInspectorsButton();

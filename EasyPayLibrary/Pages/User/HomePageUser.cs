@@ -1,9 +1,8 @@
 ﻿namespace EasyPayLibrary
 {
-    public class HomePageUser:HomePage
+    public class HomePageUser:GeneralPage
     {
         UserSidebar sidebar;
-
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
@@ -15,6 +14,7 @@
             sidebar.ClickOnPayment();
             return GetPOM<PaymentPage>(driver);
         }
+
         public PaymentHistory NavigateToPaymentHistory()
         {
             sidebar.ClickOnPaymentHistory();

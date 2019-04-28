@@ -1,6 +1,6 @@
 ﻿namespace EasyPayLibrary
 {
-    internal class UserSidebar:BaseSidebar
+    public class UserSidebar:BaseSidebar
     {
         public void ClickOnPayment()
         {

@@ -49,10 +49,9 @@ namespace EasyPayLibrary
             return new WebElementWrapper(element.FindElement(By.XPath(xpath)));
         }
 
-        public SelectElement SelectElement()
+        public IWebElement GetElement()
         {
-            return new SelectElement(element);
+            return element;
         }
-
     }
 }

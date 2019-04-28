@@ -1,9 +1,4 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EasyPayLibrary.Pages.Common;
 
 namespace EasyPayLibrary
 {
@@ -35,10 +30,10 @@ namespace EasyPayLibrary
             return  GetPOM<LoginPage>(driver);
         }
 
-        public LoginPage SignUp()
+        public RegisterPage SignUp()
         {
             ClickOnSignUpButton();
-            return GetPOM<LoginPage>(driver);
+            return GetPOM<RegisterPage>(driver);
         }        
     }
 }

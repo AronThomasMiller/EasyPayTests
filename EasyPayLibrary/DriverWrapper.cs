@@ -11,7 +11,7 @@ namespace EasyPayLibrary
 {
     public class DriverWrapper 
     {
-        public IWebDriver driver { get; set; }
+        IWebDriver driver { get; set; }
         public DriverWrapper(IWebDriver Driver)
         {
             driver = Driver;
@@ -51,7 +51,7 @@ namespace EasyPayLibrary
 
         public void GoToURL(string url)
         {
-            driver.Url = url;
+            driver.Navigate().GoToUrl(url);
         }
 
         public void Refresh()
@@ -76,12 +76,27 @@ namespace EasyPayLibrary
             driver.SwitchTo().Frame(name);
         }
 
-        public void WaitUtillUrlContainString(string str, int timeInSec)
+
+        public void WaitUntillUrlContainString(string str, int timeInSec = 20)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));
 #pragma warning disable CS0618 // Type or member is obsolete
             wait.Until(condition: ExpectedConditions.UrlContains(str));
 #pragma warning restore CS0618 // Type or member is obsolete
+        }
+
+        public WebElementWrapper WaitUntilSiteFullyLoaded(string xpath, int timeInSec = 20)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));
+#pragma warning disable CS0618 // Type or member is obsolete
+            wait.Until(condition: ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(xpath)));
+#pragma warning restore CS0618 // Type or member is obsolete
+            return GetByXpath(xpath);
+        }
+
+        public void SwitchToWindow()
+        {
+            driver.SwitchTo().Window(driver.WindowHandles.Last());
         }
     }
 }

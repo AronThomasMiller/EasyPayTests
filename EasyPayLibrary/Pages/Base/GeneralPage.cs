@@ -2,7 +2,7 @@
 
 namespace EasyPayLibrary
 {
-    public class GeneralPage:BasePageObject
+    public abstract class GeneralPage:BasePageObject
     {
         protected Header header;
         
@@ -22,6 +22,11 @@ namespace EasyPayLibrary
         {
             header.LogOut();
             return GetPOM<LoginPage>(driver);
+        }
+
+        public static string GetRole(DriverWrapper driver)
+        {
+            return driver.GetByXpath("//div[@class='menu_section']//h3").GetText();
         }
 
     }
