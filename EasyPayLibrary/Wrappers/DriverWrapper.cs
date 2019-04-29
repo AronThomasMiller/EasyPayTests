@@ -30,9 +30,7 @@ namespace EasyPayLibrary
             if (timeoutInSeconds > 0)
             {
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-#pragma warning disable CS0618 // Type or member is obsolete
                 var result = new WebElementWrapper(wait.Until(condition: ExpectedConditions.ElementIsVisible(By.XPath(xpath))));
-#pragma warning restore CS0618 // Type or member is obsolete
                 return result;
             }
             else

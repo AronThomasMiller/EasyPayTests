@@ -8,13 +8,13 @@ namespace EasyPayLibrary
         WebElementWrapper mainPageTitle;
         WebElementWrapper xTitle;
 
-        UsersSidebar sidebar;
+        SidebarUsers sidebar;
         LanguageChanger language;
 
         public override void Init(DriverWrapper driver)
         {
             language = GetPOM<LanguageChanger>(driver);
-            sidebar = GetPOM<UsersSidebar>(driver);
+            sidebar = GetPOM<SidebarUsers>(driver);
             base.Init(driver);
         }
 

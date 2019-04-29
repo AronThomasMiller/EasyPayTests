@@ -14,14 +14,14 @@
         public void ClickOnProfileDropdown()
         {
             dropdownProfile = driver.GetByXpath("//a[@class='user-profile dropdown-toggle']");
-            dropdownProfile.ClickOnIt();
+            dropdownProfile.Click();
         }
 
         public ProfilePage GoToProfile()
         {
             ClickOnProfileDropdown();
             btnProfile = driver.GetByXpath("//a[@href='/profile']");                       
-            btnProfile.ClickOnIt();
+            btnProfile.Click();
             return GetPOM<ProfilePage>(driver);
         }
 
@@ -29,7 +29,7 @@
         {
             ClickOnProfileDropdown();
             btnLogOut = driver.GetByXpath("//a[@href='/logout']");
-            btnLogOut.ClickOnIt();
+            btnLogOut.Click();
         }       
     }
 }

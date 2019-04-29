@@ -59,31 +59,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DriverFactory.cs" />
-    <Compile Include="DriverWrapper.cs" />
-    <Compile Include="Pages\SideBarAdmin\SideBarAdmin.cs" />
-    <Compile Include="Pages\BasePageObject.cs" />
-    <Compile Include="Pages\SidebarBase.cs" />
-    <Compile Include="Pages\GeneralPage.cs" />
-    <Compile Include="Pages\Header\Header.cs" />
-    <Compile Include="Pages\Header\HeaderPOM.cs" />
-    <Compile Include="Pages\HomePageAdmin.cs" />
-    <Compile Include="Pages\Login\LoginPage.cs" />
-    <Compile Include="Pages\Header\ProfilePage\ProfilePage.cs" />
-    <Compile Include="Pages\SideBarAdmin\RegisterUser.cs" />
-    <Compile Include="Pages\SideBarAdmin\Users.cs" />
-    <Compile Include="Pages\SideBarAdmin\Utilities.cs" />
-    <Compile Include="Pages\Login\WelcomePage.cs" />
-    <Compile Include="Pages\Header.cs" />
-    <Compile Include="Pages\LanguageChanger.cs" />
-    <Compile Include="Pages\Translation.cs" />
-    <Compile Include="Pages\UsersHomePage.cs" />
-    <Compile Include="Pages\LoginPage.cs" />
-    <Compile Include="Pages\ProfilePage.cs" />
-    <Compile Include="Pages\UsersSidebar.cs" />
-    <Compile Include="Pages\WelcomePage.cs" />
+    <Compile Include="Wrappers\DriverFactory.cs" />
+    <Compile Include="Wrappers\DriverWrapper.cs" />
+    <Compile Include="SidebarAdmin\SidebarAdmin.cs" />
+    <Compile Include="BasePageObject.cs" />
+    <Compile Include="SidebarBase.cs" />
+    <Compile Include="GeneralPage.cs" />
+    <Compile Include="Header\Header.cs" />
+    <Compile Include="HomePages\HomePageAdmin.cs" />
+    <Compile Include="Login\LoginPage.cs" />
+    <Compile Include="Header\ProfilePage.cs" />
+    <Compile Include="SidebarAdmin\RegisterUser.cs" />
+    <Compile Include="SidebarAdmin\Users.cs" />
+    <Compile Include="SidebarAdmin\Utilities.cs" />
+    <Compile Include="Login\WelcomePage.cs" />
+    <Compile Include="LanguageChanger.cs" />
+    <Compile Include="HomePages\UsersHomePage.cs" />
+    <Compile Include="SidebarUser\SidebarUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebelementWrapper.cs" />
+    <Compile Include="Wrappers\WebelementWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

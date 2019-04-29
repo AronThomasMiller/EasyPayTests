@@ -1,6 +1,6 @@
 ﻿namespace EasyPayLibrary
 {
-    internal class SideBarAdmin:SidebarBase
+    internal class SidebarAdmin : SidebarBase
     {
         WebElementWrapper role;
         WebElementWrapper utilities;
@@ -24,17 +24,17 @@
 
         public void ClickOnUtilities()
         {
-            utilities.ClickOnIt();
+            utilities.Click();
         }
 
         public void ClickOnUsers()
         {
-            users.ClickOnIt();
+            users.Click();
         }
 
         public void ClickOnRegisterUser()
         {
-            registerUser.ClickOnIt();
+            registerUser.Click();
         }
     }
 }

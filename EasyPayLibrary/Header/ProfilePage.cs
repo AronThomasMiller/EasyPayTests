@@ -1,33 +1,68 @@
-﻿using OpenQA.Selenium;
+﻿using EasyPayLibrary.Pages;
+using OpenQA.Selenium;
 
 namespace EasyPayLibrary
 {
     public class ProfilePage : GeneralPage
     {
         WebElementWrapper title;
-        WebElementWrapper name;
-        WebElementWrapper surName;
-        WebElementWrapper phoneNumber;
+        WebElementWrapper nameInput;
+        WebElementWrapper surnameInput;
+        WebElementWrapper phoneNumberInput;
         WebElementWrapper password;
         WebElementWrapper newPassword;
         WebElementWrapper confirmPassword;
+        WebElementWrapper errorAlert;
+        WebElementWrapper successAlert;
         //WebElementWrapper imageSelect;
         WebElementWrapper btnUpdateProfile;
-        
+
+        LanguageChanger language;
+
+
 
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
+            language = GetPOM<LanguageChanger>(driver);
             
-            name = driver.GetByXpath("//input[@id = 'name']");
-            surName = driver.GetByXpath("//input[@id = 'surname']");
-            phoneNumber = driver.GetByXpath("//input[@id='phone-number']");
+            nameInput = driver.GetByXpath("//input[@id = 'name']");
+            surnameInput = driver.GetByXpath("//input[@id = 'surname']");
+            phoneNumberInput = driver.GetByXpath("//input[@id='phone-number']");
             password = driver.GetByXpath("//input[@id='password']");
             newPassword = driver.GetByXpath("//input[@id='new-password']");
             confirmPassword = driver.GetByXpath("//input[@id='password-repeat']");
             btnUpdateProfile = driver.GetByXpath("//button[@id='submit-button']");
             title = driver.GetByXpath("//div[@class='title_left']//span");
             //imageSelect = driver.GetByXpath("//input[@id='image-file']");
+        }
+
+        public bool NameIsVisible()
+        {
+            return nameInput.IsDisplayed();
+        }
+        public bool SurnameIsVisible()
+        {
+            return surnameInput.IsDisplayed();
+        }
+        public bool PhoneNumberIsVisible()
+        {
+            return phoneNumberInput.IsDisplayed();
+        }
+
+        public string GetName()
+        {
+            return nameInput.GetAttribute("value");
+        }
+
+        public string GetSurname()
+        {
+            return surnameInput.GetAttribute("value");
+        }
+
+        public string GetPhoneNumber()
+        {
+            return phoneNumberInput.GetAttribute("value");
         }
 
         public string GetTitle()
@@ -37,17 +72,17 @@ namespace EasyPayLibrary
 
         public void SetName(string firstName)
         {
-            name.SendText(firstName);
+            nameInput.SendText(firstName);
         }
 
         public void SetSurName(string secondName)
         {
-            surName.SendText(secondName);
+            surnameInput.SendText(secondName);
         }
 
         public void SetPhoneNumber(string phone)
         {
-            phoneNumber.SendText(phone);
+            phoneNumberInput.SendText(phone);
         }
 
         public void SetPassword(string pass)
@@ -67,14 +102,33 @@ namespace EasyPayLibrary
 
         public void ClickOnUpdateProfile()
         {
-            btnUpdateProfile.ClickOnIt();
-            btnUpdateProfile.ClickOnIt();
+            btnUpdateProfile.Click();
+            btnUpdateProfile.Click();
             //btnUpdateProfile.SendText(Keys.Enter);
         }
+
+        public ProfilePage UpdateProfile()
+        {
+            ClickOnUpdateProfile();
+            return GetPOM<ProfilePage>(driver);
+        }
+
         public string GetSuccessText()
         {
             WebElementWrapper success = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
             return success.GetText();
+        }
+
+        public bool IsErrorAlertDisplayed()
+        {
+            errorAlert = driver.GetByXpath("//*[@class='alert ui-pnotify-container alert-danger ui-pnotify-shadow']");
+            return errorAlert.IsDisplayed();
+        }
+
+        public bool IsSuccessAlertDisplayed()
+        {
+            successAlert = driver.GetByXpath("//*[@class='alert ui-pnotify-container alert-success ui-pnotify-shadow']");
+            return successAlert.IsDisplayed();
         }
 
         public void EditPassword(string pass, string newpass)
@@ -91,6 +145,12 @@ namespace EasyPayLibrary
             SetPhoneNumber(phone);
             EditPassword(pass, newpass);
             ClickOnUpdateProfile();
+        }
+
+        public ProfilePage ChangeToUKR()
+        {
+            language.ChangeToUA();
+            return GetPOM<ProfilePage>(driver);
         }
         //public void SetImage()
         //{

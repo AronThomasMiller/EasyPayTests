@@ -29,24 +29,24 @@ namespace EasyPayLibrary
         {
             string role = myRole.ToUpper();
             drpListOfRoles = driver.GetByXpath("//select[@id='role']");
-            drpListOfRoles.ClickOnIt();
+            drpListOfRoles.Click();
             rrole = driver.GetByXpath($"//select[@id='role']/option[text()='{role}']");
-            rrole.ClickOnIt();
+            rrole.Click();
             btnSaveChange = driver.GetByXpath("//button[@id='updateRole']");
-            btnSaveChange.ClickOnIt();
+            btnSaveChange.Click();
         }
 
         public void ChangeRoleToManager()
         {            
             btnChangeRole = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[6]/button");
-            btnChangeRole.ClickOnIt();
+            btnChangeRole.Click();
             SelectRole("manager");
         }
 
         public void ChangeRoleToUser()
         {
             btnChangeRole = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[6]/button");
-            btnChangeRole.ClickOnIt();
+            btnChangeRole.Click();
             SelectRole("user");
         }
         public string GetRole()

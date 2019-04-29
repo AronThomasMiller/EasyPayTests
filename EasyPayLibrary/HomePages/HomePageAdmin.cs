@@ -2,15 +2,16 @@
 {
     public class HomePageAdmin : GeneralPage
     {
-        SideBarAdmin sidebar;
+        SidebarAdmin sidebar;
+       
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            sidebar = GetPOM<SideBarAdmin>(driver);
+            sidebar = GetPOM<SidebarAdmin>(driver);         
         }
         public string GetTextRole()
         {
-            return sidebar.GetTextRole();
+            return sidebar.GetTextRole();            
         }
 
         public Utilities ClickOnUtilities()

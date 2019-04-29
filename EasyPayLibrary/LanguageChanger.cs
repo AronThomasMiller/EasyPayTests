@@ -18,20 +18,19 @@ namespace EasyPayLibrary.Pages
         public void ClickOnDropdown()
         {
             btnLanguage = driver.GetByXpath("//*[@id='language-dropdown']");
-            btnLanguage.ClickOnIt();
+            btnLanguage.Click();
         }
 
-        public BasePageObject ChangeToUA()
+        public void ChangeToUA()
         {
             ClickOnDropdown();
-            driver.GetByXpath("//a[@href='?lang=ua']").ClickOnIt();
-            return GetPOM<BasePageObject>(driver);
+            driver.GetByXpath("//a[@href='?lang=ua']").Click();           
         }
 
         public BasePageObject ChangeToEN()
         {
             ClickOnDropdown();
-            driver.GetByXpath("//a[@href='?lang=en']").ClickOnIt();
+            driver.GetByXpath("//a[@href='?lang=en']").Click();
             return GetPOM<BasePageObject>(driver);
         }
     }
