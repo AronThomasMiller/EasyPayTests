@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary
 {
-    public class WelcomePage:BasePageObject
+    public class WelcomePage : BasePageObject
     {
         WebElementWrapper btnSignIn;
         WebElementWrapper btnSignUp;
 
         public override void Init(DriverWrapper driver)
         {
-            btnSignIn = driver.GetByXpath("//a[@id='Sign_in']");
-            btnSignUp = driver.GetByXpath("//a[@id='Sign_up']");
+            btnSignIn = driver.GetByXpath("//*[@id='Sign_in']");
+            btnSignUp = driver.GetByXpath("//*[@id='Sign_up']");
             base.Init(driver);
         }
 
@@ -31,14 +31,14 @@ namespace EasyPayLibrary
 
         public LoginPage SignIn()
         {
-            ClickOnSignInButton();            
-            return  GetPOM<LoginPage>(driver);
+            ClickOnSignInButton();
+            return GetPOM<LoginPage>(driver);
         }
 
         public LoginPage SignUp()
         {
             ClickOnSignUpButton();
             return GetPOM<LoginPage>(driver);
-        }        
+        }
     }
 }

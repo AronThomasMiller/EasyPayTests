@@ -53,21 +53,24 @@
   <ItemGroup>
     <Compile Include="DriverFactory.cs" />
     <Compile Include="DriverWrapper.cs" />
+    <Compile Include="Pages\AddScheduleItemPage.cs" />
     <Compile Include="Pages\BasePageObject.cs" />
     <Compile Include="Pages\BaseSidebar.cs" />
     <Compile Include="Pages\GeneralPage.cs" />
     <Compile Include="Pages\Header.cs" />
-    <Compile Include="Pages\HeaderPOM.cs" />
+    <Compile Include="Pages\HistoryPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Pages\InspectorsListPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
-    <Compile Include="Pages\ProfilePage.cs" />
-    <Compile Include="Pages\UserListRatingItem.cs" />
+    <Compile Include="Pages\ManagerSidebar.cs" />
+    <Compile Include="Pages\SchedulePage.cs" />
+    <Compile Include="Pages\StatisticsPage.cs" />
+    <Compile Include="Pages\UtilityPricePage.cs" />
     <Compile Include="Pages\WelcomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebelementWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

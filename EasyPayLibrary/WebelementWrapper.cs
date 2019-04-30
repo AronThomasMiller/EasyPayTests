@@ -23,6 +23,11 @@ namespace EasyPayLibrary
             element.Click();
         }
 
+        public void Enter()
+        {
+            element.SendKeys(Keys.Enter);
+        }
+    
         public bool IsDisplayed()
         {
             bool result;
@@ -46,6 +51,7 @@ namespace EasyPayLibrary
         {
             throw new NotImplementedException();
         }
+        
         //private By selector;
         //private string XPath;
         //public IWebElement WebElement { get; set; }

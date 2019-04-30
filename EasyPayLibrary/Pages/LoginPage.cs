@@ -6,7 +6,6 @@
         WebElementWrapper fieldPassword;
         WebElementWrapper btnLogin;
 
-
         public override void Init(DriverWrapper driver)
         {
             fieldEmail = driver.GetByXpath("//input[@id='email']");
@@ -37,9 +36,6 @@
             ClickOnLoginButton();
             return GetPOM<HomePage>(driver);
         }
-
-
-
     }
 
 }
