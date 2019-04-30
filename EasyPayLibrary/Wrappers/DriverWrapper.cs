@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,14 @@ namespace EasyPayLibrary
             if (driver == null) return;
             driver.Quit();
             driver = null;
+        }
+        public Actions MoveToElement()
+        {
+            return new Actions(driver);
+        }
+        public void Switch()
+        {
+            driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/iframe")));
         }
         
         public void Maximaze()

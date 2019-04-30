@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +20,15 @@ namespace EasyPayLibrary
 
         public string GetText() => element.Text;
 
-        public void ClickOnIt()
+        public void Click()
         {
             element.Click();
         }
+        public void Enter()
+        {
+            element.SendKeys(Keys.Enter);
+        }
+
 
         public bool IsDisplayed()
         {
@@ -37,6 +44,7 @@ namespace EasyPayLibrary
             return result;
         }
 
+
         public WebElementWrapper(IWebElement web)
         {
             element = web;
@@ -44,7 +52,16 @@ namespace EasyPayLibrary
 
         public WebElementWrapper GetByXpath(string xpath)
         {
-            throw new NotImplementedException();
+            return new WebElementWrapper(element).GetByXpath(xpath);
+        }
+
+        public SelectElement selectElement()
+        {
+            return new SelectElement(element);
+        }
+        public Actions MoveToElement(Actions actions, int x, int y)
+        {
+            return actions.MoveToElement(element, x, y);
         }
         //private By selector;
         //private string XPath;
@@ -61,4 +78,5 @@ namespace EasyPayLibrary
         //}
 
     }
+
 }

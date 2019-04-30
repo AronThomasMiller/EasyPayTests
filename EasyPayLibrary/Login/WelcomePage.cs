@@ -21,12 +21,12 @@ namespace EasyPayLibrary
 
         public void ClickOnSignInButton()
         {
-            btnSignIn.ClickOnIt();
+            btnSignIn.Click();
         }
 
         public void ClickOnSignUpButton()
         {
-            btnSignUp.ClickOnIt();
+            btnSignUp.Click();
         }
 
         public LoginPage SignIn()

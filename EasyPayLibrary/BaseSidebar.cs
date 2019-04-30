@@ -12,5 +12,6 @@ namespace EasyPayLibrary
             sidebar = driver.GetElementsByXpath("//ul[@class='nav side-menu']/li");
             base.Init(driver);
         }
+
     }
 }
