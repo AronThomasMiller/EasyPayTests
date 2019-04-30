@@ -10,7 +10,7 @@ namespace EasyPayLibrary.Translations
     {
         public string Name = "Name"; //{ get; set; }
         public string Surname = "Surname";//{ get; set; }
-        public string User = "User";
+        public string User = "";
         public string Addresses = "Addresses";
         public string SomeText = "Some Text";
         public string Profile = "Profile";

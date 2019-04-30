@@ -38,27 +38,24 @@ namespace EasyPayLibrary
             SetEmail(email);
             SetPassword(password);
             ClickOnLoginButton();
-            try
+
+            switch (GeneralPage.GetRole(driver))
             {
-                switch (GeneralPage.GetRole(driver))
-                {
-                    case "USER":
-                    case "КОРИСТУВАЧ":
-                        return GetPOM<UsersHomePage>(driver);
-                    case "MANAGER":
-                    case "МЕНЕДЖЕР":
-                        return GetPOM<BasePageObject>(driver);
-                    case "ADMIN":
-                    case "АДМІНІСТРАТОР":
-                        return GetPOM<HomePageAdmin>(driver);
-                    case "INSPECTOR":
-                    case "КОНТРОЛЕР":
-                        return GetPOM<BasePageObject>(driver);
-                    case "Login":
-                        return GetPOM<LoginPage>(driver);
-                }
+                case "USER":
+                case "КОРИСТУВАЧ":
+                    return GetPOM<UsersHomePage>(driver);
+                case "MANAGER":
+                case "МЕНЕДЖЕР":
+                    return GetPOM<BasePageObject>(driver);
+                case "ADMIN":
+                case "АДМІНІСТРАТОР":
+                    return GetPOM<HomePageAdmin>(driver);
+                case "INSPECTOR":
+                case "КОНТРОЛЕР":
+                    return GetPOM<BasePageObject>(driver);
+                case null:
+                    return GetPOM<LoginPage>(driver);
             }
-            catch (OpenQA.Selenium.NoSuchElementException) { }
 
             return GetPOM<LoginPage>(driver);
         }
@@ -66,14 +63,14 @@ namespace EasyPayLibrary
         public bool IsErrorPresent()
         {
             try
-            {
-                base.Init(driver);
+            {                
                 errorAlert = driver.GetByXpath("//*[@class='alert ui-pnotify-container alert-danger ui-pnotify-shadow']");
-                return errorAlert.IsDisplayed();
+                return true;
             }
-            catch (OpenQA.Selenium.NoSuchElementException)
-            {}
-            return false;            
+            catch (TimeoutException)
+            {
+                return false;
+            }          
         }
     }
 }

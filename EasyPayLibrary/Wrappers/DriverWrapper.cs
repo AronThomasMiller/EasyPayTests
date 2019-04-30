@@ -62,5 +62,9 @@ namespace EasyPayLibrary
         {
             driver.Manage().Window.Maximize();
         }
+        public string GetUrl()
+        {
+            return driver.Url;
+        }
     }
 }

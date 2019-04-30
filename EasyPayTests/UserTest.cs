@@ -61,9 +61,9 @@ namespace EasyPayTests
             WelcomePage welcome = new WelcomePage();
             welcome.Init(driver);
             var login = welcome.SignIn();
-            login.Login("user1@gmail.com", "Admin12345");
-            login.Init(driver);
-            Assert.IsTrue(login.IsErrorPresent());            
+            var test = (LoginPage)login.Login("user1@gmail.com", "Admin12345");
+
+            Assert.IsTrue(test.IsErrorPresent());                        
         }
 
         [Test]
@@ -101,8 +101,7 @@ namespace EasyPayTests
             var home = (UsersHomePage)login.Login("user1@gmail.com", "Admin123");
             var profile = home.GoToProfile();            
             profile.SetName("Masha");            
-            profile.UpdateProfile();
-            profile.UpdateProfile();
+            profile.UpdateProfile();            
             Assert.True(profile.IsSuccessAlertDisplayed());
             Assert.AreEqual("Masha", profile.GetName());
         }

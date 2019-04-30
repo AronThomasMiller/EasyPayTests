@@ -1,4 +1,6 @@
-﻿namespace EasyPayLibrary
+﻿using OpenQA.Selenium;
+
+namespace EasyPayLibrary
 {
     public class GeneralPage : BasePageObject
     {
@@ -15,12 +17,13 @@
             try
             {
                 GetPOM<BasePageObject>(driver);
-                var role = driver.GetByXpath("//*[@class='menu_section']/h3");
+                WebElementWrapper role = driver.GetByXpath("//*[@class='menu_section']/h3",1);
                 return role.GetText();
             }
-            catch (OpenQA.Selenium.NoSuchElementException)
-            { }
-            return "Login";
+            catch (WebDriverTimeoutException)
+            {
+                return null;
+            }            
         }
         
         public ProfilePage GoToProfile()

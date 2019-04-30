@@ -1,4 +1,24 @@
 ﻿{
 	"Name" : "Ім’я",
-	"User" :"Користувач"
+	"User" :"Користувач",	
+        "Surname" : "Прізвище",        
+        "Addresses" : "Адреси",
+        "SomeText" : "Деякий текст",
+        "Profile" : "Профіль",
+        "MainPage" : "Головна сторінка",
+        "ChangeAvatar" : "Змінити Аватар",       
+        "PhoneNumber" : "Номер телефону",
+        "ChangePassword" : "Змінити пароль",
+        "Password" : "Пароль",
+        "NewPassword" : "Новий пароль",
+        "RepeatNewPassword" : "Повторно введіть новий пароль",
+        "UpdateProfile" : "Оновити профіль",
+        "UpdateUserInformation" : "Змінити дані користувача",
+        "Mariya" : "Марія",
+        "Chuikina" : "Чуйкіна",
+        "ConnectedUtilities" : "Підключені послуги",
+        "Payments" : "Платежі",
+        "PaymentsHistory" : "Історія платежів",
+        "RateInspectors" : "Рейтинг контролерів",
+        "Language" : "Мова"
 }
