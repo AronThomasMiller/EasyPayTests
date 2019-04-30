@@ -1,6 +1,12 @@
-﻿namespace EasyPayLibrary
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EasyPayLibrary
 {
-    public class Header:BasePageObject
+    public class Header : BasePageObject
     {
         WebElementWrapper btnProfile;
         WebElementWrapper btnLogOut;
@@ -11,28 +17,27 @@
         WebElementWrapper dropdownLanguage;
 
         public override void Init(DriverWrapper driver)
-        {            
+        {
+            dropdownProfile = driver.GetByXpath("//li[@id='user-menu-header']//a[@class='user-profile dropdown-toggle']");
             dropdownLanguage = driver.GetByXpath("//a[@class='dropdown-toggle user-profile']");
             base.Init(driver);
         }
 
         public void ClickOnProfileDropdown()
         {
-            dropdownProfile = driver.GetByXpath("//a[@class='user-profile dropdown-toggle']");
             dropdownProfile.Click();
         }
 
-        public void ClickOnLanguageDropdown ()
+        public void ClickOnLanguageDropdown()
         {
-            dropdownLanguage.ClickOnIt();
+            dropdownLanguage.Click();
         }
 
         public void GoToProfile()
         {
             ClickOnProfileDropdown();
-            btnProfile = driver.GetByXpath("//a[@href='/profile']");                       
+            btnProfile = driver.GetByXpath("//a[@href='/profile']");
             btnProfile.Click();
-            return GetPOM<ProfilePage>(driver);
         }
 
         public void LogOut()
@@ -40,13 +45,13 @@
             ClickOnProfileDropdown();
             btnLogOut = driver.GetByXpath("//a[@href='/logout']");
             btnLogOut.Click();
-        }    
-        
+        }
+
         public void ChangeToUa()
         {
             ClickOnLanguageDropdown();
-            btnUA = driver.GetByXpath("//a[@href='/profile']");
-            btnUA.ClickOnIt();
+            btnUA = driver.GetByXpath("//a[@href='?lang=ua']");
+            btnUA.Click();
         }
     }
 }

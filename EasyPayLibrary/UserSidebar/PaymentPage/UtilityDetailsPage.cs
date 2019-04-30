@@ -16,7 +16,7 @@
 
         public SetValuePage ClickSetNewValueButton()
         {
-            btnSetNewValue.ClickOnIt();
+            btnSetNewValue.Click();
             return GetPOM<SetValuePage>(driver);
         }
 
@@ -29,7 +29,7 @@
 
         public void ClickOnCloseButton()
         {
-            btnClose.ClickOnIt();
+            btnClose.Click();
         }
 
         public PaymentPage CloseUtilityDetailsPage()
@@ -39,7 +39,7 @@
         }
         public void ClickOnButtonPay()
         {
-            btnPay.ClickOnIt();
+            btnPay.Click();
         }
 
         public void PayForSum(float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)

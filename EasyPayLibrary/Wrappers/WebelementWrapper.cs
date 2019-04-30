@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -53,32 +54,19 @@ namespace EasyPayLibrary
         {
             return new WebElementWrapper(element.FindElement(By.XPath(xpath)));
         }
-        //private By selector;
-        //private string XPath;
-        //public IWebElement WebElement { get; set; }
-        //public WebElementWrapper(IWebElement element)
-        //{
-        //    WebElement = element;
-        //}
-        //public WebElementWrapper ByXpath(string xpath)
-        //{
-        //    selector = By.XPath(xpath);
-        //    XPath = xpath;
-        //    return this;
-        //}
 
         public string GetAttribute(string attribute)
         {
             return element.GetAttribute(attribute);
         }
-                public IWebElement GetElement()
+        public IWebElement GetElement()
         {
             return element;
         }
 
-        public string GetCssValue(string css)
+        public Actions MoveToElement(Actions actions, int x, int y)
         {
-            return element.GetCssValue(css);
+            return actions.MoveToElement(element, x, y);
         }
     }
 }

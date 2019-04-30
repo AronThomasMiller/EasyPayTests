@@ -15,7 +15,7 @@ namespace EasyPayTests
 
             var loginPage = welcomePage.SignIn();
 
-            var homePage = (HomePageUser)loginPage.Login(userEmail, userPass);
+            var homePage = (UsersHomePage)loginPage.Login(userEmail, userPass);
             Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"));
 
             var payPage = homePage.NavigateToPayment();

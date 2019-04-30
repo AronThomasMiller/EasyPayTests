@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace EasyPayTests
 {
-    public class ManagerTest:BaseTest
+    public class ManagerTest: BaseTest
     {
         [TestCase("manager1@gmail.com","Admin123")]
         public void VerifyThatManagerHasAccesToAccount(string email, string password)

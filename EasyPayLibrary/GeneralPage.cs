@@ -1,4 +1,5 @@
 ﻿using EasyPayLibrary.Pages;
+using OpenQA.Selenium;
 
 namespace EasyPayLibrary
 {
@@ -26,7 +27,14 @@ namespace EasyPayLibrary
 
         public static string GetRole(DriverWrapper driver)
         {
-            return driver.GetByXpath("//div[@class='menu_section']//h3").GetText();
+            try
+            {
+                return driver.GetByXpath("//div[@class='menu_section']//h3", 2).GetText();
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return null;
+            }
         }
 
     }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.Pages.Manager
 {
-    class ManagerSidebar:BaseSidebar
+    class ManagerSidebar:SidebarBase
     {
         public void ClickOnInspectorsButton()
         {
-            sidebar[0].ClickOnIt();
+            sidebar[0].Click();
         }
     }
 }

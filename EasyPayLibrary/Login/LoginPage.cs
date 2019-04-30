@@ -1,4 +1,9 @@
-﻿using System;
+﻿using EasyPayLibrary.HomePages;
+using EasyPayLibrary.Pages.Manager;
+using EasyPayLibrary.Pages.UnauthorizedUserPages;
+using EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail;
+using OpenQA.Selenium;
+using System;
 
 namespace EasyPayLibrary
 {
@@ -8,7 +13,7 @@ namespace EasyPayLibrary
         WebElementWrapper fieldPassword;
         WebElementWrapper btnLogin;
         WebElementWrapper errorAlert;
-        
+
 
         public override void Init(DriverWrapper driver)
         {
@@ -42,7 +47,7 @@ namespace EasyPayLibrary
 
             try
             {
-                RedirectModalWindow.ClickOnRedirectButton(driver,1);
+                RedirectModalWindow.ClickOnRedirectButton(driver, 1);
                 return GetPOM<GmailEmailPage>(driver);
             }
             catch (WebDriverTimeoutException)
@@ -51,23 +56,25 @@ namespace EasyPayLibrary
                 {
                     case "USER":
                     case "КОРИСТУВАЧ":
-                        return GetPOM<HomePageUser>(driver);
+                        return GetPOM<UsersHomePage>(driver);
                     case "MANAGER":
                     case "МЕНЕДЖЕР":
                         return GetPOM<HomePageManager>(driver);
                     case "ADMIN":
                     case "АДМІНІСТРАТОР":
-                        return GetPOM<HomePageUser>(driver);
+                        return GetPOM<HomePageAdmin>(driver);
                     case "INSPECTOR":
                     case "КОНТРОЛЕР":
-                        return GetPOM<BasePageObject>(driver);
-                case null:
-                    return GetPOM<LoginPage>(driver);
+                        return GetPOM<HomePageInspector>(driver);
+                    case null:
+                        return GetPOM<LoginPage>(driver);
                 }
 
+            }
             return GetPOM<LoginPage>(driver);
+
         }
-        
+
         public LoginPage TranslatePageToUA()
         {
             return TranslatePageToUA<LoginPage>(driver);
@@ -77,17 +84,17 @@ namespace EasyPayLibrary
         {
             return TranslatePageToEN<LoginPage>(driver);
         }
-                public bool IsErrorPresent()
+        public bool IsErrorPresent()
         {
             try
-            {                
+            {
                 errorAlert = driver.GetByXpath("//*[@class='alert ui-pnotify-container alert-danger ui-pnotify-shadow']");
                 return true;
             }
             catch (TimeoutException)
             {
                 return false;
-            }          
+            }
         }
     }
 

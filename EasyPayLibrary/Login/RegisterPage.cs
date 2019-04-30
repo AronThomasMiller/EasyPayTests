@@ -68,7 +68,7 @@ namespace EasyPayLibrary.Pages.Common
 
         void ClickOnSubmitButton()
         {
-            btnSubmit.ClickOnIt();
+            btnSubmit.Click();
         }
         
         public GmailEmailPage Register(string name, string surName, string phoneNumber, string email, string password)

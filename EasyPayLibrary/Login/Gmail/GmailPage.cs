@@ -15,7 +15,7 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 
         public void ClickOnFirstMail()
         {
-            emailFromEasyPay.ClickOnIt();
+            emailFromEasyPay.Click();
         }
 
         public MailPage OpenMail()

@@ -3,7 +3,7 @@ using System;
 
 namespace EasyPayLibrary
 {
-    public class PaymentHistory:HomePageUser
+    public class PaymentHistory: UsersHomePage
     {
         WebElementWrapper addressesDropdown;
         WebElementWrapper utilitiesDropdown;

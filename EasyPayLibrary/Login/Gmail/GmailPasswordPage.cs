@@ -19,7 +19,7 @@
 
         public void ClickOnNextButton()
         {
-            btnNext.ClickOnIt();
+            btnNext.Click();
         }
 
         public GmailPage EnterPassword(string password)

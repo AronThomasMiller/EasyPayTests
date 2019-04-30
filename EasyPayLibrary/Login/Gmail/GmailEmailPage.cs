@@ -26,7 +26,7 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 
         public void ClickOnNextButton()
         {
-            btnNext.ClickOnIt();
+            btnNext.Click();
         }
 
         public GmailPasswordPage EnterEmail(string email)

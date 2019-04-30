@@ -18,7 +18,7 @@
 
         public void ClickSetApply()
         {
-            btnApply.ClickOnIt();
+            btnApply.Click();
         }
 
         public UtilityDetailsPage SetValue(float value)

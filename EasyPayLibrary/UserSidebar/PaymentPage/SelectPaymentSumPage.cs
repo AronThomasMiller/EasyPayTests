@@ -30,12 +30,12 @@
 
         public void ChooseDownloadCheck()
         {
-            btnDownloadCheck.ClickOnIt();
+            btnDownloadCheck.Click();
         }
 
         public void ClickOnPayButton()
         {
-            btnPay.ClickOnIt();
+            btnPay.Click();
         }
     }
 }

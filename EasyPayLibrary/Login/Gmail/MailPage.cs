@@ -16,13 +16,13 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 
         public void ClickOnLastLink()
         {
-            confirmationLink.ClickOnIt();
+            confirmationLink.Click();
         }
 
         public void DeleteAllMails()
         {
             WebElementWrapper btnDelete = driver.GetByXpath("//table//table//table[1]//tbody[1]//tr[1]//td[1]//input[6]");
-            btnDelete.ClickOnIt();
+            btnDelete.Click();
         }
 
         public LoginPage ConfirmEmail()

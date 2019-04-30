@@ -2,7 +2,7 @@
 
 namespace EasyPayLibrary
 {
-    public class PaymentPage: HomePageUser
+    public class PaymentPage: UsersHomePage
     {
         WebElementWrapper addressesDropdown;
         WebElementWrapper utilitiesTable;
@@ -24,7 +24,7 @@ namespace EasyPayLibrary
         public UtilityDetailsPage NavigateToUtilityDetails(string utility)
         {
             WebElementWrapper btnDetails = driver.GetByXpath($"//tbody/tr/td[contains(text(),'{utility}')]/../td[3]/button");
-            btnDetails.ClickOnIt();
+            btnDetails.Click();
             return GetPOM<UtilityDetailsPage>(driver);
         }
 
@@ -34,12 +34,12 @@ namespace EasyPayLibrary
             return GetPOM<SelectPaymentSumPage>(driver);
         }
 
-        public HomePageUser Pay(string address, string utility, float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
+        public UsersHomePage Pay(string address, string utility, float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
         {
             ChooseAddress(address);
             var page = NavigateToUtilityDetails(utility);
             page.PayForSum(sum, email, cardNumber, dateOfCard, cvc, zipCode);
-            return GetPOM<HomePageUser>(driver);
+            return GetPOM<UsersHomePage>(driver);
         }
 
 

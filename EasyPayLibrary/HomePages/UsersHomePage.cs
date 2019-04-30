@@ -1,4 +1,6 @@
 ﻿using EasyPayLibrary.Pages;
+using EasyPayLibrary.Pages.Base;
+using System.Collections.Generic;
 
 namespace EasyPayLibrary
 {
@@ -9,11 +11,11 @@ namespace EasyPayLibrary
         WebElementWrapper xTitle;
 
         SidebarUsers sidebar;
-        LanguageChanger language;
+        SidebarBase sidebarBase;
 
         public override void Init(DriverWrapper driver)
         {
-            language = GetPOM<LanguageChanger>(driver);
+            sidebarBase = GetPOM<SidebarBase>(driver);
             sidebar = GetPOM<SidebarUsers>(driver);
             base.Init(driver);
         }
@@ -53,10 +55,10 @@ namespace EasyPayLibrary
             return sidebar.GetRateInspectorsText();
         }
 
-        public LanguageChanger ChangeToUKR()
+        public UsersHomePage ChangeToUKR()
         {
-            language.ChangeToUA();
-            return GetPOM<LanguageChanger>(driver);
+            header.ChangeToUa();
+            return GetPOM<UsersHomePage>(driver);
         }
 
         public string GetMainPageTitleText()
@@ -70,10 +72,28 @@ namespace EasyPayLibrary
             return xTitle.GetText();
         }
 
-        //public bool TranslateToUA(string value)
-        //{
-        //    Translation translation = new Translation();
-        //    return translation.CheckUA(value);
-        //}
+
+        public PaymentPage NavigateToPayment()
+        {
+            sidebar.ClickOnPayment();
+            return GetPOM<PaymentPage>(driver);
+        }
+
+        public PaymentHistory NavigateToPaymentHistory()
+        {
+            sidebar.ClickOnPaymentHistory();
+            return GetPOM<PaymentHistory>(driver);
+        }
+
+        public IEnumerable<WebElementWrapper> GetList()
+        {
+            return sidebarBase.GetListOfSideBarComponents();
+        }
     }
+
+    //public bool TranslateToUA(string value)
+    //{
+    //    Translation translation = new Translation();
+    //    return translation.CheckUA(value);
+    //}
 }

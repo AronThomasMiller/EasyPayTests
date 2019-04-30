@@ -1,4 +1,5 @@
 ﻿using EasyPayLibrary.Pages;
+using EasyPayLibrary.Pages.Base;
 using OpenQA.Selenium;
 
 namespace EasyPayLibrary
@@ -17,14 +18,11 @@ namespace EasyPayLibrary
         //WebElementWrapper imageSelect;
         WebElementWrapper btnUpdateProfile;
 
-        LanguageChanger language;
-
 
 
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            language = GetPOM<LanguageChanger>(driver);
             
             nameInput = driver.GetByXpath("//input[@id = 'name']");
             surnameInput = driver.GetByXpath("//input[@id = 'surname']");
@@ -149,7 +147,7 @@ namespace EasyPayLibrary
 
         public ProfilePage ChangeToUKR()
         {
-            language.ChangeToUA();
+            header.ChangeToUa();
             return GetPOM<ProfilePage>(driver);
         }
         //public void SetImage()

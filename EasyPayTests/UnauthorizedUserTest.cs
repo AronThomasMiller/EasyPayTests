@@ -24,7 +24,7 @@ namespace EasyPayTests
             var emailsPage = passPage.EnterPassword(password);
             var mailPage = emailsPage.OpenMail();
             var loginPage = mailPage.ConfirmEmail();
-            var homePage = (HomePageUser)loginPage.Login(email, password);
+            var homePage = (UsersHomePage)loginPage.Login(email, password);
 
             Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"));
         }

@@ -11,7 +11,7 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages
         public static void ClickOnRedirectButton(DriverWrapper driver, int timeoutInSec)
         {
             WebElementWrapper btnRedirect = driver.GetByXpath("//a[@id='redirect-btn']", timeoutInSec);
-            btnRedirect.ClickOnIt();
+            btnRedirect.Click();
         }
     }
 }

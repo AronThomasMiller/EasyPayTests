@@ -54,10 +54,10 @@ namespace EasyPayLibrary
 
         public void ClickSubmitButton()
         {
-            btnSubmit.ClickOnIt();
+            btnSubmit.Click();
         }
 
-        public HomePageUser FillUpPayForm(string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
+        public UsersHomePage FillUpPayForm(string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
         {
             SetEmail(email);
             SetCardNumber(cardNumber);
@@ -70,7 +70,7 @@ namespace EasyPayLibrary
             ClickSubmitButton();
             driver.WaitUntillUrlContainString("drive.google.com",20);
             driver.GoToURL("http://localhost:8080/home");
-            return GetPOM<HomePageUser>(driver);
+            return GetPOM<UsersHomePage>(driver);
         }
     }
 }

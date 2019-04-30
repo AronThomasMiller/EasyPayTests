@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace EasyPayLibrary
 
         public string getUrl() { return driver.Url; }
 
-        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 20)
+        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
         {
             GetByXpath(xpath);
             var elements = driver.FindElements(By.XPath(xpath));
@@ -27,7 +28,7 @@ namespace EasyPayLibrary
             return result.ToList();
         }
 
-        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 20)
+        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 5)
         {
             if (timeoutInSeconds > 0)
             {
@@ -88,6 +89,11 @@ namespace EasyPayLibrary
         public void SwitchToWindow()
         {
             driver.SwitchTo().Window(driver.WindowHandles.Last());
+        }
+
+        public Actions MoveToElement()
+        {
+            return new Actions(driver);
         }
     }
 }

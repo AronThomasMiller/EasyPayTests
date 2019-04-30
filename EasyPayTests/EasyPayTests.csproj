@@ -59,13 +59,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminTestMax.cs" />
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="InspectorTestNazar.cs" />
     <Compile Include="Translations\TranslationProvider.cs" />
     <Compile Include="Translations\TranslationValues.cs" />
-    <Compile Include="BaseTest.cs" />
+    <Compile Include="MikeTests.cs" />
     <Compile Include="ManagerTest.cs" />
     <Compile Include="UnauthorizedUserTest.cs" />
     <Compile Include="UserTestBotis.cs" />
-    <Compile Include="UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

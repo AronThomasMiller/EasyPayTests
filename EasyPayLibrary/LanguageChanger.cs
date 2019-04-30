@@ -11,13 +11,13 @@ namespace EasyPayLibrary.Pages.Base
         public static void ChangeToUA(DriverWrapper driver)
         {
             WebElementWrapper btnUA = driver.GetByXpath("//a[@href='?lang=ua']");
-            btnUA.ClickOnIt();
+            btnUA.Click();
         }
 
         public static void ChangeToEN(DriverWrapper driver)
         {
             WebElementWrapper btnEN = driver.GetByXpath("//a[@href='?lang=en']");
-            btnEN.ClickOnIt();
+            btnEN.Click();
         }
     }
 }
