@@ -27,9 +27,9 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
+            var homePage = (ManagersHomePage)loginPage.Login("manager1@gmail.com", "Admin123");
             var listOfInspectors = homePage.GetInspectorsList();
-            var schedule = listOfInspectors.ChooseOlegAdamov();
+            var schedule = listOfInspectors.ChooseInspector("Oleg Adamov");
             var btnAddInspector = schedule.GetAddScheduleItem();
             Assert.IsTrue(btnAddInspector.IsDisplayed());
         }
@@ -40,9 +40,9 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
+            var homePage = (ManagersHomePage)loginPage.Login("manager1@gmail.com", "Admin123");
             var listOfInspectors = homePage.GetInspectorsList();
-            var schedule = listOfInspectors.ChooseOlegAdamov();
+            var schedule = listOfInspectors.ChooseInspector("Oleg Adamov");
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190430", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
@@ -59,9 +59,9 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
+            var homePage = (ManagersHomePage)loginPage.Login("manager1@gmail.com", "Admin123");
             var listOfInspectors = homePage.GetInspectorsList();
-            var schedule = listOfInspectors.ChooseOlegAdamov();
+            var schedule = listOfInspectors.ChooseInspector("Oleg Adamov");
 
             // preCondition
             var addItem = schedule.AddItem();
@@ -84,9 +84,9 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
+            var homePage = (ManagersHomePage)loginPage.Login("manager1@gmail.com", "Admin123");
             var listOfInspectors = homePage.GetInspectorsList();
-            var schedule = listOfInspectors.ChooseOlegAdamov();
+            var schedule = listOfInspectors.ChooseInspector("Oleg Adamov");
 
             //preCondition
             var addItem = schedule.AddItem();
@@ -106,12 +106,12 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
+            var homePage = (ManagersHomePage)loginPage.Login("manager1@gmail.com", "Admin123");
             var listOfInspectors = homePage.GetInspectorsList();
 
             // preCondition
             var addIvan = listOfInspectors.ClickToAddInspector();
-            addIvan.AddIvanIvanov();
+            addIvan.AddInspector("Ivan Ivanov");
             driver.Refresh();
             //
 
@@ -121,7 +121,7 @@ namespace EasyPayTests
             driver.Refresh();
 
             // postCondition
-            var removeIvan = listOfInspectors.RemoveIvanIvanov();
+            var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
             //
         }
@@ -132,16 +132,16 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
+            var homePage = (ManagersHomePage) loginPage.Login("manager1@gmail.com", "Admin123");
             var listOfInspectors = homePage.GetInspectorsList();
 
             // preCondition
             var addIvan = listOfInspectors.ClickToAddInspector();
-            addIvan.AddIvanIvanov();
+            addIvan.AddInspector("Ivan Ivanov");
             driver.Refresh();
             //
 
-            var removeIvan = listOfInspectors.RemoveIvanIvanov();
+            var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
         }
 
@@ -151,16 +151,16 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
-            var listOfInspectors = homePage.GetInspectorsList();
+            var homePage = (ManagersHomePage) loginPage.Login("manager1@gmail.com", "Admin123");
+            var listOfInspectors =  homePage.GetInspectorsList();
             var addIvan = listOfInspectors.ClickToAddInspector();
-            addIvan.AddIvanIvanov();
+            addIvan.AddInspector("Ivan Ivanov");
             driver.Refresh();
 
-            Assert.IsTrue(listOfInspectors.GetIvanIvanov().IsDisplayed());
+            Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed());
 
             // postCondition
-            var removeIvan = listOfInspectors.RemoveIvanIvanov();
+            var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
             //
         }
@@ -171,7 +171,7 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
+            var homePage = (ManagersHomePage)loginPage.Login("manager1@gmail.com", "Admin123");
             var setNewPrice = homePage.GetPricesToEdit();
             setNewPrice.ClickOnSetNewPriceButton();
             setNewPrice.SetNewPrice("7");
@@ -187,8 +187,8 @@ namespace EasyPayTests
             WelcomePage page = new WelcomePage();
             page.Init(driver);
             var loginPage = page.SignIn();
-            var homePage = loginPage.Login("manager1@gmail.com", "Admin123");
-            var setFuturePrice = homePage.GetPricesToEdit();
+            var homePage = (ManagersHomePage)loginPage.Login("manager1@gmail.com", "Admin123");
+            var setFuturePrice =  homePage.GetPricesToEdit();
             setFuturePrice.ClickOnSetFuturePriceButton();
             setFuturePrice.SetFuturePrice("20", "2019-05-02");
             driver.Refresh();

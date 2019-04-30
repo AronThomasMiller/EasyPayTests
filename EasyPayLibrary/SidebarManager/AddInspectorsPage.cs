@@ -2,9 +2,8 @@
 {
     public class AddInspectorsPage : BasePageObject
     {
-        WebElementWrapper makar;
-        WebElementWrapper oleg;
-        WebElementWrapper ivan;
+        WebElementWrapper inspector;
+        
         WebElementWrapper allInspectorsAreBusy;
         WebElementWrapper btnAdd;
         WebElementWrapper btnClose;
@@ -16,23 +15,12 @@
             base.Init(driver);
         }
 
-        public void ClickOnMakarportnov()
+        public void ClickOnInspector(string name)
         {
-            makar = driver.GetByXpath("//option[@value='110']");
-            makar.Click();
+            inspector = driver.GetByXpath($"//option[contains(text(),'{name}')]");
+            inspector.Click();
         }
-
-        public void ClickOnOlegAdamov()
-        {
-            oleg = driver.GetByXpath("//option[@value='109']");
-            oleg.Click();
-        }
-
-        public void ClickOnIvanIvanov()
-        {
-            ivan = driver.GetByXpath("//option[@value='113']");
-            ivan.Click();
-        }
+        
         public void ClickOnAddButton()
         {
             btnAdd.Click();
@@ -49,27 +37,14 @@
             allInspectorsAreBusy = driver.GetByXpath("//h3[@id='busy']");
             return allInspectorsAreBusy;
         }
-        public InspectorsListPage AddMakarPortnov()
+        public InspectorsListPage AddInspector(string name)
         {
-            ClickOnMakarportnov();
+            ClickOnInspector(name);
             ClickOnAddButton();
             return GetPOM<InspectorsListPage>(driver);
         }
 
-        public InspectorsListPage AddOlegAdamov()
-        {
-            ClickOnOlegAdamov();
-            ClickOnAddButton();
-            return GetPOM<InspectorsListPage>(driver);
-        }
-
-        public InspectorsListPage AddIvanIvanov()
-        {
-            ClickOnIvanIvanov();
-            ClickOnAddButton();
-            return GetPOM<InspectorsListPage>(driver);
-        }
-
+        
         public InspectorsListPage CloseWindow()
         {
             ClickOnCloseButton();
