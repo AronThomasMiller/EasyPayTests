@@ -19,6 +19,7 @@
         WebElementWrapper btnAddAddresse;
         WebElementWrapper btnCheck;
         WebElementWrapper fieldFlat;
+        WebElementWrapper error;
         
         public override void Init(DriverWrapper driver)
         {
@@ -106,6 +107,11 @@
             btnAddAddresse.Click();
 
 
+        }
+        public string Error()
+        {
+            error = driver.GetByXpath("//div[contains(@class,'ui-pnotify-fade-normal ui-pnotify-move ui-pnotify-in ui-pnotify-fade-in')]");
+            return error.GetText();
         }
 
 

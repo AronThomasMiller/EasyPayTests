@@ -35,7 +35,7 @@ namespace EasyPayTests
             var home = (HomePageUser)login.Login("user1@gmail.com", "Admin123");
             var addresses = home.OpenAddresses();
             addresses.EnterAllFields("Небесної сотні", "4Б", "Небесної сотні", "Чернівці", "Чернівецька область", "12345", "Україна", "45");
-            var error = driver.GetByXpath("//div[contains(@class,'ui-pnotify-fade-normal ui-pnotify-move ui-pnotify-in ui-pnotify-fade-in')]");
+            var error = addresses.Error();
             Assert.IsNull(error);
                        
         }
@@ -105,6 +105,8 @@ namespace EasyPayTests
             var utilities = home.OpenUtilities();
             utilities.SelectAddress("Чернівці City, вулиця Університетська Str., 2/5");
             utilities.Disconect();
+
+
 
         }
         [Test]
