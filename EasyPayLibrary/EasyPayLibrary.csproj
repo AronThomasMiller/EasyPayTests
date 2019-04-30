@@ -11,11 +11,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EasyPayLibrary</RootNamespace>
     <AssemblyName>EasyPayLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,9 +60,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SidebarManager\AddInspectorsPage.cs" />
+    <Compile Include="SidebarManager\AddScheduleItemPage.cs" />
+    <Compile Include="SidebarManager\DeleteScheduleItemPage.cs" />
+    <Compile Include="SidebarManager\EditScheduleItemPage.cs" />
+    <Compile Include="HomePages\ManagersHomePage.cs" />
+    <Compile Include="SidebarManager\InspectorsListPage.cs" />
+    <Compile Include="SidebarManager\RemoveInspectorPage.cs" />
+    <Compile Include="SidebarManager\SchedulePage.cs" />
+    <Compile Include="SidebarManager\ManagerSidebar.cs" />
+    <Compile Include="SidebarManager\UtilityPricePage.cs" />
     <Compile Include="Wrappers\DriverFactory.cs" />
     <Compile Include="Wrappers\DriverWrapper.cs" />
-    <Compile Include="SidebarAdmin\SidebarAdmin.cs" />
+    <Compile Include="SidebarAdmin\AdminSidebar.cs" />
     <Compile Include="BasePageObject.cs" />
     <Compile Include="SidebarBase.cs" />
     <Compile Include="GeneralPage.cs" />
@@ -75,7 +86,7 @@
     <Compile Include="Login\WelcomePage.cs" />
     <Compile Include="LanguageChanger.cs" />
     <Compile Include="HomePages\UsersHomePage.cs" />
-    <Compile Include="SidebarUser\SidebarUsers.cs" />
+    <Compile Include="SidebarUser\UserSidebar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wrappers\WebelementWrapper.cs" />
   </ItemGroup>
@@ -88,8 +99,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
   </Target>
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" />
 </Project>

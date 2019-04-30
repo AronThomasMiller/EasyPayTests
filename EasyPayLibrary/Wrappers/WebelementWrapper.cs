@@ -57,5 +57,15 @@ namespace EasyPayLibrary
         {
             return element.GetAttribute(attribute);
         }
+
+        public void sendBackSpace()
+        {
+            element.SendKeys(Keys.Backspace);
+        }
+
+        public void sendEnter()
+        {
+            element.SendKeys(Keys.Enter);
+        }
     }
 }
