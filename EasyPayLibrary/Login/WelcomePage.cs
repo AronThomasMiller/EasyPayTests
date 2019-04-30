@@ -9,8 +9,8 @@ namespace EasyPayLibrary
 {
     public class WelcomePage:BasePageObject
     {
-        WebElementWrapper btnSignIn;
-        WebElementWrapper btnSignUp;
+        public WebElementWrapper btnSignIn;
+        public WebElementWrapper btnSignUp;
 
         public override void Init(DriverWrapper driver)
         {

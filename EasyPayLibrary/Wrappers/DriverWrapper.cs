@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -63,5 +64,15 @@ namespace EasyPayLibrary
         {
             driver.Manage().Window.Maximize();
         }
+
+        public Actions MoveToElement()
+        {
+            return new Actions(driver);
+        }
+
+        //public Actions ConvertToActions()
+        //{
+        //    return new Actions(driver);
+        //}
     }
 }

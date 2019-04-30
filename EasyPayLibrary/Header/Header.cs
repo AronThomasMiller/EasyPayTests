@@ -2,31 +2,31 @@
 {
     public class Header:BasePageObject
     {
-        WebElementWrapper btnProfile;
-        WebElementWrapper btnLogOut;
-        WebElementWrapper dropdownProfile;
+        public WebElementWrapper btnProfile;
+        public WebElementWrapper btnLogOut;
+        public WebElementWrapper dropdownProfile;
 
         public override void Init(DriverWrapper driver)
-        {
-            btnProfile = driver.GetByXpath("//a[@href='/profile']");
-            btnLogOut = driver.GetByXpath("//a[@href='/logout']");
-            dropdownProfile = driver.GetByXpath("//a[@class='user-profile dropdown-toggle']");
+        {          
             base.Init(driver);
         }
 
         public void ClickOnProfileDropdown()
         {
+            dropdownProfile = driver.GetByXpath("//a[@class='user-profile dropdown-toggle']");
             dropdownProfile.ClickOnIt();
         }
 
         public void GoToProfile()
         {
+            btnProfile = driver.GetByXpath("//a[@href='/profile']");
             ClickOnProfileDropdown();             
             btnProfile.ClickOnIt();
         }
 
         public void LogOut()
         {
+            btnLogOut = driver.GetByXpath("//a[@href='/logout']");
             ClickOnProfileDropdown();  
             btnLogOut.ClickOnIt();
         }       

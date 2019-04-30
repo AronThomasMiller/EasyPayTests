@@ -1,13 +1,15 @@
-﻿namespace EasyPayLibrary
+﻿using EasyPayLibrary.Pages;
+
+namespace EasyPayLibrary
 {
     public class GeneralPage:BasePageObject
     {
         protected Header header;
-        //HeaderPOM Header { get; set; }
-        
+                
         public override void Init(DriverWrapper driver)
         {
             header = GetPOM<Header>(driver);
+            
             base.Init(driver);
         }
         

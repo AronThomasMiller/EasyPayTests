@@ -2,7 +2,7 @@
 
 namespace EasyPayLibrary
 {
-    public class BaseSidebar:BasePageObject
+    public class BaseSidebar : BasePageObject
     {
         public List<WebElementWrapper> sidebar;
 
@@ -11,6 +11,10 @@ namespace EasyPayLibrary
             sidebar = new List<WebElementWrapper>();
             sidebar = driver.GetElementsByXpath("//ul[@class='nav side-menu']/li");
             base.Init(driver);
+        }
+        public IEnumerable<WebElementWrapper> GetListOfSideBarComponents()
+        {
+            return sidebar;
         }
     }
 }
