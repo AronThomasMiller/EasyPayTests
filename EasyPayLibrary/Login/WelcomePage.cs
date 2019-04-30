@@ -1,9 +1,5 @@
-﻿using OpenQA.Selenium;
-using System;
+﻿using EasyPayLibrary.Pages.Common;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyPayLibrary
 {
@@ -12,10 +8,15 @@ namespace EasyPayLibrary
         WebElementWrapper btnSignIn;
         WebElementWrapper btnSignUp;
 
+        WebElementWrapper LeadText;
+
         public override void Init(DriverWrapper driver)
         {
-            btnSignIn = driver.GetByXpath("//a[@id='Sign_in']",10);
-            btnSignUp = driver.GetByXpath("//a[@id='Sign_up']",10);
+            LeadText = driver.GetByXpath("//p[@class='lead']/span");
+
+            btnSignIn = driver.GetByXpath("//a[@id='Sign_in']");
+            btnSignUp = driver.GetByXpath("//a[@id='Sign_up']");
+
             base.Init(driver);
         }
 
@@ -35,10 +36,32 @@ namespace EasyPayLibrary
             return  GetPOM<LoginPage>(driver);
         }
 
-        public LoginPage SignUp()
+        public RegisterPage SignUp()
         {
             ClickOnSignUpButton();
-            return GetPOM<LoginPage>(driver);
-        }        
+            return GetPOM<RegisterPage>(driver);
+        }
+
+        public WelcomePage TranslatePageToUA()
+        {
+            return TranslatePageToUA<WelcomePage>(driver);
+        }
+
+        public WelcomePage TranslatePageToEN()
+        {
+            return TranslatePageToEN<WelcomePage>(driver);
+        }
+
+        public override List<string> GetTextElements()
+        {
+            var list = new List<string>
+            {
+                LeadText.GetText(),
+                btnSignIn.GetByXpath(".//span").GetText(),
+                btnSignUp.GetByXpath(".//span").GetText()
+            };
+
+            return list;
+        }
     }
 }

@@ -1,29 +1,15 @@
-﻿using OpenQA.Selenium;
+﻿using EasyPayLibrary.Pages;
 
 namespace EasyPayLibrary
 {
-    public class GeneralPage : BasePageObject
+    public abstract class GeneralPage:BasePageObject
     {
-        protected Header header;        
+        protected Header header;
         
         public override void Init(DriverWrapper driver)
         {
-            header = GetPOM<Header>(driver);            
+            header = GetPOM<Header>(driver);
             base.Init(driver);
-        }
-
-        public static string GetRole(DriverWrapper driver)
-        {
-            try
-            {
-                GetPOM<BasePageObject>(driver);
-                WebElementWrapper role = driver.GetByXpath("//*[@class='menu_section']/h3",1);
-                return role.GetText();
-            }
-            catch (WebDriverTimeoutException)
-            {
-                return null;
-            }            
         }
         
         public ProfilePage GoToProfile()
@@ -37,5 +23,11 @@ namespace EasyPayLibrary
             header.LogOut();
             return GetPOM<LoginPage>(driver);
         }
+
+        public static string GetRole(DriverWrapper driver)
+        {
+            return driver.GetByXpath("//div[@class='menu_section']//h3").GetText();
+        }
+
     }
 }

@@ -2,8 +2,6 @@
 using EasyPayLibrary.Pages;
 using EasyPayLibrary.Translations;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace EasyPayTests
 {
-    public class UserTest
+    public class BaseTest
     {
-        DriverWrapper driver;
+        protected DriverWrapper driver;
         TranslationValues t;
 
         [SetUp]
@@ -278,6 +276,7 @@ namespace EasyPayTests
         [TearDown]
         public void PostCondition()
         {
+            Thread.Sleep(3000);
             driver.Quit();
         }
     }

@@ -4,34 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyPayLibrary.Pages
+namespace EasyPayLibrary.Pages.Base
 {
-    public class LanguageChanger : BasePageObject
+    public class LanguageChanger
     {
-        private WebElementWrapper btnLanguage;
-
-        public override void Init(DriverWrapper driver)
-        {            
-            base.Init(driver);
+        public static void ChangeToUA(DriverWrapper driver)
+        {
+            WebElementWrapper btnUA = driver.GetByXpath("//a[@href='?lang=ua']");
+            btnUA.ClickOnIt();
         }
 
-        public void ClickOnDropdown()
+        public static void ChangeToEN(DriverWrapper driver)
         {
-            btnLanguage = driver.GetByXpath("//*[@id='language-dropdown']");
-            btnLanguage.Click();
-        }
-
-        public void ChangeToUA()
-        {
-            ClickOnDropdown();
-            driver.GetByXpath("//a[@href='?lang=ua']").Click();           
-        }
-
-        public BasePageObject ChangeToEN()
-        {
-            ClickOnDropdown();
-            driver.GetByXpath("//a[@href='?lang=en']").Click();
-            return GetPOM<BasePageObject>(driver);
+            WebElementWrapper btnEN = driver.GetByXpath("//a[@href='?lang=en']");
+            btnEN.ClickOnIt();
         }
     }
 }

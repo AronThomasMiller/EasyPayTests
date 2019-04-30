@@ -11,13 +11,15 @@ namespace EasyPayLibrary
 {
     public class DriverWrapper 
     {
-        public IWebDriver driver { get; set; }
+        IWebDriver driver { get; set; }
         public DriverWrapper(IWebDriver Driver)
         {
             driver = Driver;
         }
 
-        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
+        public string getUrl() { return driver.Url; }
+
+        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 20)
         {
             GetByXpath(xpath);
             var elements = driver.FindElements(By.XPath(xpath));
@@ -25,7 +27,7 @@ namespace EasyPayLibrary
             return result.ToList();
         }
 
-        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 5)
+        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 20)
         {
             if (timeoutInSeconds > 0)
             {
@@ -46,6 +48,11 @@ namespace EasyPayLibrary
             driver.Url = url;            
         }
 
+        public void GoToURL(string url)
+        {
+            driver.Navigate().GoToUrl(url);
+        }
+
         public void Refresh()
         {
             driver.Navigate().Refresh();
@@ -62,9 +69,25 @@ namespace EasyPayLibrary
         {
             driver.Manage().Window.Maximize();
         }
-        public string GetUrl()
+
+        public void ChangeFrame(string name)
         {
-            return driver.Url;
+            driver.SwitchTo().Frame(name);
+        }
+
+
+        public void WaitUntillUrlContainString(string str, int timeInSec = 20)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));
+#pragma warning disable CS0618 // Type or member is obsolete
+            wait.Until(condition: ExpectedConditions.UrlContains(str));
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
+        
+
+        public void SwitchToWindow()
+        {
+            driver.SwitchTo().Window(driver.WindowHandles.Last());
         }
     }
 }

@@ -14,7 +14,7 @@ namespace EasyPayLibrary
         {
             fieldEmail = driver.GetByXpath("//input[@id='email']");
             fieldPassword = driver.GetByXpath("//input[@id='password']");
-            btnLogin = driver.GetByXpath("//input[@id='Login_button']");                      
+            btnLogin = driver.GetByXpath("//input[@id='Login_button']");
             base.Init(driver);
         }
 
@@ -35,32 +35,49 @@ namespace EasyPayLibrary
 
         public BasePageObject Login(string email, string password)
         {
+
             SetEmail(email);
             SetPassword(password);
             ClickOnLoginButton();
 
-            switch (GeneralPage.GetRole(driver))
+            try
             {
-                case "USER":
-                case "КОРИСТУВАЧ":
-                    return GetPOM<UsersHomePage>(driver);
-                case "MANAGER":
-                case "МЕНЕДЖЕР":
-                    return GetPOM<BasePageObject>(driver);
-                case "ADMIN":
-                case "АДМІНІСТРАТОР":
-                    return GetPOM<HomePageAdmin>(driver);
-                case "INSPECTOR":
-                case "КОНТРОЛЕР":
-                    return GetPOM<BasePageObject>(driver);
+                RedirectModalWindow.ClickOnRedirectButton(driver,1);
+                return GetPOM<GmailEmailPage>(driver);
+            }
+            catch (WebDriverTimeoutException)
+            {
+                switch (GeneralPage.GetRole(driver))
+                {
+                    case "USER":
+                    case "КОРИСТУВАЧ":
+                        return GetPOM<HomePageUser>(driver);
+                    case "MANAGER":
+                    case "МЕНЕДЖЕР":
+                        return GetPOM<HomePageManager>(driver);
+                    case "ADMIN":
+                    case "АДМІНІСТРАТОР":
+                        return GetPOM<HomePageUser>(driver);
+                    case "INSPECTOR":
+                    case "КОНТРОЛЕР":
+                        return GetPOM<BasePageObject>(driver);
                 case null:
                     return GetPOM<LoginPage>(driver);
-            }
+                }
 
             return GetPOM<LoginPage>(driver);
         }
+        
+        public LoginPage TranslatePageToUA()
+        {
+            return TranslatePageToUA<LoginPage>(driver);
+        }
 
-        public bool IsErrorPresent()
+        public LoginPage TranslatePageToEN()
+        {
+            return TranslatePageToEN<LoginPage>(driver);
+        }
+                public bool IsErrorPresent()
         {
             try
             {                
@@ -73,4 +90,5 @@ namespace EasyPayLibrary
             }          
         }
     }
+
 }

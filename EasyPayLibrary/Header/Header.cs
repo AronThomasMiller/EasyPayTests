@@ -6,8 +6,13 @@
         WebElementWrapper btnLogOut;
         WebElementWrapper dropdownProfile;
 
+        //WebElementWrapper btnEN;
+        WebElementWrapper btnUA;
+        WebElementWrapper dropdownLanguage;
+
         public override void Init(DriverWrapper driver)
         {            
+            dropdownLanguage = driver.GetByXpath("//a[@class='dropdown-toggle user-profile']");
             base.Init(driver);
         }
 
@@ -17,7 +22,12 @@
             dropdownProfile.Click();
         }
 
-        public ProfilePage GoToProfile()
+        public void ClickOnLanguageDropdown ()
+        {
+            dropdownLanguage.ClickOnIt();
+        }
+
+        public void GoToProfile()
         {
             ClickOnProfileDropdown();
             btnProfile = driver.GetByXpath("//a[@href='/profile']");                       
@@ -30,6 +40,13 @@
             ClickOnProfileDropdown();
             btnLogOut = driver.GetByXpath("//a[@href='/logout']");
             btnLogOut.Click();
-        }       
+        }    
+        
+        public void ChangeToUa()
+        {
+            ClickOnLanguageDropdown();
+            btnUA = driver.GetByXpath("//a[@href='/profile']");
+            btnUA.ClickOnIt();
+        }
     }
 }
