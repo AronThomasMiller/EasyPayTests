@@ -53,5 +53,10 @@ namespace EasyPayLibrary
         {
             return element;
         }
+
+        public string GetCssValue(string css)
+        {
+            return element.GetCssValue(css);
+        }
     }
 }

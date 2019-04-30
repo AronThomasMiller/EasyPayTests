@@ -5,17 +5,17 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 {
     public class GmailPage:BasePageObject
     {
-        List<WebElementWrapper> emailFromEasyPay;
+        WebElementWrapper emailFromEasyPay;
 
         public override void Init(DriverWrapper driver)
         {
-            emailFromEasyPay = driver.GetElementsByXpath("//span[@email='ch067.easypay@gmail.com']/../../../..");
+            emailFromEasyPay = driver.GetByXpath("//*[contains(text(),'EASY PAY - Confirm Registration')]/../..");
             base.Init(driver);
         }
 
         public void ClickOnFirstMail()
         {
-            emailFromEasyPay[0].ClickOnIt();
+            emailFromEasyPay.ClickOnIt();
         }
 
         public MailPage OpenMail()

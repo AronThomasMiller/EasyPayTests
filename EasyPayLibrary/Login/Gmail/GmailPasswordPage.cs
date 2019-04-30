@@ -27,7 +27,7 @@
             SetPassword(password);
             ClickOnNextButton();
             driver.GetByXpath("//*[@class='gb_pe']");
-            driver.GoToURL("https://mail.google.com/mail/u/0/#inbox");
+            driver.GoToURL("https://mail.google.com/mail/u/0/h/1pq68r75kzvdr/?v%3Dlui");
             return GetPOM<GmailPage>(driver);
         }
     }

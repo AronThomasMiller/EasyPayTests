@@ -53,8 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="UnauthorizedUser.cs" />
-    <Compile Include="UserTest.cs" />
+    <Compile Include="ManagerTest.cs" />
+    <Compile Include="UnauthorizedUserTest.cs" />
+    <Compile Include="UserTestBotis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

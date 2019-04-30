@@ -45,18 +45,37 @@ namespace EasyPayLibrary
             try
             {
                 RedirectModalWindow.ClickOnRedirectButton(driver,1);
-                driver.GoToURL("https://accounts.google.com");
                 return GetPOM<GmailEmailPage>(driver);
             }
             catch (WebDriverTimeoutException)
             {
                 switch (GeneralPage.GetRole(driver))
                 {
-                    case "USER": return GetPOM<HomePageUser>(driver);
-                    case "MANAGER": return GetPOM<HomePageManager>(driver);
+                    case "USER":
+                    case "КОРИСТУВАЧ":
+                        return GetPOM<HomePageUser>(driver);
+                    case "MANAGER":
+                    case "МЕНЕДЖЕР":
+                        return GetPOM<HomePageManager>(driver);
+                    case "ADMIN":
+                    case "АДМІНІСТРАТОР":
+                        return GetPOM<HomePageUser>(driver);
+                    case "INSPECTOR":
+                    case "КОНТРОЛЕР":
+                        return GetPOM<BasePageObject>(driver);
                 }
             }
             return GetPOM<BasePageObject>(driver);
+        }
+        
+        public LoginPage TranslatePageToUA()
+        {
+            return TranslatePageToUA<LoginPage>(driver);
+        }
+
+        public LoginPage TranslatePageToEN()
+        {
+            return TranslatePageToEN<LoginPage>(driver);
         }
     }
 

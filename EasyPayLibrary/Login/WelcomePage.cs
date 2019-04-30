@@ -1,4 +1,5 @@
 ﻿using EasyPayLibrary.Pages.Common;
+using System.Collections.Generic;
 
 namespace EasyPayLibrary
 {
@@ -7,10 +8,15 @@ namespace EasyPayLibrary
         WebElementWrapper btnSignIn;
         WebElementWrapper btnSignUp;
 
+        WebElementWrapper LeadText;
+
         public override void Init(DriverWrapper driver)
         {
+            LeadText = driver.GetByXpath("//p[@class='lead']/span");
+
             btnSignIn = driver.GetByXpath("//a[@id='Sign_in']");
             btnSignUp = driver.GetByXpath("//a[@id='Sign_up']");
+
             base.Init(driver);
         }
 
@@ -34,6 +40,28 @@ namespace EasyPayLibrary
         {
             ClickOnSignUpButton();
             return GetPOM<RegisterPage>(driver);
-        }        
+        }
+
+        public WelcomePage TranslatePageToUA()
+        {
+            return TranslatePageToUA<WelcomePage>(driver);
+        }
+
+        public WelcomePage TranslatePageToEN()
+        {
+            return TranslatePageToEN<WelcomePage>(driver);
+        }
+
+        public override List<string> GetTextElements()
+        {
+            var list = new List<string>
+            {
+                LeadText.GetText(),
+                btnSignIn.GetByXpath(".//span").GetText(),
+                btnSignUp.GetByXpath(".//span").GetText()
+            };
+
+            return list;
+        }
     }
 }

@@ -42,6 +42,6 @@ namespace EasyPayLibrary
             return GetPOM<HomePageUser>(driver);
         }
 
-   
+
     }
 }

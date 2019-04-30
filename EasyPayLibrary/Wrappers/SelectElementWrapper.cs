@@ -20,6 +20,5 @@ namespace EasyPayLibrary
         {
             selectElement.SelectByText(text);
         }
-
     }
 }

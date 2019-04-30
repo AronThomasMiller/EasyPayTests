@@ -1,11 +1,15 @@
 ﻿using EasyPayLibrary.Pages.UnauthorizedUserPages;
 using EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace EasyPayLibrary.Pages.Common
 {
     public class RegisterPage:BasePageObject
     {
+        WebElementWrapper header;
+        WebElementWrapper footer;
+
         WebElementWrapper fieldName;
         WebElementWrapper fieldSurname;
         WebElementWrapper fieldPhoneNumber;
@@ -18,6 +22,10 @@ namespace EasyPayLibrary.Pages.Common
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
+
+            header = driver.GetByXpath("//h1[@id='registrationName']");
+            footer = driver.GetByXpath("//div[@class='separator']");
+
             fieldName = driver.GetByXpath("//input[@id='name']");
             fieldSurname = driver.GetByXpath("//input[@id='surname']");
             fieldPhoneNumber = driver.GetByXpath("//input[@id='phone']");
@@ -76,8 +84,35 @@ namespace EasyPayLibrary.Pages.Common
 
             RedirectModalWindow.ClickOnRedirectButton(driver,10);
             
-            driver.GoToURL("https://accounts.google.com");
             return GetPOM<GmailEmailPage>(driver);
+        }
+        
+        public RegisterPage TranslatePageToUA()
+        {
+            return TranslatePageToUA<RegisterPage>(driver);
+        }
+
+        public RegisterPage TranslatePageToEN()
+        {
+            return TranslatePageToEN<RegisterPage>(driver);
+        }
+
+        public override List<string> GetTextElements()
+        {
+            var list = new List<string>
+            {
+                header.GetText(),
+                footer.GetByXpath(".//span/span").GetText(),
+                footer.GetByXpath(".//a/span").GetText(),
+                
+                fieldName.GetCssValue("placeholder"),
+                fieldSurname.GetCssValue("placeholder"),
+                fieldEmail.GetCssValue("placeholder"),
+                fieldPassword.GetCssValue("placeholder"),
+                fieldPassword.GetCssValue("placeholder")
+            };
+
+            return list;
         }
     }
 }

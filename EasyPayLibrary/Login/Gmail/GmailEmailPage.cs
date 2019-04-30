@@ -13,6 +13,7 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 
         public override void Init(DriverWrapper driver)
         {
+            driver.GoToURL("https://accounts.google.com");
             fieldEmail = driver.GetByXpath("//input[@id='identifierId']");
             btnNext = driver.GetByXpath("//div[@id='identifierNext']");
             base.Init(driver);
