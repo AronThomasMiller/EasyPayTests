@@ -17,6 +17,7 @@ namespace EasyPayTests
         {
             driver = new DriverFactory().GetDriver();
             driver.Maximaze();
+            driver.GoToURL();
         }
 
         [TearDown]

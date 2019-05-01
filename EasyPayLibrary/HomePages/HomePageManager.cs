@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyPayLibrary.ManagerSidebar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,12 @@ namespace EasyPayLibrary.Pages.Manager
         {
             sidebar.ClickOnInspectorsButton();
             return GetPOM<InspectorsListPage>(driver);
+        }
+
+        public UtilityPricePage GetPricesToEdit()
+        {
+            sidebar.ClickOnUtilityPriceButton();
+            return GetPOM<UtilityPricePage>(driver);
         }
     }
 }

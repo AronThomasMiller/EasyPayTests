@@ -70,6 +70,15 @@
     <Compile Include="LanguageChanger.cs" />
     <Compile Include="Login\LoginPage.cs" />
     <Compile Include="Login\WelcomePage.cs" />
+    <Compile Include="ManagerSidebar\AddInspectorsPage.cs" />
+    <Compile Include="ManagerSidebar\AddScheduleItemPage.cs" />
+    <Compile Include="ManagerSidebar\DeleteScheduleItemPage.cs" />
+    <Compile Include="ManagerSidebar\EditScheduleItemPage.cs" />
+    <Compile Include="ManagerSidebar\HistoryPage.cs" />
+    <Compile Include="ManagerSidebar\RemoveInspectorPage.cs" />
+    <Compile Include="ManagerSidebar\SchedulePage.cs" />
+    <Compile Include="ManagerSidebar\StatisticsPage.cs" />
+    <Compile Include="ManagerSidebar\UtilityPricePage.cs" />
     <Compile Include="Wrappers\ActionsWrapper.cs" />
     <Compile Include="Wrappers\DriverFactory.cs" />
     <Compile Include="Wrappers\DriverWrapper.cs" />
@@ -117,8 +126,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
   </Target>
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" />
 </Project>
