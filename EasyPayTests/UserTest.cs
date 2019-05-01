@@ -135,11 +135,11 @@ namespace EasyPayTests
             WelcomePage welcome = new WelcomePage();
             welcome.Init(driver);
             var login = welcome.SignIn();
-            //var home = (HomePageUser)login.Login("user1@gmail.com", "Admin123");
-            //var utilities = home.OpenUtilities();
-            //utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
-            //var logOut = utilities.SubmitCall();
-            //var secondEnter = logOut.LogOut();
+            var home = (HomePageUser)login.Login("user1@gmail.com", "Admin123");
+            var utilities = home.OpenUtilities();
+            utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
+            var logOut = utilities.SubmitCall();
+            var secondEnter = logOut.LogOut();
             var schedule = (HomePageInspector)login.Login("inspector2@gmail.com", "Admin123");
             var sched = schedule.OpenSchedule();
             Assert.IsNotNull(sched.GetCallByAddress("вулиця Толстого 2"),"No address match");
