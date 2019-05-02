@@ -20,5 +20,10 @@ namespace EasyPayLibrary.Inspector
             textInfo = driver.GetByXpath("//td[contains(@class,'fc-day fc-widget-content fc-mon fc-today')]");
             return textInfo.GetText();
         }
+
+        public WebElementWrapper GetCallByAddress(string address)
+        {
+            return driver.GetByXpath($"//span[contains(text(),'{address}')]");
+        }
     }
 }

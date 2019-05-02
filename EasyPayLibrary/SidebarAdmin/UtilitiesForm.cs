@@ -16,7 +16,7 @@ namespace EasyPayLibrary.Admin
         }
         public string VerifyUtilitiesListIsNotEmpty()
         {
-            panel = driver.GetByXpath("//div[@class='x_content']");
+            panel = driver.GetByXpath("//tbody[@id='utility_table']");
             return panel.ToString();
         }
 

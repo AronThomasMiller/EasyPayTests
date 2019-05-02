@@ -42,7 +42,7 @@ namespace EasyPayLibrary.Changes
         }
         public string SelectAddress(string address)
         {
-            selectAddresse = driver.GetByXpath("//*[@id='selectAddress']");
+            selectAddresse = driver.GetByXpath("//select[@id='selectAddress']");
             SelectElement listOfAddressesPay;            
             listOfAddressesPay = selectAddresse.selectElement();
             listOfAddressesPay.SelectByText(address);

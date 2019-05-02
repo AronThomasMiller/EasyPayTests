@@ -16,7 +16,8 @@ namespace EasyPayLibrary.Manager
         }
         public string VerifyListOfInspectorsNotEmpty()
         {
-            panel = driver.GetByXpath("//div[@class='x_content']");
+
+            panel = driver.GetByXpath("//div[@class='x_content']");//ПОМІНЯТИ!!!
             return panel.ToString();
         }
     }

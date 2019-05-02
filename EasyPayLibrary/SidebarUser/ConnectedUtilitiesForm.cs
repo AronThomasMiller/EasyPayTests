@@ -15,7 +15,7 @@ namespace EasyPayLibrary.Changes
         WebElementWrapper btnCallinspector;
         WebElementWrapper selectDate;
         WebElementWrapper btnCall;
-
+        WebElementWrapper text;
         public override void Init(DriverWrapper driver)
         {
             btnConnectedUtilities = driver.GetByXpath("//a[@href='/user/connected-utilities/']");
@@ -34,43 +34,47 @@ namespace EasyPayLibrary.Changes
             list.SelectByText(address);
             return list.SelectedOption.Text;
         }
-
-        public void Disconect()
+        public void CallInspector(string address)
         {
-            btnDisconnect = driver.GetByXpath("//*[@id='disc']");
+            SelectAddress(address);
+            ClickOnCallInspector();
+            SelectDate();
+        }
+
+        public ConnectedUtilitiesForm Disconect()
+        {
+            btnDisconnect = driver.GetByXpath("//td[contains(text(),'ДнепрОблЭнерго')]/..//td[3]/a");
             btnDisconnect.Click();
+            return GetPOM<ConnectedUtilitiesForm>(driver);
 
         }
         public void ClickOnCallInspector()
         {
-            btnCallinspector = driver.GetByXpath("//*[@id='preCall']");
+            btnCallinspector = driver.GetByXpath("//button[@id='preCall']");
             btnCallinspector.Click();
         }
         public void SelectDate()
         {
-            selectDate = driver.GetByXpath("//*[@id='picker']");
+            selectDate = driver.GetByXpath("//input[@id='picker']");
             selectDate.Click();
-            var currentDate = DateTime.Today.Day + 1;
-            string currentDateString = currentDate.ToString();
-            var list = driver.GetElementsByXpath("//td[@class='day']");
-            foreach (var element in list)
-            {
-                if (element.GetText() == currentDateString)
-                {
-                    element.Click();
-                    break;
-                }
-            }
-            //selectDate.Enter();
+            DateTime currentDate = DateTime.Today.AddDays(1);
+            string currentDateString = currentDate.ToString("yyyy-MM-dd");
+            selectDate.SendText(currentDateString);
 
         }
+
         public HomePageUser SubmitCall()
         {
-            btnCall = driver.GetByXpath("//*[@id='submit']");
+            btnCall = driver.GetByXpath("//button[@id='submit']");
             btnCall.Click();
-            driver.Refresh();
             return GetPOM<HomePageUser>(driver);
 
+        }
+        public string VerifyThatUtilitiExist()
+        {
+            text = driver.GetByXpath("//td[contains(text(),'ДнепрОблЭнерго')]/..");
+
+            return text.GetText();
         }
 
     }
