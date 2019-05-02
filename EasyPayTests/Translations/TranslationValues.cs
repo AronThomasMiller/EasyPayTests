@@ -8,13 +8,13 @@ namespace EasyPayLibrary.Translations
 {
     public class TranslationValues
     {
-        public string Name = "Name"; //{ get; set; }
-        public string Surname = "Surname";//{ get; set; }
+        public string Name = ""; 
+        public string Surname = "";
         public string User = "";
-        public string Addresses = "Addresses";
-        public string SomeText = "Some Text";
-        public string Profile = "Profile";
-        public string MainPage = "Main Page";
+        public string Addresses = "";
+        public string SomeText = "";
+        public string Profile = "";
+        public string MainPage = "";
         public string ChangeAvatar = "";
         public string SelectImage = "";
         public string PhoneNumber = "";

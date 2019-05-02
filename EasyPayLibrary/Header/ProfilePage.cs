@@ -14,16 +14,12 @@ namespace EasyPayLibrary
         WebElementWrapper newPassword;
         WebElementWrapper confirmPassword;
         WebElementWrapper errorAlert;
-        WebElementWrapper successAlert;
-        //WebElementWrapper imageSelect;
+        WebElementWrapper successAlert;        
         WebElementWrapper btnUpdateProfile;
-
-
 
         public override void Init(DriverWrapper driver)
         {
-            base.Init(driver);
-            
+            base.Init(driver);            
             nameInput = driver.GetByXpath("//input[@id = 'name']");
             surnameInput = driver.GetByXpath("//input[@id = 'surname']");
             phoneNumberInput = driver.GetByXpath("//input[@id='phone-number']");
@@ -31,18 +27,19 @@ namespace EasyPayLibrary
             newPassword = driver.GetByXpath("//input[@id='new-password']");
             confirmPassword = driver.GetByXpath("//input[@id='password-repeat']");
             btnUpdateProfile = driver.GetByXpath("//button[@id='submit-button']");
-            title = driver.GetByXpath("//div[@class='title_left']//span");
-            //imageSelect = driver.GetByXpath("//input[@id='image-file']");
+            title = driver.GetByXpath("//div[@class='title_left']//span");            
         }
 
         public bool NameIsVisible()
         {
             return nameInput.IsDisplayed();
         }
+
         public bool SurnameIsVisible()
         {
             return surnameInput.IsDisplayed();
         }
+
         public bool PhoneNumberIsVisible()
         {
             return phoneNumberInput.IsDisplayed();
@@ -101,8 +98,7 @@ namespace EasyPayLibrary
         public void ClickOnUpdateProfile()
         {
             btnUpdateProfile.Click();
-            btnUpdateProfile.Click();
-            //btnUpdateProfile.SendText(Keys.Enter);
+            btnUpdateProfile.Click();            
         }
 
         public ProfilePage UpdateProfile()
@@ -136,6 +132,7 @@ namespace EasyPayLibrary
             SetConfirmPassword(newpass);
             ClickOnUpdateProfile();
         }
+
         public void EditData(string firstName, string secondName, string phone, string pass, string newpass)
         {
             SetName(firstName);
@@ -150,9 +147,5 @@ namespace EasyPayLibrary
             header.ChangeToUa();
             return GetPOM<ProfilePage>(driver);
         }
-        //public void SetImage()
-        //{
-        //    imageSelect.SendText(@"C:\Users\Maxim\Desktop\11.jpg");
-        //}
     }
 }

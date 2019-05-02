@@ -64,6 +64,7 @@ namespace EasyPayLibrary
         {
             return element.GetAttribute(attribute);
         }
+
         public IWebElement GetElement()
         {
             return element;

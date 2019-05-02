@@ -19,31 +19,19 @@ namespace EasyPayLibrary.ManagerSidebar
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
             base.Init(driver);
         }
-        /// <summary>
-        /// REDO
-        /// </summary>
-        /// <returns></returns>
+
         public void ChooseDateAndTime(string date)
         {
-            //chooseDateAndTime.Click();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.sendBackSpace();
-            //chooseDateAndTime.SendText(date);
+            chooseDateAndTime.Click();
+            for (int i = 0; i <= 7; i++)
+            {
+                chooseDateAndTime.sendBackSpace();
+            }
             chooseDateAndTime.SendText(date);
-            chooseDateAndTime.sendEnter();
         }
 
         public void ChooseAddress(string address)
         {
-            //chooseAddress.Click();
-            //chooseAddress.SendText(address);
-            //chooseAddress.sendEnter();
             chooseAddress.SendText(address);
             chooseAddress.sendEnter();
         }

@@ -10,9 +10,7 @@ namespace EasyPayLibrary
     {
         WebElementWrapper btnProfile;
         WebElementWrapper btnLogOut;
-        WebElementWrapper dropdownProfile;
-
-        //WebElementWrapper btnEN;
+        WebElementWrapper dropdownProfile;        
         WebElementWrapper btnUA;
         WebElementWrapper dropdownLanguage;
 

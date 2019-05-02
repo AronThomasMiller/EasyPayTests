@@ -7,8 +7,8 @@ namespace EasyPayLibrary
         WebElementWrapper tableOfUsers;
         WebElementWrapper btnChangeRole;
         WebElementWrapper role;
-        WebElementWrapper drpListOfRoles;
-        WebElementWrapper rrole;
+        WebElementWrapper drpdListOfRoles;
+        WebElementWrapper drpdRole;
         WebElementWrapper btnSaveChange;
 
         public override void Init(DriverWrapper driver)
@@ -26,31 +26,33 @@ namespace EasyPayLibrary
 
         public void SelectRole(string myRole)
         {
-            string role = myRole.ToUpper();
-            drpListOfRoles = driver.GetByXpath("//select[@id='role']");
-            drpListOfRoles.Click();
-            rrole = driver.GetByXpath($"//select[@id='role']/option[text()='{role}']");
-            rrole.Click();
+            myRole = myRole.ToUpper();
+            drpdListOfRoles = driver.GetByXpath("//select[@id='role']");
+            drpdListOfRoles.Click();
+
+            var drpdRole = driver.GetByXpath($"//select[@id='role']").selectElement();
+            drpdRole.SelectByText(myRole);
+
             btnSaveChange = driver.GetByXpath("//button[@id='updateRole']");
             btnSaveChange.Click();
         }
 
-        public void ChangeRoleToManager()
+        public void ChangeRoleToManager(string email)
         {            
-            btnChangeRole = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[6]/button");
+            btnChangeRole = driver.GetByXpath($"//tbody/tr/td[contains(text(),'{email}')]/../td[6]/button");
             btnChangeRole.Click();
             SelectRole("MANAGER");
         }
 
-        public void ChangeRoleToUser()
+        public void ChangeRoleToUser(string email)
         {
-            btnChangeRole = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[6]/button");
+            btnChangeRole = driver.GetByXpath($"//tbody/tr/td[contains(text(),'{email}')]/../td[6]/button");
             btnChangeRole.Click();
             SelectRole("user");
         }
-        public string GetRole()
+        public string GetRole(string email)
         {
-            role = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[3]");
+            role = driver.GetByXpath($"//tbody/tr/td[contains(text(),'{email}')]/../td[3]");
             return role.GetText();
         }
     }

@@ -11,8 +11,6 @@ namespace EasyPayLibrary.User
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-
         }
-
     }
 }

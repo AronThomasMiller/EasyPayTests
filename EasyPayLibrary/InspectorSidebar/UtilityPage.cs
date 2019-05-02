@@ -48,7 +48,7 @@ namespace EasyPayLibrary.InspectorSidebar
             }
 
         }
-
+        // Change
         public SetCurrentValue ClickOnSetNewValue(string address)
         {
             if (fixedOrUnfixed.GetText() == "Set fixed" && activateOrDeactivate.GetText() == "Deactivate")

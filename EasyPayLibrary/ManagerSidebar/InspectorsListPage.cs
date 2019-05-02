@@ -7,12 +7,10 @@ namespace EasyPayLibrary.Pages.Manager
         WebElementWrapper panel;
         WebElementWrapper inspector;
         WebElementWrapper btnAddInspector;
-        WebElementWrapper olegAdamov;
         WebElementWrapper btnRemoveInspector;
 
         public override void Init(DriverWrapper driver)
         {
-            olegAdamov = driver.GetByXpath("//a[contains(text(),'Oleg Adamov')]");
             base.Init(driver);
         }
 
@@ -29,19 +27,18 @@ namespace EasyPayLibrary.Pages.Manager
 
         }
 
-        public void ClickToDeleteInspector(string name)
+        public void ClickToRemoveInspector(string name)
         {
             btnRemoveInspector = driver.GetByXpath($"//a[contains(text(),'{name}')]/../..//td[2]/button");
             btnRemoveInspector.Click();
         }
-
 
         public void ClickOnAddInspectorsButton()
         {
             btnAddInspector = driver.GetByXpath("//button[@onclick='getFreeInspectors()']");
             btnAddInspector.Click();
         }
-        public SchedulePage ChooseInspector(string name)
+        public SchedulePage NavigateToInspectorsSchedule(string name)
         {
             ClickOnInspector(name);
             return GetPOM<SchedulePage>(driver);
@@ -49,7 +46,7 @@ namespace EasyPayLibrary.Pages.Manager
 
         public RemoveInspectorPage RemoveInspector(string name)
         {
-            ClickToDeleteInspector(name);
+            ClickToRemoveInspector(name);
             return GetPOM<RemoveInspectorPage>(driver);
         }
 
@@ -58,12 +55,6 @@ namespace EasyPayLibrary.Pages.Manager
         {
             ClickOnAddInspectorsButton();
             return GetPOM<AddInspectorsPage>(driver);
-        }
-
-        public SchedulePage ClickOnInspectorOlegAdamov()
-        {
-            olegAdamov.Click();
-            return GetPOM<SchedulePage>(driver);
         }
 
         public string VerifyListOfInspectorsNotEmpty()

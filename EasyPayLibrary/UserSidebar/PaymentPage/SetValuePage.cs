@@ -11,6 +11,7 @@
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-apply']");
             base.Init(driver);
         }
+
         public void SetFieldNewCurrentValue(float Value)
         {
             fieldNewCurrentValue.SendText(Value.ToString());
@@ -27,6 +28,5 @@
             ClickSetApply();
             return GetPOM<UtilityDetailsPage>(driver);
         }
-
     }
 }

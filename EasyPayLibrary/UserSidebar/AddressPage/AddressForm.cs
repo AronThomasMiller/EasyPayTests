@@ -22,6 +22,7 @@ namespace EasyPayLibrary.Changes
 
         public override void Init(DriverWrapper driver)
         {
+            base.Init(driver);
             fieldAddress = driver.GetByXpath("//input[@id='autocomplete']");
             fieldHouse = driver.GetByXpath("//*[@id='street_number']");
             fieldStreet = driver.GetByXpath("//*[@id='route']");
@@ -31,11 +32,9 @@ namespace EasyPayLibrary.Changes
             fieldCountry = driver.GetByXpath("//*[@id='country']");
             fieldFlat = driver.GetByXpath("//*[@id='flat_number']");
             btnCheck = driver.GetByXpath("//*[@id='flat_checkbox']");
-            btnAddAddresse = driver.GetByXpath("//*[@id='submit']");
-            
-            base.Init(driver);
-
+            btnAddAddresse = driver.GetByXpath("//*[@id='submit']");           
         }
+
         public void SetAddress(string address)
         {
             fieldAddress.Click();
@@ -54,38 +53,44 @@ namespace EasyPayLibrary.Changes
             fieldStreet.Click();
             fieldStreet.SendText(street);
         }
+
         public void SetCity(string city)
         {
             fieldCity.Click();
             fieldCity.SendText(city);
         }
+
         public void SetRegion(string region)
         {
             fieldRegion.Click();
             fieldRegion.SendText(region);
-
         }
+
         public void SetZipCode(string zipCode)
         {
             fieldZipCode.SendText(zipCode);
         }
+
         public void SetCountry(string country)
         {
             fieldCountry.SendText(country);
         }
+
         public void ClickOnCheck()
         {
             btnCheck.Click();
-
         }
+
         public void SetFlat(string flat)
         {
             fieldFlat.SendText(flat);
         }
+
         public void Submit()
         {
             btnAddAddresse.Click();
         }
+
         public void EnterAllFields(string address, string house, string street, string city, string region, string zipCode, string country, string flat)
         {
             fieldAddress.SendText(address);
@@ -100,6 +105,7 @@ namespace EasyPayLibrary.Changes
             fieldFlat.SendText(flat);
             btnAddAddresse.Click();
         }
+
         public string Error()
         {
             error = driver.GetByXpath("//div[contains(@class,'ui-pnotify-fade-normal ui-pnotify-move ui-pnotify-in ui-pnotify-fade-in')]");

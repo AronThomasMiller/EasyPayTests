@@ -15,11 +15,8 @@ namespace EasyPayLibrary
 
         public virtual void Init(DriverWrapper driver)
         {
-            this.driver = driver;
-            //InitDriver(driver);
+            this.driver = driver;            
         }
-
-        //private void InitDriver(DriverWrapper driver) => this.driver = driver;
 
         public static T GetPOM<T>(DriverWrapper driver) where T : BasePageObject, new()
         {

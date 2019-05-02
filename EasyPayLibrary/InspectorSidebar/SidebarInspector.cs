@@ -14,16 +14,17 @@ namespace EasyPayLibrary.InspectorSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            schedule = driver.GetByXpath("//a[@href='/inspector/schedule/']");
-            checkCounters = driver.GetByXpath("//a[@href='/inspector/addresses/counters/']");
-            rateClients = driver.GetByXpath("//a[@href='/inspector/rate/']");
             base.Init(driver);
+            schedule = sidebar[0];
+            checkCounters = sidebar[1];
+            rateClients = sidebar[2];            
         }
 
         public void ClickOnCheckCounters()
         {
             checkCounters.Click();
         }
+
         public void ClickOnRateClient()
         {
             rateClients.Click();
@@ -33,12 +34,5 @@ namespace EasyPayLibrary.InspectorSidebar
         {
             schedule.Click();
         }
-
-        public SchedulePage GotoSchedule()
-        {
-            schedule.Click();
-            return GetPOM<SchedulePage>(driver);
-        }
-
     }
 }

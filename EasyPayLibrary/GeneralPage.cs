@@ -36,6 +36,5 @@ namespace EasyPayLibrary
                 return null;
             }
         }
-
     }
 }

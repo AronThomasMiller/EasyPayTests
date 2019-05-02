@@ -3,7 +3,7 @@ using System;
 
 namespace EasyPayLibrary
 {
-    public class PaymentsHistoryPage: UsersHomePage
+    public class PaymentsHistoryPage: HomePageUser
     {
         WebElementWrapper addressesDropdown;
         WebElementWrapper utilitiesDropdown;
@@ -12,23 +12,20 @@ namespace EasyPayLibrary
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-
             addressesDropdown = driver.GetByXpath("//select[@id='select-address']");
             utilitiesDropdown = driver.GetByXpath("//select[@id='select-utility']");
         }
 
         public string SelectAddress(string address)
         {
-            SelectElement listOfAddresses;
-            listOfAddresses = addressesDropdown.selectElement();
+            SelectElement listOfAddresses = addressesDropdown.selectElement();
             listOfAddresses.SelectByText(address);
             return listOfAddresses.SelectedOption.Text;
         }
 
         public void SelectUtility(string utility)
         {
-            SelectElementWrapper list;
-            list = new SelectElementWrapper(utilitiesDropdown);
+            SelectElementWrapper list = new SelectElementWrapper(utilitiesDropdown);
             list.SelectByText(utility);
         }
 
@@ -38,7 +35,6 @@ namespace EasyPayLibrary
             SelectUtility(utility);
             tblPayment = GetPOM<PaymentHistoryTable>(driver);
             return tblPayment.GetLastPayInString();
-            //return driver.GetByXpath("//tbody//tr[last()]//td[1]").GetText() + "_" + driver.GetByXpath("//tbody//tr[last()]//td[2]").GetText();
         }
     }
 }

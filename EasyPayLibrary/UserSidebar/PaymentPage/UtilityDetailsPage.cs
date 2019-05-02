@@ -37,6 +37,7 @@
             ClickOnCloseButton();
             return GetPOM<PaymentPage>(driver);
         }
+
         public void ClickOnButtonPay()
         {
             btnPay.Click();

@@ -5,30 +5,21 @@ using System.Collections.Generic;
 
 namespace EasyPayLibrary
 {
-    public class UsersHomePage : GeneralPage
+    public class HomePageUser : GeneralPage
     {
-        WebElementWrapper role;
         WebElementWrapper mainPageTitle;
         WebElementWrapper xTitle;
-
-        SidebarUsers sidebar;
-        SidebarBase sidebarBase;
+        SidebarUsers sidebar;        
 
         public override void Init(DriverWrapper driver)
-        {
-            sidebarBase = GetPOM<SidebarBase>(driver);
+        {            
             sidebar = GetPOM<SidebarUsers>(driver);
             base.Init(driver);
-        }
+        }        
 
-        public bool GetRole()
-        {
-            role = driver.GetByXpath("//h3[text()='User']");
-            return role.IsDisplayed();
-        }
         public string GetRoleText()
         {
-            return sidebar.GetRoleText().ToLower();
+            return sidebar.GetRoleText();
         }
 
         public string GetAddressesText()
@@ -56,10 +47,10 @@ namespace EasyPayLibrary
             return sidebar.GetRateInspectorsText();
         }
 
-        public UsersHomePage ChangeToUKR()
+        public HomePageUser ChangeToUKR()
         {
             header.ChangeToUa();
-            return GetPOM<UsersHomePage>(driver);
+            return GetPOM<HomePageUser>(driver);
         }
 
         public string GetMainPageTitleText()
@@ -67,12 +58,12 @@ namespace EasyPayLibrary
             mainPageTitle = driver.GetByXpath("//*[@data-locale-item='mainPage']/span");
             return mainPageTitle.GetText();
         }
+
         public string GetXTitleText()
         {
             xTitle = driver.GetByXpath("//*[@class='x_title']/h2");
             return xTitle.GetText();
         }
-
 
         public PaymentPage NavigateToPayment()
         {
@@ -88,39 +79,25 @@ namespace EasyPayLibrary
 
         public IEnumerable<WebElementWrapper> GetList()
         {
-            return sidebarBase.GetListOfSideBarComponents();
+            return sidebar.GetListOfSideBarComponents();
         }
 
-        public AddAddressForm OpenAddresses()
+        public AddAddressForm NavigateToAddresses()
         {
-            sidebar.GoToAddresses();
+            sidebar.ClickOnAddresses();
             return GetPOM<AddAddressForm>(driver);
         }
-        public ConnectedUtilitiesForm OpenUtilities()
+
+        public ConnectedUtilitiesForm NavigateToUtilities()
         {
-            sidebar.GoToConnectedUtilities();
+            sidebar.ClickOnConnectedUtilities();
             return GetPOM<ConnectedUtilitiesForm>(driver);
         }
-        public PaymentsHistoryPage OpenPaymentsHistory()
+
+        public RateInspectorsPage NavigateToRateInspectors()
         {
-            sidebar.GoToPaymentsHistory();
-            return GetPOM<PaymentsHistoryPage>(driver);
-        }
-        public PaymentPage OpenPayments()
-        {
-            sidebar.GoToPayments();
-            return GetPOM<PaymentPage>(driver);
-        }
-        public RateInspectorsPage OpenRateInspectors()
-        {
-            sidebar.GoToRateInspectors();
+            sidebar.ClickOnRateInspectorsPage();
             return GetPOM<RateInspectorsPage>(driver);
         }
-    }
-
-    //public bool TranslateToUA(string value)
-    //{
-    //    Translation translation = new Translation();
-    //    return translation.CheckUA(value);
-    //}
+    }    
 }

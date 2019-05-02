@@ -21,6 +21,7 @@ namespace EasyPayLibrary.ManagerSidebar
             tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");
             base.Init(driver);
         }
+
         public WebElementWrapper GetAddScheduleItem()
         {
             return btnAddScheduleItem;
@@ -30,6 +31,7 @@ namespace EasyPayLibrary.ManagerSidebar
         {
             return driver.GetByXpath("//span[@class='fc-title']");
         }
+
         public void ClickOnAddScheduleButton()
         {
             btnAddScheduleItem.Click();

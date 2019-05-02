@@ -1,5 +1,7 @@
 ﻿using EasyPayLibrary;
+using EasyPayLibrary.Translations;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,13 @@ namespace EasyPayTests
 {
     public class BaseTest
     {
-        protected DriverWrapper driver;
+        public TranslationValues t;
+        public DriverWrapper driver;
+
         [SetUp]
         public void PreCondition()
         {
+            t  = TranslationProvider.GetTranslation("ua");
             driver = new DriverFactory().GetDriver();
             driver.Maximaze();
             driver.GoToURL();
@@ -23,6 +28,11 @@ namespace EasyPayTests
         [TearDown]
         public void PostCondition()
         {
+            if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
+            {
+                driver.getScreenshot();
+            }
+
             driver.Quit();
         }
     }

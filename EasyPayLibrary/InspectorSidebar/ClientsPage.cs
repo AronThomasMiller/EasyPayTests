@@ -13,9 +13,9 @@ namespace EasyPayLibrary.InspectorSidebar
         {
             base.Init(driver);
         }
+
         public WebElementWrapper Rate(string name, int starNumber, int halfStar)
-        {
-            //halfStar: 1 if a half, 2 if full star  
+        { 
             WebElementWrapper starRate = driver.GetByXpath($"//td[contains(text(),'{name}')]/../td[3]/span/div[{starNumber}]/div[{halfStar}]");
             WebElementWrapper element = driver.GetByXpath("//tbody/tr[1]/td[3]/span[1]");
             var actionMove = new ActionsWrapper(driver, element, 12, 5);
@@ -23,6 +23,5 @@ namespace EasyPayLibrary.InspectorSidebar
             var errorOrSuccess = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
             return errorOrSuccess;
         }
-
     }
 }

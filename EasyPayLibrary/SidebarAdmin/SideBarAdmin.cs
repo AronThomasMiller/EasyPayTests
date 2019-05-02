@@ -18,8 +18,7 @@
 
         public string GetTextRole()
         {
-            var result = role.GetText();
-            return result;
+            return role.GetText();
         }
 
         public void ClickOnUtilities()

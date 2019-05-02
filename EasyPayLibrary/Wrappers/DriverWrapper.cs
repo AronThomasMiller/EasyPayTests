@@ -1,10 +1,13 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +16,7 @@ namespace EasyPayLibrary
     public class DriverWrapper 
     {
         IWebDriver driver { get; set; }
+
         public DriverWrapper(IWebDriver Driver)
         {
             driver = Driver;
@@ -59,6 +63,19 @@ namespace EasyPayLibrary
             driver.Navigate().GoToUrl(url);
         }
 
+        public void getScreenshot()
+        {
+            Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+            string nameTest = TestContext.CurrentContext.Test.Name;
+            string title = nameTest + DateTime.Now.ToString(" dd-MM-yyyy_(HH_mm_ss)");
+            var x = Assembly.GetExecutingAssembly().Location;
+            var info = new FileInfo(x);
+            var path = info.Directory.FullName;
+            var adress = new FileInfo(path + "\\Screen\\");
+            string screenshotFileName = adress + title + ".png";
+            ss.SaveAsFile(screenshotFileName);
+        }
+
         public void Refresh()
         {
             driver.Navigate().Refresh();
@@ -81,16 +98,12 @@ namespace EasyPayLibrary
             driver.SwitchTo().Frame(name);
         }
 
-
         public void WaitUntillUrlContainString(string str, int timeInSec = 20)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));
-#pragma warning disable CS0618 // Type or member is obsolete
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));                 
             wait.Until(condition: ExpectedConditions.UrlContains(str));
-#pragma warning restore CS0618 // Type or member is obsolete
         }
         
-
         public void SwitchToWindow()
         {
             driver.SwitchTo().Window(driver.WindowHandles.Last());
@@ -100,7 +113,6 @@ namespace EasyPayLibrary
         {
             return new Actions(driver);
         }
-
 
         public void Switch()
         {

@@ -23,8 +23,7 @@ namespace EasyPayLibrary.Pages
             connectedUtilities = sidebar[1];
             payments = sidebar[2];
             paymentsHistory = sidebar[3];
-            rateInspectors = sidebar[4];
-            
+            rateInspectors = sidebar[4];            
         }
 
         public string GetRoleText()
@@ -58,42 +57,29 @@ namespace EasyPayLibrary.Pages
             return rateInspectors.GetText();
         }
 
+        public void ClickOnAddresses()
+        {
+            addresses.Click();
+        }
+
+        public void ClickOnConnectedUtilities()
+        {
+            connectedUtilities.Click();
+        }
+
         public void ClickOnPayment()
         {
-            sidebar[2].Click();
+            payments.Click();
         }
 
         public void ClickOnPaymentHistory()
         {
-            sidebar[3].Click();
-        }
-
-        public AddressesPage GoToAddresses()
-        {
-            addresses.Click();
-            return GetPOM<AddressesPage>(driver);
-        }
-        public ConnectedUtilitiesPage GoToConnectedUtilities()
-        {
-            connectedUtilities.Click();
-            return GetPOM<ConnectedUtilitiesPage>(driver);
-        }
-        public PaymentPage GoToPayments()
-        {
-            payments.Click();
-            return GetPOM<PaymentPage>(driver);
-        }
-
-        public PaymentsHistoryPage GoToPaymentsHistory()
-        {
             paymentsHistory.Click();
-            return GetPOM<PaymentsHistoryPage>(driver);
-        }
-        public RateInspectorsPage GoToRateInspectors()
+        }       
+        
+        public void ClickOnRateInspectorsPage()
         {
-            rateInspectors.Click();
-            return GetPOM<RateInspectorsPage>(driver);
+            rateInspectors.Click();            
         }
-
     }
 }

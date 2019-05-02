@@ -8,12 +8,12 @@ namespace EasyPayLibrary.Pages.Manager
 {
     class ManagerSidebar : SidebarBase
     {
-        public void ClickOnInspectorsButton()
+        public void ClickOnInspectors()
         {
             sidebar[0].Click();
         }
 
-        public void ClickOnUtilityPriceButton()
+        public void ClickOnUtilityPrice()
         {
             sidebar[1].Click();
         }

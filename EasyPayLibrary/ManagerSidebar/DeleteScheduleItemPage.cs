@@ -15,10 +15,12 @@ namespace EasyPayLibrary.ManagerSidebar
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-remove-apply']");
             base.Init(driver);
         }
+
         public void ClickOnApplyButton()
         {
             btnApply.Click();
         }
+
         public SchedulePage ApplyToDelete()
         {
             ClickOnApplyButton();

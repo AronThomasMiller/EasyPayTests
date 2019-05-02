@@ -9,8 +9,9 @@ namespace EasyPayLibrary.InspectorSidebar
 {
     public class RateClientsPage : HomePageInspector
     {
-        public WebElementWrapper element;
-        public ClientsPage clientsPage;
+        WebElementWrapper element;
+        ClientsPage clientsPage;
+
         public override void Init(DriverWrapper driver)
         {
             element = driver.GetByXpath("//table[@id='user-list-rating']//tbody");

@@ -4,15 +4,13 @@ namespace EasyPayLibrary
 {
     public class PaymentFrame:BasePageObject
     {
-        string frameName = "stripe_checkout_app";
-
         WebElementWrapper email;
         WebElementWrapper cardNumber;
         WebElementWrapper dateOfCard;
         WebElementWrapper cvc;
         WebElementWrapper zipCode;
-
         WebElementWrapper btnSubmit;
+        string frameName = "stripe_checkout_app";
 
         public override void Init(DriverWrapper driver)
         {
@@ -23,7 +21,6 @@ namespace EasyPayLibrary
             cardNumber = driver.GetByXpath("//input[@placeholder='Card number']");
             dateOfCard = driver.GetByXpath("//input[@placeholder='MM / YY']");
             cvc = driver.GetByXpath("//input[@placeholder='CVC']");
-
             btnSubmit = driver.GetByXpath("//button");
         }
 
@@ -57,7 +54,7 @@ namespace EasyPayLibrary
             btnSubmit.Click();
         }
 
-        public UsersHomePage FillUpPayForm(string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
+        public HomePageUser FillUpPayForm(string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
         {
             SetEmail(email);
             SetCardNumber(cardNumber);
@@ -70,7 +67,7 @@ namespace EasyPayLibrary
             ClickSubmitButton();
             driver.WaitUntillUrlContainString("drive.google.com",20);
             driver.GoToURL("http://localhost:8080/home");
-            return GetPOM<UsersHomePage>(driver);
+            return GetPOM<HomePageUser>(driver);
         }
     }
 }

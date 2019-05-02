@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace EasyPayTests
 {
-    class UnauthorizedUserTest:BaseTest
+    public class UnauthorizedUserTest : BaseTest
     {
         [TestCase("Name", "Surname", "+380123456789", "gangstatester@gmail.com", "Fakesoft15")]
         public void CreateAccount(string name, string surname, string phoneNumber, string email, string password)
@@ -24,7 +24,7 @@ namespace EasyPayTests
             var emailsPage = passPage.EnterPassword(password);
             var mailPage = emailsPage.OpenMail();
             var loginPage = mailPage.ConfirmEmail();
-            var homePage = (UsersHomePage)loginPage.Login(email, password);
+            var homePage = (HomePageUser)loginPage.Login(email, password);
 
             Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"));
         }
@@ -48,7 +48,7 @@ namespace EasyPayTests
             }
 
             var result = BasePageObject.CheckTranslation(dict, welcomeTextElemsUA);
-            Assert.IsTrue(result == null,"The word {0} didn't match dictionary",result);
+            Assert.IsTrue(result == null, "The word {0} didn't match dictionary", result);
             dict.Clear();
 
 
@@ -65,7 +65,7 @@ namespace EasyPayTests
             {
                 dict.Add(welcomeTextElemsEN[i], welcomeTextElemsUA[i]);
             }
-            
+
             result = BasePageObject.CheckTranslation(dict, welcomeTextElemsUA);
             Assert.IsTrue(result == null, "The word {0} didn't match dictionary", result);
         }

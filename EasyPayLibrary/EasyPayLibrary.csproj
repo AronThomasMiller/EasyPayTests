@@ -95,7 +95,7 @@
     <Compile Include="SidebarAdmin\RegisterUser.cs" />
     <Compile Include="SidebarAdmin\Users.cs" />
     <Compile Include="SidebarAdmin\Utilities.cs" />
-    <Compile Include="HomePages\UsersHomePage.cs" />
+    <Compile Include="HomePages\HomePageUser.cs" />
     <Compile Include="UserSidebar\SidebarUsers.cs" />
     <Compile Include="BasePageObject.cs" />
     <Compile Include="Login\Gmail\MailPage.cs" />

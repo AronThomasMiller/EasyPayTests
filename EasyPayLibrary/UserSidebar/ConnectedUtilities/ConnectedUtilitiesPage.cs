@@ -8,12 +8,12 @@ namespace EasyPayLibrary.Changes
 {
     public class ConnectedUtilitiesPage : GeneralPage
     {
-        public ConnectedUtilitiesForm selectAddresse;
+        ConnectedUtilitiesForm selectAddresse;
 
         public override void Init(DriverWrapper driver)
         {
-            selectAddresse = GetPOM<ConnectedUtilitiesForm>(driver);
             base.Init(driver);
+            selectAddresse = GetPOM<ConnectedUtilitiesForm>(driver);    
         }
     }
 }

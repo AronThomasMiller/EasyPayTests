@@ -17,19 +17,19 @@ namespace EasyPayLibrary.HomePages
             base.Init(driver);
         }
 
-        public CheckCountersPage EnterOnCheckCounters()
+        public CheckCountersPage NavigateToCheckCounters()
         {
             sidebar.ClickOnCheckCounters();
             return GetPOM<CheckCountersPage>(driver);
         }
 
-        public RateClientsPage EnterOnRateClient()
+        public RateClientsPage NavigateToRateClients()
         {
             sidebar.ClickOnRateClient();
             return GetPOM<RateClientsPage>(driver);
         }
 
-        public SchedulePage EnterOnSchedule()
+        public SchedulePage NavigateToSchedule()
         {
             sidebar.ClickOnSchedule();
             return GetPOM<SchedulePage>(driver);

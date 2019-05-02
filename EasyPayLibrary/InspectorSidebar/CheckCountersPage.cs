@@ -10,13 +10,11 @@ namespace EasyPayLibrary.InspectorSidebar
     public class CheckCountersPage : HomePageInspector
     {
         public WebElementWrapper dropdown;
-
         public UtilityPage utility;
 
         public override void Init(DriverWrapper driver)
         {
             dropdown = driver.GetByXpath("//span[@class='input-group-addon dropdown-toggle']");
-
             base.Init(driver);
         }
 
@@ -37,7 +35,6 @@ namespace EasyPayLibrary.InspectorSidebar
             var addresses = ReturnListOfDropDown();
             ForEach(addresses, text);
             return GetPOM<UtilityPage>(driver);
-
         }
 
         public void ForEach(IEnumerable<WebElementWrapper> addresses, string text)

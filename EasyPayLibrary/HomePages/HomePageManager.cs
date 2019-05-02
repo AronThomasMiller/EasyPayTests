@@ -17,15 +17,15 @@ namespace EasyPayLibrary.Pages.Manager
             base.Init(driver);
         }
 
-        public InspectorsListPage NavigateToInspectorsListPage()
+        public InspectorsListPage NavigateToInspectorsList()
         {
-            sidebar.ClickOnInspectorsButton();
+            sidebar.ClickOnInspectors();
             return GetPOM<InspectorsListPage>(driver);
         }
 
-        public UtilityPricePage GetPricesToEdit()
+        public UtilityPricePage NavigateToUtilityPrice()
         {
-            sidebar.ClickOnUtilityPriceButton();
+            sidebar.ClickOnUtilityPrice();
             return GetPOM<UtilityPricePage>(driver);
         }
     }

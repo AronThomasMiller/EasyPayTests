@@ -9,24 +9,25 @@
             base.Init(driver);
             sidebar = GetPOM<SidebarAdmin>(driver);         
         }
+
         public string GetTextRole()
         {
             return sidebar.GetTextRole();            
         }
 
-        public Utilities ClickOnUtilities()
+        public Utilities NavigateToUtilities()
         {
             sidebar.ClickOnUtilities();
             return GetPOM<Utilities>(driver);
         }
 
-        public Users ClickOnUsers()
+        public Users NavigateToUsers()
         {
             sidebar.ClickOnUsers();
             return GetPOM<Users>(driver);
         }
 
-        public RegisterUser ClickOnRegisterUser()
+        public RegisterUser NavigateToRegisterUser()
         {
             sidebar.ClickOnRegisterUser();
             return GetPOM<RegisterUser>(driver);

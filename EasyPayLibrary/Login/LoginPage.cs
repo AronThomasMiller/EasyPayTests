@@ -56,7 +56,7 @@ namespace EasyPayLibrary
                 {
                     case "USER":
                     case "КОРИСТУВАЧ":
-                        return GetPOM<UsersHomePage>(driver);
+                        return GetPOM<HomePageUser>(driver);
                     case "MANAGER":
                     case "МЕНЕДЖЕР":
                         return GetPOM<HomePageManager>(driver);

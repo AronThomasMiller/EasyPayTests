@@ -17,24 +17,26 @@ namespace EasyPayLibrary.Changes
         WebElementWrapper selectDate;
         WebElementWrapper btnCall;
         WebElementWrapper text;
+
         public override void Init(DriverWrapper driver)
         {
-            btnConnectedUtilities = driver.GetByXpath("//a[@href='/user/connected-utilities/']");
-            addressesDropdown = driver.GetByXpath("//select[@id='selectAddress']");
             base.Init(driver);
-
+            btnConnectedUtilities = driver.GetByXpath("//a[@href='/user/connected-utilities/']");
+            addressesDropdown = driver.GetByXpath("//select[@id='selectAddress']");           
         }
+
         public void ClickOnConnectedUtilities()
         {
             btnConnectedUtilities.Click();
         }
+
         public string SelectAddress(string address)
         {
-            SelectElement list;
-            list = addressesDropdown.selectElement();
+            SelectElement list = addressesDropdown.selectElement();
             list.SelectByText(address);
             return list.SelectedOption.Text;
         }
+
         public void CallInspector(string address)
         {
             SelectAddress(address);
@@ -47,13 +49,14 @@ namespace EasyPayLibrary.Changes
             btnDisconnect = driver.GetByXpath("//td[contains(text(),'ДнепрОблЭнерго')]/..//td[3]/a");
             btnDisconnect.Click();
             return GetPOM<ConnectedUtilitiesForm>(driver);
-
         }
+
         public void ClickOnCallInspector()
         {
             btnCallinspector = driver.GetByXpath("//button[@id='preCall']");
             btnCallinspector.Click();
         }
+
         public void SelectDate()
         {
             selectDate = driver.GetByXpath("//input[@id='picker']");
@@ -61,16 +64,15 @@ namespace EasyPayLibrary.Changes
             DateTime currentDate = DateTime.Today.AddDays(1);
             string currentDateString = currentDate.ToString("yyyy-MM-dd");
             selectDate.SendText(currentDateString);
-
         }
 
-        public UsersHomePage SubmitCall()
+        public HomePageUser SubmitCall()
         {
             btnCall = driver.GetByXpath("//button[@id='submit']");
             btnCall.Click();
-            return GetPOM<UsersHomePage>(driver);
-
+            return GetPOM<HomePageUser>(driver);
         }
+
         public string VerifyThatUtilitiExist()
         {
             try
@@ -83,6 +85,5 @@ namespace EasyPayLibrary.Changes
             }
             return text.GetText();
         }
-
     }
 }
