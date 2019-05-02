@@ -1,4 +1,5 @@
 ﻿using EasyPayLibrary.HomePages;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,16 @@ namespace EasyPayLibrary.InspectorSidebar
             return schedule.IsDisplayed();
         }
 
+        public WebElementWrapper GetCallByAddress(string address)
+        {
+            try
+            {
+                return driver.GetByXpath($"//span[contains(text(),'{address}')]");
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return null;
+            }
+        }
     }
 }

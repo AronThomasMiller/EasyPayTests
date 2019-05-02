@@ -18,7 +18,7 @@ namespace EasyPayLibrary
 
         public override void Init(DriverWrapper driver)
         {
-            dropdownProfile = driver.GetByXpath("//li[@id='user-menu-header']//a[@class='user-profile dropdown-toggle']");
+            dropdownProfile = driver.GetByXpath("//li[@id='user-menu-header']/a");
             dropdownLanguage = driver.GetByXpath("//a[@class='dropdown-toggle user-profile']");
             base.Init(driver);
         }

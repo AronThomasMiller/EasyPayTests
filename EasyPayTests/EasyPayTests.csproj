@@ -64,6 +64,7 @@
     <Compile Include="InspectorTestNazar.cs" />
     <Compile Include="ManagerTestsMax.cs" />
     <Compile Include="ManagerTestsTania.cs" />
+    <Compile Include="TestsIra.cs" />
     <Compile Include="Translations\TranslationProvider.cs" />
     <Compile Include="Translations\TranslationValues.cs" />
     <Compile Include="MikeTests.cs" />

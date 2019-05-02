@@ -79,6 +79,12 @@
     <Compile Include="ManagerSidebar\SchedulePage.cs" />
     <Compile Include="ManagerSidebar\StatisticsPage.cs" />
     <Compile Include="ManagerSidebar\UtilityPricePage.cs" />
+    <Compile Include="UserSidebar\AddressPage\AddressesPage.cs" />
+    <Compile Include="UserSidebar\AddressPage\AddressForm.cs" />
+    <Compile Include="UserSidebar\ConnectedUtilities\ConnectedUtilitiesForm.cs" />
+    <Compile Include="UserSidebar\ConnectedUtilities\ConnectedUtilitiesPage.cs" />
+    <Compile Include="UserSidebar\RateInspector\RateInspectorForm.cs" />
+    <Compile Include="UserSidebar\RateInspector\RateInspectorPage.cs" />
     <Compile Include="Wrappers\ActionsWrapper.cs" />
     <Compile Include="Wrappers\DriverFactory.cs" />
     <Compile Include="Wrappers\DriverWrapper.cs" />
@@ -90,7 +96,7 @@
     <Compile Include="SidebarAdmin\Users.cs" />
     <Compile Include="SidebarAdmin\Utilities.cs" />
     <Compile Include="HomePages\UsersHomePage.cs" />
-    <Compile Include="SidebarUser\SidebarUsers.cs" />
+    <Compile Include="UserSidebar\SidebarUsers.cs" />
     <Compile Include="BasePageObject.cs" />
     <Compile Include="Login\Gmail\MailPage.cs" />
     <Compile Include="Login\Gmail\GmailEmailPage.cs" />
@@ -102,7 +108,7 @@
     <Compile Include="HomePages\HomePageManager.cs" />
     <Compile Include="ManagerSidebar\InspectorsListPage.cs" />
     <Compile Include="ManagerSidebar\ManagerSidebar.cs" />
-    <Compile Include="UserSidebar\PaymentHistory\PaymentHistory.cs" />
+    <Compile Include="UserSidebar\PaymentHistory\PaymentsHistoryPage.cs" />
     <Compile Include="UserSidebar\PaymentHistory\PaymentHistoryTable.cs" />
     <Compile Include="UserSidebar\PaymentHistory\PaymentHistoryTableRows.cs" />
     <Compile Include="UserSidebar\PaymentPage\PaymentFrame.cs" />

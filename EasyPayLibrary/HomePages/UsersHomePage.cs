@@ -1,4 +1,5 @@
-﻿using EasyPayLibrary.Pages;
+﻿using EasyPayLibrary.Changes;
+using EasyPayLibrary.Pages;
 using EasyPayLibrary.Pages.Base;
 using System.Collections.Generic;
 
@@ -79,15 +80,41 @@ namespace EasyPayLibrary
             return GetPOM<PaymentPage>(driver);
         }
 
-        public PaymentHistory NavigateToPaymentHistory()
+        public PaymentsHistoryPage NavigateToPaymentHistory()
         {
             sidebar.ClickOnPaymentHistory();
-            return GetPOM<PaymentHistory>(driver);
+            return GetPOM<PaymentsHistoryPage>(driver);
         }
 
         public IEnumerable<WebElementWrapper> GetList()
         {
             return sidebarBase.GetListOfSideBarComponents();
+        }
+
+        public AddAddressForm OpenAddresses()
+        {
+            sidebar.GoToAddresses();
+            return GetPOM<AddAddressForm>(driver);
+        }
+        public ConnectedUtilitiesForm OpenUtilities()
+        {
+            sidebar.GoToConnectedUtilities();
+            return GetPOM<ConnectedUtilitiesForm>(driver);
+        }
+        public PaymentsHistoryPage OpenPaymentsHistory()
+        {
+            sidebar.GoToPaymentsHistory();
+            return GetPOM<PaymentsHistoryPage>(driver);
+        }
+        public PaymentPage OpenPayments()
+        {
+            sidebar.GoToPayments();
+            return GetPOM<PaymentPage>(driver);
+        }
+        public RateInspectorsPage OpenRateInspectors()
+        {
+            sidebar.GoToRateInspectors();
+            return GetPOM<RateInspectorsPage>(driver);
         }
     }
 

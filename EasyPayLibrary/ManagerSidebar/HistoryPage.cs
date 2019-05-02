@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,15 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public bool IsHistoryCurrentMonthVisible(string address,string date)
         {
-            var element = driver.GetByXpath($"//td[contains(text(),'{address}')]/following-sibling::td[text()='{date}']");
-            return element.IsDisplayed();            
+            WebElementWrapper element;
+            try {
+                element = driver.GetByXpath($"//td[contains(text(),'{address}')]/following-sibling::td[text()='{date}']");
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
+            return element.IsDisplayed();
         }
 
         public HistoryPage ClickOnPreviousMonthButton()

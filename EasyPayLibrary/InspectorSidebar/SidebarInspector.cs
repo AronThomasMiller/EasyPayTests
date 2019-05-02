@@ -34,5 +34,11 @@ namespace EasyPayLibrary.InspectorSidebar
             schedule.Click();
         }
 
+        public SchedulePage GotoSchedule()
+        {
+            schedule.Click();
+            return GetPOM<SchedulePage>(driver);
+        }
+
     }
 }

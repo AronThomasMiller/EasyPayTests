@@ -18,6 +18,11 @@ namespace EasyPayLibrary
             driver = Driver;
         }
 
+        public IWebDriver GetDriver()
+        {
+            return driver;
+        }
+
         public string getUrl() { return driver.Url; }
 
         public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
@@ -94,6 +99,12 @@ namespace EasyPayLibrary
         public Actions MoveToElement()
         {
             return new Actions(driver);
+        }
+
+
+        public void Switch()
+        {
+            driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/iframe")));
         }
     }
 }

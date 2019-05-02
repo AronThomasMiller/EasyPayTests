@@ -39,7 +39,7 @@ namespace EasyPayLibrary
         {            
             btnChangeRole = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[6]/button");
             btnChangeRole.Click();
-            SelectRole("manager");
+            SelectRole("MANAGER");
         }
 
         public void ChangeRoleToUser()

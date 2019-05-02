@@ -4,6 +4,7 @@ namespace EasyPayLibrary.Pages.Manager
 {
     public class InspectorsListPage : BasePageObject
     {
+        WebElementWrapper panel;
         WebElementWrapper inspector;
         WebElementWrapper btnAddInspector;
         WebElementWrapper olegAdamov;
@@ -63,6 +64,12 @@ namespace EasyPayLibrary.Pages.Manager
         {
             olegAdamov.Click();
             return GetPOM<SchedulePage>(driver);
+        }
+
+        public string VerifyListOfInspectorsNotEmpty()
+        {
+            panel = driver.GetByXpath("//div[@class='x_content']");
+            return panel.ToString();
         }
     }
 }

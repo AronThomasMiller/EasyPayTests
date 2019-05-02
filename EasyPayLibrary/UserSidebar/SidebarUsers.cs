@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyPayLibrary.Changes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,5 +67,33 @@ namespace EasyPayLibrary.Pages
         {
             sidebar[3].Click();
         }
+
+        public AddressesPage GoToAddresses()
+        {
+            addresses.Click();
+            return GetPOM<AddressesPage>(driver);
+        }
+        public ConnectedUtilitiesPage GoToConnectedUtilities()
+        {
+            connectedUtilities.Click();
+            return GetPOM<ConnectedUtilitiesPage>(driver);
+        }
+        public PaymentPage GoToPayments()
+        {
+            payments.Click();
+            return GetPOM<PaymentPage>(driver);
+        }
+
+        public PaymentsHistoryPage GoToPaymentsHistory()
+        {
+            paymentsHistory.Click();
+            return GetPOM<PaymentsHistoryPage>(driver);
+        }
+        public RateInspectorsPage GoToRateInspectors()
+        {
+            rateInspectors.Click();
+            return GetPOM<RateInspectorsPage>(driver);
+        }
+
     }
 }
