@@ -34,20 +34,6 @@ namespace EasyPayLibrary
             return GetPOM<UtilityDetailsPage>(driver);
         }
 
-        public SelectPaymentSumPage NavigateToSelectPaymentSumPage(string utility)
-        {
-            NavigateToUtilityDetails(utility);
-            return GetPOM<SelectPaymentSumPage>(driver);
-        }
-
-        public HomePageUser Pay(string address, string utility, float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
-        {
-            SelectAddress(address);
-            var page = NavigateToUtilityDetails(utility);
-            page.PayForSum(sum, email, cardNumber, dateOfCard, cvc, zipCode);
-            return GetPOM<HomePageUser>(driver);
-        }
-
         public double GetBalance()
         {
             balance = driver.GetByXpath("//tbody/tr[1]/td[2]");

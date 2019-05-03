@@ -1,22 +1,34 @@
-﻿namespace EasyPayLibrary
+﻿using System;
+
+namespace EasyPayLibrary
 {
-    internal class PaymentHistoryTableRows:BasePageObject
+    public class PaymentHistoryTableRow:BasePageObject
     {
-        WebElementWrapper row;
-        
-        public PaymentHistoryTableRows(WebElementWrapper element)
+        WebElementWrapper lblDate;
+        WebElementWrapper lblSum;
+        WebElementWrapper btnViewCheck;
+
+        public PaymentHistoryTableRow(WebElementWrapper element)
         {
-            row = element;
+            lblDate = element.GetByXpath(".//td[@class='historyDate']");
+            lblSum = element.GetByXpath(".//td[@class='historySum']");
+            btnViewCheck = element.GetByXpath(".//td[@class='historyView']/a");
+            base.Init(driver);
         }
 
-        public string GetDateFromRow()
+        public DateTime GetDateFromRow()
         {
-            return row.GetByXpath(".//td[@class='historyDate']").GetText();
+            return Convert.ToDateTime(lblDate.GetText());
         }
 
-        public string GetSumFromRow()
+        public float GetSumFromRow()
         {
-            return row.GetByXpath(".//td[@class='historySum']").GetText();
+            return Convert.ToSingle(lblSum.GetText().Replace(".",","));
+        }
+
+        public void ViewCheck()
+        {
+            btnViewCheck.Click();
         }
     }
 }

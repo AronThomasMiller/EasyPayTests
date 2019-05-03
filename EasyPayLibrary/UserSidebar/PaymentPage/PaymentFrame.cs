@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace EasyPayLibrary
 {
@@ -54,7 +55,7 @@ namespace EasyPayLibrary
             btnSubmit.Click();
         }
 
-        public HomePageUser FillUpPayForm(string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
+        public Tuple<HomePageUser,string> Pay(string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
         {
             SetEmail(email);
             SetCardNumber(cardNumber);
@@ -66,8 +67,10 @@ namespace EasyPayLibrary
 
             ClickSubmitButton();
             driver.WaitUntillUrlContainString("drive.google.com",20);
+            var urlOfCheck = driver.getUrl();
             driver.GoToURL("http://localhost:8080/home");
-            return GetPOM<HomePageUser>(driver);
+
+            return new Tuple<HomePageUser, string>(GetPOM<HomePageUser>(driver), urlOfCheck);
         }
     }
 }

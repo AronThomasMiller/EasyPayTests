@@ -33,7 +33,6 @@ namespace EasyPayTests
             welcomePage.Init(driver);
             var loginPage = welcomePage.SignIn();
             homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
-
         }
 
         [TearDown]
@@ -146,20 +145,50 @@ namespace EasyPayTests
             Assert.AreEqual(t.SomeText.ToLower(), xTitle.ToLower());
         }
 
-        [TestCase((float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Толстого 2", "Pat \"Chernivtsihaz\"")]
+        [TestCase((float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"")]
         public void PayAndCheckOneInPaymentHistory(float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {           
             Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"));
 
-            var payPage = homePage.NavigateToPayment();
-
-            var address = street + ", " + city + ", " + region;
-            homePage = payPage.Pay(address, utility, sumToPay, userEmail, cardNumber, dateOfCard, cvc, zipCode);
-
             var paymentHistoryPage = homePage.NavigateToPaymentHistory();
 
+            var address = region + ", " + city + ", " + street;
+            paymentHistoryPage.SelectAddress(address);
+            paymentHistoryPage.SelectUtility(utility);
+            var oldTableOfPayments = paymentHistoryPage.InitTable();
+            var oldPayTableRows = oldTableOfPayments.GetAllRows();
+
+            var payPage = paymentHistoryPage.NavigateToPayment();
+            address = street + ", " + city + ", " + region;
+            payPage.SelectAddress(address);
+            var utilityDetails = payPage.NavigateToUtilityDetails(utility);
+            var selectPaymentSum = utilityDetails.NavigateToSelectPaymentSum();
+            selectPaymentSum.ChooseDownloadCheck();
+            var payFrame = selectPaymentSum.PayForSum(sumToPay);
+            var homePageAndUrlOfCheck = payFrame.Pay(userEmail, cardNumber, dateOfCard, cvc, zipCode);
+            var urlOfCheck = homePageAndUrlOfCheck.Item2;
+            homePage = homePageAndUrlOfCheck.Item1;
+
+
+            paymentHistoryPage = homePage.NavigateToPaymentHistory();
             address = region + ", " + city + ", " + street;
-            Assert.AreEqual(DateTime.Today.ToString("d") + "_" + sumToPay.ToString().Replace(',', '.'), paymentHistoryPage.GetLastPayInString(address, utility));
+            paymentHistoryPage.SelectAddress(address);
+            paymentHistoryPage.SelectUtility(utility);
+
+            var newTableOfPayments = paymentHistoryPage.InitTable();
+            var newPayTableRows = newTableOfPayments.GetAllRows();
+
+            var newLastPay = newTableOfPayments.GetLastRow();
+            var newLastPayDate = newLastPay.GetDateFromRow();
+            var newLastPaySum = newLastPay.GetSumFromRow();
+            newLastPay.ViewCheck();
+            var newLastPayCheck = driver.getUrl();
+
+            Assert.AreEqual(DateTime.Today, newLastPayDate,  "Date of last pay doesn't match today date");
+            Assert.AreEqual(sumToPay, newLastPaySum, "Sum of last pay doesn't match today's sum of pay");
+            Assert.AreEqual(urlOfCheck, newLastPayCheck, "Url of last check doesn't match today's url of check");
+
+            CollectionAssert.AreNotEqual(oldPayTableRows, newPayTableRows, "All checks matches old ones, no new check added to history");
         }
 
         [Test]

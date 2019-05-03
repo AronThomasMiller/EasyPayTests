@@ -7,7 +7,6 @@ namespace EasyPayLibrary
     {
         WebElementWrapper addressesDropdown;
         WebElementWrapper utilitiesDropdown;
-        PaymentHistoryTable tblPayment;
 
         public override void Init(DriverWrapper driver)
         {
@@ -28,13 +27,10 @@ namespace EasyPayLibrary
             SelectElementWrapper list = new SelectElementWrapper(utilitiesDropdown);
             list.SelectByText(utility);
         }
-
-        public string GetLastPayInString(string address, string utility)
+        
+        public PaymentHistoryTable InitTable()
         {
-            SelectAddress(address);
-            SelectUtility(utility);
-            tblPayment = GetPOM<PaymentHistoryTable>(driver);
-            return tblPayment.GetLastPayInString();
+            return GetPOM<PaymentHistoryTable>(driver);
         }
     }
 }

@@ -4,23 +4,21 @@
     {
         WebElementWrapper fieldSumToPay;
         WebElementWrapper btnDownloadCheck;
-        WebElementWrapper btnPay;
+        WebElementWrapper btnProcceed;
 
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
             fieldSumToPay = driver.GetByXpath("//input[@id='payment-sum-input']");
             btnDownloadCheck = driver.GetByXpath("//span[@id='download-check-text']");
-            btnPay = driver.GetByXpath("//button[@id='payment-proceed']");
+            btnProcceed = driver.GetByXpath("//button[@id='payment-proceed']");
         }
 
-        public void PayForSum(float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
+        public PaymentFrame PayForSum(float sum)
         {
             SetSumToPay(sum);
-            ChooseDownloadCheck();
             ClickOnPayButton();
-            var payFramePage = GetPOM<PaymentFrame>(driver);
-            payFramePage.FillUpPayForm(email, cardNumber, dateOfCard, cvc, zipCode);
+            return GetPOM<PaymentFrame>(driver);
         }
 
         public void SetSumToPay(float sum)
@@ -35,7 +33,7 @@
 
         public void ClickOnPayButton()
         {
-            btnPay.Click();
+            btnProcceed.Click();
         }
     }
 }

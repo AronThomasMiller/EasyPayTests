@@ -1,31 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
 
 namespace EasyPayLibrary
 {
-    internal class PaymentHistoryTable:BasePageObject
+    public class PaymentHistoryTable:BasePageObject
     {
-        List<PaymentHistoryTableRows> table;
+        List<PaymentHistoryTableRow> table;
 
         public override void Init(DriverWrapper driver)
         {
+            List<WebElementWrapper> tableOnPage;
             base.Init(driver);
-            List<WebElementWrapper> tableOnPage = driver.GetElementsByXpath("//tbody/tr");
-            table = new List<PaymentHistoryTableRows>();
+            try
+            {
+                tableOnPage = driver.GetElementsByXpath("//table[@id='historyTable']//tbody/tr",1);
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return;
+            }
+            table = new List<PaymentHistoryTableRow>();
 
             foreach (var element in tableOnPage)
             {
-                table.Add(new PaymentHistoryTableRows(element));
+                table.Add(new PaymentHistoryTableRow(element));
             }           
         }
 
-        public PaymentHistoryTableRows GetLastRow()
+        public PaymentHistoryTableRow GetLastRow()
         {
-            return table[table.Count-1];
+            try
+            {
+                return table[table.Count - 1];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return null;
+            }
+        }
+
+        public List<PaymentHistoryTableRow> GetAllRows()
+        {
+            return table;
         }
 
         public string GetLastPayInString()
         {
-            PaymentHistoryTableRows last = GetLastRow();
+            PaymentHistoryTableRow last = GetLastRow();
             return last.GetDateFromRow() + "_" + last.GetSumFromRow();
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace EasyPayLibrary
+﻿using System;
+
+namespace EasyPayLibrary
 {
     public class UtilityDetailsPage:BasePageObject
     {
@@ -43,11 +45,10 @@
             btnPay.Click();
         }
 
-        public void PayForSum(float sum, string email, string cardNumber, string dateOfCard, string cvc, string zipCode)
+        public SelectPaymentSumPage NavigateToSelectPaymentSum()
         {
             ClickOnButtonPay();
-            var page = GetPOM<SelectPaymentSumPage>(driver);
-            page.PayForSum(sum, email, cardNumber, dateOfCard, cvc, zipCode);
+            return GetPOM<SelectPaymentSumPage>(driver);
         }
     }
 }

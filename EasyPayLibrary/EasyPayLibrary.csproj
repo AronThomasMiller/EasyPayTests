@@ -83,6 +83,7 @@
     <Compile Include="UserSidebar\AddressPage\AddressForm.cs" />
     <Compile Include="UserSidebar\ConnectedUtilities\ConnectedUtilitiesForm.cs" />
     <Compile Include="UserSidebar\ConnectedUtilities\ConnectedUtilitiesPage.cs" />
+    <Compile Include="UserSidebar\PaymentHistory\CheckPage.cs" />
     <Compile Include="UserSidebar\RateInspector\RateInspectorForm.cs" />
     <Compile Include="UserSidebar\RateInspector\RateInspectorPage.cs" />
     <Compile Include="Wrappers\ActionsWrapper.cs" />
