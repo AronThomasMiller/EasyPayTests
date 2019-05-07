@@ -56,7 +56,7 @@ namespace EasyPayTests
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190510", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
-            Assert.IsTrue(schedule.GetTask().IsDisplayed());
+            Assert.IsTrue(schedule.GetTask().IsDisplayed(),"Schedule isn't dosplayed");
             // postCondition
             var confirm = deleteItem.DeleteItem();
             confirm.ApplyToDelete();
@@ -75,7 +75,7 @@ namespace EasyPayTests
             var editItem = chooseItemToEdit.EditItem();
             var deleteItem = editItem.ApplyToEdit("20190510", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
 
-            Assert.IsTrue(schedule.GetTask().IsDisplayed());
+            Assert.IsTrue(schedule.GetTask().IsDisplayed(),"Schedule isn't dosplayed");
             // postCondition
             var confirm = deleteItem.DeleteItem();
             confirm.ApplyToDelete();
@@ -106,7 +106,7 @@ namespace EasyPayTests
             driver.Refresh();
 
             var close = listOfInspectors.ClickToAddInspector();
-            Assert.IsTrue(close.GetCaption().IsDisplayed());
+            Assert.IsTrue(close.GetCaption().IsDisplayed(),"Busy isn't displayed");
             close.CloseWindow();
             driver.Refresh();
 
@@ -137,7 +137,7 @@ namespace EasyPayTests
             addIvan.AddInspector("Ivan Ivanov");
             driver.Refresh();
 
-            Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed());
+            Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed(),"Ivan Ivanov isn't displayed");
 
             // postCondition
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
@@ -152,7 +152,7 @@ namespace EasyPayTests
             setNewPrice.SetNewPrice("7");
             driver.Refresh();
             var actualPrice = setNewPrice.GetCurrentPrice();
-            Assert.AreEqual("Current price: ₴7", actualPrice);
+            Assert.AreEqual("Current price: ₴7", actualPrice,"Wrong price");
         }
 
         [Test]
@@ -164,15 +164,15 @@ namespace EasyPayTests
             driver.Refresh();
             var actualPrice = setFuturePrice.GetFuturePrice();
             var actualActivationDate = setFuturePrice.GetActivationDate();
-            Assert.AreEqual("Future price: ₴20", actualPrice);
-            Assert.AreEqual("Next activation date: 5 MAY 2019", actualActivationDate);
+            Assert.AreEqual("Future price: ₴20", actualPrice,"Wrong price");
+            Assert.AreEqual("Next activation date: 5 MAY 2019", actualActivationDate,"Wrong  activation date");
         }
 
         [Test]
         public void VerifyThatManagerHasAccesToAccount()
         {
-            Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"));
-            Assert.AreEqual("MANAGER", GeneralPage.GetRole(driver));
+            Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"),"Wrong Url");
+            Assert.AreEqual("MANAGER", GeneralPage.GetRole(driver),"manager can't access his account");
         }
 
         [Test]
@@ -192,9 +192,9 @@ namespace EasyPayTests
             var schedulePage = inspectorPage.NavigateToInspectorsSchedule("Oleg Adamov");
             var tabHistory = schedulePage.ClickOnTabHistory();
             var tabCurrentMonth = tabHistory.ClickOnCurrentMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("Нагірна", "15.4.2019"), "Current month history is not visible");
+            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("Нагірна", "10.5.2018"), "Current month history is not visible");
             var tabPreviousMonth = tabHistory.ClickOnPreviousMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryPreviousMonthVisible("21.4.2019"), "Previous month history is not visible");
+            Assert.IsTrue(tabHistory.IsHistoryPreviousMonthVisible("21.4.2019"), "Previous month history doesn't contain date: 21.4.2019");
         }
 
         [Test]

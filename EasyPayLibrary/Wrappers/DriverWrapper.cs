@@ -100,7 +100,7 @@ namespace EasyPayLibrary
 
         public void WaitUntillUrlContainString(string str, int timeInSec = 20)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));                 
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeInSec));
             wait.Until(condition: ExpectedConditions.UrlContains(str));
         }
         

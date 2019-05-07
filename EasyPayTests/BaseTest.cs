@@ -28,7 +28,7 @@ namespace EasyPayTests
         [TearDown]
         public void PostCondition()
         {
-            if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
             {
                 driver.getScreenshot();
             }

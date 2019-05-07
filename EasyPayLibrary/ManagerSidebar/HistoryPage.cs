@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.ManagerSidebar
 {
-    public class HistoryPage : SchedulePage
+    public class HistoryPage : BasePageObject
     {
         WebElementWrapper btnCurrentMonth;
         WebElementWrapper btnPreviousMonth;
@@ -47,8 +47,15 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public bool IsHistoryPreviousMonthVisible(string date)
         {
-            var element = driver.GetByXpath($"//*[contains(text(),'{date}')]");
-            return element.IsDisplayed();
+            try
+            {
+                var element = driver.GetByXpath($"//*[contains(text(),'{date}')]",1);
+                return true;
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
         }
     }
 }

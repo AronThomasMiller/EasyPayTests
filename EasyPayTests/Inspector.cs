@@ -46,19 +46,8 @@ namespace EasyPayTests
         {
 
             var header = driver.GetByXpath("//h3[contains(text(),'Inspector')]");
-            Assert.AreEqual(header.GetText(), "INSPECTOR");
+            Assert.AreEqual(header.GetText(), "INSPECTOR","Inspector isn't loged in");
         }
-
-        //[Test]
-        //public void SignInInspectorIncorrect()
-        //{
-        //    WelcomePage welcomePage = new WelcomePage();
-        //    welcomePage.Init(driver);
-        //    var loginPage = welcomePage.SignIn();
-        //    var test = (LoginPage)loginPage.Login("inspectr1@gmail.com", "Admin123");
-        //    var result = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
-        //    Assert.AreEqual(result.GetText(), "Error");
-        //}
 
         //schedule Page
         [Test]

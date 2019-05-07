@@ -8,7 +8,7 @@ namespace EasyPayLibrary
         WebElementWrapper btnChangeRole;
         WebElementWrapper role;
         WebElementWrapper drpdListOfRoles;
-        WebElementWrapper drpdRole;
+        WebElementWrapper user;
         WebElementWrapper btnSaveChange;
 
         public override void Init(DriverWrapper driver)
@@ -17,11 +17,17 @@ namespace EasyPayLibrary
             btnChangeRole = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[6]/button");
             role = driver.GetByXpath("//tbody/tr/td[contains(text(),'user3@gmail.com')]/../td[3]");
             tableOfUsers = driver.GetByXpath("//table[@id='user-list']");
+            user = driver.GetByXpath("//td[text()='user1@gmail.com']");
         }
 
         public bool TableOfUsersIsVisible()
         {
             return tableOfUsers.IsDisplayed();
+        }
+
+        public bool UserIsVisible()
+        {
+            return user.IsDisplayed();
         }
 
         public void SelectRole(string myRole)

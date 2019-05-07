@@ -59,36 +59,25 @@ namespace EasyPayTests
         [Test]
         public void UserIsAbleToLogin()
         {          
-            Assert.AreEqual(homePage.GetRoleText(), "USER");
-        }
-
-        //[Test]
-        //public void UserIsUnableToLoginNonValidData()
-        //{
-        //    WelcomePage welcome = new WelcomePage();
-        //    welcome.Init(driver);
-        //    var login = welcome.SignIn();
-        //    var test = (LoginPage)login.Login("user1@gmail.com", "Admin12345");
-
-        //    Assert.IsTrue(test.IsErrorPresent());                        
-        //}
+            Assert.AreEqual(homePage.GetRoleText(), "USER","user isn't loged in");
+        }        
 
         [Test]
         public void PersonalCabinetAccess()
         {
             var profile = homePage.GoToProfile();
-            Assert.IsTrue(profile.NameIsVisible());
-            Assert.IsTrue(profile.SurnameIsVisible());
-            Assert.IsTrue(profile.PhoneNumberIsVisible());
+            Assert.IsTrue(profile.NameIsVisible(),"Name isn't visible");
+            Assert.IsTrue(profile.SurnameIsVisible(), "Surname isn't visible");
+            Assert.IsTrue(profile.PhoneNumberIsVisible(), "PhoneNumber isn't visible");
         }
 
         [Test]
         public void PersonalInfoMatch()
         {
             var profile = homePage.GoToProfile();
-            Assert.AreEqual("Masha",profile.GetName());
-            Assert.AreEqual("Chuikina", profile.GetSurname());
-            Assert.AreEqual("+380968780876", profile.GetPhoneNumber());
+            Assert.AreEqual("Masha",profile.GetName(), "Wrong name");
+            Assert.AreEqual("Chuikina", profile.GetSurname(), "Wrong surname");
+            Assert.AreEqual("+380968780876", profile.GetPhoneNumber(), "Wrong name");
         }
 
         [Test]
@@ -98,7 +87,7 @@ namespace EasyPayTests
             profile.SetName("Masha");            
             profile.UpdateProfile();            
             Assert.True(profile.IsSuccessAlertDisplayed());
-            Assert.AreEqual("Masha", profile.GetName());
+            Assert.AreEqual("Masha", profile.GetName(),"Name doesn't change");
         }
 
         [Test]
@@ -107,10 +96,10 @@ namespace EasyPayTests
             var profile = homePage.GoToProfile();
             ProfilePage changed = profile.ChangeToUKR();
             profile.Init(driver);
-            var name = profile.GetName();            
-            Assert.AreEqual(t.Mariya.ToLower(),name.ToLower());
+            var name = profile.GetName();
+            StringAssert.AreEqualIgnoringCase(t.Mariya, name, "Wrong name translation");
             var surname = profile.GetSurname();
-            Assert.AreEqual(t.Chuikina.ToLower(), surname.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.Chuikina, surname, "Wrong surname translation");
         }
 
         [Test]
@@ -119,7 +108,7 @@ namespace EasyPayTests
             var profile = homePage.GoToProfile();
             profile.SetName("Вася");
             profile.UpdateProfile();            
-            Assert.IsFalse(profile.IsErrorAlertDisplayed());            
+            Assert.IsFalse(profile.IsErrorAlertDisplayed(),"error alert isn't displayed");            
         }
 
         [Test]
@@ -127,22 +116,22 @@ namespace EasyPayTests
         {
             homePage.ChangeToUKR();
             homePage.Init(driver);
-            var role = homePage.GetRoleText();            
-            Assert.AreEqual(t.User.ToLower(),role.ToLower());            
+            var role = homePage.GetRoleText();
+            StringAssert.AreEqualIgnoringCase(t.User, role, "Wrong role translation");
             var addresses = homePage.GetAddressesText();
-            Assert.AreEqual(t.Addresses.ToLower(), addresses.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.Addresses, addresses, "Wrong address translation");
             var connectedUtilities = homePage.GetConnectedUtilitiesText();
-            Assert.AreEqual(t.ConnectedUtilities.ToLower(), connectedUtilities.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.ConnectedUtilities, connectedUtilities, "Wrong connected utilities translation");
             var payments = homePage.GetPaymentsText();
-            Assert.AreEqual(t.Payments.ToLower(), payments.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.Payments, payments, "Wrong payments translation");
             var paymentsHistory = homePage.GetPaymentsHistoryText();
-            Assert.AreEqual(t.PaymentsHistory.ToLower(), paymentsHistory.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.PaymentsHistory, paymentsHistory, "Wrong payments history translation");
             var rateInspectors = homePage.GetRateInspectorsText();
-            Assert.AreEqual(t.RateInspectors.ToLower(), rateInspectors.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.RateInspectors, rateInspectors, "Wrong rate inspectors translation");
             var mainPageTitle = homePage.GetMainPageTitleText();
-            Assert.AreEqual(t.MainPage.ToLower(), mainPageTitle.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.MainPage, mainPageTitle, "Wrong main title translation");
             var xTitle = homePage.GetXTitleText();
-            Assert.AreEqual(t.SomeText.ToLower(), xTitle.ToLower());
+            StringAssert.AreEqualIgnoringCase(t.SomeText, xTitle, "Wrong xtitle translation");
         }
 
         [TestCase((float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"")]
@@ -197,7 +186,7 @@ namespace EasyPayTests
             var addresses = homePage.NavigateToAddresses();
             addresses.EnterAllFields("Небесної сотні", "4Б", "Небесної сотні", "Чернівці", "Чернівецька область", "12345", "Україна", "45");
             var error = addresses.Error();
-            Assert.IsNull(error);
+            Assert.IsNull(error,"Address is not added");
         }
 
         [Test]
@@ -205,7 +194,7 @@ namespace EasyPayTests
         {
             var utilities = homePage.NavigateToUtilities();
             var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
-            Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result);
+            Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
         }
 
         [Test]
@@ -231,7 +220,7 @@ namespace EasyPayTests
         {
             var paymentsHistory = homePage.NavigateToPaymentHistory();
             var result = paymentsHistory.SelectAddress("Чернівецька область, Чернівці, вулиця Пушкіна 12");
-            Assert.AreEqual("Чернівецька область, Чернівці, вулиця Пушкіна 12", result);
+            Assert.AreEqual("Чернівецька область, Чернівці, вулиця Пушкіна 12", result,"Adress is not selected");
         }
 
         [Test]
@@ -251,7 +240,7 @@ namespace EasyPayTests
             var pay = homePage.NavigateToPayment();
             pay.ChangeMetrics("вулиця Нагірна 5, Чернівці, Чернівецька область", "42");
             pay.SelectAddress("вулиця Нагірна 5, Чернівці, Чернівецька область");
-            Assert.Negative(pay.GetBalance());
+            Assert.Negative(pay.GetBalance(),"Incorrect value");
         }
 
         [Test]
@@ -274,7 +263,7 @@ namespace EasyPayTests
             var loginManager = (HomePageManager)logOut.Login("manager1@gmail.com", "Admin123");
             var rateInspectors = loginManager.NavigateToInspectorsList();
             var res = rateInspectors.VerifyListOfInspectorsNotEmpty();
-            Assert.IsNotEmpty(res);
+            Assert.IsNotEmpty(res, "List of Inspector is empty");
         }
 
         [Test]
@@ -285,7 +274,7 @@ namespace EasyPayTests
             var loginAdmin = (HomePageAdmin)logOut.Login("admin1@gmail.com", "Admin123");
             var utilities = loginAdmin.NavigateToUtilities();
             var res = utilities.TableOfUtilitiesIsVisible();
-            Assert.IsTrue(res);
+            Assert.IsTrue(res, "List of Utilities is empty");
         }
     }
 }

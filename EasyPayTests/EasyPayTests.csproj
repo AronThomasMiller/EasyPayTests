@@ -63,6 +63,7 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="Inspector.cs" />
     <Compile Include="Manager.cs" />
+    <Compile Include="NonValidData.cs" />
     <Compile Include="Translations\TranslationProvider.cs" />
     <Compile Include="Translations\TranslationValues.cs" />
     <Compile Include="User.cs" />

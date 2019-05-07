@@ -41,33 +41,16 @@ namespace EasyPayTests
         public void LoginAsAdminWithValidData()
         {
             var role = home.GetTextRole();
-            Assert.AreEqual("ADMIN", role);
+            Assert.AreEqual("ADMIN", role,"not logined as admin");
         }
 
-        //[TestCase("admin1@gmail.com", "Admin5677")]
-        //public void LoginAsAdminWithNonValidData(string email, string password)
-        //{
-        //    driver.GoToURL();
-        //    WelcomePage welcome = new WelcomePage();
-        //    welcome.Init(driver);
-        //    var login = welcome.SignIn();
-        //    var home = (LoginPage)login.Login(email, password);
-
-        //    Assert.IsFalse(home.IsErrorPresent());
-        //}
-
-        [Test]
-        public void VerifyThatAdminHasAbilityToAccessHisDashboard()
-        {
-            var role = home.GetTextRole();
-            Assert.AreEqual("ADMIN", role);
-        }
+       
 
         [Test]
         public void VerifyThatAdminHasAbilityToAccessHisProfile()
         {
             var prof = home.GoToProfile();
-            Assert.AreEqual("Profile", prof.GetTitle());
+            Assert.AreEqual("Profile", prof.GetTitle(),"Profile is not avaliable");
         }
 
         [Test]
@@ -75,8 +58,9 @@ namespace EasyPayTests
         {
             var prof = home.GoToProfile();
             prof.EditData("Ivan", "Petrov", "+380938780876", "Admin123", "Admin1234");
-            Assert.AreEqual("Success", prof.GetSuccessText());
+            Assert.AreEqual("Success", prof.GetSuccessText(),"Admin can't change his profile data");
 
+            //post condition
             prof.EditPassword("Admin1234", "Admin123");
         }
 
@@ -85,7 +69,7 @@ namespace EasyPayTests
         {
             var user = home.NavigateToUsers();
             user.ChangeRoleToManager("user3@gmail.com");
-            Assert.AreNotEqual("USER", user.GetRole("user3@gmail.com"));
+            Assert.AreNotEqual("USER", user.GetRole("user3@gmail.com"),"Role isn't changing");
             user.ChangeRoleToUser("user3@gmail.com");
         }
 
@@ -93,14 +77,14 @@ namespace EasyPayTests
         public void VerifyThatListOfUsersIsVisibleForAdmin()
         {
             var user = home.NavigateToUsers();
-            Assert.IsTrue(user.TableOfUsersIsVisible());
+            Assert.IsTrue(user.TableOfUsersIsVisible(),"Table of users isn't visible");
         }
 
         [Test]
         public void VerifyThatListOfUtilitiesIsVisibleForAdmin()
         {
             var utilities = home.NavigateToUtilities();
-            Assert.IsTrue(utilities.TableOfUtilitiesIsVisible());
+            Assert.IsTrue(utilities.TableOfUtilitiesIsVisible(),"Table of utilities isn't visible");
         }
 
         [Test]
@@ -111,16 +95,14 @@ namespace EasyPayTests
             utilities.SetKeywordToTextBox();
             utilities.SelectManager("Viktoriya Radashko");
             utilities.ClickOnConfirm();
-            Assert.AreEqual("Viktoriya Radashko", utilities.getTextFromManagerField());
+            Assert.AreEqual("Viktoriya Radashko", utilities.getTextFromManagerField(),"Viktoriya Radashko isn't assigned as manager");
         }
 
         [Test]
         public void IsUserSignedUp()
         {
-            driver.GetByXpath("//*[@href='/admin/management-users']").Click();
-            var user = driver.GetByXpath("//td[text()='user1@gmail.com']");
-            Assert.IsTrue(user.IsDisplayed());
+            var user = home.NavigateToUsers();
+            Assert.IsTrue(user.UserIsVisible(),"User isn't visible");
         }
-
     }
 }

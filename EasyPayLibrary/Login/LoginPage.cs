@@ -72,7 +72,6 @@ namespace EasyPayLibrary
 
             }
             return GetPOM<LoginPage>(driver);
-
         }
 
         public LoginPage TranslatePageToUA()
