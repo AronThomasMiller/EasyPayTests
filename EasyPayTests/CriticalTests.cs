@@ -12,6 +12,12 @@ namespace EasyPayTests
     [TestFixture]
     class CriticalTests:BaseTest
     {
+        [SetUp]
+        public override void PreCondition()
+        {
+            base.PreCondition();
+        }
+
         [Test]
         public void VerifyThatAdminCanEditManager()
         {

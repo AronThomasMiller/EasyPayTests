@@ -12,9 +12,14 @@ namespace EasyPayLibrary
 {
     public class DriverFactory
     {
-        public DriverWrapper GetDriver()
+        public DriverWrapper GetDriver(string browser)
         {
-            string browser = ConfigurationManager.AppSettings["browser"];
+            if (browser == null) browser = ConfigurationManager.AppSettings["browser"];
+            return ChooseDriver(browser);
+        }
+
+        private DriverWrapper ChooseDriver(string browser)
+        {
             IWebDriver driver = null;
             switch (browser)
             {

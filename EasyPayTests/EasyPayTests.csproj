@@ -73,6 +73,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="RunAllTestsByBrowser.bat" />
     <None Include="Translations\dictionaries\dict.en.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

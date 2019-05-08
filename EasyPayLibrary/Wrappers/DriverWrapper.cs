@@ -73,7 +73,6 @@ namespace EasyPayLibrary
             var path = info.Directory.FullName;
             var adress = new FileInfo(path + "\\Screen\\");
             string screenshotFileName = adress + title + ".png";
-            Console.WriteLine(screenshotFileName);
             ss.SaveAsFile(screenshotFileName);
         }
 

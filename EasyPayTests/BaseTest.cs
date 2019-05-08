@@ -2,11 +2,13 @@
 using EasyPayLibrary.Translations;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using System;
 
 namespace EasyPayTests
 {
     public class BaseTest
     {
+        string browser;
         protected TranslationValues t;
         protected DriverWrapper driver;
         protected WelcomePage welcome;
@@ -15,7 +17,10 @@ namespace EasyPayTests
         public virtual void PreCondition()
         {
             t = TranslationProvider.GetTranslation("ua");
-            driver = new DriverFactory().GetDriver();
+
+            browser = TestContext.Parameters.Get("browser");
+            driver = new DriverFactory().GetDriver(browser);
+
             driver.Maximaze();
             driver.GoToURL();
             welcome = new WelcomePage();
