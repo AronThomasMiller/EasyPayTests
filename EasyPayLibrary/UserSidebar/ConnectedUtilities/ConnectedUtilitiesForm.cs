@@ -70,6 +70,7 @@ namespace EasyPayLibrary.Changes
         {
             btnCall = driver.GetByXpath("//button[@id='submit']");
             btnCall.Click();
+            driver.Refresh();
             return GetPOM<HomePageUser>(driver);
         }
 

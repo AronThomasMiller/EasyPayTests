@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="BaseTest.cs" />
+    <Compile Include="CriticalTests.cs" />
     <Compile Include="Inspector.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Translations\TranslationProvider.cs" />

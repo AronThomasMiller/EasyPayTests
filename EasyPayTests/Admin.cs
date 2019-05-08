@@ -76,17 +76,6 @@ namespace EasyPayTests
         }
 
         [Test]
-        public void VerifyThatAdminCanEditManager()
-        {
-            var utilities = home.NavigateToUtilities();
-            utilities.ClickOnChangeManager();
-            utilities.SetKeywordToTextBox();
-            utilities.SelectManager("Viktoriya Radashko");
-            utilities.ClickOnConfirm();
-            Assert.AreEqual("Viktoriya Radashko", utilities.getTextFromManagerField(),"Viktoriya Radashko isn't assigned as manager");
-        }
-
-        [Test]
         public void IsUserSignedUp()
         {
             var user = home.NavigateToUsers();
