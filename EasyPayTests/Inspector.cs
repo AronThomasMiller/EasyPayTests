@@ -12,33 +12,19 @@ using System.Threading.Tasks;
 
 namespace EasyPayTests
 {
-    public class Inspector
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class Inspector:BaseTest
     {
-        DriverWrapper driver;
         HomePageInspector homePage;
         string address = "вулиця Університетська 2/5, Чернівці, Чернівецька область";
 
         [SetUp]
-        public void PreCondition()
+        public override void PreCondition()
         {
-            driver = new DriverFactory().GetDriver();
-            driver.Maximaze();
-            driver.GoToURL();
-            WelcomePage welcomePage = new WelcomePage();
-            welcomePage.Init(driver);
-            var loginPage = welcomePage.SignIn();
+            base.PreCondition();
+            var loginPage = welcome.SignIn();
             homePage = (HomePageInspector)loginPage.Login("inspector1@gmail.com", "Admin123");
-        }
-
-        [TearDown]
-        public void PostCondition()
-        {
-            if ((TestContext.CurrentContext.Result.Outcome == ResultState.Failure) || (TestContext.CurrentContext.Result.Outcome == ResultState.Error))
-            {
-                driver.getScreenshot();
-            }
-
-            driver.Quit();
         }
 
         [Test]

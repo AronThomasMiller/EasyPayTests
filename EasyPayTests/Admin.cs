@@ -10,31 +10,18 @@ using System.Threading.Tasks;
 
 namespace EasyPayTests
 {
-    public class Admin
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class Admin:BaseTest
     {
-        DriverWrapper driver;
         HomePageAdmin home;
 
         [SetUp]
-        public void PreCondition()
+        public override void PreCondition()
         {
-            driver = new DriverFactory().GetDriver();
-            driver.Maximaze();
-            driver.GoToURL();
-            WelcomePage welcome = new WelcomePage();
-            welcome.Init(driver);
+            base.PreCondition();
             var login = welcome.SignIn();
             home = (HomePageAdmin)login.Login("admin1@gmail.com", "Admin123");
-        }
-
-        [TearDown]
-        public void PostCondition()
-        {
-            if ((TestContext.CurrentContext.Result.Outcome == ResultState.Failure)||(TestContext.CurrentContext.Result.Outcome == ResultState.Error))
-            {
-                driver.getScreenshot();
-            }
-            driver.Quit();
         }
 
         [Test]
@@ -62,6 +49,7 @@ namespace EasyPayTests
 
             //post condition
             prof.EditPassword("Admin1234", "Admin123");
+            Assert.AreEqual("Success", prof.GetSuccessText(), "Admin can't change his profile data");
         }
 
         [Test]

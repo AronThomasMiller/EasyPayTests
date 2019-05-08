@@ -15,36 +15,21 @@ using System.Threading.Tasks;
 
 namespace EasyPayTests
 {
-    public class User
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class User : BaseTest
     {
-        TranslationValues t;
-        DriverWrapper driver;
         HomePageUser homePage;
         string userEmail = "user1@gmail.com";
 
         [SetUp]
-        public void PreCondition()
+        public override void PreCondition()
         {
-            t = TranslationProvider.GetTranslation("ua");
-            driver = new DriverFactory().GetDriver();
-            driver.Maximaze();
-            driver.GoToURL();
-            WelcomePage welcomePage = new WelcomePage();
-            welcomePage.Init(driver);
-            var loginPage = welcomePage.SignIn();
+            base.PreCondition();
+            var loginPage = welcome.SignIn();
             homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
         }
-
-        [TearDown]
-        public void PostCondition()
-        {
-            if ((TestContext.CurrentContext.Result.Outcome == ResultState.Failure) || (TestContext.CurrentContext.Result.Outcome == ResultState.Error))
-            {
-                driver.getScreenshot();
-            }
-
-            driver.Quit();
-        }
+        
 
         [Test]
         public void ScheduleNotAvailable()
@@ -55,7 +40,7 @@ namespace EasyPayTests
                 Assert.False(element.GetText() == "Schedule", "Element found");
             }
         }
-
+        
         [Test]
         public void UserIsAbleToLogin()
         {          
@@ -133,7 +118,7 @@ namespace EasyPayTests
             var xTitle = homePage.GetXTitleText();
             StringAssert.AreEqualIgnoringCase(t.SomeText, xTitle, "Wrong xtitle translation");
         }
-
+        
         [TestCase((float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"")]
         public void PayAndCheckOneInPaymentHistory(float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {           
@@ -175,7 +160,7 @@ namespace EasyPayTests
 
             Assert.AreEqual(DateTime.Today, newLastPayDate,  "Date of last pay doesn't match today date");
             Assert.AreEqual(sumToPay, newLastPaySum, "Sum of last pay doesn't match today's sum of pay");
-            Assert.AreEqual(urlOfCheck, newLastPayCheck, "Url of last check doesn't match today's url of check");
+            StringAssert.Contains(newLastPayCheck, urlOfCheck, "Url of last check doesn't match today's url of check");
 
             CollectionAssert.AreNotEqual(oldPayTableRows, newPayTableRows, "All checks matches old ones, no new check added to history");
         }

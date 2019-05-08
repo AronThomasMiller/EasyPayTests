@@ -33,8 +33,6 @@ namespace EasyPayLibrary
         public void SelectRole(string myRole)
         {
             myRole = myRole.ToUpper();
-            drpdListOfRoles = driver.GetByXpath("//select[@id='role']");
-            drpdListOfRoles.Click();
 
             var drpdRole = driver.GetByXpath($"//select[@id='role']").selectElement();
             drpdRole.SelectByText(myRole);

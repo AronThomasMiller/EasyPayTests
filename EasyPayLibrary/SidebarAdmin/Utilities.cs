@@ -29,19 +29,19 @@
 
         public void SetKeywordToTextBox()
         {
-            keywordField.GetByXpath("//input[@id='change_manager']");
+            keywordField = driver.GetByXpath("//input[@id='change_manager']");
             keywordField.SendText("UPDATE");
         }
 
         public void SelectManager(string nameManager)
         {
-            managerRadashko.GetByXpath($"//select[@id='update_managers']//option[contains(text(),'{nameManager}')]");
+            managerRadashko = driver.GetByXpath($"//select[@id='update_managers']//option[contains(text(),'{nameManager}')]");
             managerRadashko.Click();
         }
 
         public void ClickOnConfirm()
         {
-            btnConfirm.GetByXpath("//button[@id='update_button']");
+            btnConfirm = driver.GetByXpath("//button[@id='update_button']");
             btnConfirm.Click();
         }
 

@@ -66,13 +66,14 @@ namespace EasyPayLibrary
         public void getScreenshot()
         {
             Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
-            string nameTest = TestContext.CurrentContext.Test.Name;
+            string nameTest = TestContext.CurrentContext.Test.MethodName;
             string title = nameTest + DateTime.Now.ToString(" dd-MM-yyyy_(HH_mm_ss)");
             var x = Assembly.GetExecutingAssembly().Location;
             var info = new FileInfo(x);
             var path = info.Directory.FullName;
             var adress = new FileInfo(path + "\\Screen\\");
             string screenshotFileName = adress + title + ".png";
+            Console.WriteLine(screenshotFileName);
             ss.SaveAsFile(screenshotFileName);
         }
 
@@ -96,6 +97,16 @@ namespace EasyPayLibrary
         public void ChangeFrame(string name)
         {
             driver.SwitchTo().Frame(name);
+        }
+
+        public void SwithToDefault()
+        {
+            driver.SwitchTo().DefaultContent();
+        }
+
+        public Type GetTypeOfDriver()
+        {
+            return driver.GetType();
         }
 
         public void WaitUntillUrlContainString(string str, int timeInSec = 20)

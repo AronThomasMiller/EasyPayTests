@@ -1,12 +1,16 @@
 ﻿using EasyPayLibrary;
 using EasyPayLibrary.Pages.UnauthorizedUserPages;
 using EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail;
+using EasyPayLibrary.Translations;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 
 namespace EasyPayTests
 {
-    public class UnauthorizedUserTest : BaseTest
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class UnauthorizedUserTest:BaseTest
     {
         [TestCase("Name", "Surname", "+380123456789", "gangstatester@gmail.com", "Fakesoft15")]
         public void CreateAccount(string name, string surname, string phoneNumber, string email, string password)
@@ -68,6 +72,39 @@ namespace EasyPayTests
 
             result = BasePageObject.CheckTranslation(dict, welcomeTextElemsUA);
             Assert.IsTrue(result == null, "The word {0} didn't match dictionary", result);
+        }
+
+        [Test]
+        public void SignInInspectorIncorrect()
+        {
+            WelcomePage welcomePage = new WelcomePage();
+            welcomePage.Init(driver);
+            var loginPage = welcomePage.SignIn();
+            var test = (LoginPage)loginPage.Login("inspectr1@gmail.com", "Admin123");
+            var result = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
+            Assert.AreEqual(result.GetText(), "Error");
+        }
+
+        [Test]
+        public void LoginAsAdminWithNonValidData()
+        {
+            driver.GoToURL();
+            WelcomePage welcome = new WelcomePage();
+            welcome.Init(driver);
+            var login = welcome.SignIn();
+            var home = (LoginPage)login.Login("admin1@gmail.com", "Admin5677");
+            Assert.IsTrue(home.IsErrorPresent());
+        }
+
+        [Test]
+        public void UserIsUnableToLoginNonValidData()
+        {
+            WelcomePage welcome = new WelcomePage();
+            welcome.Init(driver);
+            var login = welcome.SignIn();
+            var test = (LoginPage)login.Login("user1@gmail.com", "Admin12345");
+
+            Assert.IsTrue(test.IsErrorPresent());
         }
     }
 }

@@ -11,33 +11,20 @@ using System.Threading.Tasks;
 
 namespace EasyPayTests
 {
-    public class Manager
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class Manager:BaseTest
     {
-        DriverWrapper driver;
         HomePageManager homePage;
 
         [SetUp]
-        public void PreCondition()
+        public override void PreCondition()
         {
-            driver = new DriverFactory().GetDriver();
-            driver.Maximaze();
-            driver.GoToURL();
-            WelcomePage page = new WelcomePage();
-            page.Init(driver);
-            var loginPage = page.SignIn();
+            base.PreCondition();
+            var loginPage = welcome.SignIn();
             homePage = (HomePageManager)loginPage.Login("manager1@gmail.com", "Admin123");
         }
-
-        [TearDown]
-        public void PostCondition()
-        {
-            if ((TestContext.CurrentContext.Result.Outcome == ResultState.Failure) || (TestContext.CurrentContext.Result.Outcome == ResultState.Error))
-            {
-                driver.getScreenshot();
-            }
-
-            driver.Quit();
-        }
+        
 
         [Test]
         public void ReviewInformation()

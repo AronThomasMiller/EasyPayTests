@@ -16,7 +16,6 @@ namespace EasyPayLibrary
         {
             string browser = ConfigurationManager.AppSettings["browser"];
             IWebDriver driver = null;
-
             switch (browser)
             {
                 case "Chrome":
