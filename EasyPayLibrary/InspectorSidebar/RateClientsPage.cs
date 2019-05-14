@@ -10,7 +10,6 @@ namespace EasyPayLibrary.InspectorSidebar
     public class RateClientsPage : HomePageInspector
     {
         WebElementWrapper element;
-        ClientsPage clientsPage;
 
         public override void Init(DriverWrapper driver)
         {

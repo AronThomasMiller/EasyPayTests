@@ -28,7 +28,7 @@ namespace EasyPayLibrary
         }
 
         public string getUrl() { return driver.Url; }
-
+        
         public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
         {
             GetByXpath(xpath);
@@ -63,7 +63,7 @@ namespace EasyPayLibrary
             driver.Navigate().GoToUrl(url);
         }
 
-        public void getScreenshot()
+        public string GetScreenshot()
         {
             Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
             string nameTest = TestContext.CurrentContext.Test.MethodName;
@@ -74,6 +74,7 @@ namespace EasyPayLibrary
             var adress = new FileInfo(path + "\\Screen\\");
             string screenshotFileName = adress + title + ".png";
             ss.SaveAsFile(screenshotFileName);
+            return screenshotFileName;
         }
 
         public void Refresh()

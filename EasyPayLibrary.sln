@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPayLibrary", "EasyPayLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPayTests", "EasyPayTests\EasyPayTests.csproj", "{3C5BCC82-1EB0-4242-960E-D79875023EA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumExtentReport", "SeleniumExtentReport\SeleniumExtentReport.csproj", "{CE92E6A0-BC60-4F99-96B9-83CF6C4B971E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3C5BCC82-1EB0-4242-960E-D79875023EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C5BCC82-1EB0-4242-960E-D79875023EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C5BCC82-1EB0-4242-960E-D79875023EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE92E6A0-BC60-4F99-96B9-83CF6C4B971E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE92E6A0-BC60-4F99-96B9-83CF6C4B971E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE92E6A0-BC60-4F99-96B9-83CF6C4B971E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE92E6A0-BC60-4F99-96B9-83CF6C4B971E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

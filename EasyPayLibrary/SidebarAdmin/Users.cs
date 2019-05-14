@@ -7,7 +7,6 @@ namespace EasyPayLibrary
         WebElementWrapper tableOfUsers;
         WebElementWrapper btnChangeRole;
         WebElementWrapper role;
-        WebElementWrapper drpdListOfRoles;
         WebElementWrapper user;
         WebElementWrapper btnSaveChange;
 

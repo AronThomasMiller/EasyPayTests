@@ -2,6 +2,7 @@
 using EasyPayLibrary.Translations;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using SeleniumExtentReportTest;
 using System;
 
 namespace EasyPayTests
@@ -12,12 +13,20 @@ namespace EasyPayTests
         protected TranslationValues t;
         protected DriverWrapper driver;
         protected WelcomePage welcome;
+        protected SeleniumExtentReport report;
+
+        [OneTimeSetUp]
+        public void BeforeClass()
+        {
+            report = new SeleniumExtentReport();
+            report.BeforeClass();
+        }
 
         [SetUp]
         public virtual void PreCondition()
         {
+            report.BeforeTest();
             t = TranslationProvider.GetTranslation("ua");
-
             browser = TestContext.Parameters.Get("browser");
             driver = new DriverFactory().GetDriver(browser);
 
@@ -30,12 +39,14 @@ namespace EasyPayTests
         [TearDown]
         public virtual void PostCondition()
         {
-            if ((TestContext.CurrentContext.Result.Outcome == ResultState.Failure) || (TestContext.CurrentContext.Result.Outcome == ResultState.Error))
-            {
-                driver.getScreenshot();
-            }
-
+            report.AfterTest(driver);
             driver.Quit();
+        }
+
+        [OneTimeTearDown]
+        public void AfterClass()
+        {
+            report.AfterClass();
         }
     }
 }

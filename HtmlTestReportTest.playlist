@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="EasyPayTests.Inspector.AbleActivateOrDeactivateMetrix" /><Add Test="EasyPayTests.Inspector.AbleFixedOrUnfixedMetrix" /><Add Test="EasyPayTests.CriticalTests.CallInspectorForConcreteDate" /><Add Test="EasyPayTests.CriticalTests.AddAddresses" /></Playlist>

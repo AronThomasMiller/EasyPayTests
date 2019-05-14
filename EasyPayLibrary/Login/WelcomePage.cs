@@ -12,7 +12,7 @@ namespace EasyPayLibrary
 
         public override void Init(DriverWrapper driver)
         {
-            LeadText = driver.GetByXpath("//p[@class='lead']/span");
+            LeadText = driver.GetByXpath("//p[@class='lead']");
 
             btnSignIn = driver.GetByXpath("//a[@id='Sign_in']");
             btnSignUp = driver.GetByXpath("//a[@id='Sign_up']");
@@ -56,7 +56,7 @@ namespace EasyPayLibrary
         {
             var list = new List<string>
             {
-                LeadText.GetText(),
+                LeadText.GetByXpath("./span").GetText(),
                 btnSignIn.GetByXpath(".//span").GetText(),
                 btnSignUp.GetByXpath(".//span").GetText()
             };
