@@ -260,4 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 
-E:\Users\MYCOM\EasyPayLibrary\EasyPayTests\Test_Execution_Reports\
+EasyPayTests/Test_Execution_Reports
