@@ -15,7 +15,7 @@ namespace EasyPayLibrary.Translations
         {
             var x = Assembly.GetExecutingAssembly().Location;
             var info = new FileInfo(x);         
-            var dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "");
+            var dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
             var dictionaryFile = new FileInfo(dir + $"\\Translations\\dictionaries\\dict.{langCode}.json");
 
             if (dictionaryFile.Exists)

@@ -35,7 +35,7 @@ namespace SeleniumExtentReportTest
                 var TestClassName = TestContext.CurrentContext.Test.ClassName;
 
                 htmlTestSuitReport = new ExtentReports();
-                var dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "");
+                var dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
                 DirectoryInfo di = Directory.CreateDirectory(dir + "\\Test_Execution_Reports");
                 var outputDir = dir + "\\Test_Execution_Reports" + "\\" + TestClassName + "\\";
                 var htmlReporter = new ExtentHtmlReporter(outputDir + "Automation_Report" + ".html");
