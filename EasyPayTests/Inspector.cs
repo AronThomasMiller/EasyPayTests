@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("Inspector")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class Inspector:BaseTest
     {

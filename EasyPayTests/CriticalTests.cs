@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("Critical")]
     [Parallelizable(ParallelScope.Fixtures)]
     class CriticalTests:BaseTest
     {

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("UnauthorizedUserTest")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class UnauthorizedUserTest:BaseTest
     {
