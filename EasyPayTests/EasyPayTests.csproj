@@ -85,13 +85,13 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="BaseTest.cs" />
-    <Compile Include="CriticalTests.cs" />
+    <Compile Include="Critical.cs" />
     <Compile Include="Inspector.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Translations\TranslationProvider.cs" />
     <Compile Include="Translations\TranslationValues.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UnauthorizedUserTest.cs" />
+    <Compile Include="UnauthorizedUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

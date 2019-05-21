@@ -12,7 +12,7 @@ namespace EasyPayTests
     [TestFixture]
     [Category("Critical")]
     [Parallelizable(ParallelScope.Fixtures)]
-    class CriticalTests:BaseTest
+    class Critical:BaseTest
     {
         [Test]
         public void VerifyThatAdminCanEditManager()

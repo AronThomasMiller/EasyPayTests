@@ -9,9 +9,9 @@ using System.Collections.Generic;
 namespace EasyPayTests
 {
     [TestFixture]
-    [Category("UnauthorizedUserTest")]
+    [Category("UnauthorizedUser")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class UnauthorizedUserTest:BaseTest
+    public class UnauthorizedUser:BaseTest
     {
         [TestCase("Name", "Surname", "+380123456789", "gangstatester@gmail.com", "Fakesoft15")]
         public void CreateAccount(string name, string surname, string phoneNumber, string email, string password)
