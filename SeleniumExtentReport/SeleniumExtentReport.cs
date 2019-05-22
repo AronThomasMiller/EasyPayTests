@@ -19,6 +19,7 @@ namespace SeleniumExtentReportTest
     {
         protected ExtentReports htmlTestSuitReport;
         protected ExtentTest htmlTestReport;
+        protected string screenFolder;
         
         struct ContextOfTest
         {
@@ -37,7 +38,12 @@ namespace SeleniumExtentReportTest
                 htmlTestSuitReport = new ExtentReports();
                 var dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
                 DirectoryInfo di = Directory.CreateDirectory(dir + "\\Test_Execution_Reports");
+                screenFolder = dir + "\\Test_Execution_Reports\\Screen";
+                di = Directory.CreateDirectory(screenFolder);
+                
+
                 var outputDir = dir + "\\Test_Execution_Reports" + "\\" + TestClassName + "\\";
+
                 var htmlReporter = new ExtentHtmlReporter(outputDir + "Automation_Report" + ".html");
 
                 htmlTestSuitReport.AddSystemInfo("Who want to ATQC?", "");
@@ -76,7 +82,7 @@ namespace SeleniumExtentReportTest
 
                 if (test.status == Status.Fail)
                 {
-                    string screenShotPath = driver.GetScreenshot();
+                    string screenShotPath = driver.GetScreenshot(screenFolder);
                     AddTestHTML(test, screenShotPath);
                 }
                 else

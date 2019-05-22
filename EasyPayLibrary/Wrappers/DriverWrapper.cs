@@ -63,15 +63,15 @@ namespace EasyPayLibrary
             driver.Navigate().GoToUrl(url);
         }
 
-        public string GetScreenshot()
+        public string GetScreenshot(string pathToSaveIn)
         {
             Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
             string nameTest = TestContext.CurrentContext.Test.MethodName;
             string title = nameTest + DateTime.Now.ToString(" dd-MM-yyyy_(HH_mm_ss)");
             var x = Assembly.GetExecutingAssembly().Location;
             var info = new FileInfo(x);
-            var path = info.Directory.FullName;
-            var adress = new FileInfo(path + "\\Screen\\");
+            var path = pathToSaveIn;
+            var adress = new FileInfo(path + "\\");
             string screenshotFileName = adress + title + ".png";
             ss.SaveAsFile(screenshotFileName);
             return screenshotFileName;
