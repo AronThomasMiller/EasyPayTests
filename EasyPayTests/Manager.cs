@@ -42,7 +42,7 @@ namespace EasyPayTests
             var listOfInspectors = homePage.NavigateToInspectorsList();
             var schedule = listOfInspectors.NavigateToInspectorsSchedule("Oleg Adamov");
             var addItem = schedule.AddItem();
-            var deleteItem = addItem.ApplyToAdd("20190510", "вулиця Руська 241/245, Чернівці, Чернівецька область");
+            var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
             Assert.IsTrue(schedule.GetTask().IsDisplayed(),"Schedule isn't dosplayed");
             // postCondition
@@ -58,10 +58,10 @@ namespace EasyPayTests
 
             // preCondition
             var addItem = schedule.AddItem();
-            var chooseItemToEdit = addItem.ApplyToAdd("20190510", "вулиця Руська 241/245, Чернівці, Чернівецька область");
+            var chooseItemToEdit = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
             var editItem = chooseItemToEdit.EditItem();
-            var deleteItem = editItem.ApplyToEdit("20190510", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
+            var deleteItem = editItem.ApplyToEdit("20190531", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
 
             Assert.IsTrue(schedule.GetTask().IsDisplayed(),"Schedule isn't dosplayed");
             // postCondition
@@ -77,7 +77,7 @@ namespace EasyPayTests
 
             //preCondition
             var addItem = schedule.AddItem();
-            var deleteItem = addItem.ApplyToAdd("20190510", "вулиця Руська 241/245, Чернівці, Чернівецька область");
+            var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
             var confirm = deleteItem.DeleteItem();
             confirm.ApplyToDelete();
@@ -148,12 +148,12 @@ namespace EasyPayTests
         {
             var setFuturePrice = homePage.NavigateToUtilityPrice();
             setFuturePrice.ClickOnSetFuturePriceButton();
-            setFuturePrice.SetFuturePrice("20", "2019-05-05");
+            setFuturePrice.SetFuturePrice("20", "2019-05-30");
             driver.Refresh();
             var actualPrice = setFuturePrice.GetFuturePrice();
             var actualActivationDate = setFuturePrice.GetActivationDate();
             Assert.AreEqual("Future price: ₴20", actualPrice,"Wrong price");
-            Assert.AreEqual("Next activation date: 5 MAY 2019", actualActivationDate,"Wrong  activation date");
+            Assert.AreEqual("Next activation date: 30 MAY 2019", actualActivationDate,"Wrong  activation date");
         }
 
         [Test]
