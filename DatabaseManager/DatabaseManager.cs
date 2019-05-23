@@ -14,18 +14,23 @@ namespace DatabaseManagerNamespace
 
         public DatabaseManager()
         {
-            var Server = ConfigurationManager.AppSettings.Get("Server");
-            var Port = ConfigurationManager.AppSettings.Get("Port");
-            var Username = ConfigurationManager.AppSettings.Get("Username");
-            var Password = ConfigurationManager.AppSettings.Get("Password");
-            var Database = ConfigurationManager.AppSettings.Get("Database");
+            var server = ConfigurationManager.AppSettings.Get("Server");
+            var port = ConfigurationManager.AppSettings.Get("Port");
+            var username = ConfigurationManager.AppSettings.Get("Username");
+            var password = ConfigurationManager.AppSettings.Get("Password");
+            var database = ConfigurationManager.AppSettings.Get("Database");
 
-            Init(Server, Port, Username, Password, Database);
+            Init(server, port, username, password, database);
         }
 
-        private void Init(string server, string port, string user, string password, string database)
+        public DatabaseManager(string server, string port, string username, string password, string database)
         {
-            string conn_param = "Server=" + server + ";Port=" + port + ";User Id= " + user +";Password=" + password + ";Database="+ database +";";
+            Init(server, port, username, password, database);
+        }
+
+        private void Init(string server, string port, string username, string password, string database)
+        {
+            string conn_param = "Server=" + server + ";Port=" + port + ";User Id= " + username +";Password=" + password + ";Database="+ database +";";
             conn = new NpgsqlConnection(conn_param);
             conn.Open();
         }
