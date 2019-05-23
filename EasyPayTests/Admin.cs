@@ -57,9 +57,9 @@ namespace EasyPayTests
         public void VerifyThatAdminCanChangeRole()
         {
             var user = home.NavigateToUsers();
-            user.ChangeRoleToManager("user3@gmail.com");
+            user.ChangeRole("user3@gmail.com", "MANAGER");
             Assert.AreNotEqual("USER", user.GetRole("user3@gmail.com"),"Role isn't changing");
-            user.ChangeRoleToUser("user3@gmail.com");
+            user.ChangeRole("user3@gmail.com", "USER");
         }
 
         [Test]

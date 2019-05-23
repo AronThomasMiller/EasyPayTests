@@ -40,19 +40,14 @@ namespace EasyPayLibrary
             btnSaveChange.Click();
         }
 
-        public void ChangeRoleToManager(string email)
+        public void ChangeRole(string email, string role)
         {            
             btnChangeRole = driver.GetByXpath($"//tbody/tr/td[contains(text(),'{email}')]/../td[6]/button");
             btnChangeRole.Click();
-            SelectRole("MANAGER");
+            SelectRole(role);
+            driver.Refresh();
         }
-
-        public void ChangeRoleToUser(string email)
-        {
-            btnChangeRole = driver.GetByXpath($"//tbody/tr/td[contains(text(),'{email}')]/../td[6]/button");
-            btnChangeRole.Click();
-            SelectRole("user");
-        }
+        
         public string GetRole(string email)
         {
             role = driver.GetByXpath($"//tbody/tr/td[contains(text(),'{email}')]/../td[3]");
