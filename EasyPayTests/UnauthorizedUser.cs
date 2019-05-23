@@ -1,9 +1,6 @@
-﻿using EasyPayLibrary;
-using EasyPayLibrary.Pages.UnauthorizedUserPages;
-using EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail;
-using EasyPayLibrary.Translations;
+﻿using DatabaseManipulation;
+using EasyPayLibrary;
 using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 
 namespace EasyPayTests
@@ -16,7 +13,7 @@ namespace EasyPayTests
         [TestCase("Name", "Surname", "+380123456789", "gangstatester@gmail.com", "Fakesoft15")]
         public void CreateAccount(string name, string surname, string phoneNumber, string email, string password)
         {
-            using(var conn = new DatabaseManagerNamespace.DatabaseManager())
+            using(var conn = new DatabaseMaster())
             {
                 conn.ChangeInDB("delete from users where email = 'gangstatester@gmail.com'");
             }
@@ -26,9 +23,6 @@ namespace EasyPayTests
             welcomePage.Init(driver);
 
             var googlePage = welcomePage.SignUp().Register(name, surname, phoneNumber, email, password);
-
-            //var googlePage = (GmailEmailPage)welcomePage.SignIn().Login(email, password);
-            //delete from users where email = 'gangstatester@gmail.com'
 
             var passPage = googlePage.EnterEmail(email);
             var emailsPage = passPage.EnterPassword(password);

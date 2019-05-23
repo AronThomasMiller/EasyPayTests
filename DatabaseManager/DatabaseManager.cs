@@ -2,9 +2,9 @@
 using System;
 using System.Configuration;
 
-namespace DatabaseManagerNamespace
+namespace DatabaseManipulation
 {
-    public class DatabaseManager : IDisposable
+    public class DatabaseMaster : IDisposable
     {
         NpgsqlConnection conn;
         public void Dispose()
@@ -12,7 +12,7 @@ namespace DatabaseManagerNamespace
             conn.Close();
         }
 
-        public DatabaseManager()
+        public DatabaseMaster()
         {
             var server = ConfigurationManager.AppSettings.Get("Server");
             var port = ConfigurationManager.AppSettings.Get("Port");
@@ -23,7 +23,7 @@ namespace DatabaseManagerNamespace
             Init(server, port, username, password, database);
         }
 
-        public DatabaseManager(string server, string port, string username, string password, string database)
+        public DatabaseMaster(string server, string port, string username, string password, string database)
         {
             Init(server, port, username, password, database);
         }
