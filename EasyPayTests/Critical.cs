@@ -81,6 +81,7 @@ namespace EasyPayTests
         }
 
 
+        [Repeat(11)]
         [TestCase("user1@gmail.com" , (float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"")]
         public void PayAndCheckOneInPaymentHistory(string userEmail, float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {

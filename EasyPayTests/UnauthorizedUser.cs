@@ -16,6 +16,11 @@ namespace EasyPayTests
         [TestCase("Name", "Surname", "+380123456789", "gangstatester@gmail.com", "Fakesoft15")]
         public void CreateAccount(string name, string surname, string phoneNumber, string email, string password)
         {
+            using(var conn = new DatabaseManagerNamespace.DatabaseManager())
+            {
+                conn.ChangeInDB("delete from users where email = 'gangstatester@gmail.com'");
+            }
+
             driver.GoToURL();
             WelcomePage welcomePage = new WelcomePage();
             welcomePage.Init(driver);

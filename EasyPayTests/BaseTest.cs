@@ -1,4 +1,5 @@
-﻿using EasyPayLibrary;
+﻿using DatabaseManagerNamespace;
+using EasyPayLibrary;
 using EasyPayLibrary.Translations;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;

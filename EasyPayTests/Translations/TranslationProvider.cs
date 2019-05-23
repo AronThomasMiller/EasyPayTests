@@ -14,8 +14,15 @@ namespace EasyPayLibrary.Translations
         public static TranslationValues GetTranslation(string langCode)
         {
             var x = Assembly.GetExecutingAssembly().Location;
-            var info = new FileInfo(x);         
-            var dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
+            var info = new FileInfo(x);
+
+            string dir;
+#if DEBUG
+            dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "");
+#else
+                dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
+#endif
+
             var dictionaryFile = new FileInfo(dir + $"\\Translations\\dictionaries\\dict.{langCode}.json");
 
             if (dictionaryFile.Exists)

@@ -105,6 +105,10 @@
     <None Include="Translations\dictionaries\dict.ua.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseManager\DatabaseManager.csproj">
+      <Project>{080C8744-8B6E-408F-84EC-307D4D30B60E}</Project>
+      <Name>DatabaseManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EasyPayLibrary\EasyPayLibrary.csproj">
       <Project>{648B9F8D-963A-4D2B-8CB7-3F8B57ECEB73}</Project>
       <Name>EasyPayLibrary</Name>
