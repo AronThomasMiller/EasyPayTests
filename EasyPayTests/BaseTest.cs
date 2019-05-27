@@ -48,5 +48,10 @@ namespace EasyPayTests
         {
             report.AfterClass();
         }
+
+        public void LogProgress(string message)
+        {
+            TestContext.Out.WriteLine("\n<br>" + message);
+        }
     }
 }
