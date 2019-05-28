@@ -9,11 +9,11 @@ namespace EasyPayLibrary.Pages.Manager
 {
     public class HomePageManager:GeneralPage
     {
-        ManagerSidebar sidebar;
+        SidebarManager sidebar;
 
         public override void Init(DriverWrapper driver)
         {
-            sidebar = GetPOM<ManagerSidebar>(driver);
+            sidebar = GetPOM<SidebarManager>(driver);
             base.Init(driver);
         }
 

@@ -1,4 +1,5 @@
 ﻿using EasyPayLibrary.HomePages;
+using EasyPayLibrary.Pages.Common;
 using EasyPayLibrary.Pages.Manager;
 using EasyPayLibrary.Pages.UnauthorizedUserPages;
 using EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail;
@@ -12,6 +13,7 @@ namespace EasyPayLibrary
         WebElementWrapper fieldEmail;
         WebElementWrapper fieldPassword;
         WebElementWrapper btnLogin;
+        WebElementWrapper btnCreateAccount;
         WebElementWrapper errorAlert;
 
 
@@ -20,69 +22,67 @@ namespace EasyPayLibrary
             fieldEmail = driver.GetByXpath("//input[@id='email']");
             fieldPassword = driver.GetByXpath("//input[@id='password']");
             btnLogin = driver.GetByXpath("//input[@id='Login_button']");
+            btnCreateAccount = driver.GetByXpath("//a[@data-locale-item='createAccount']");
             base.Init(driver);
         }
 
-        public void SetEmail(string email)
+        private void SetEmail(string email)
         {
             fieldEmail.SendText(email);
         }
 
-        public void SetPassword(string password)
+        private void SetPassword(string password)
         {
             fieldPassword.SendText(password);
         }
 
-        public void ClickOnLoginButton()
+        private void ClickOnLoginButton()
         {
             btnLogin.Click();
         }
 
-        public BasePageObject Login(string email, string password)
+        private void ClickOnCreateAccountButton()
         {
+            btnCreateAccount.Click();
+        }
 
+        private void EnterEmailAndPasswordAndClickLogin(string email, string password)
+        {
             SetEmail(email);
             SetPassword(password);
             ClickOnLoginButton();
+        }
 
-            try
-            {
-                RedirectModalWindow.ClickOnRedirectButton(driver, 1);
-                return GetPOM<GmailEmailPage>(driver);
-            }
-            catch (WebDriverTimeoutException)
-            {
-                switch (GeneralPage.GetRole(driver))
-                {
-                    case "USER":
-                    case "КОРИСТУВАЧ":
-                        return GetPOM<HomePageUser>(driver);
-                    case "MANAGER":
-                    case "МЕНЕДЖЕР":
-                        return GetPOM<HomePageManager>(driver);
-                    case "ADMIN":
-                    case "АДМІНІСТРАТОР":
-                        return GetPOM<HomePageAdmin>(driver);
-                    case "INSPECTOR":
-                    case "КОНТРОЛЕР":
-                        return GetPOM<HomePageInspector>(driver);
-                    case null:
-                        return GetPOM<LoginPage>(driver);
-                }
+        public HomePageAdmin LoginAsAdmin(string email, string password)
+        {
+            EnterEmailAndPasswordAndClickLogin(email, password);
+            return GetPOM<HomePageAdmin>(driver);
+        }
 
-            }
+        public HomePageManager LoginAsManager(string email, string password)
+        {
+            EnterEmailAndPasswordAndClickLogin(email, password);
+            return GetPOM<HomePageManager>(driver);
+        }
+
+        public HomePageInspector LoginAsInspector(string email, string password)
+        {
+            EnterEmailAndPasswordAndClickLogin(email, password);
+            return GetPOM<HomePageInspector>(driver);
+        }
+
+        public HomePageUser LoginAsUser(string email, string password)
+        {
+            EnterEmailAndPasswordAndClickLogin(email, password);
+            return GetPOM<HomePageUser>(driver);
+        }
+
+        public LoginPage TryLoginWithInvalidData(string email, string password)
+        {
+            EnterEmailAndPasswordAndClickLogin(email, password);
             return GetPOM<LoginPage>(driver);
         }
 
-        public LoginPage TranslatePageToUA()
-        {
-            return TranslatePageToUA<LoginPage>(driver);
-        }
-
-        public LoginPage TranslatePageToEN()
-        {
-            return TranslatePageToEN<LoginPage>(driver);
-        }
         public bool IsErrorPresent()
         {
             try
@@ -94,6 +94,32 @@ namespace EasyPayLibrary
             {
                 return false;
             }
+        }
+
+        public string this[string elementName]
+        {
+            get
+            {
+                switch (elementName)
+                {
+                    case "Email": return fieldEmail.GetAttribute("placeholder");
+                    case "Password": return fieldPassword.GetAttribute("placeholder");
+                    case "Login": return btnLogin.GetAttribute("value");
+                    case "NewToSite": return driver.GetByXpath("//*[@data-locale-item='newToSite']").GetText();
+                    case "CreateAccount": return btnCreateAccount.GetByXpath("./span").GetText();
+                    case "LostYourPassword": return driver.GetByXpath("//*[@data-locale-item='lostYourPassword']").GetText();
+                    case "Header": return driver.GetByXpath("//*[@data-locale-item='login']/span").GetText();
+                    case "Or": return driver.GetByXpath("//*[@data-locale-item='or']/span").GetText();
+                    case "Footer": return driver.GetByXpath("//*[@data-locale-item='copyright']/span").GetText();
+                    default: return null;
+                }
+            }
+        }
+
+        public RegisterPage NavigateToCreateAccountPage()
+        {
+            ClickOnCreateAccountButton();
+            return GetPOM<RegisterPage>(driver);
         }
     }
 

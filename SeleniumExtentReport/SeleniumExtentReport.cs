@@ -11,6 +11,7 @@ using EasyPayLibrary;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.Xml;
+using NUnit.Framework.Internal;
 
 namespace SeleniumExtentReportTest
 {
@@ -20,7 +21,7 @@ namespace SeleniumExtentReportTest
         protected ExtentReports htmlTestSuitReport;
         protected ExtentTest htmlTestReport;
         protected string screenFolder;
-        
+
         struct ContextOfTest
         {
             public Status status;
@@ -39,7 +40,7 @@ namespace SeleniumExtentReportTest
 
                 string dir;
 #if DEBUG
-   dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "");
+                dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "");
 #else
                 dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
 #endif
@@ -47,7 +48,7 @@ namespace SeleniumExtentReportTest
 
                 screenFolder = dir + "\\Test_Execution_Reports\\Screen";
                 di = Directory.CreateDirectory(screenFolder);
-                
+
 
                 var outputDir = dir + "\\Test_Execution_Reports" + "\\" + TestClassName + "\\";
 
@@ -86,19 +87,21 @@ namespace SeleniumExtentReportTest
                 test.status = GetStatus(TestContext.CurrentContext.Result.Outcome.Status);
                 test.stacktrace = "" + TestContext.CurrentContext.Result.StackTrace + "";
                 test.errorMessage = TestContext.CurrentContext.Result.Message;
+                var output = TestExecutionContext.CurrentContext.CurrentResult.Output;
+                MediaEntityModelProvider mediaModel = null;
 
                 if (test.status == Status.Fail)
                 {
                     string screenShotPath = driver.GetScreenshot(screenFolder);
-                    AddTestHTML(test, screenShotPath);
+                    AddTestHTML(test, screenShotPath, output, mediaModel);
                 }
                 else
                 {
-                    AddTestHTML(test);
+                    AddTestHTML(test, output, mediaModel);
                 }
 
             }
-            
+
             catch (Exception e)
             {
                 throw (e);
@@ -136,14 +139,28 @@ namespace SeleniumExtentReportTest
             htmlTestReport.Log(logstatus, "Snapshot below: " + htmlTestReport.AddScreenCaptureFromPath(screenShotPath));
         }
 
-        private void AddTestHTML(ContextOfTest test)
+        private void AddTestHTML(ContextOfTest test, string output, MediaEntityModelProvider mediaModel)
         {
-            htmlTestReport.Log(test.status, "Test ended with " + test.status);
+            var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
+            var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
+
+            htmlTestReport.Log(test.status,
+          "Test ended with " + test.status +
+          (!isStackTraceNullOrEmpty ? "\n<br>\n<br>" + test.stacktrace + "\n<br>\n<br>" : "\n<br>\n<br>")
+          + (!isErrorMessageNullOrEmpty ? test.errorMessage + "\n<br>\n<br>" : string.Empty)
+          + output, mediaModel);
         }
 
-        private void AddTestHTML(ContextOfTest test, string screenShotPath)
+        private void AddTestHTML(ContextOfTest test, string screenShotPath, string output, MediaEntityModelProvider mediaModel)
         {
-            htmlTestReport.Log(test.status, "Test ended with " + test.status + " – " + test.errorMessage);
+            var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
+            var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
+
+            htmlTestReport.Log(test.status,
+          "Test ended with " + test.status +
+          (!isStackTraceNullOrEmpty ? "\n<br>\n<br>" + test.stacktrace + "\n<br>\n<br>" : "\n<br>\n<br>")
+          + (!isErrorMessageNullOrEmpty ? test.errorMessage + "\n<br>\n<br>" : string.Empty)
+          + output, mediaModel);
             AddScreenShotHTML(test.status, screenShotPath);
         }
     }

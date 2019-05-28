@@ -30,13 +30,13 @@ namespace EasyPayLibrary.ManagerSidebar
             WebElementWrapper element;
             try
             {
-                element = driver.GetByXpath($"//td[contains(text(),'{address}')]/following-sibling::td[text()='{date}']");
+                element = driver.GetByXpath($"//table[@id='scheduleHistoryCurrent']//td[contains(text(),'{address}')]/following-sibling::td[contains(text(),'{date}')]");
             }
             catch (WebDriverTimeoutException)
             {
                 return false;
             }
-            return element.IsDisplayed();
+            return true;
         }
 
         public HistoryPage ClickOnPreviousMonthButton()

@@ -3,16 +3,11 @@
     public class HomePageAdmin : GeneralPage
     {
         SidebarAdmin sidebar;
-       
+
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
             sidebar = GetPOM<SidebarAdmin>(driver);         
-        }
-
-        public string GetTextRole()
-        {
-            return sidebar.GetTextRole();            
         }
 
         public Utilities NavigateToUtilities()

@@ -26,8 +26,8 @@ namespace EasyPayTests
         {
             
             base.PreCondition();
-            var loginPage = welcome.SignIn();
-            homePage = (HomePageInspector)loginPage.Login("inspector1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            homePage = loginPage.LoginAsInspector("inspector1@gmail.com", "Admin123");
         }
 
         [Test]

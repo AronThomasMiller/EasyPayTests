@@ -33,7 +33,7 @@ namespace EasyPayLibrary
         {
             myRole = myRole.ToUpper();
 
-            var drpdRole = driver.GetByXpath($"//select[@id='role']").selectElement();
+            var drpdRole = driver.GetByXpath($"//select[@id='role']").SelectElement();
             drpdRole.SelectByText(myRole);
 
             btnSaveChange = driver.GetByXpath("//button[@id='updateRole']");

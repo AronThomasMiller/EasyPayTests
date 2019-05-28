@@ -8,11 +8,11 @@ namespace EasyPayLibrary
         WebElementWrapper btnSignIn;
         WebElementWrapper btnSignUp;
 
-        WebElementWrapper LeadText;
+        WebElementWrapper Lead;
 
         public override void Init(DriverWrapper driver)
         {
-            LeadText = driver.GetByXpath("//p[@class='lead']");
+            Lead = driver.GetByXpath("//p[@class='lead']");
 
             btnSignIn = driver.GetByXpath("//a[@id='Sign_in']");
             btnSignUp = driver.GetByXpath("//a[@id='Sign_up']");
@@ -20,12 +20,12 @@ namespace EasyPayLibrary
             base.Init(driver);
         }
 
-        public void ClickOnSignInButton()
+        private void ClickOnSignInButton()
         {
             btnSignIn.Click();
         }
 
-        public void ClickOnSignUpButton()
+        private void ClickOnSignUpButton()
         {
             btnSignUp.Click();
         }
@@ -52,16 +52,19 @@ namespace EasyPayLibrary
             return TranslatePageToEN<WelcomePage>(driver);
         }
 
-        public override List<string> GetTextElements()
+        public string this[string elementName]
         {
-            var list = new List<string>
+            get
             {
-                LeadText.GetByXpath("./span").GetText(),
-                btnSignIn.GetByXpath(".//span").GetText(),
-                btnSignUp.GetByXpath(".//span").GetText()
-            };
-
-            return list;
+                switch (elementName)
+                {
+                    case "Lead": return Lead.GetText();
+                    case "SignIn": return btnSignIn.GetByXpath("./span").GetText();
+                    case "SignUp": return btnSignUp.GetByXpath("./span").GetText();
+                    case "Footer": return driver.GetByXpath("//*[@class='mastfoot']/div[@class='inner']//p[2]").GetText();
+                    default: return null;
+                }
+            }
         }
     }
 }

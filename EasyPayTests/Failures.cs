@@ -18,8 +18,8 @@ namespace EasyPayTests
         [Test]
         public void VerifyThatAdminCanEditManager()
         {
-            var login = welcome.SignIn();
-            var home = (HomePageAdmin)login.Login("admin1@gmail.com", "Admin123");
+            var login = welcomePage.SignIn();
+            var home = login.LoginAsAdmin("admin1@gmail.com", "Admin123");
             var utilities = home.NavigateToUtilities();
             utilities.ClickOnChangeManager();
             utilities.SetKeywordToTextBox();
@@ -31,12 +31,12 @@ namespace EasyPayTests
         [Test]
         public void CheckTranslationOnHomeUsersPage()
         {
-            var loginPage = welcome.SignIn();
-            var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
             homePage.ChangeToUKR();
             homePage.Init(driver);
-            var role = homePage.GetRoleText();
+            var role = GeneralPage.GetRole(driver);
             StringAssert.AreEqualIgnoringCase(t.User, role, "Wrong role translation");
             var addresses = homePage.GetAddressesText();
             StringAssert.AreEqualIgnoringCase(t.Addresses, addresses, "Wrong address translation");
@@ -53,12 +53,69 @@ namespace EasyPayTests
             var xTitle = homePage.GetXTitleText();
             StringAssert.AreEqualIgnoringCase(t.SomeText, xTitle, "Wrong xtitle translation");
         }
+        
+        [Test]
+        public void Localization()
+        {
+            welcomePage = welcomePage.TranslatePageToUA();
+
+            var WelcomePageTitle = welcomePage["Lead"];
+            StringAssert.AreEqualIgnoringCase(t.WelcomePageTitle, WelcomePageTitle);
+            var WelcomePageFooter = welcomePage["Footer"];
+            StringAssert.AreEqualIgnoringCase(t.WelcomePageFooter, WelcomePageFooter);
+            var SignIn = welcomePage["SignIn"];
+            StringAssert.AreEqualIgnoringCase(t.SignIn, SignIn);
+            var SignUp = welcomePage["SignUp"];
+            StringAssert.AreEqualIgnoringCase(t.SignUp, SignUp);
+
+            var LoginPage = welcomePage.SignIn();
+
+            var LoginPageHeader = LoginPage["Header"];
+            StringAssert.AreEqualIgnoringCase(t.Login, LoginPageHeader);
+            var Email = LoginPage["Email"];
+            StringAssert.AreEqualIgnoringCase(t.Email, Email);
+            var Password = LoginPage["Password"];
+            StringAssert.AreEqualIgnoringCase(t.Password, Password);
+            var Login = LoginPage["Login"];
+            StringAssert.AreEqualIgnoringCase(t.Login, Login);
+            var LostYourPassword = LoginPage["LostYourPassword"];
+            StringAssert.AreEqualIgnoringCase(t.LostYourPassword, LostYourPassword);
+            var Or = LoginPage["Or"];
+            StringAssert.AreEqualIgnoringCase(t.Or, Or);
+            var NewToSite = LoginPage["NewToSite"];
+            StringAssert.AreEqualIgnoringCase(t.NewToSite, NewToSite);
+            var CreateAccount = LoginPage["CreateAccount"];
+            StringAssert.AreEqualIgnoringCase(t.CreateAccount, CreateAccount);
+            var LoginPageFooter = LoginPage["Footer"];
+            StringAssert.AreEqualIgnoringCase(t.LoginPageFooter, LoginPageFooter);
+
+            var RegisterPage = LoginPage.NavigateToCreateAccountPage();
+
+            var RegisterPageHeader = RegisterPage["Header"];
+            StringAssert.AreEqualIgnoringCase(t.RegisterPageHeader, RegisterPageHeader);
+            var Name = RegisterPage["Name"];
+            StringAssert.AreEqualIgnoringCase(t.Name, Name);
+            var Surname = RegisterPage["Surname"];
+            StringAssert.AreEqualIgnoringCase(t.Surname, Surname);
+            Email = RegisterPage["Email"];
+            StringAssert.AreEqualIgnoringCase(t.Email, Email);
+            Password = RegisterPage["Password"];
+            StringAssert.AreEqualIgnoringCase(t.Password, Password);
+            var ConfirmPassword = RegisterPage["ConfirmPassword"];
+            StringAssert.AreEqualIgnoringCase(t.ConfirmPassword, ConfirmPassword);
+            var Submit = RegisterPage["Submit"];
+            StringAssert.AreEqualIgnoringCase(t.Submit, Submit);
+            var RegisterPageFooter = RegisterPage["Footer"];
+            StringAssert.AreEqualIgnoringCase(t.RegisterPageFooter, RegisterPageFooter);
+            SignIn = RegisterPage["SignIn"];
+            StringAssert.AreEqualIgnoringCase(t.SignIn, SignIn);
+        }
 
         [Test]
         public void AddAddresses()
         {
-            var loginPage = welcome.SignIn();
-            var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
             var addresses = homePage.NavigateToAddresses();
             addresses.EnterAllFields("Небесної сотні", "4Б", "Небесної сотні", "Чернівці", "Чернівецька область", "12345", "Україна", "45");
             var error = addresses.Error();
@@ -68,14 +125,14 @@ namespace EasyPayTests
         [Test]
         public void CallInspectorForConcreteDate()
         {
-            var loginPage = welcome.SignIn();
-            var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
             var utilities = homePage.NavigateToUtilities();
             utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
             var logOut = utilities.SubmitCall();
             var secondEnter = logOut.LogOut();
-            var schedule = (HomePageInspector)secondEnter.Login("inspector2@gmail.com", "Admin123");
+            var schedule = secondEnter.LoginAsInspector("inspector2@gmail.com", "Admin123");
             var sched = schedule.NavigateToSchedule();
             Assert.IsNotNull(sched.GetCallByAddress("вулиця Толстого 2"), "No address match");
         }
@@ -83,8 +140,8 @@ namespace EasyPayTests
         [Test]
         public void IsPersonalInfoTranslationIsCorrect()
         {
-            var loginPage = welcome.SignIn();
-            var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
             var profile = homePage.GoToProfile();
             ProfilePage changed = profile.ChangeToUKR();
@@ -98,8 +155,8 @@ namespace EasyPayTests
         [Test]
         public void NameCanContainUALetters()
         {
-            var loginPage = welcome.SignIn();
-            var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
             var profile = homePage.GoToProfile();
             profile.SetName("Вася");
@@ -112,8 +169,8 @@ namespace EasyPayTests
         [TestCase("user1@gmail.com" , (float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"")]
         public void PayAndCheckOneInPaymentHistory(string userEmail, float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {
-            var loginPage = welcome.SignIn();
-            var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
             Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"));
 

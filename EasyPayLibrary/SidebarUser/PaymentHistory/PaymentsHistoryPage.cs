@@ -17,9 +17,9 @@ namespace EasyPayLibrary
 
         public string SelectAddress(string address)
         {
-            SelectElement listOfAddresses = addressesDropdown.selectElement();
+            SelectElementWrapper listOfAddresses = addressesDropdown.SelectElement();
             listOfAddresses.SelectByText(address);
-            return listOfAddresses.SelectedOption.Text;
+            return listOfAddresses.GetSelectedOptionText();
         }
 
         public void SelectUtility(string utility)

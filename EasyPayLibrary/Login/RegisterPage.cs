@@ -18,13 +18,14 @@ namespace EasyPayLibrary.Pages.Common
         WebElementWrapper fieldConfirmPassword;
 
         WebElementWrapper btnSubmit;
+        WebElementWrapper btnSignIn;
 
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
 
             header = driver.GetByXpath("//h1[@id='registrationName']");
-            footer = driver.GetByXpath("//div[@class='separator']");
+            footer = driver.GetByXpath("//span[@data-locale-item='haveAnAccount']");
 
             fieldName = driver.GetByXpath("//input[@id='name']");
             fieldSurname = driver.GetByXpath("//input[@id='surname']");
@@ -34,6 +35,7 @@ namespace EasyPayLibrary.Pages.Common
             fieldConfirmPassword = driver.GetByXpath("//input[@id='confirm']");
 
             btnSubmit = driver.GetByXpath("//input[@id='submit-btn']");
+            btnSignIn = driver.GetByXpath("//a[@data-locale-item='signIn']");
         }
 
         void SetName(string name)
@@ -97,22 +99,24 @@ namespace EasyPayLibrary.Pages.Common
             return TranslatePageToEN<RegisterPage>(driver);
         }
 
-        public override List<string> GetTextElements()
+        public string this[string elementName]
         {
-            var list = new List<string>
+            get
             {
-                header.GetText(),
-                footer.GetByXpath(".//span/span").GetText(),
-                footer.GetByXpath(".//a/span").GetText(),
-                
-                fieldName.GetCssValue("placeholder"),
-                fieldSurname.GetCssValue("placeholder"),
-                fieldEmail.GetCssValue("placeholder"),
-                fieldPassword.GetCssValue("placeholder"),
-                fieldPassword.GetCssValue("placeholder")
-            };
-
-            return list;
+                switch (elementName)
+                {
+                    case "Header": return header.GetText();
+                    case "Footer": return footer.GetByXpath("./span").GetText();
+                    case "Name": return fieldName.GetAttribute("placeholder");
+                    case "Surname": return fieldSurname.GetAttribute("placeholder");
+                    case "Email": return fieldEmail.GetAttribute("placeholder");
+                    case "Password": return fieldPassword.GetAttribute("placeholder");
+                    case "ConfirmPassword": return fieldConfirmPassword.GetAttribute("placeholder");
+                    case "Submit": return btnSubmit.GetAttribute("value");
+                    case "SignIn": return btnSignIn.GetByXpath("./span").GetText();
+                    default: return null;
+                }
+            }
         }
     }
 }

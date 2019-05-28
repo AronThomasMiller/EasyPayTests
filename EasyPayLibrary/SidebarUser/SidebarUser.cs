@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.Pages
 {
-    public class SidebarUsers : SidebarBase
+    public class SidebarUser: SidebarBase
     {
-        WebElementWrapper role;
         WebElementWrapper addresses;
         WebElementWrapper connectedUtilities;
         WebElementWrapper payments;
@@ -19,17 +18,11 @@ namespace EasyPayLibrary.Pages
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            addresses = sidebar[0];
-            connectedUtilities = sidebar[1];
-            payments = sidebar[2];
-            paymentsHistory = sidebar[3];
-            rateInspectors = sidebar[4];            
-        }
-
-        public string GetRoleText()
-        {
-            role = driver.GetByXpath("//*[@class='menu_section']/h3");
-            return role.GetText();
+            addresses = driver.GetByXpath("//a[@href='/user/addresses']");
+            connectedUtilities = driver.GetByXpath("//a[@href='/user/connected-utilities/']");
+            payments = driver.GetByXpath("//a[@href='/user/paymentsPage']");
+            paymentsHistory = driver.GetByXpath("//a[@href='/user/paymentsHistoryPage']");
+            rateInspectors = driver.GetByXpath("//a[@href='/user/rate/']");
         }
 
         public string GetAddressesText()
