@@ -66,8 +66,8 @@
     <Compile Include="InspectorSidebar\Rate clients\RateClientsTable.cs" />
     <Compile Include="InspectorSidebar\Schedule\SchedulePage.cs" />
     <Compile Include="InspectorSidebar\Schedule\SetCurrentValue.cs" />
-    <Compile Include="InspectorSidebar\SidebarInspector.cs" />
     <Compile Include="InspectorSidebar\Schedule\UtilityPage.cs" />
+    <Compile Include="InspectorSidebar\SidebarInspector.cs" />
     <Compile Include="LanguageChanger.cs" />
     <Compile Include="Login\LoginPage.cs" />
     <Compile Include="Login\WelcomePage.cs" />
