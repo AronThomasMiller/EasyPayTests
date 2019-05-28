@@ -27,6 +27,7 @@ namespace EasyPayTests
         public override void PreCondition()
         {
             base.PreCondition();
+            LogProgress("User is going to login page");
             var loginPage = welcomePage.SignIn();
             homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
         }
@@ -35,6 +36,7 @@ namespace EasyPayTests
         [Test]
         public void ScheduleNotAvailable()
         {
+            LogProgress("Getting sidebar menus");
             var list = homePage.GetList();
             foreach (var element in list)
             {
@@ -44,13 +46,15 @@ namespace EasyPayTests
         
         [Test]
         public void UserIsAbleToLogin()
-        {          
+        {
+            LogProgress("User is logging");
             Assert.AreEqual(GeneralPage.GetRole(driver), "USER","user isn't loged in");
         }        
 
         [Test]
         public void PersonalCabinetAccess()
         {
+            LogProgress("User is going to profile");
             var profile = homePage.GoToProfile();
             Assert.IsTrue(profile.NameIsVisible(),"Name isn't visible");
             Assert.IsTrue(profile.SurnameIsVisible(), "Surname isn't visible");
@@ -60,6 +64,7 @@ namespace EasyPayTests
         [Test]
         public void PersonalInfoMatch()
         {
+            LogProgress("User is going to profile");
             var profile = homePage.GoToProfile();
             Assert.AreEqual("Masha",profile.GetName(), "Wrong name");
             Assert.AreEqual("Chuikina", profile.GetSurname(), "Wrong surname");
@@ -69,8 +74,11 @@ namespace EasyPayTests
         [Test]
         public void IsNameChanging()
         {
-            var profile = homePage.GoToProfile();            
-            profile.SetName("Masha");            
+            LogProgress("User is going to profile");
+            var profile = homePage.GoToProfile();
+            LogProgress("User sets his name in profile");
+            profile.SetName("Masha");
+            LogProgress("User updates his profile");
             profile.UpdateProfile();            
             Assert.True(profile.IsSuccessAlertDisplayed());
             Assert.AreEqual("Masha", profile.GetName(),"Name doesn't change");
@@ -79,8 +87,9 @@ namespace EasyPayTests
         [Test]
         public void SelectAddresseUtilities()
         {
-
+            LogProgress("User is going to Utilities");
             var utilities = homePage.NavigateToUtilities();
+            LogProgress("User choosing Address");
             var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
             Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
         }
@@ -88,8 +97,11 @@ namespace EasyPayTests
         [Test]
         public void RateInspectors()
         {
+            LogProgress("User is going to RateInspectors");
             var rateInspectors = homePage.NavigateToRateInspectors();
+            LogProgress("Return RateInspectors Page");
             var inspectorsPage = rateInspectors.ReturnRateInspectors();
+            LogProgress("User is going to RateInspectors");
             var result = inspectorsPage.Rate("Oleg Adamov", (float)4.5);
             Assert.AreEqual(result.GetText(), "Success");
         }
@@ -97,7 +109,9 @@ namespace EasyPayTests
         [Test]
         public void SelectAddresseOnPaymentsHistory()
         {
+            LogProgress("User is going to PaymentHistory");
             var paymentsHistory = homePage.NavigateToPaymentHistory();
+            LogProgress("User choosing address ");
             var result = paymentsHistory.SelectAddress("Чернівецька область, Чернівці, вулиця Пушкіна 12");
             Assert.AreEqual("Чернівецька область, Чернівці, вулиця Пушкіна 12", result,"Adress is not selected");
         }
@@ -110,10 +124,13 @@ namespace EasyPayTests
                 conn.Open();
                 conn.ChangeInDB("update counters set is_active = true where debt_id = 23");
             }
-
+            LogProgress("User is going to utilities");
             var utilities = homePage.NavigateToUtilities();
+            LogProgress("User choosing address ");
             utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
+            LogProgress("User disconects Utility");
             var newUtilities = utilities.Disconect();
+            LogProgress("User choosing address ");
             newUtilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
             var result = newUtilities.VerifyThatUtilitiExist();
             Assert.IsNull(result, "Utility wasn't disconnected");
@@ -122,8 +139,11 @@ namespace EasyPayTests
         [Test(Description = "Repeat 2 times")]
         public void ChangeMetrics()
         {
+            LogProgress("User is going to Payment ");
             var pay = homePage.NavigateToPayment();
+            LogProgress("User is changing metrics ");
             pay.ChangeMetrics("вулиця Нагірна 5, Чернівці, Чернівецька область", "42");
+            LogProgress("User choosing address ");
             pay.SelectAddress("вулиця Нагірна 5, Чернівці, Чернівецька область");
             Assert.Negative(pay.GetBalance(),"Incorrect value");
         }
@@ -131,9 +151,13 @@ namespace EasyPayTests
         [Test]
         public void ListOfInspectorsNotEmpty()
         {
+            LogProgress("User is going to Rate Inspectors ");
             var rateinspectors = homePage.NavigateToRateInspectors();
+            LogProgress("User is going to log out ");
             var logOut = rateinspectors.LogOut();
+            LogProgress("User is logging as Manager ");
             var loginManager = logOut.LoginAsManager("manager1@gmail.com", "Admin123");
+            LogProgress("User is going to Inspectors List ");
             var rateInspectors = loginManager.NavigateToInspectorsList();
             var res = rateInspectors.VerifyListOfInspectorsNotEmpty();
             Assert.IsNotEmpty(res, "List of Inspector is empty");
@@ -142,9 +166,13 @@ namespace EasyPayTests
         [Test]
         public void ListOfUtilitiesNotEmpty()
         {
+            LogProgress("User is going to Payment History ");
             var paymentsHistory = homePage.NavigateToPaymentHistory();
+            LogProgress("User is going to log out ");
             var logOut = paymentsHistory.LogOut();
+            LogProgress("User is logging as Admin ");
             var loginAdmin = logOut.LoginAsAdmin("admin1@gmail.com", "Admin123");
+            LogProgress("User is going to Utilities ");
             var utilities = loginAdmin.NavigateToUtilities();
             var res = utilities.TableOfUtilitiesIsVisible();
             Assert.IsTrue(res, "List of Utilities is empty");
