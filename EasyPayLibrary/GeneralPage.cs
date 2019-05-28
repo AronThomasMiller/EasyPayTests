@@ -27,14 +27,7 @@ namespace EasyPayLibrary
 
         public static string GetRole(DriverWrapper driver)
         {
-            try
-            {
-                return driver.GetByXpath("//div[@class='menu_section']//h3", 2).GetText();
-            }
-            catch (WebDriverTimeoutException)
-            {
-                return null;
-            }
+            return SidebarBase.GetRole(driver);
         }
     }
 }

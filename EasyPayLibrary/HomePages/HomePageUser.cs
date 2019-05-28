@@ -9,17 +9,12 @@ namespace EasyPayLibrary
     {
         WebElementWrapper mainPageTitle;
         WebElementWrapper xTitle;
-        SidebarUsers sidebar;        
+        SidebarUser sidebar;        
 
         public override void Init(DriverWrapper driver)
         {            
-            sidebar = GetPOM<SidebarUsers>(driver);
+            sidebar = GetPOM<SidebarUser>(driver);
             base.Init(driver);
-        }        
-
-        public string GetRoleText()
-        {
-            return sidebar.GetRoleText();
         }
 
         public string GetAddressesText()

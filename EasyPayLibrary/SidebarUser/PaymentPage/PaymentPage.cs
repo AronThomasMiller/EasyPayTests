@@ -7,7 +7,6 @@ namespace EasyPayLibrary
     {
         WebElementWrapper addressesDropdown;
         WebElementWrapper utilitiesTable;
-        WebElementWrapper selectAddresse;
         WebElementWrapper btnDetails;
         WebElementWrapper setNewValue;
         WebElementWrapper fieldNewValue;
@@ -39,13 +38,11 @@ namespace EasyPayLibrary
             balance = driver.GetByXpath("//tbody/tr[1]/td[2]");
             return Convert.ToDouble(balance.GetText().Replace('.', ','));
         }
+
         //Incorrect
         public void ChangeMetrics(string address, string value)
         {
-            selectAddresse = driver.GetByXpath("//*[@id='selectAddress']");
-            SelectElement listOfAddressesPay;
-            listOfAddressesPay = selectAddresse.selectElement();
-            listOfAddressesPay.SelectByText(address);
+            SelectAddress(address);
 
             btnDetails = driver.GetByXpath("//tbody/tr[1]/td/button");
             btnDetails.Click();

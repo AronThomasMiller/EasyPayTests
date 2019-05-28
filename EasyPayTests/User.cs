@@ -27,8 +27,8 @@ namespace EasyPayTests
         public override void PreCondition()
         {
             base.PreCondition();
-            var loginPage = welcome.SignIn();
-            homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
         }
         
 
@@ -45,7 +45,7 @@ namespace EasyPayTests
         [Test]
         public void UserIsAbleToLogin()
         {          
-            Assert.AreEqual(homePage.GetRoleText(), "USER","user isn't loged in");
+            Assert.AreEqual(GeneralPage.GetRole(driver), "USER","user isn't loged in");
         }        
 
         [Test]
@@ -79,6 +79,7 @@ namespace EasyPayTests
         [Test]
         public void SelectAddresseUtilities()
         {
+
             var utilities = homePage.NavigateToUtilities();
             var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
             Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
@@ -104,6 +105,12 @@ namespace EasyPayTests
         [Test]
         public void DisconnectUtilities()
         {
+            using(var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB("update counters set is_active = true where debt_id = 23");
+            }
+
             var utilities = homePage.NavigateToUtilities();
             utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
             var newUtilities = utilities.Disconect();
@@ -126,7 +133,7 @@ namespace EasyPayTests
         {
             var rateinspectors = homePage.NavigateToRateInspectors();
             var logOut = rateinspectors.LogOut();
-            var loginManager = (HomePageManager)logOut.Login("manager1@gmail.com", "Admin123");
+            var loginManager = logOut.LoginAsManager("manager1@gmail.com", "Admin123");
             var rateInspectors = loginManager.NavigateToInspectorsList();
             var res = rateInspectors.VerifyListOfInspectorsNotEmpty();
             Assert.IsNotEmpty(res, "List of Inspector is empty");
@@ -137,7 +144,7 @@ namespace EasyPayTests
         {
             var paymentsHistory = homePage.NavigateToPaymentHistory();
             var logOut = paymentsHistory.LogOut();
-            var loginAdmin = (HomePageAdmin)logOut.Login("admin1@gmail.com", "Admin123");
+            var loginAdmin = logOut.LoginAsAdmin("admin1@gmail.com", "Admin123");
             var utilities = loginAdmin.NavigateToUtilities();
             var res = utilities.TableOfUtilitiesIsVisible();
             Assert.IsTrue(res, "List of Utilities is empty");

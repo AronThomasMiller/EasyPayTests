@@ -12,7 +12,7 @@ namespace EasyPayTests
         string browser;
         protected TranslationValues t;
         protected DriverWrapper driver;
-        protected WelcomePage welcome;
+        protected WelcomePage welcomePage;
         protected SeleniumExtentReport report;
 
         [OneTimeSetUp]
@@ -32,8 +32,8 @@ namespace EasyPayTests
 
             driver.Maximaze();
             driver.GoToURL();
-            welcome = new WelcomePage();
-            welcome.Init(driver);
+            welcomePage = new WelcomePage();
+            welcomePage.Init(driver);
         }
 
         [TearDown]

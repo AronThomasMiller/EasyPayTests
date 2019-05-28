@@ -32,9 +32,9 @@ namespace EasyPayLibrary.Changes
 
         public string SelectAddress(string address)
         {
-            SelectElement list = addressesDropdown.selectElement();
+            SelectElementWrapper list = addressesDropdown.SelectElement();
             list.SelectByText(address);
-            return list.SelectedOption.Text;
+            return list.GetSelectedOptionText();
         }
 
         public void CallInspector(string address)
