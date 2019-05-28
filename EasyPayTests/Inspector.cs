@@ -107,7 +107,8 @@ namespace EasyPayTests
         {
             var rateClients = homePage.NavigateToRateClients();
             var clientPage = rateClients.ReturnRateClients();
-            var result = clientPage.Rate("Masha Chuikina", 1, 2);
+            var firstRow = clientPage.GetLastRow();
+            var result = firstRow.Rate(4, true);
             Assert.AreEqual(result.GetText(), "Success");
         }
     }

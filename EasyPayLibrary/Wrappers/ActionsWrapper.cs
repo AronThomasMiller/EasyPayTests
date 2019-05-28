@@ -14,7 +14,7 @@ namespace EasyPayLibrary.Wrappers
         public ActionsWrapper(DriverWrapper driver, WebElementWrapper element, int x, int y)
         {
             action = driver.MoveToElement();
-            action = element.MoveToElement(action, x, y);
+            element.MoveToElement(action, x, y).Build().Perform();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using EasyPayLibrary.HomePages;
+using EasyPayLibrary.InspectorSidebar.Rate_clients;
+using EasyPayLibrary.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +24,9 @@ namespace EasyPayLibrary.InspectorSidebar
             return element.IsDisplayed();
         }
 
-        public ClientsPage ReturnRateClients()
+        public RateClientsTable ReturnRateClients()
         {
-            return GetPOM<ClientsPage>(driver);
-        }
+            return GetPOM<RateClientsTable>(driver);
+        }       
     }
 }
