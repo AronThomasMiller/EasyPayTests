@@ -11,8 +11,7 @@ namespace EasyPayTests
 {
     [TestFixture]
     [Category("All")]
-    [Category("Failures")]
-    [Parallelizable(ParallelScope.Fixtures)]
+    [Category("Failures")]    
     class Failures:BaseTest
     {
         [Test]

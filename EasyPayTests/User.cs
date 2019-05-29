@@ -18,7 +18,7 @@ namespace EasyPayTests
     [TestFixture]
     [Category("All")]
     [Category("User")]
-    [Parallelizable(ParallelScope.Fixtures)]
+    //[Parallelizable(ParallelScope.Fixtures)]
     public class User : BaseTest
     {
         HomePageUser homePage;

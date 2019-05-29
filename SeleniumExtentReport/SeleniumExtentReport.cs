@@ -88,16 +88,15 @@ namespace SeleniumExtentReportTest
                 test.stacktrace = "" + TestContext.CurrentContext.Result.StackTrace + "";
                 test.errorMessage = TestContext.CurrentContext.Result.Message;
                 var output = TestExecutionContext.CurrentContext.CurrentResult.Output;
-                MediaEntityModelProvider mediaModel = null;
-
+               
                 if (test.status == Status.Fail)
                 {
                     string screenShotPath = driver.GetScreenshot(screenFolder);
-                    AddTestHTML(test, screenShotPath, output, mediaModel);
+                    AddTestHTML(test, screenShotPath, output);
                 }
                 else
                 {
-                    AddTestHTML(test, output, mediaModel);
+                    AddTestHTML(test, output);
                 }
 
             }
@@ -139,7 +138,7 @@ namespace SeleniumExtentReportTest
             htmlTestReport.Log(logstatus, "Snapshot below: " + htmlTestReport.AddScreenCaptureFromPath(screenShotPath));
         }
 
-        private void AddTestHTML(ContextOfTest test, string output, MediaEntityModelProvider mediaModel)
+        private void AddTestHTML(ContextOfTest test, string output)
         {
             var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
             var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
@@ -148,10 +147,10 @@ namespace SeleniumExtentReportTest
           "Test ended with " + test.status +
           (!isStackTraceNullOrEmpty ? "\n<br>\n<br>" + test.stacktrace + "\n<br>\n<br>" : "\n<br>\n<br>")
           + (!isErrorMessageNullOrEmpty ? test.errorMessage + "\n<br>\n<br>" : string.Empty)
-          + output, mediaModel);
+          + output);
         }
 
-        private void AddTestHTML(ContextOfTest test, string screenShotPath, string output, MediaEntityModelProvider mediaModel)
+        private void AddTestHTML(ContextOfTest test, string screenShotPath, string output)
         {
             var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
             var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
@@ -160,7 +159,7 @@ namespace SeleniumExtentReportTest
           "Test ended with " + test.status +
           (!isStackTraceNullOrEmpty ? "\n<br>\n<br>" + test.stacktrace + "\n<br>\n<br>" : "\n<br>\n<br>")
           + (!isErrorMessageNullOrEmpty ? test.errorMessage + "\n<br>\n<br>" : string.Empty)
-          + output, mediaModel);
+          + output);
             AddScreenShotHTML(test.status, screenShotPath);
         }
     }

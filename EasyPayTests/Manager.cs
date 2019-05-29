@@ -14,7 +14,7 @@ namespace EasyPayTests
     [TestFixture]
     [Category("All")]
     [Category("Manager")]
-    [Parallelizable(ParallelScope.Fixtures)]
+    //[Parallelizable(ParallelScope.Fixtures)]
     public class Manager:BaseTest
     {
         HomePageManager homePage;

@@ -15,7 +15,7 @@ namespace EasyPayTests
     [TestFixture]
     [Category("All")]
     [Category("Inspector")]
-    [Parallelizable(ParallelScope.Fixtures)]
+    //[Parallelizable(ParallelScope.Fixtures)]
     public class Inspector : BaseTest
     {
         HomePageInspector homePage;
