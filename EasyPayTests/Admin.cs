@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("All")]
     [Category("Admin")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class Admin:BaseTest

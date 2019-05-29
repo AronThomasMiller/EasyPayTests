@@ -14,6 +14,24 @@ namespace EasyPayLibrary.InspectorSidebar
             base.Init(driver);
         }
 
+        //public class ClientDataRow : BasePageObject
+        //{
+        //    WebElementWrapper row { get; set; }
+            
+        //    public string GetName()
+        //    {
+        //        return row.fin
+        //    }
+        //    public void Rate(int starNumber, bool andHalf = false);
+        //}
+
+            public enum Stars
+        {
+            One,
+            OneAndHalf,
+            Two,
+        }
+
         public WebElementWrapper Rate(string name, int starNumber, int halfStar)
         { 
             WebElementWrapper starRate = driver.GetByXpath($"//td[contains(text(),'{name}')]/../td[3]/span/div[{starNumber}]/div[{halfStar}]");

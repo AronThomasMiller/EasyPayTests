@@ -27,7 +27,7 @@ namespace EasyPayLibrary
             return driver;
         }
 
-        public string getUrl() { return driver.Url; }
+        public string GetUrl() { return driver.Url; }
         
         public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
         {

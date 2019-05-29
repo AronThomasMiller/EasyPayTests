@@ -46,6 +46,6 @@ namespace EasyPayLibrary
             return null;
         }
 
-        public virtual List<string> GetTextElements() { return null; }
+        public virtual List<string> GetTextElements() { return Enumerable.Empty<string>().ToList(); }
     }
 }

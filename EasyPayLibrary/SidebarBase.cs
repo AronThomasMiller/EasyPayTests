@@ -5,6 +5,7 @@ namespace EasyPayLibrary
     public class SidebarBase : BasePageObject
     {
         public List<WebElementWrapper> sidebar;
+        public WebElementWrapper ScheduleSideBar { get; set; }
 
         public override void Init(DriverWrapper driver)
         {

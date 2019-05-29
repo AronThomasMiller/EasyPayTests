@@ -85,7 +85,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Critical.cs" />
+    <Compile Include="Failures.cs" />
     <Compile Include="Inspector.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Translations\TranslationProvider.cs" />

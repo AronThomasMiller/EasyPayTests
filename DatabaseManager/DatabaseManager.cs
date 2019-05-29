@@ -4,13 +4,9 @@ using System.Configuration;
 
 namespace DatabaseManipulation
 {
-    public class DatabaseMaster : IDisposable
+    public class DatabaseMaster:IDisposable
     {
         NpgsqlConnection conn;
-        public void Dispose()
-        {
-            conn.Close();
-        }
 
         public DatabaseMaster()
         {
@@ -32,6 +28,10 @@ namespace DatabaseManipulation
         {
             string conn_param = "Server=" + server + ";Port=" + port + ";User Id= " + username +";Password=" + password + ";Database="+ database +";";
             conn = new NpgsqlConnection(conn_param);
+        }
+
+        public void Open()
+        {
             conn.Open();
         }
 
@@ -45,6 +45,12 @@ namespace DatabaseManipulation
         {
             var comm = new NpgsqlCommand(sql, conn);
             comm.ExecuteNonQuery();
+        }
+
+        public void Dispose()
+        {
+            conn.Close();
+            conn.Dispose();
         }
     }
 }

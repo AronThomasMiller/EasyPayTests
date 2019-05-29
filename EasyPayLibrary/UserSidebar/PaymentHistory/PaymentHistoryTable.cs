@@ -30,14 +30,7 @@ namespace EasyPayLibrary
 
         public PaymentHistoryTableRow GetLastRow()
         {
-            try
-            {
-                return table[table.Count - 1];
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return null;
-            }
+            return table?[table.Count - 1];
         }
 
         public List<PaymentHistoryTableRow> GetAllRows()

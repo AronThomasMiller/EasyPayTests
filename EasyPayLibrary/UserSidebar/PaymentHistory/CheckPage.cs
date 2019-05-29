@@ -4,7 +4,7 @@
     {
         public string GetUrl()
         {
-            return driver.getUrl();
+            return driver.GetUrl();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace EasyPayLibrary.Pages.Manager
     {
         public void ClickOnInspectors()
         {
+            //ScheduleSideBar.Click();
             sidebar[0].Click();
         }
 

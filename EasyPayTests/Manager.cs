@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("All")]
     [Category("Manager")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class Manager:BaseTest
@@ -159,7 +160,7 @@ namespace EasyPayTests
         [Test]
         public void VerifyThatManagerHasAccesToAccount()
         {
-            Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"),"Wrong Url");
+            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"),"Wrong Url");
             Assert.AreEqual("MANAGER", GeneralPage.GetRole(driver),"manager can't access his account");
         }
 

@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 namespace EasyPayTests
 {
     [TestFixture]
-    [Category("Critical")]
+    [Category("All")]
+    [Category("Failures")]
     [Parallelizable(ParallelScope.Fixtures)]
-    class Critical:BaseTest
+    class Failures:BaseTest
     {
         [Test]
         public void VerifyThatAdminCanEditManager()
@@ -25,6 +26,32 @@ namespace EasyPayTests
             utilities.SelectManager("Viktoriya Radashko");
             utilities.ClickOnConfirm();
             Assert.AreEqual("Viktoriya Radashko", utilities.getTextFromManagerField(), "Viktoriya Radashko isn't assigned as manager");
+        }
+
+        [Test]
+        public void CheckTranslationOnHomeUsersPage()
+        {
+            var loginPage = welcome.SignIn();
+            var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
+
+            homePage.ChangeToUKR();
+            homePage.Init(driver);
+            var role = homePage.GetRoleText();
+            StringAssert.AreEqualIgnoringCase(t.User, role, "Wrong role translation");
+            var addresses = homePage.GetAddressesText();
+            StringAssert.AreEqualIgnoringCase(t.Addresses, addresses, "Wrong address translation");
+            var connectedUtilities = homePage.GetConnectedUtilitiesText();
+            StringAssert.AreEqualIgnoringCase(t.ConnectedUtilities, connectedUtilities, "Wrong connected utilities translation");
+            var payments = homePage.GetPaymentsText();
+            StringAssert.AreEqualIgnoringCase(t.Payments, payments, "Wrong payments translation");
+            var paymentsHistory = homePage.GetPaymentsHistoryText();
+            StringAssert.AreEqualIgnoringCase(t.PaymentsHistory, paymentsHistory, "Wrong payments history translation");
+            var rateInspectors = homePage.GetRateInspectorsText();
+            StringAssert.AreEqualIgnoringCase(t.RateInspectors, rateInspectors, "Wrong rate inspectors translation");
+            var mainPageTitle = homePage.GetMainPageTitleText();
+            StringAssert.AreEqualIgnoringCase(t.MainPage, mainPageTitle, "Wrong main title translation");
+            var xTitle = homePage.GetXTitleText();
+            StringAssert.AreEqualIgnoringCase(t.SomeText, xTitle, "Wrong xtitle translation");
         }
 
         [Test]
@@ -88,7 +115,7 @@ namespace EasyPayTests
             var loginPage = welcome.SignIn();
             var homePage = (HomePageUser)loginPage.Login("user1@gmail.com", "Admin123");
 
-            Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"));
+            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"));
 
             var paymentHistoryPage = homePage.NavigateToPaymentHistory();
 
@@ -101,15 +128,16 @@ namespace EasyPayTests
             var payPage = paymentHistoryPage.NavigateToPayment();
             address = street + ", " + city + ", " + region;
             payPage.SelectAddress(address);
+
             var utilityDetails = payPage.NavigateToUtilityDetails(utility);
             var selectPaymentSum = utilityDetails.NavigateToSelectPaymentSum();
             selectPaymentSum.ChooseDownloadCheck();
+
             var payFrame = selectPaymentSum.PayForSum(sumToPay);
             var homePageAndUrlOfCheck = payFrame.Pay(userEmail, cardNumber, dateOfCard, cvc, zipCode);
             var urlOfCheck = homePageAndUrlOfCheck.Item2;
             homePage = homePageAndUrlOfCheck.Item1;
-
-
+            
             paymentHistoryPage = homePage.NavigateToPaymentHistory();
             address = region + ", " + city + ", " + street;
             paymentHistoryPage.SelectAddress(address);
@@ -117,18 +145,19 @@ namespace EasyPayTests
 
             var newTableOfPayments = paymentHistoryPage.InitTable();
             var newPayTableRows = newTableOfPayments.GetAllRows();
+            CollectionAssert.AreNotEqual(oldPayTableRows, newPayTableRows, "All checks matches old ones, no new check added to history");
 
             var newLastPay = newTableOfPayments.GetLastRow();
+
             var newLastPayDate = newLastPay.GetDateFromRow();
-            var newLastPaySum = newLastPay.GetSumFromRow();
-            newLastPay.ViewCheck();
-            var newLastPayCheck = driver.getUrl();
-
             Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");
-            Assert.AreEqual(sumToPay, newLastPaySum, "Sum of last pay doesn't match today's sum of pay");
-            StringAssert.Contains(newLastPayCheck, urlOfCheck, "Url of last check doesn't match today's url of check");
 
-            CollectionAssert.AreNotEqual(oldPayTableRows, newPayTableRows, "All checks matches old ones, no new check added to history");
+            var newLastPaySum = newLastPay.GetSumFromRow();
+            Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");
+
+            newLastPay.ViewCheck();
+            var newLastPayCheck = driver.GetUrl();
+            StringAssert.Contains(newLastPayCheck, urlOfCheck, "Url of last check doesn't match today's url of check");
         }
     }
 }

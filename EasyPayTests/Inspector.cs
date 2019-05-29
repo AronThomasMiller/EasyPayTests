@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("All")]
     [Category("Inspector")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class Inspector:BaseTest
@@ -23,6 +24,7 @@ namespace EasyPayTests
         [SetUp]
         public override void PreCondition()
         {
+            
             base.PreCondition();
             var loginPage = welcome.SignIn();
             homePage = (HomePageInspector)loginPage.Login("inspector1@gmail.com", "Admin123");
@@ -31,7 +33,6 @@ namespace EasyPayTests
         [Test]
         public void SignInInspectorCorrect()
         {
-
             var header = driver.GetByXpath("//h3[contains(text(),'Inspector')]");
             Assert.AreEqual(header.GetText(), "INSPECTOR","Inspector isn't loged in");
         }
@@ -62,9 +63,11 @@ namespace EasyPayTests
         [Test]
         public void AbleActivateOrDeactivateMetrix()
         {
-            var checkCounters = homePage.NavigateToCheckCounters();
-            var utility = checkCounters.SelectAddress("вулиця Університетська 2/5, Чернівці, Чернівецька область");
-            var result = utility.DoSomeAction("Activate", checkCounters);
+            var checkCountersPage = homePage.NavigateToCheckCounters();
+            Console.WriteLine("Successfully opened page with counters");
+            var utility = checkCountersPage.SelectAddress("вулиця Університетська 2/5, Чернівці, Чернівецька область");
+            Console.WriteLine("Successfully selected address" + "address");
+            var result = utility.DoSomeAction("Activate", checkCountersPage);
             Assert.AreEqual(result.GetText(), "Success");
             driver.Refresh();
         }
@@ -90,8 +93,7 @@ namespace EasyPayTests
             var result = setCurrentValue.ErrorOrSuccess();
             Assert.AreEqual(result.GetText(), "Success");
         }
-
-        //Rate client page
+        
         [Test]
         public void ListOfClientsAble()
         {
@@ -100,7 +102,7 @@ namespace EasyPayTests
             Assert.True(result, "List of clients empty");
         }
 
-        [Test]
+        [Test(Description = "Repeat 2 times")]
         public void RateClients()
         {
             var rateClients = homePage.NavigateToRateClients();

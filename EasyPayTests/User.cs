@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("All")]
     [Category("User")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class User : BaseTest
@@ -74,29 +75,6 @@ namespace EasyPayTests
             Assert.True(profile.IsSuccessAlertDisplayed());
             Assert.AreEqual("Masha", profile.GetName(),"Name doesn't change");
         }
-
-        [Test]
-        public void CheckTranslationOnHomeUsersPage()
-        {
-            homePage.ChangeToUKR();
-            homePage.Init(driver);
-            var role = homePage.GetRoleText();
-            StringAssert.AreEqualIgnoringCase(t.User, role, "Wrong role translation");
-            var addresses = homePage.GetAddressesText();
-            StringAssert.AreEqualIgnoringCase(t.Addresses, addresses, "Wrong address translation");
-            var connectedUtilities = homePage.GetConnectedUtilitiesText();
-            StringAssert.AreEqualIgnoringCase(t.ConnectedUtilities, connectedUtilities, "Wrong connected utilities translation");
-            var payments = homePage.GetPaymentsText();
-            StringAssert.AreEqualIgnoringCase(t.Payments, payments, "Wrong payments translation");
-            var paymentsHistory = homePage.GetPaymentsHistoryText();
-            StringAssert.AreEqualIgnoringCase(t.PaymentsHistory, paymentsHistory, "Wrong payments history translation");
-            var rateInspectors = homePage.GetRateInspectorsText();
-            StringAssert.AreEqualIgnoringCase(t.RateInspectors, rateInspectors, "Wrong rate inspectors translation");
-            var mainPageTitle = homePage.GetMainPageTitleText();
-            StringAssert.AreEqualIgnoringCase(t.MainPage, mainPageTitle, "Wrong main title translation");
-            var xTitle = homePage.GetXTitleText();
-            StringAssert.AreEqualIgnoringCase(t.SomeText, xTitle, "Wrong xtitle translation");
-        }
         
         [Test]
         public void SelectAddresseUtilities()
@@ -134,7 +112,7 @@ namespace EasyPayTests
             Assert.IsNull(result, "Utility wasn't disconnected");
         }
 
-        [Test]
+        [Test(Description = "Repeat 2 times")]
         public void ChangeMetrics()
         {
             var pay = homePage.NavigateToPayment();

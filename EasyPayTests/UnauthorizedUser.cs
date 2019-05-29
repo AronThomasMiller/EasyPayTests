@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace EasyPayTests
 {
     [TestFixture]
+    [Category("All")]
     [Category("UnauthorizedUser")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class UnauthorizedUser:BaseTest
@@ -15,7 +16,8 @@ namespace EasyPayTests
         {
             using(var conn = new DatabaseMaster())
             {
-                conn.ChangeInDB("delete from users where email = 'gangstatester@gmail.com'");
+                conn.Open();
+                conn.ChangeInDB($"delete from users where email = '{email}'");
             }
 
             driver.GoToURL();
@@ -30,7 +32,7 @@ namespace EasyPayTests
             var loginPage = mailPage.ConfirmEmail();
             var homePage = (HomePageUser)loginPage.Login(email, password);
 
-            Assert.IsTrue(driver.getUrl().Contains("http://localhost:8080/home"));
+            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"));
         }
 
         [Test]
