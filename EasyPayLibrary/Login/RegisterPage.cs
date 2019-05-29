@@ -95,7 +95,7 @@ namespace EasyPayLibrary.Pages.Common
 
             ClickOnSubmitButton();
 
-            RedirectModalWindow.ClickOnRedirectButton(driver,10);
+            RedirectModalWindow.ClickOnRedirectButton(driver,30);
             
             return GetPOM<GmailEmailPage>(driver);
         }

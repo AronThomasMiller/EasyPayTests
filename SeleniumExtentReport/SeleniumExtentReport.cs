@@ -50,7 +50,7 @@ namespace SeleniumExtentReportTest
                 di = Directory.CreateDirectory(screenFolder);
 
 
-                var outputDir = dir + "\\Test_Execution_Reports" + "\\" + TestClassName + "\\";
+                var outputDir = dir + "\\Test_Execution_Reports" + "\\" + TestClassName + DateTime.Now.ToString(" dd-MM-yyyy_(HH_mm_ss)") + "\\";
 
                 var htmlReporter = new ExtentHtmlReporter(outputDir + "Automation_Report" + ".html");
 

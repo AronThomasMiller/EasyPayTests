@@ -16,6 +16,7 @@ namespace EasyPayTests
             using(var conn = new DatabaseMaster())
             {
                 conn.Open();
+                conn.ChangeInDB("truncate table email_token");
                 conn.ChangeInDB($"delete from users where email = '{email}'");
             }
 

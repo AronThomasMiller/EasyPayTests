@@ -122,8 +122,8 @@ namespace EasyPayTests
         public void AddInspector()
         {
             var listOfInspectors = homePage.NavigateToInspectorsList();
-            var addIvan = listOfInspectors.ClickToAddInspector();
-            addIvan.AddInspector("Ivan Ivanov");
+            var addIvan1 = listOfInspectors.ClickToAddInspector();
+            addIvan1.AddInspector("Ivan Ivanov");
             driver.Refresh();
 
             Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed(),"Ivan Ivanov isn't displayed");
