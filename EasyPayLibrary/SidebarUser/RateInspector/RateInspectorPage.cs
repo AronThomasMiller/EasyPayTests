@@ -23,11 +23,11 @@ namespace EasyPayLibrary.Changes
         {
             return GetPOM<RateInspectorsPage>(driver);
         }
-
+        //Look an Nazar's example
         public WebElementWrapper Rate(string name, float star)
         {
             var element = driver.GetByXpath($"//td[contains(text(),'{name}')]/..//td[4]/span");
-            var clickOnStar = new Actions(driver.GetDriver());
+            var clickOnStar = new Actions(driver.GetDriver);
             clickOnStar.MoveToElement(element.GetElement(), (int)(6 * star), 5).Click().Build().Perform();
             var errorOrSuccess = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
             return errorOrSuccess;

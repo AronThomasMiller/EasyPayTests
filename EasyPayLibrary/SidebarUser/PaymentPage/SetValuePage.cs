@@ -26,6 +26,7 @@
         {
             SetFieldNewCurrentValue(value);
             ClickSetApply();
+            //Another page payment
             return GetPOM<UtilityDetailsPage>(driver);
         }
     }

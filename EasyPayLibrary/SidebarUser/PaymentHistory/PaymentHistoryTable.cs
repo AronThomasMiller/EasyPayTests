@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace EasyPayLibrary
@@ -22,10 +23,7 @@ namespace EasyPayLibrary
             }
             table = new List<PaymentHistoryTableRow>();
 
-            foreach (var element in tableOnPage)
-            {
-                table.Add(new PaymentHistoryTableRow(element));
-            }           
+            table = tableOnPage.Select(element => new PaymentHistoryTableRow(driver, element)).ToList();
         }
 
         public PaymentHistoryTableRow GetLastRow()
