@@ -170,7 +170,8 @@ namespace EasyPayTests
             profile.SetName("Василь");
             LogProgress("User is updating his profile ");
             profile.UpdateProfile();
-            Assert.IsFalse(profile.IsErrorAlertDisplayed(), "error alert isn't displayed");
+            var errorAlertDisplayed = profile.IsErrorAlertDisplayed();
+            Assert.AreEqual(false, errorAlertDisplayed, "error alert isn't displayed");
         }
 
 
