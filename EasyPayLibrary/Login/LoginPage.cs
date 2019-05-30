@@ -22,9 +22,9 @@ namespace EasyPayLibrary
         public string btnCreateAccountText { get { return btnCreateAccount.GetByXpath("./span").GetText(); } }
         public string NewToSiteText { get { return driver.GetByXpath("//*[@data-locale-item='newToSite']").GetText(); } }
         public string LostYourPassword { get { return driver.GetByXpath("//*[@data-locale-item='lostYourPassword']").GetText(); } }
-        public string Header { get { return driver.GetByXpath("//*[@data-locale-item='login']/span").GetText(); } }
+        public string HeaderText { get { return driver.GetByXpath("//*[@data-locale-item='login']/span").GetText(); } }
         public string Or { get { return driver.GetByXpath("//*[@data-locale-item='or']/span").GetText(); } }
-        public string Footer { get { return driver.GetByXpath("//*[@data-locale-item='copyright']/span").GetText(); } }
+        public string FooterText { get { return driver.GetByXpath("//*[@data-locale-item='copyright']/span").GetText(); } }
 
         public override void Init(DriverWrapper driver)
         {

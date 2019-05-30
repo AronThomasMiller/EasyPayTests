@@ -21,8 +21,8 @@ namespace EasyPayLibrary.Pages.Common
         WebElementWrapper btnSignIn;
 
 
-        public string headerText { get { return header.GetText(); } }
-        public string footerText { get { return footer.GetByXpath("./span").GetText(); } }
+        public string HeaderText { get { return header.GetText(); } }
+        public string FooterText { get { return footer.GetByXpath("./span").GetText(); } }
         public string fieldNameText { get { return fieldName.GetAttribute("placeholder"); } }
         public string fieldSurnameText { get { return fieldSurname.GetAttribute("placeholder"); } }
         public string fieldEmailText { get { return fieldEmail.GetAttribute("placeholder"); } }

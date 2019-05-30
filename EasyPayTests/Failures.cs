@@ -59,55 +59,55 @@ namespace EasyPayTests
         {
             welcomePage = welcomePage.TranslatePageToUA();
 
-            var WelcomePageTitle = welcomePage["Lead"];
+            var WelcomePageTitle = welcomePage.LeadText;
             StringAssert.AreEqualIgnoringCase(t.WelcomePageTitle, WelcomePageTitle);
-            var WelcomePageFooter = welcomePage["Footer"];
+            var WelcomePageFooter = welcomePage.FooterText;
             StringAssert.AreEqualIgnoringCase(t.WelcomePageFooter, WelcomePageFooter);
-            var SignIn = welcomePage["SignIn"];
+            var SignIn = welcomePage.btnSignInText;
             StringAssert.AreEqualIgnoringCase(t.SignIn, SignIn);
-            var SignUp = welcomePage["SignUp"];
+            var SignUp = welcomePage.btnSignUpText;
             StringAssert.AreEqualIgnoringCase(t.SignUp, SignUp);
 
             var LoginPage = welcomePage.SignIn();
 
-            var LoginPageHeader = LoginPage["Header"];
+            var LoginPageHeader = LoginPage.HeaderText;
             StringAssert.AreEqualIgnoringCase(t.Login, LoginPageHeader);
-            var Email = LoginPage["Email"];
+            var Email = LoginPage.fieldEmailText;
             StringAssert.AreEqualIgnoringCase(t.Email, Email);
-            var Password = LoginPage["Password"];
+            var Password = LoginPage.fieldPasswordText;
             StringAssert.AreEqualIgnoringCase(t.Password, Password);
-            var Login = LoginPage["Login"];
+            var Login = LoginPage.btnLoginText;
             StringAssert.AreEqualIgnoringCase(t.Login, Login);
-            var LostYourPassword = LoginPage["LostYourPassword"];
+            var LostYourPassword = LoginPage.LostYourPassword;
             StringAssert.AreEqualIgnoringCase(t.LostYourPassword, LostYourPassword);
-            var Or = LoginPage["Or"];
+            var Or = LoginPage.Or;
             StringAssert.AreEqualIgnoringCase(t.Or, Or);
-            var NewToSite = LoginPage["NewToSite"];
+            var NewToSite = LoginPage.NewToSiteText;
             StringAssert.AreEqualIgnoringCase(t.NewToSite, NewToSite);
-            var CreateAccount = LoginPage["CreateAccount"];
+            var CreateAccount = LoginPage.btnCreateAccountText;
             StringAssert.AreEqualIgnoringCase(t.CreateAccount, CreateAccount);
-            var LoginPageFooter = LoginPage["Footer"];
+            var LoginPageFooter = LoginPage.FooterText;
             StringAssert.AreEqualIgnoringCase(t.LoginPageFooter, LoginPageFooter);
 
             var RegisterPage = LoginPage.NavigateToCreateAccountPage();
 
-            var RegisterPageHeader = RegisterPage["Header"];
+            var RegisterPageHeader = RegisterPage.HeaderText;
             StringAssert.AreEqualIgnoringCase(t.RegisterPageHeader, RegisterPageHeader);
-            var Name = RegisterPage["Name"];
+            var Name = RegisterPage.fieldNameText;
             StringAssert.AreEqualIgnoringCase(t.Name, Name);
-            var Surname = RegisterPage["Surname"];
+            var Surname = RegisterPage.fieldSurnameText;
             StringAssert.AreEqualIgnoringCase(t.Surname, Surname);
-            Email = RegisterPage["Email"];
+            Email = RegisterPage.fieldEmailText;
             StringAssert.AreEqualIgnoringCase(t.Email, Email);
-            Password = RegisterPage["Password"];
+            Password = RegisterPage.fieldPasswordText;
             StringAssert.AreEqualIgnoringCase(t.Password, Password);
-            var ConfirmPassword = RegisterPage["ConfirmPassword"];
+            var ConfirmPassword = RegisterPage.fieldConfirmPasswordText;
             StringAssert.AreEqualIgnoringCase(t.ConfirmPassword, ConfirmPassword);
-            var Submit = RegisterPage["Submit"];
+            var Submit = RegisterPage.btnSubmitText;
             StringAssert.AreEqualIgnoringCase(t.Submit, Submit);
-            var RegisterPageFooter = RegisterPage["Footer"];
+            var RegisterPageFooter = RegisterPage.FooterText;
             StringAssert.AreEqualIgnoringCase(t.RegisterPageFooter, RegisterPageFooter);
-            SignIn = RegisterPage["SignIn"];
+            SignIn = RegisterPage.btnSignInText;
             StringAssert.AreEqualIgnoringCase(t.SignIn, SignIn);
         }
 
