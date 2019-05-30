@@ -1,8 +1,7 @@
 ﻿namespace EasyPayLibrary
 {
-    internal class SidebarAdmin : SidebarBase
+    public class SidebarAdmin : SidebarBase
     {
-        WebElementWrapper role;
         WebElementWrapper utilities;
         WebElementWrapper users;
         WebElementWrapper registerUser;
@@ -10,15 +9,9 @@
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            role = driver.GetByXpath("//div[@class='menu_section']/h3");
-            utilities = sidebar[0];
-            users = sidebar[1];
-            registerUser = sidebar[2];       
-        }
-
-        public string GetTextRole()
-        {
-            return role.GetText();
+            utilities = driver.GetByXpath("//a[@href='/admin/utilitiesPage']");
+            users = driver.GetByXpath("//a[@href='/admin/management-users']");
+            registerUser = driver.GetByXpath("//a[@href='/admin/register-user']");       
         }
 
         public void ClickOnUtilities()

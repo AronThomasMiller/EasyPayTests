@@ -22,14 +22,14 @@ namespace EasyPayTests
         public override void PreCondition()
         {
             base.PreCondition();
-            var login = welcome.SignIn();
-            home = (HomePageAdmin)login.Login("admin1@gmail.com", "Admin123");
+            var login = welcomePage.SignIn();
+            home = login.LoginAsAdmin("admin1@gmail.com", "Admin123");
         }
 
         [Test]
         public void LoginAsAdminWithValidData()
         {
-            var role = home.GetTextRole();
+            var role = GeneralPage.GetRole(driver);
             Assert.AreEqual("ADMIN", role,"not logined as admin");
         }
 
@@ -43,13 +43,12 @@ namespace EasyPayTests
         }
 
         [Test]
-        public void VerifyThatAdminHasAbilityToCheckHisProfile()
+        public void VerifyThatAdminHasAbilityToChangeHisProfileInfo()
         {
             var prof = home.GoToProfile();
             prof.EditData("Ivan", "Petrov", "+380938780876", "Admin123", "Admin1234");
             Assert.AreEqual("Success", prof.GetSuccessText(),"Admin can't change his profile data");
-
-            //post condition
+            
             prof.EditPassword("Admin1234", "Admin123");
             Assert.AreEqual("Success", prof.GetSuccessText(), "Admin can't change his profile data");
         }

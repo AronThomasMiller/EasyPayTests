@@ -23,8 +23,8 @@ namespace EasyPayTests
         public override void PreCondition()
         {
             base.PreCondition();
-            var loginPage = welcome.SignIn();
-            homePage = (HomePageManager)loginPage.Login("manager1@gmail.com", "Admin123");
+            var loginPage = welcomePage.SignIn();
+            homePage = loginPage.LoginAsManager("manager1@gmail.com", "Admin123");
         }
         
 
@@ -177,13 +177,20 @@ namespace EasyPayTests
         [Test]
         public void VerifyHistoryIsVisible()
         {
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB($"update schedule_history set event_date = '{DateTime.Today.AddMonths(-1).ToString("yyyy-MM-dd")}', submit_date = '{DateTime.Today.AddMonths(-1).AddDays(1).ToString("yyyy-MM-dd")}' where id = 163");
+                conn.ChangeInDB($"update schedule_history set event_date = '{DateTime.Today.ToString("yyyy-MM-dd")}', submit_date = '{DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")}' where id = 196");
+            }
+
             var inspectorPage = homePage.NavigateToInspectorsList();
             var schedulePage = inspectorPage.NavigateToInspectorsSchedule("Oleg Adamov");
             var tabHistory = schedulePage.ClickOnTabHistory();
             var tabCurrentMonth = tabHistory.ClickOnCurrentMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("Нагірна", "10.5.2018"), "Current month history is not visible");
+            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("Нагірна", $"{DateTime.Today.ToString("dd.M.yyyy")}"), "Current month history is not visible");
             var tabPreviousMonth = tabHistory.ClickOnPreviousMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryPreviousMonthVisible("21.4.2019"), "Previous month history doesn't contain date: 21.4.2019");
+            Assert.IsTrue(tabHistory.IsHistoryPreviousMonthVisible($"{DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}"), $"Previous month history doesn't contain date: {DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}");
         }
 
         [Test]

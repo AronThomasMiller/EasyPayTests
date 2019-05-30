@@ -50,9 +50,9 @@ namespace EasyPayLibrary
             element = web;
         }
 
-        internal SelectElement selectElement()
+        public SelectElementWrapper SelectElement()
         {
-            return new SelectElement(element);
+            return new SelectElementWrapper(new WebElementWrapper(element));
         }
 
         public WebElementWrapper GetByXpath(string xpath)

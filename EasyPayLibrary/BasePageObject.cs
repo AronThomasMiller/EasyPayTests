@@ -36,16 +36,5 @@ namespace EasyPayLibrary
             LanguageChanger.ChangeToEN(driver);
             return GetPOM<T>(driver);
         }
-
-        public static string CheckTranslation(Dictionary<string, string> dict, List<string> words)
-        {
-            foreach (var elem in words)
-            {
-                if (dict.ContainsValue(elem) == false) return elem;
-            }
-            return null;
-        }
-
-        public virtual List<string> GetTextElements() { return Enumerable.Empty<string>().ToList(); }
     }
 }

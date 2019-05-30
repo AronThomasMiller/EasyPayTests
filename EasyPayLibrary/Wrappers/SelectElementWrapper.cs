@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary
 {
-    class SelectElementWrapper
+    public class SelectElementWrapper
     {
         SelectElement selectElement;
         
@@ -19,6 +19,11 @@ namespace EasyPayLibrary
         public void SelectByText(string text)
         {
             selectElement.SelectByText(text);
+        }
+
+        public string GetSelectedOptionText()
+        {
+            return selectElement.SelectedOption.Text;
         }
     }
 }
