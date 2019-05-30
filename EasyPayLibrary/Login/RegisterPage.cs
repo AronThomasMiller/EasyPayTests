@@ -20,6 +20,17 @@ namespace EasyPayLibrary.Pages.Common
         WebElementWrapper btnSubmit;
         WebElementWrapper btnSignIn;
 
+
+        public string headerText { get { return header.GetText(); } }
+        public string footerText { get { return footer.GetByXpath("./span").GetText(); } }
+        public string fieldNameText { get { return fieldName.GetAttribute("placeholder"); } }
+        public string fieldSurnameText { get { return fieldSurname.GetAttribute("placeholder"); } }
+        public string fieldEmailText { get { return fieldEmail.GetAttribute("placeholder"); } }
+        public string fieldPasswordText { get { return fieldPassword.GetAttribute("placeholder"); } }
+        public string fieldConfirmPasswordText { get { return fieldConfirmPassword.GetAttribute("placeholder"); } }
+        public string btnSubmitText { get { return btnSubmit.GetAttribute("value"); } }
+        public string btnSignInText { get { return btnSignIn.GetByXpath("./span").GetText(); } }
+
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
@@ -97,26 +108,6 @@ namespace EasyPayLibrary.Pages.Common
         public RegisterPage TranslatePageToEN()
         {
             return TranslatePageToEN<RegisterPage>(driver);
-        }
-
-        public string this[string elementName]
-        {
-            get
-            {
-                switch (elementName)
-                {
-                    case "Header": return header.GetText();
-                    case "Footer": return footer.GetByXpath("./span").GetText();
-                    case "Name": return fieldName.GetAttribute("placeholder");
-                    case "Surname": return fieldSurname.GetAttribute("placeholder");
-                    case "Email": return fieldEmail.GetAttribute("placeholder");
-                    case "Password": return fieldPassword.GetAttribute("placeholder");
-                    case "ConfirmPassword": return fieldConfirmPassword.GetAttribute("placeholder");
-                    case "Submit": return btnSubmit.GetAttribute("value");
-                    case "SignIn": return btnSignIn.GetByXpath("./span").GetText();
-                    default: return null;
-                }
-            }
         }
     }
 }

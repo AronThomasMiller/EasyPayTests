@@ -183,9 +183,15 @@ namespace EasyPayTests
         {
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
+                var prevMonthDate = DateTime.Today.AddMonths(-1);
+                var currentMothDate = DateTime.Today;
                 conn.Open();
-                conn.ChangeInDB($"update schedule_history set event_date = '{DateTime.Today.AddMonths(-1).ToString("yyyy-MM-dd")}', submit_date = '{DateTime.Today.AddMonths(-1).AddDays(1).ToString("yyyy-MM-dd")}' where id = 163");
-                conn.ChangeInDB($"update schedule_history set event_date = '{DateTime.Today.ToString("yyyy-MM-dd")}', submit_date = '{DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")}' where id = 196");
+                conn.ChangeInDB($"update schedule_history set event_date = " +
+                    $"'{prevMonthDate.ToString("yyyy-MM-dd")}', submit_date = " +
+                    $"'{prevMonthDate.AddDays(1).ToString("yyyy-MM-dd")}' where id = 163");
+                conn.ChangeInDB($"update schedule_history set event_date = " +
+                    $"'{currentMothDate.ToString("yyyy-MM-dd")}', submit_date = " +
+                    $"'{currentMothDate.AddDays(1).ToString("yyyy-MM-dd")}' where id = 196");
             }
 
             var inspectorPage = homePage.NavigateToInspectorsList();

@@ -16,6 +16,15 @@ namespace EasyPayLibrary
         WebElementWrapper btnCreateAccount;
         WebElementWrapper errorAlert;
 
+        public string fieldEmailText { get { return fieldEmail.GetAttribute("placeholder"); } }
+        public string fieldPasswordText { get { return fieldPassword.GetAttribute("placeholder"); } }
+        public string btnLoginText { get { return btnLogin.GetAttribute("value"); } }
+        public string btnCreateAccountText { get { return btnCreateAccount.GetByXpath("./span").GetText(); } }
+        public string NewToSiteText { get { return driver.GetByXpath("//*[@data-locale-item='newToSite']").GetText(); } }
+        public string LostYourPassword { get { return driver.GetByXpath("//*[@data-locale-item='lostYourPassword']").GetText(); } }
+        public string Header { get { return driver.GetByXpath("//*[@data-locale-item='login']/span").GetText(); } }
+        public string Or { get { return driver.GetByXpath("//*[@data-locale-item='or']/span").GetText(); } }
+        public string Footer { get { return driver.GetByXpath("//*[@data-locale-item='copyright']/span").GetText(); } }
 
         public override void Init(DriverWrapper driver)
         {
@@ -93,26 +102,6 @@ namespace EasyPayLibrary
             catch (TimeoutException)
             {
                 return false;
-            }
-        }
-
-        public string this[string elementName]
-        {
-            get
-            {
-                switch (elementName)
-                {
-                    case "Email": return fieldEmail.GetAttribute("placeholder");
-                    case "Password": return fieldPassword.GetAttribute("placeholder");
-                    case "Login": return btnLogin.GetAttribute("value");
-                    case "NewToSite": return driver.GetByXpath("//*[@data-locale-item='newToSite']").GetText();
-                    case "CreateAccount": return btnCreateAccount.GetByXpath("./span").GetText();
-                    case "LostYourPassword": return driver.GetByXpath("//*[@data-locale-item='lostYourPassword']").GetText();
-                    case "Header": return driver.GetByXpath("//*[@data-locale-item='login']/span").GetText();
-                    case "Or": return driver.GetByXpath("//*[@data-locale-item='or']/span").GetText();
-                    case "Footer": return driver.GetByXpath("//*[@data-locale-item='copyright']/span").GetText();
-                    default: return null;
-                }
             }
         }
 

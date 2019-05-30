@@ -26,15 +26,11 @@ namespace DatabaseManipulation
 
         private void Init(string server, string port, string username, string password, string database)
         {
-            string conn_param = "Server=" + server + ";Port=" + port + ";User Id= " + username +";Password=" + password + ";Database="+ database +";";
+            string conn_param = "Server=" + server + ";Port=" + port + "" +
+                ";User Id= " + username +";Password=" + password + 
+                ";Database="+ database +";";
             conn = new NpgsqlConnection(conn_param);
         }
-
-        public void Open()
-        {
-            conn.Open();
-        }
-
         public string TakeFromDB(string sql)
         {
             var comm = new NpgsqlCommand(sql, conn);
@@ -45,6 +41,11 @@ namespace DatabaseManipulation
         {
             var comm = new NpgsqlCommand(sql, conn);
             comm.ExecuteNonQuery();
+        }
+
+        public void Open()
+        {
+            conn.Open();
         }
 
         public void Dispose()

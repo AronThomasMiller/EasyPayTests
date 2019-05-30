@@ -31,8 +31,7 @@ namespace EasyPayLibrary.Translations
         public string PaymentsHistory = "";
         public string RateInspectors = "";
         public string Language = "";
-
-        //Boris's
+        
         public string SignIn = "";
         public string SignUp = "";
         public string WelcomePageTitle = "";

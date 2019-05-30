@@ -10,6 +10,11 @@ namespace EasyPayLibrary
 
         WebElementWrapper Lead;
 
+        public string btnSignInText { get { return btnSignIn.GetByXpath("./span").GetText(); } }
+        public string btnSignUpText { get { return btnSignUp.GetByXpath("./span").GetText(); } }
+        public string LeadText { get { return Lead.GetText(); } }
+        public string FooterText { get { return driver.GetByXpath("//*[@class='mastfoot']/div[@class='inner']//p[2]").GetText(); } }
+
         public override void Init(DriverWrapper driver)
         {
             Lead = driver.GetByXpath("//p[@class='lead']");
@@ -50,21 +55,6 @@ namespace EasyPayLibrary
         public WelcomePage TranslatePageToEN()
         {
             return TranslatePageToEN<WelcomePage>(driver);
-        }
-
-        public string this[string elementName]
-        {
-            get
-            {
-                switch (elementName)
-                {
-                    case "Lead": return Lead.GetText();
-                    case "SignIn": return btnSignIn.GetByXpath("./span").GetText();
-                    case "SignUp": return btnSignUp.GetByXpath("./span").GetText();
-                    case "Footer": return driver.GetByXpath("//*[@class='mastfoot']/div[@class='inner']//p[2]").GetText();
-                    default: return null;
-                }
-            }
         }
     }
 }
