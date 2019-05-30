@@ -31,9 +31,11 @@ namespace EasyPayTests
         [Test]
         public void CheckTranslationOnHomeUsersPage()
         {
+            LogProgress("User is going to Login Page ");
             var loginPage = welcomePage.SignIn();
+            LogProgress("User is logging as User");
             var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
-
+            LogProgress("User is changing language to UKR");
             homePage.ChangeToUKR();
             homePage.Init(driver);
             var role = GeneralPage.GetRole(driver);
@@ -140,10 +142,13 @@ namespace EasyPayTests
         [Test]
         public void IsPersonalInfoTranslationIsCorrect()
         {
+            LogProgress("User is going to Login Page ");
             var loginPage = welcomePage.SignIn();
+            LogProgress("User is logging as User");
             var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
-
+            LogProgress("User is going to Profile ");
             var profile = homePage.GoToProfile();
+            LogProgress("User is changing language to UKR");
             ProfilePage changed = profile.ChangeToUKR();
             profile.Init(driver);
             var name = profile.GetName();
@@ -155,11 +160,15 @@ namespace EasyPayTests
         [Test]
         public void NameCanContainUALetters()
         {
+            LogProgress("User is going to Login Page ");
             var loginPage = welcomePage.SignIn();
+            LogProgress("User is logging as User");
             var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
-
+            LogProgress("User is going to Profile ");
             var profile = homePage.GoToProfile();
-            profile.SetName("Вася");
+            LogProgress("User is changing his name with UA characters ");
+            profile.SetName("Василь");
+            LogProgress("User is updating his profile ");
             profile.UpdateProfile();
             Assert.IsFalse(profile.IsErrorAlertDisplayed(), "error alert isn't displayed");
         }
