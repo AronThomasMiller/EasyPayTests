@@ -131,8 +131,7 @@ namespace EasyPayTests
             var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
             var utilities = homePage.NavigateToConnectedUtilitiesPage();
-            utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
-            var logOut = utilities.SubmitCall();
+            var logOut = utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
             var secondEnter = logOut.LogOut();
             var schedule = secondEnter.LoginAsInspector("inspector2@gmail.com", "Admin123");
             var sched = schedule.NavigateToSchedule();

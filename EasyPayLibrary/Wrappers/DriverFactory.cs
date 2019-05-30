@@ -16,8 +16,7 @@ namespace EasyPayLibrary
     {
         public DriverWrapper GetDriver(string browser)
         {
-            if (browser == null) browser = ConfigurationManager.AppSettings["browser"];
-            return ChooseDriver(browser);
+            return (browser == null) ? ChooseDriver(ConfigurationManager.AppSettings["browser"]) : ChooseDriver(browser);
         }
 
         private DriverWrapper ChooseDriver(string browser)

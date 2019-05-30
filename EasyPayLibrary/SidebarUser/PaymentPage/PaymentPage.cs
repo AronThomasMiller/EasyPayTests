@@ -5,6 +5,7 @@ namespace EasyPayLibrary
 {
     public class PaymentPage: HomePageUser
     {
+        //type of elems
         WebElementWrapper addressesDropdown;
         WebElementWrapper utilitiesTable;
         WebElementWrapper btnDetails;
@@ -46,8 +47,10 @@ namespace EasyPayLibrary
 
             btnDetails = driver.GetByXpath("//tbody/tr[1]/td/button");
             btnDetails.Click();
+            //separate class
             setNewValue = driver.GetByXpath("//table[@id = 'modal-table']/tbody/tr/td/button");
             setNewValue.Click();
+            //
             fieldNewValue = driver.GetByXpath("//input[@id='newCurrentValue']");
             fieldNewValue.SendText(value);
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-apply']");

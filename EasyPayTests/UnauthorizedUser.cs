@@ -16,17 +16,28 @@ namespace EasyPayTests
         {
             using(var conn = new DatabaseMaster())
             {
+                LogProgress("Connecting to database");
                 conn.Open();
+                LogProgress("Clearing pre-registered users");
                 conn.ChangeInDB("truncate table email_token");
+                LogProgress($"Deleting from DB user with email:{email}");
                 conn.ChangeInDB($"delete from users where email = '{email}'");
             }
 
-            var googlePage = welcomePage.SignUp().Register(name, surname, phoneNumber, email, password);
+            LogProgress("Navigating to register page");
+            var registerPage = welcomePage.SignUp();
+            LogProgress($"Entering data to registration fields - Name:{name}, Surname:{surname}, Phone number:{phoneNumber}, Email:{email}");
+            var googlePage = registerPage.Register(name, surname, phoneNumber, email, password);
 
+            LogProgress($"Entering email\"{email}\" to login");
             var passPage = googlePage.EnterEmail(email);
+            LogProgress($"Entering password\"{password}\" to login");
             var emailsPage = passPage.EnterPassword(password);
+            LogProgress("Opening email with confirm link");
             var mailPage = emailsPage.OpenMail();
+            LogProgress("Clicking on confirm link");
             var loginPage = mailPage.ConfirmEmail();
+            LogProgress("Checking able of loggining");
             var homePage = loginPage.LoginAsUser(email, password);
 
             Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"));

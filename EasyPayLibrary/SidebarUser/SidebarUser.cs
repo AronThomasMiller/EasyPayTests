@@ -25,7 +25,7 @@ namespace EasyPayLibrary.Pages
             lnkPaymentsHistory = driver.GetByXpath("//a[@href='/user/paymentsHistoryPage']");
             lnkRateInspectors = driver.GetByXpath("//a[@href='/user/rate/']");
         }
-
+        //property
         public string GetAddressesText()
         {
             return lnkAddresses.GetText();

@@ -9,7 +9,7 @@ namespace EasyPayLibrary
         string lblSum;
         WebElementWrapper btnViewCheck;
 
-        public PaymentHistoryTableRow(WebElementWrapper element)
+        public PaymentHistoryTableRow(DriverWrapper driver, WebElementWrapper element)
         {
             lblDate = element.GetByXpath(".//td[@class='historyDate']").GetText();
             lblSum = element.GetByXpath(".//td[@class='historySum']").GetText();

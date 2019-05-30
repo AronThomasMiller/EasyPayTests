@@ -22,10 +22,7 @@ namespace EasyPayLibrary
             driver = Driver;
         }
 
-        public IWebDriver GetDriver()
-        {
-            return driver;
-        }
+        public IWebDriver GetDriver => driver;
 
         public string GetUrl() { return driver.Url; }
         
@@ -71,7 +68,7 @@ namespace EasyPayLibrary
             var x = Assembly.GetExecutingAssembly().Location;
             var info = new FileInfo(x);
             var path = pathToSaveIn;
-            var adress = new FileInfo(path + "\\");
+            var adress = new FileInfo($"{path}\\");
             string screenshotFileName = adress + title + ".png";
             ss.SaveAsFile(screenshotFileName);
             return screenshotFileName;
