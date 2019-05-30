@@ -201,7 +201,7 @@ namespace EasyPayTests
             var tabHistory = schedulePage.ClickOnTabHistory();
             LogProgress("Manager is clicking on current month button");
             var tabCurrentMonth = tabHistory.ClickOnCurrentMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("Нагірна", $"{DateTime.Today.ToString("dd.M.yyyy")}"), "Current month history is not visible");
+            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("вулиця Шевченка", $"{DateTime.Today.ToString("dd.M.yyyy")}"), "Current month history is not visible");
             var tabPreviousMonth = tabHistory.ClickOnPreviousMonthButton();
             Assert.IsTrue(tabHistory.IsHistoryPreviousMonthVisible($"{DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}"), $"Previous month history doesn't contain date: {DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}");
         }
