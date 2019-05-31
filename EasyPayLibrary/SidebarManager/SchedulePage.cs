@@ -17,13 +17,11 @@ namespace EasyPayLibrary.ManagerSidebar
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            btnAddScheduleItem = driver.GetByXpath("//button[@class='fc-addScheduleItem-button fc-button fc-state-default fc-corner-left fc-corner-right']",20);
+            btnAddScheduleItem = driver.GetByXpath("//button[@class='fc-addScheduleItem-button fc-button fc-state-default fc-corner-left fc-corner-right']",5);
             tabHistory = driver.GetByXpath("//a[@id='profile-tab2']");
-            tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");
-            btnDeleteScheduleItem = driver.GetByXpath("//i[@class='fa fa-trash-o']");
-            btnEditScheduleItem = driver.GetByXpath("//span[@class='fc-title']");
+            tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");           
         }
-        //you can use property for one-line method
+
         public WebElementWrapper GetAddScheduleItem()
         {
             return btnAddScheduleItem;
@@ -31,6 +29,7 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public WebElementWrapper GetTask()
         {
+            btnEditScheduleItem = driver.GetByXpath("//span[@class='fc-title']");
             return btnEditScheduleItem;
         }
 
@@ -41,12 +40,13 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public void ClickOnEditScheduleButton()
         {
+            btnEditScheduleItem = driver.GetByXpath("//span[@class='fc-title']");
             btnEditScheduleItem.Click();
         }
 
         public void ClickOnDeleteScheduleButton()
         {
-            //it will delete some task, not specific one
+            btnDeleteScheduleItem = driver.GetByXpath("//i[@class='fa fa-trash-o']");
             btnDeleteScheduleItem.Click();
         }
 

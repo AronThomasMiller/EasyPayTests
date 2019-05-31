@@ -36,19 +36,13 @@ namespace EasyPayTests
             LogProgress("Manager is choosing Oleg Adamov");
             var schedule = listOfInspectors.NavigateToInspectorsSchedule("Oleg Adamov");
             var btnAddInspector = schedule.GetAddScheduleItem();
-            Assert.IsTrue(btnAddInspector.IsDisplayed());
+            var isDisplayedButton = btnAddInspector.IsDisplayed();
+            Assert.AreEqual(true, isDisplayedButton, "Button 'Add schedule item' isn't displayed");
         }
 
         [Test]
         public void AddTasksToInspectorsSchedule()
         {
-            using (var conn = new DatabaseManipulation.DatabaseMaster())
-            {
-                conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
-                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
-            }
-
             LogProgress("Manager is going to list of inspectors");
             var listOfInspectors = homePage.NavigateToInspectorsList();
             LogProgress("Manager is choosing Oleg Adamov");
@@ -56,8 +50,9 @@ namespace EasyPayTests
             LogProgress("Manager is adding an item to inspector's schedule");
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
-
-            Assert.IsTrue(schedule.GetTask().IsDisplayed(), "Schedule isn't displayed");
+            
+            var isVisibleTask = schedule.GetTask().IsDisplayed();
+            Assert.AreEqual(true, isVisibleTask, "Task isn't displayed");
             // postCondition
             LogProgress("Manager is remowing an item from inspector's schedule");
             var confirm = deleteItem.DeleteItem();
@@ -80,7 +75,9 @@ namespace EasyPayTests
             LogProgress("Manager is editing an item in inspector's schedule");
             var editItem = chooseItemToEdit.EditItem();
             var deleteItem = editItem.ApplyToEdit("20190531", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
-            Assert.IsTrue(schedule.GetTask().IsDisplayed(), "Schedule isn't displayed");
+
+            var isVisibleTask = schedule.GetTask().IsDisplayed();
+            Assert.AreEqual(true, isVisibleTask, "Task isn't displayed");            
 
             // postCondition
             LogProgress("Manager is remowing an item from inspector's schedule");
@@ -123,13 +120,12 @@ namespace EasyPayTests
             LogProgress("Manager is adding Ivan Ivanov to the list of inspectors");
             var addIvan = listOfInspectors.ClickToAddInspector();
             addIvan.AddInspector("Ivan Ivanov");
-            driver.Refresh();
 
             LogProgress("Manager is trying to add an inspector to the list of inspectors");
             var close = listOfInspectors.ClickToAddInspector();
-            Assert.IsTrue(close.GetCaption().IsDisplayed(), "Busy isn't displayed");
+            var actualCaption = close.GetCaption();
+            Assert.AreEqual("All inspectors are busy", actualCaption, "Busy isn't displayed");
             close.CloseWindow();
-            driver.Refresh();
 
             // postCondition
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
@@ -154,7 +150,7 @@ namespace EasyPayTests
             LogProgress("Manager is adding Ivan Ivanov to the list of inspectors");
             var addIvan = listOfInspectors.ClickToAddInspector();
             addIvan.AddInspector("Ivan Ivanov");
-            driver.Refresh();
+
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
@@ -174,9 +170,9 @@ namespace EasyPayTests
             var listOfInspectors = homePage.NavigateToInspectorsList();
             LogProgress("Manager is adding Ivan Ivanov to the list of inspectors");
             var addIvan = listOfInspectors.ClickToAddInspector();
-            addIvan.AddInspector("Ivan Ivanov");
-            driver.Refresh();
-            Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed(), "Ivan Ivanov isn't displayed");
+            addIvan.AddInspector("Ivan Ivanov");            
+            var isInspectorDisplayed = listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed();
+            Assert.AreEqual(true, isInspectorDisplayed, "Ivan Ivanov isn't displayed");
             
             // postCondition
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
@@ -193,7 +189,6 @@ namespace EasyPayTests
             setNewPrice.ClickOnSetNewPriceButton();
             var formSetNewPrice = setNewPrice.ClickOnSetNewPriceButton();
             formSetNewPrice.SetNewPrice("7");
-            driver.Refresh();
             var actualPrice = setNewPrice.GetCurrentPrice();
             Assert.AreEqual("Current price: ₴7", actualPrice, "Wrong price");
         }
@@ -207,7 +202,6 @@ namespace EasyPayTests
             setFuturePrice.ClickOnSetFuturePriceButton();
             var formSetFuturePrice = setFuturePrice.ClickOnSetFuturePriceButton();
             formSetFuturePrice.SetFuturePrice("20", "2019-05-30");
-            driver.Refresh();
             var actualPrice = setFuturePrice.GetFuturePrice();
             var actualActivationDate = setFuturePrice.GetActivationDate();
             Assert.AreEqual("Future price: ₴20", actualPrice, "Wrong price");

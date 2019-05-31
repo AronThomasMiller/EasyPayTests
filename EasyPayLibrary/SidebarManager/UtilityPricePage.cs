@@ -33,12 +33,14 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public string GetCurrentPrice()
         {
+            driver.Refresh();
             var currentPrice = driver.GetByXpath("//p[@id='service_price']").GetText();
             return currentPrice;
         }
 
         public string GetFuturePrice()
         {
+            driver.Refresh();
             var futurePrice = driver.GetByXpath("//p[@id='future_price']").GetText();
             return futurePrice;
         }

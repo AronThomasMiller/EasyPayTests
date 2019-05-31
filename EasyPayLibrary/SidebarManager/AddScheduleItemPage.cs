@@ -10,28 +10,28 @@ namespace EasyPayLibrary.ManagerSidebar
 {
     public class AddScheduleItemPage : BasePageObject
     {
-        WebElementWrapper chooseDateAndTime;
-        WebElementWrapper chooseAddress;
+        WebElementWrapper fieldChooseDateAndTime;
+        WebElementWrapper fieldChooseAddress;
         WebElementWrapper btnApply;
 
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            chooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker']");
-            chooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
+            fieldChooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker']");
+            fieldChooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
         }
         public void ChooseDateAndTime(string date)
         {
-            chooseDateAndTime.Click();
-            DatePicker.DatePickerFunc(chooseDateAndTime);
-            chooseDateAndTime.SendText(date);
+            fieldChooseDateAndTime.Click();
+            DatePicker.DatePickerFunc(fieldChooseDateAndTime);
+            fieldChooseDateAndTime.SendText(date);
         }
 
         public void ChooseAddress(string address)
         {
-            chooseAddress.SendText(address);
-            chooseAddress.sendEnter();
+            fieldChooseAddress.SendText(address);
+            fieldChooseAddress.sendEnter();
         }
 
         public void ClickOnApplyButton()

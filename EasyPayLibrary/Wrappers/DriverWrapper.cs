@@ -29,7 +29,7 @@ namespace EasyPayLibrary
 
         public string GetUrl() { return driver.Url; }
         
-        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 20)
+        public List<WebElementWrapper> GetElementsByXpath(string xpath, int timeoutInSeconds = 5)
         {
             GetByXpath(xpath);
             var elements = driver.FindElements(By.XPath(xpath));
@@ -37,7 +37,7 @@ namespace EasyPayLibrary
             return result.ToList();
         }
 
-        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 20)
+        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 5)
         {
             if (timeoutInSeconds > 0)
             {
