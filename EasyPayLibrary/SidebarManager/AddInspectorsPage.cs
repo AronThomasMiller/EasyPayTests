@@ -11,7 +11,6 @@ namespace EasyPayLibrary.ManagerSidebar
     {
         //what variable inspector means? what type it is?
         WebElementWrapper inspector;
-
         //what it is "allInspectorsAreBusy"?
         WebElementWrapper allInspectorsAreBusy;
         WebElementWrapper btnAdd;
@@ -19,8 +18,8 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            btnAdd = driver.GetByXpath("//button[@data-locale-item='add']");
             base.Init(driver);
+            btnAdd = driver.GetByXpath("//button[@data-locale-item='add']");
         }
         //by POM you should make list of inspectors as separate class, and list of inspectors which are able to add too
         public void ClickOnInspector(string name)
@@ -53,7 +52,6 @@ namespace EasyPayLibrary.ManagerSidebar
             ClickOnAddButton();
             return GetPOM<InspectorsListPage>(driver);
         }
-
 
         public InspectorsListPage CloseWindow()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyPayLibrary.SidebarManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.ManagerSidebar
 {
-    //Page of item?
     public class EditScheduleItemPage : BasePageObject
     {
-        //Type?
         WebElementWrapper chooseDateAndTime;
         WebElementWrapper deleteAddress;
         WebElementWrapper chooseAddress;
-
         WebElementWrapper btnApply;
 
         public override void Init(DriverWrapper driver)
@@ -24,14 +22,11 @@ namespace EasyPayLibrary.ManagerSidebar
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-edit-apply']");
             base.Init(driver);
         }
-        //Specific class DatePicker, put it there and name specific
+
         public void ChooseDateAndTime(string date)
         {
             chooseDateAndTime.Click();
-            for(int i = 0; i <= 7; i++)
-            {
-                chooseDateAndTime.sendBackSpace();
-            }
+            DatePicker.DatePickerFunc(chooseDateAndTime);
             chooseDateAndTime.SendText(date);
         }
 

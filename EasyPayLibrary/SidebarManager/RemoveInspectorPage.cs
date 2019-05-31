@@ -13,8 +13,8 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            btnRemove = driver.GetByXpath("//button[@id='removeInspector']");
             base.Init(driver);
+            btnRemove = driver.GetByXpath("//button[@id='removeInspector']");
         }
 
         public void ClickOnRemoveButton()

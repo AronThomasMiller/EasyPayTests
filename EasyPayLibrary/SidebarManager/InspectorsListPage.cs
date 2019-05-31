@@ -57,7 +57,7 @@ namespace EasyPayLibrary.Pages.Manager
             ClickOnAddInspectorsButton();
             return GetPOM<AddInspectorsPage>(driver);
         }
-        
+
         public string VerifyListOfInspectorsIsNotEmpty()
         {
             panel = driver.GetByXpath("//div[@class='x_content']");

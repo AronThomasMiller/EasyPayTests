@@ -15,7 +15,7 @@ namespace EasyPayTests
     [Category("All")]
     [Category("Manager")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class Manager:BaseTest
+    public class Manager : BaseTest
     {
         HomePageManager homePage;
 
@@ -50,7 +50,7 @@ namespace EasyPayTests
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
-            Assert.IsTrue(schedule.GetTask().IsDisplayed(),"Schedule isn't displayed");
+            Assert.IsTrue(schedule.GetTask().IsDisplayed(), "Schedule isn't displayed");
             // postCondition
             LogProgress("Manager is remowing an item from inspector's schedule");
             var confirm = deleteItem.DeleteItem();
@@ -73,8 +73,8 @@ namespace EasyPayTests
             LogProgress("Manager is editing an item in inspector's schedule");
             var editItem = chooseItemToEdit.EditItem();
             var deleteItem = editItem.ApplyToEdit("20190531", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
-            Assert.IsTrue(schedule.GetTask().IsDisplayed(),"Schedule isn't displayed");
-            
+            Assert.IsTrue(schedule.GetTask().IsDisplayed(), "Schedule isn't displayed");
+
             // postCondition
             LogProgress("Manager is remowing an item from inspector's schedule");
             var confirm = deleteItem.DeleteItem();
@@ -113,7 +113,7 @@ namespace EasyPayTests
 
             LogProgress("Manager is trying to add an inspector to the list of inspectors");
             var close = listOfInspectors.ClickToAddInspector();
-            Assert.IsTrue(close.GetCaption().IsDisplayed(),"Busy isn't displayed");
+            Assert.IsTrue(close.GetCaption().IsDisplayed(), "Busy isn't displayed");
             close.CloseWindow();
             driver.Refresh();
 
@@ -150,7 +150,7 @@ namespace EasyPayTests
             addIvan.AddInspector("Ivan Ivanov");
             driver.Refresh();
 
-            Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed(),"Ivan Ivanov isn't displayed");
+            Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed(), "Ivan Ivanov isn't displayed");
 
             // postCondition
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
@@ -165,10 +165,11 @@ namespace EasyPayTests
             var setNewPrice = homePage.NavigateToUtilityPrice();
             LogProgress("Manager is setting a new price");
             setNewPrice.ClickOnSetNewPriceButton();
-            setNewPrice.SetNewPrice("7");
+            var formSetNewPrice = setNewPrice.ClickOnSetNewPriceButton();
+            formSetNewPrice.SetNewPrice("7");
             driver.Refresh();
             var actualPrice = setNewPrice.GetCurrentPrice();
-            Assert.AreEqual("Current price: ₴7", actualPrice,"Wrong price");
+            Assert.AreEqual("Current price: ₴7", actualPrice, "Wrong price");
         }
 
         [Test]
@@ -178,19 +179,20 @@ namespace EasyPayTests
             var setFuturePrice = homePage.NavigateToUtilityPrice();
             LogProgress("Manager is setting a future price");
             setFuturePrice.ClickOnSetFuturePriceButton();
-            setFuturePrice.SetFuturePrice("20", "2019-05-30");
+            var formSetFuturePrice = setFuturePrice.ClickOnSetFuturePriceButton();
+            formSetFuturePrice.SetFuturePrice("20", "2019-05-30");
             driver.Refresh();
             var actualPrice = setFuturePrice.GetFuturePrice();
             var actualActivationDate = setFuturePrice.GetActivationDate();
-            Assert.AreEqual("Future price: ₴20", actualPrice,"Wrong price");
-            Assert.AreEqual("Next activation date: 30 MAY 2019", actualActivationDate,"Wrong  activation date");
+            Assert.AreEqual("Future price: ₴20", actualPrice, "Wrong price");
+            Assert.AreEqual("Next activation date: 30 MAY 2019", actualActivationDate, "Wrong  activation date");
         }
 
         [Test]
         public void VerifyThatManagerHasAccesToAccount()
         {
-            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"),"Wrong Url");
-            Assert.AreEqual("MANAGER", GeneralPage.GetRole(driver),"manager can't access his account");
+            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"), "Wrong Url");
+            Assert.AreEqual("MANAGER", GeneralPage.GetRole(driver), "manager can't access his account");
         }
 
         [Test]
@@ -204,7 +206,8 @@ namespace EasyPayTests
             var addScheduleItemPage = schedulePage.AddItem();
             LogProgress("Manager is entering date and address");
             addScheduleItemPage.ApplyToAdd("2019-05-01", "Немирівська вулиця 1/2, Чернівці, Чернівецька область");
-            Assert.IsTrue(addScheduleItemPage.IsAddressFromScheduleDisplayed(), "Address from schedule is not displayed");
+            var isAddressFromScheduleDisplayed = addScheduleItemPage.IsAddressFromScheduleDisplayed();
+            Assert.AreEqual(true, isAddressFromScheduleDisplayed, "Address from schedule is not displayed");
         }
 
         [Test]
@@ -214,13 +217,12 @@ namespace EasyPayTests
             {
                 var prevMonthDate = DateTime.Today.AddMonths(-1);
                 var currentMothDate = DateTime.Today;
+                var todayStr = currentMothDate.ToString().Replace('.', '-');
+                var prevMothStr = prevMonthDate.ToString().Replace('.', '-');
                 conn.Open();
-                conn.ChangeInDB($"update schedule_history set event_date = " +
-                    $"'{prevMonthDate.ToString("yyyy-MM-dd")}', submit_date = " +
-                    $"'{prevMonthDate.AddDays(1).ToString("yyyy-MM-dd")}' where id = 163");
-                conn.ChangeInDB($"update schedule_history set event_date = " +
-                    $"'{currentMothDate.ToString("yyyy-MM-dd")}', submit_date = " +
-                    $"'{currentMothDate.AddDays(1).ToString("yyyy-MM-dd")}' where address_id = 16");
+                conn.ChangeInDB("Truncate table schedule_history");
+                conn.ChangeInDB($"insert into schedule_history values (16,'Overdue visit','{todayStr}','OVERDUE','{todayStr}',16,109)");
+                conn.ChangeInDB($"insert into schedule_history values (17,'Overdue visit','{prevMothStr}','OVERDUE','{prevMothStr}',16,109)");
             }
 
             var inspectorPage = homePage.NavigateToInspectorsList();
@@ -230,9 +232,11 @@ namespace EasyPayTests
             var tabHistory = schedulePage.ClickOnTabHistory();
             LogProgress("Manager is clicking on current month button");
             var tabCurrentMonth = tabHistory.ClickOnCurrentMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("вулиця Пушкіна ", $"{DateTime.Today.ToString("dd.M.yyyy")}"), "Current month history is not visible");
+            var currentMonthContainsAddress = tabHistory.CurrentMonthContainsAddress("вулиця Пушкіна ", $"{DateTime.Today.ToString("dd.M.yyyy")}");
+            Assert.AreEqual(true, currentMonthContainsAddress, "Current month history is not visible");
             var tabPreviousMonth = tabHistory.ClickOnPreviousMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryPreviousMonthVisible($"{DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}"), $"Previous month history doesn't contain date: {DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}");
+            var previousMonthContainsAddress = tabHistory.PreviousMonthContainsAddress($"{DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}");
+            Assert.AreEqual(true, previousMonthContainsAddress, $"Previous month history doesn't contain date: {DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}");
         }
 
         [Test]
@@ -244,8 +248,10 @@ namespace EasyPayTests
             var schedulePage = inspectorPage.NavigateToInspectorsSchedule("Oleg Adamov");
             LogProgress("Manager is clicking on tab statistics");
             var tabStatistics = schedulePage.ClickOnTabStatistics();
-            Assert.IsTrue(tabStatistics.IsCurrentAppointmentVisible(), "Current appointment is not visible");
-            Assert.IsTrue(tabStatistics.IsPreviousAppointmentsVisible(), "Previous appointment is not visible");
+            var isCurrentAppointmentVisible = tabStatistics.IsCurrentAppointmentVisible();
+            var isPreviousAppointmentsVisible = tabStatistics.IsPreviousAppointmentsVisible();
+            Assert.AreEqual(true, isCurrentAppointmentVisible, "Current appointment is not visible");
+            Assert.AreEqual(true, isPreviousAppointmentsVisible, "Previous appointment is not visible");
         }
 
         [Test]
@@ -254,10 +260,12 @@ namespace EasyPayTests
             LogProgress("Manager is navigating to utility price page");
             var utilityPricePage = homePage.NavigateToUtilityPrice();
             LogProgress("Manager is setting new price");
-            utilityPricePage.SetNewPrice("24");
+            var formSetNewPrice = utilityPricePage.ClickOnSetNewPriceButton();
+            formSetNewPrice.SetNewPrice("24");
             utilityPricePage.Init(driver);
             LogProgress("Manager is setting new future price");
-            utilityPricePage.SetFuturePrice("30", "2019-05-01");
+            var formSetFuturePrice = utilityPricePage.ClickOnSetFuturePriceButton();
+            formSetFuturePrice.SetFuturePrice("30", "2019-05-01");
             Assert.AreEqual("Current price: ₴24", "Current price: ₴24", "Current price is not 24");
             Assert.AreEqual("Future price: ₴30", "Future price: ₴30", "Future price is not 30");
         }

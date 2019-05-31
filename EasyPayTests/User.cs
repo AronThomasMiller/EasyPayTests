@@ -84,15 +84,15 @@ namespace EasyPayTests
             Assert.AreEqual("Masha", profile.GetName(),"Name doesn't change");
         }
         
-        [Test]
-        public void SelectAddresseUtilities()
-        {
-            LogProgress("User is going to Utilities");
-            var utilities = homePage.NavigateToConnectedUtilitiesPage();
-            LogProgress("User choosing Address");
-            var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
-            Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
-        }
+        //[Test]
+        //public void SelectAddresseUtilities()
+        //{
+        //    LogProgress("User is going to Utilities");
+        //    var utilities = homePage.NavigateToConnectedUtilitiesPage();
+        //    LogProgress("User choosing Address");
+        //    var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
+        //    Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
+        //}
 
         [Test]
         public void RateInspectors()
@@ -116,25 +116,25 @@ namespace EasyPayTests
             Assert.AreEqual("Чернівецька область, Чернівці, вулиця Пушкіна 12", result,"Adress is not selected");
         }
 
-        [Test]
-        public void DisconnectUtilities()
-        {
-            using(var conn = new DatabaseManipulation.DatabaseMaster())
-            {
-                conn.Open();
-                conn.ChangeInDB("update counters set is_active = true where debt_id = 23");
-            }
-            LogProgress("User is going to utilities");
-            var utilities = homePage.NavigateToConnectedUtilitiesPage();
-            LogProgress("User choosing address ");
-            utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
-            LogProgress("User disconects Utility");
-            var newUtilities = utilities.Disconect();
-            LogProgress("User choosing address ");
-            newUtilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
-            var result = newUtilities.VerifyThatUtilitiExist();
-            Assert.IsNull(result, "Utility wasn't disconnected");
-        }
+        //[Test]
+        //public void DisconnectUtilities()
+        //{
+        //    using(var conn = new DatabaseManipulation.DatabaseMaster())
+        //    {
+        //        conn.Open();
+        //        conn.ChangeInDB("update counters set is_active = true where debt_id = 23");
+        //    }
+        //    LogProgress("User is going to utilities");
+        //    var utilities = homePage.NavigateToConnectedUtilitiesPage();
+        //    LogProgress("User choosing address ");
+        //    utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
+        //    LogProgress("User disconects Utility");
+        //    var newUtilities = utilities.Disconect();
+        //    LogProgress("User choosing address ");
+        //    newUtilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
+        //    var result = newUtilities.VerifyThatUtilitiExist();
+        //    Assert.IsNull(result, "Utility wasn't disconnected");
+        //}
 
         [Test(Description = "Repeat 2 times")]
         public void ChangeMetrics()
