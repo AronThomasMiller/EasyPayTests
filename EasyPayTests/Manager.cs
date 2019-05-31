@@ -49,7 +49,7 @@ namespace EasyPayTests
             LogProgress("Manager is adding an item to inspector's schedule");
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
-
+            driver.Refresh();
             Assert.IsTrue(schedule.GetTask().IsDisplayed(), "Schedule isn't displayed");
             // postCondition
             LogProgress("Manager is remowing an item from inspector's schedule");
@@ -93,7 +93,7 @@ namespace EasyPayTests
             LogProgress("Manager is adding an item to inspector's schedule");
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
-
+            
             LogProgress("Manager is remowing an item from inspector's schedule");
             var confirm = deleteItem.DeleteItem();
             confirm.ApplyToDelete();

@@ -22,9 +22,9 @@ namespace EasyPayLibrary.ManagerSidebar
         }
         public void ChooseDateAndTime(string date)
         {
-            chooseDateAndTime.Click();
-            DatePicker.DatePickerFunc(chooseDateAndTime);
-            chooseDateAndTime.SendText(date);
+            fieldChooseDateAndTime.Click();
+            DatePicker.DatePickerFunc(fieldChooseDateAndTime);
+            fieldChooseDateAndTime.SendText(date);
         }
 
         public void ChooseAddress(string address)

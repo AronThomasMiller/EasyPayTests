@@ -137,7 +137,7 @@ namespace EasyPayTests
         //    var schedule = secondEnter.LoginAsInspector("inspector2@gmail.com", "Admin123");
         //    var sched = schedule.NavigateToSchedule();
         //    Assert.IsNotNull(sched.GetCallByAddress("вулиця Толстого 2"), "No address match");
-        //}
+        }
 
         [Test]
         public void IsPersonalInfoTranslationIsCorrect()
