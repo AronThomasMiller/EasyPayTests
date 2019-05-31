@@ -50,7 +50,7 @@ namespace SeleniumExtentReportTest
 
                 var date = DateTime.Now.ToString(" dd-MM-yyyy_(HH_mm_ss)");
                 var outputDir = $"{dir}\\Test_Execution_Reports\\{TestClassName}{date}\\";
-                var param = "Automation_Report" + ".html";
+                var param = "Automation_Report.html";
                 var htmlReporter = new ExtentHtmlReporter($"{outputDir}{param}");
 
                 htmlTestSuitReport.AddSystemInfo("Who want to ATQC?", "");
@@ -90,7 +90,7 @@ namespace SeleniumExtentReportTest
                 if (test.status == Status.Fail)
                 {
                     string screenShotPath = driver.GetScreenshot(screenFolder);
-                    AddTestHTML(test, screenShotPath, output);
+                    AddTestHTML(test, output, screenShotPath);
                 }
                 else
                 {
@@ -134,23 +134,14 @@ namespace SeleniumExtentReportTest
             htmlTestReport.Log(logstatus, $"Snapshot below: {htmlTestReport.AddScreenCaptureFromPath(screenShotPath)}");
         }
 
-        private void AddTestHTML(ContextOfTest test, string output)
-        {
-            var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
-            var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
-            var res1 = (!isStackTraceNullOrEmpty ? "\n<br>\n<br>" + test.stacktrace + "\n<br>\n<br>" : "\n<br>\n<br>");
-            var res2 = (!isErrorMessageNullOrEmpty ? test.errorMessage + "\n<br>\n<br>" : string.Empty);
-            htmlTestReport.Log(test.status, $"Test ended with {test.status}{res1}{res2}{output}");
-        }
-
-        private void AddTestHTML(ContextOfTest test, string screenShotPath, string output)
+        private void AddTestHTML(ContextOfTest test, string output = null, string screenShotPath = null)
         {
             var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
             var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
             var res1 = (!isStackTraceNullOrEmpty ? $"\n<br>\n<br>{test.stacktrace}\n<br>\n<br>" : "\n<br>\n<br>");
             var res2 = (!isErrorMessageNullOrEmpty ?$"{test.errorMessage}\n<br>\n<br>" : string.Empty);
             htmlTestReport.Log(test.status, $"Test ended with {test.status}{res1}{res2}{output}");
-            AddScreenShotHTML(test.status, screenShotPath);
+            if (screenShotPath != null) AddScreenShotHTML(test.status, screenShotPath);
         }
     }
 }

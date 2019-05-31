@@ -17,7 +17,7 @@ namespace EasyPayLibrary.ManagerSidebar
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            btnAddScheduleItem = driver.GetByXpath("//button[@class='fc-addScheduleItem-button fc-button fc-state-default fc-corner-left fc-corner-right']");
+            btnAddScheduleItem = driver.GetByXpath("//button[@class='fc-addScheduleItem-button fc-button fc-state-default fc-corner-left fc-corner-right']",20);
             tabHistory = driver.GetByXpath("//a[@id='profile-tab2']");
             tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");
             btnDeleteScheduleItem = driver.GetByXpath("//i[@class='fa fa-trash-o']");

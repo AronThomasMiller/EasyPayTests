@@ -21,7 +21,6 @@ namespace EasyPayLibrary.ManagerSidebar
             chooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
         }
-        //Create separate class DatePicker, put it in ther and name specific
         public void ChooseDateAndTime(string date)
         {
             chooseDateAndTime.Click();
