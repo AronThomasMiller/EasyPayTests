@@ -19,9 +19,7 @@ namespace EasyPayLibrary.ManagerSidebar
             base.Init(driver);
             btnAddScheduleItem = driver.GetByXpath("//button[@class='fc-addScheduleItem-button fc-button fc-state-default fc-corner-left fc-corner-right']", 20);
             tabHistory = driver.GetByXpath("//a[@id='profile-tab2']");
-            tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");
-            
-            
+            tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");            
         }
         //you can use property for one-line method
         public WebElementWrapper GetAddScheduleItem()
@@ -31,6 +29,7 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public WebElementWrapper GetTask()
         {
+            btnEditScheduleItem = driver.GetByXpath("//span[@class='fc-title']");
             return btnEditScheduleItem;
         }
 

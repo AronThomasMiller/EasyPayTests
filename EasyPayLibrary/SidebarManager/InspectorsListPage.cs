@@ -7,7 +7,7 @@ namespace EasyPayLibrary.Pages.Manager
         //type of element
         WebElementWrapper panel;
         //create pom for table
-        WebElementWrapper inspector;
+        WebElementWrapper optionInspector;
         WebElementWrapper btnAddInspector;
         WebElementWrapper btnRemoveInspector;
 
@@ -23,8 +23,8 @@ namespace EasyPayLibrary.Pages.Manager
 
         public void ClickOnInspector(string name)
         {
-            inspector = GetInspector(name);
-            inspector.Click();
+            optionInspector = GetInspector(name);
+            optionInspector.Click();
         }
 
         public void ClickToRemoveInspector(string name)

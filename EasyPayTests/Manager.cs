@@ -41,14 +41,7 @@ namespace EasyPayTests
 
         [Test]
         public void AddTasksToInspectorsSchedule()
-        {
-            using (var conn = new DatabaseManipulation.DatabaseMaster())
-            {
-                conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
-                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
-            }
-
+        {            
             LogProgress("Manager is going to list of inspectors");
             var listOfInspectors = homePage.NavigateToInspectorsList();
             LogProgress("Manager is choosing Oleg Adamov");
@@ -112,7 +105,7 @@ namespace EasyPayTests
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
                 conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
+                conn.ChangeInDB("delete from users where user_id = 113");
                 conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
             }
 
@@ -146,7 +139,7 @@ namespace EasyPayTests
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
                 conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
+                conn.ChangeInDB("delete from users where user_id = 113");
                 conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
             }
 
@@ -169,7 +162,7 @@ namespace EasyPayTests
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
                 conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
+                conn.ChangeInDB("delete from users where user_id = 113");
                 conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
             }
 
