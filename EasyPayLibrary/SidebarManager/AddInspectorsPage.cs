@@ -16,8 +16,8 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            btnAdd = driver.GetByXpath("//button[@data-locale-item='add']");
             base.Init(driver);
+            btnAdd = driver.GetByXpath("//button[@data-locale-item='add']");
         }
 
         public void ClickOnInspector(string name)
@@ -49,7 +49,6 @@ namespace EasyPayLibrary.ManagerSidebar
             ClickOnAddButton();
             return GetPOM<InspectorsListPage>(driver);
         }
-
 
         public InspectorsListPage CloseWindow()
         {

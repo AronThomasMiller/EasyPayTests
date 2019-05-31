@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyPayLibrary.SidebarManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,20 +21,13 @@ namespace EasyPayLibrary.ManagerSidebar
             fieldChooseAddress = driver.GetByXpath("//form[@id='edit-schedule-item-form']//input[@placeholder='Select a Address']");
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-edit-apply']");
             base.Init(driver);
-        }        
-
-        public void ClearFieldChooseDateAndTime()
-        {
-            for (int i = 0; i <= 7; i++)
-            {
-                fieldChooseDateAndTime.sendBackSpace();
-            }
         }
+
         public void ChooseDateAndTime(string date)
         {
-            fieldChooseDateAndTime.Click();
-            ClearFieldChooseDateAndTime();
-            fieldChooseDateAndTime.SendText(date);
+            chooseDateAndTime.Click();
+            DatePicker.DatePickerFunc(chooseDateAndTime);
+            chooseDateAndTime.SendText(date);
         }
 
         public void ChooseAddressToEdit(string address)

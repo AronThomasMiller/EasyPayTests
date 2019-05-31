@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EasyPayLibrary.SidebarManager;
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,21 +19,12 @@ namespace EasyPayLibrary.ManagerSidebar
             fieldChooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker']");
             fieldChooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
-            base.Init(driver);
-        }        
-
-        public void ClearFieldChooseDateAndTime()
-        {
-            for (int i = 0; i <= 7; i++)
-            {
-                fieldChooseDateAndTime.sendBackSpace();
-            }
         }
         public void ChooseDateAndTime(string date)
         {
-            fieldChooseDateAndTime.Click();
-            ClearFieldChooseDateAndTime();
-            fieldChooseDateAndTime.SendText(date);
+            chooseDateAndTime.Click();
+            DatePicker.DatePickerFunc(chooseDateAndTime);
+            chooseDateAndTime.SendText(date);
         }
 
         public void ChooseAddress(string address)
@@ -53,11 +46,17 @@ namespace EasyPayLibrary.ManagerSidebar
             return GetPOM<SchedulePage>(driver);
         }
 
-        //try catch for case if it is not displayed, in this way you will get no exception
         public bool IsAddressFromScheduleDisplayed()
         {
-            var element = driver.GetByXpath("//div[@class='fc-content']");
-            return element.IsDisplayed();
+            try
+            {
+                var element = driver.GetByXpath("//div[@class='fc-content']");
+                return element.IsDisplayed();
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
         }
     }
 }

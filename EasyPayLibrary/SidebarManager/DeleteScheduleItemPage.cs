@@ -12,8 +12,8 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-remove-apply']");
             base.Init(driver);
+            btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-remove-apply']");
         }
 
         public void ClickOnApplyButton()
