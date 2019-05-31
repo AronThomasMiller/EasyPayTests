@@ -113,7 +113,8 @@ namespace EasyPayTests
 
             LogProgress("Manager is trying to add an inspector to the list of inspectors");
             var close = listOfInspectors.ClickToAddInspector();
-            Assert.IsTrue(close.GetCaption().IsDisplayed(),"Busy isn't displayed");
+            var actualCaption = close.GetCaption();
+            Assert.AreEqual("All inspectors are busy", actualCaption, "Busy isn't displayed");            
             close.CloseWindow();
             driver.Refresh();
 
@@ -121,6 +122,8 @@ namespace EasyPayTests
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
+            
+            
         }
 
         [Test]

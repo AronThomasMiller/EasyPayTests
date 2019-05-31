@@ -7,35 +7,37 @@ using System.Threading.Tasks;
 namespace EasyPayLibrary.ManagerSidebar
 {
     public class AddScheduleItemPage : BasePageObject
-    {
-        //Type of elements?
-        WebElementWrapper chooseDateAndTime;
-        WebElementWrapper chooseAddress;
-
+    {        
+        WebElementWrapper fieldChooseDateAndTime;
+        WebElementWrapper fieldChooseAddress;
         WebElementWrapper btnApply;
 
         public override void Init(DriverWrapper driver)
         {
-            chooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker']");
-            chooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
+            fieldChooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker']");
+            fieldChooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
             base.Init(driver);
-        }
-        //Create separate class DatePicker, put it in ther and name specific
-        public void ChooseDateAndTime(string date)
+        }        
+
+        public void ClearFieldChooseDateAndTime()
         {
-            chooseDateAndTime.Click();
             for (int i = 0; i <= 7; i++)
             {
-                chooseDateAndTime.sendBackSpace();
+                fieldChooseDateAndTime.sendBackSpace();
             }
-            chooseDateAndTime.SendText(date);
+        }
+        public void ChooseDateAndTime(string date)
+        {
+            fieldChooseDateAndTime.Click();
+            ClearFieldChooseDateAndTime();
+            fieldChooseDateAndTime.SendText(date);
         }
 
         public void ChooseAddress(string address)
         {
-            chooseAddress.SendText(address);
-            chooseAddress.sendEnter();
+            fieldChooseAddress.SendText(address);
+            fieldChooseAddress.sendEnter();
         }
 
         public void ClickOnApplyButton()

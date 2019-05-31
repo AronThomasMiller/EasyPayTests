@@ -8,12 +8,12 @@ namespace EasyPayLibrary.Pages.Manager
         WebElementWrapper panel;
         //create pom for table
         WebElementWrapper inspector;
-
         WebElementWrapper btnAddInspector;
         WebElementWrapper btnRemoveInspector;
 
         public override void Init(DriverWrapper driver)
         {
+            btnAddInspector = driver.GetByXpath("//button[@onclick='getFreeInspectors()']");
             base.Init(driver);
         }
 
@@ -34,9 +34,9 @@ namespace EasyPayLibrary.Pages.Manager
             btnRemoveInspector.Click();
         }
 
-        public void ClickOnAddInspectorsButton()
+        public void ClickOnAddInspectorButton()
         {
-            btnAddInspector = driver.GetByXpath("//button[@onclick='getFreeInspectors()']");
+            
             btnAddInspector.Click();
         }
         public SchedulePage NavigateToInspectorsSchedule(string name)
@@ -54,10 +54,10 @@ namespace EasyPayLibrary.Pages.Manager
 
         public AddInspectorsPage ClickToAddInspector()
         {
-            ClickOnAddInspectorsButton();
+            ClickOnAddInspectorButton();
             return GetPOM<AddInspectorsPage>(driver);
         }
-        
+
         public string VerifyListOfInspectorsIsNotEmpty()
         {
             panel = driver.GetByXpath("//div[@class='x_content']");

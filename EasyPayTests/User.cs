@@ -84,7 +84,7 @@ namespace EasyPayTests
             Assert.AreEqual("Masha", profile.GetName(),"Name doesn't change");
         }
         
-        [Test]
+        /*[Test]
         public void SelectAddresseUtilities()
         {
             LogProgress("User is going to Utilities");
@@ -92,7 +92,7 @@ namespace EasyPayTests
             LogProgress("User choosing Address");
             var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
             Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
-        }
+        }*/
 
         [Test]
         public void RateInspectors()
@@ -116,7 +116,7 @@ namespace EasyPayTests
             Assert.AreEqual("Чернівецька область, Чернівці, вулиця Пушкіна 12", result,"Adress is not selected");
         }
 
-        [Test]
+        /*[Test]
         public void DisconnectUtilities()
         {
             using(var conn = new DatabaseManipulation.DatabaseMaster())
@@ -134,7 +134,7 @@ namespace EasyPayTests
             newUtilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
             var result = newUtilities.VerifyThatUtilitiExist();
             Assert.IsNull(result, "Utility wasn't disconnected");
-        }
+        }*/
 
         [Test(Description = "Repeat 2 times")]
         public void ChangeMetrics()
