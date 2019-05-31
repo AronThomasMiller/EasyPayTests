@@ -123,21 +123,21 @@ namespace EasyPayTests
             var error = addresses.Error();
             Assert.IsNull(error, "Address is not added");
         }
-        
-        //[Test]
-        //public void CallInspectorForConcreteDate()
-        //{
-        //    var loginPage = welcomePage.SignIn();
-        //    var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
-        //    var utilities = homePage.NavigateToConnectedUtilitiesPage();
-        //    utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
-        //    var logOut = utilities.SubmitCall();
-        //    var secondEnter = logOut.LogOut();
-        //    var schedule = secondEnter.LoginAsInspector("inspector2@gmail.com", "Admin123");
-        //    var sched = schedule.NavigateToSchedule();
-        //    Assert.IsNotNull(sched.GetCallByAddress("вулиця Толстого 2"), "No address match");
-        //}
+        [Test]
+        public void CallInspectorForConcreteDate()
+        {
+            var loginPage = welcomePage.SignIn();
+            var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
+
+            var utilities = homePage.NavigateToConnectedUtilitiesPage();
+            utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
+            var logOut = utilities.SubmitCall();
+            var secondEnter = logOut.LogOut();
+            var schedule = secondEnter.LoginAsInspector("inspector2@gmail.com", "Admin123");
+            var sched = schedule.NavigateToSchedule();
+            Assert.IsNotNull(sched.GetCallByAddress("вулиця Толстого 2"), "No address match");
+        }
 
         [Test]
         public void IsPersonalInfoTranslationIsCorrect()

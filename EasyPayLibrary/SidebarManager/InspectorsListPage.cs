@@ -12,8 +12,7 @@ namespace EasyPayLibrary.Pages.Manager
         WebElementWrapper btnRemoveInspector;
 
         public override void Init(DriverWrapper driver)
-        {
-            btnAddInspector = driver.GetByXpath("//button[@onclick='getFreeInspectors()']");
+        {            
             base.Init(driver);
         }
 
@@ -36,7 +35,7 @@ namespace EasyPayLibrary.Pages.Manager
 
         public void ClickOnAddInspectorButton()
         {
-            
+            btnAddInspector = driver.GetByXpath("//button[@onclick='getFreeInspectors()']");
             btnAddInspector.Click();
         }
         public SchedulePage NavigateToInspectorsSchedule(string name)
