@@ -42,6 +42,13 @@ namespace EasyPayTests
         [Test]
         public void AddTasksToInspectorsSchedule()
         {
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB("delete from users where user_id = 99");
+                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
+            }
+
             LogProgress("Manager is going to list of inspectors");
             var listOfInspectors = homePage.NavigateToInspectorsList();
             LogProgress("Manager is choosing Oleg Adamov");
@@ -102,6 +109,13 @@ namespace EasyPayTests
         [Test]
         public void NotAvailableToAddInspector()
         {
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB("delete from users where user_id = 99");
+                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
+            }
+
             LogProgress("Manager is going to list of inspectors");
             var listOfInspectors = homePage.NavigateToInspectorsList();
 
@@ -126,6 +140,13 @@ namespace EasyPayTests
         [Test]
         public void RemoveInspector()
         {
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB("delete from users where user_id = 99");
+                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
+            }
+
             LogProgress("Manager is going to list of inspectors");
             var listOfInspectors = homePage.NavigateToInspectorsList();
 
@@ -134,7 +155,6 @@ namespace EasyPayTests
             var addIvan = listOfInspectors.ClickToAddInspector();
             addIvan.AddInspector("Ivan Ivanov");
             driver.Refresh();
-
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
@@ -143,15 +163,21 @@ namespace EasyPayTests
         [Test]
         public void AddInspector()
         {
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB("delete from users where user_id = 99");
+                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
+            }
+
             LogProgress("Manager is going to list of inspectors");
             var listOfInspectors = homePage.NavigateToInspectorsList();
             LogProgress("Manager is adding Ivan Ivanov to the list of inspectors");
             var addIvan = listOfInspectors.ClickToAddInspector();
             addIvan.AddInspector("Ivan Ivanov");
             driver.Refresh();
-
             Assert.IsTrue(listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed(), "Ivan Ivanov isn't displayed");
-
+            
             // postCondition
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
