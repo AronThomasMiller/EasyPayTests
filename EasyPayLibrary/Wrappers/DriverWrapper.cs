@@ -37,7 +37,7 @@ namespace EasyPayLibrary
             return result.ToList();
         }
 
-        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 5)
+        public WebElementWrapper GetByXpath(string xpath, int timeoutInSeconds = 20)
         {
             if (timeoutInSeconds > 0)
             {
