@@ -25,7 +25,7 @@ namespace EasyPayLibrary.Pages
             paymentsHistory = driver.GetByXpath("//a[@href='/user/paymentsHistoryPage']");
             rateInspectors = driver.GetByXpath("//a[@href='/user/rate/']");
         }
-
+        //property
         public string GetAddressesText()
         {
             return addresses.GetText();

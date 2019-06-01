@@ -100,7 +100,7 @@
     <Compile Include="SidebarManager\SchedulePage.cs" />
     <Compile Include="SidebarManager\StatisticsPage.cs" />
     <Compile Include="SidebarManager\UtilityPricePage.cs" />
-    <Compile Include="BaseSidebar.cs" />
+    <Compile Include="SidebarBase.cs" />
     <Compile Include="SidebarUser\AddressPage\AddressesPage.cs" />
     <Compile Include="SidebarUser\AddressPage\AddressForm.cs" />
     <Compile Include="SidebarUser\ConnectedUtilities\ConnectedUtilitiesForm.cs" />

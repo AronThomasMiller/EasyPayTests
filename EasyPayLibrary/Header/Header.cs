@@ -10,8 +10,7 @@ namespace EasyPayLibrary
     {
         WebElementWrapper btnProfile;
         WebElementWrapper btnLogOut;
-        WebElementWrapper dropdownProfile;        
-        WebElementWrapper btnUA;
+        WebElementWrapper dropdownProfile;
         WebElementWrapper dropdownLanguage;
 
         public override void Init(DriverWrapper driver)

@@ -30,7 +30,7 @@ namespace EasyPayLibrary.InspectorSidebar.Rate_clients
             {
                 table.Add(new RateClientsRows(element, driver));
             }
-            //table = tableOnPage.Select(element => new RateClientsRows(element, driver)).ToList();
+            table = tableOnPage.Select(element => new RateClientsRows(element, driver)).ToList();
         }
 
         public RateClientsRows GetFirstRow()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.Changes
 {
-    public class ConnectedUtilitiesPage : GeneralPage
+    public class ConnectedUtilitiesPage : HomePageUser
     {
         //FormToManageAddress
         ConnectedUtilitiesForm selectAddresse;
@@ -15,6 +15,22 @@ namespace EasyPayLibrary.Changes
         {
             base.Init(driver);
             selectAddresse = GetPOM<ConnectedUtilitiesForm>(driver);    
+        }
+
+        public HomePageUser CallInspector(string address)
+        {
+            selectAddresse.CallInspector(address);
+            return selectAddresse.SubmitCall();
+        }
+
+        public string SelectAddress(string address)
+        {
+            return selectAddresse.SelectAddress(address);
+        }
+
+        public ConnectedUtilitiesForm Disconect()
+        {
+           return selectAddresse.Disconect();
         }
     }
 }
