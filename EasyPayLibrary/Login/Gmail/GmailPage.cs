@@ -9,7 +9,8 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 
         public override void Init(DriverWrapper driver)
         {
-            emailFromEasyPay = driver.GetByXpath("//*[contains(text(),'EASY PAY - Confirm Registration')]/../..");
+            var ListOfEmails = driver.GetElementsByXpath("//*[contains(text(),'EASY PAY - Confirm Registration')]/../..");
+            emailFromEasyPay = ListOfEmails[0];
             base.Init(driver);
         }
 

@@ -1,5 +1,6 @@
 ﻿namespace EasyPayLibrary
 {
+    //if you create class for page, name of class should tell about it, "Utilities" can be not only page
     public class Utilities : HomePageAdmin
     {
         WebElementWrapper btnChangeManager;
@@ -21,7 +22,7 @@
         {
             btnChangeManager.Click();
         }
-
+        //use property instead one-line method
         public bool TableOfUtilitiesIsVisible()
         {
             return tableOfUtilities.IsDisplayed();
@@ -44,7 +45,7 @@
             btnConfirm = driver.GetByXpath("//button[@id='update_button']");
             btnConfirm.Click();
         }
-
+        //Public members should start by UpperCase
         public string getTextFromManagerField()
         {
             return fieldManager.GetText();

@@ -14,7 +14,7 @@ namespace EasyPayTests
     [TestFixture]
     [Category("All")]
     [Category("Manager")]
-    //[Parallelizable(ParallelScope.Fixtures)]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class Manager:BaseTest
     {
         HomePageManager homePage;
@@ -220,7 +220,7 @@ namespace EasyPayTests
                     $"'{prevMonthDate.AddDays(1).ToString("yyyy-MM-dd")}' where id = 163");
                 conn.ChangeInDB($"update schedule_history set event_date = " +
                     $"'{currentMothDate.ToString("yyyy-MM-dd")}', submit_date = " +
-                    $"'{currentMothDate.AddDays(1).ToString("yyyy-MM-dd")}' where id = 196");
+                    $"'{currentMothDate.AddDays(1).ToString("yyyy-MM-dd")}' where address_id = 16");
             }
 
             var inspectorPage = homePage.NavigateToInspectorsList();
@@ -230,7 +230,7 @@ namespace EasyPayTests
             var tabHistory = schedulePage.ClickOnTabHistory();
             LogProgress("Manager is clicking on current month button");
             var tabCurrentMonth = tabHistory.ClickOnCurrentMonthButton();
-            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("вулиця Шевченка", $"{DateTime.Today.ToString("dd.M.yyyy")}"), "Current month history is not visible");
+            Assert.IsTrue(tabHistory.IsHistoryCurrentMonthVisible("вулиця Пушкіна ", $"{DateTime.Today.ToString("dd.M.yyyy")}"), "Current month history is not visible");
             var tabPreviousMonth = tabHistory.ClickOnPreviousMonthButton();
             Assert.IsTrue(tabHistory.IsHistoryPreviousMonthVisible($"{DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}"), $"Previous month history doesn't contain date: {DateTime.Today.AddMonths(-1).ToString("dd.M.yyyy")}");
         }

@@ -16,7 +16,7 @@ namespace EasyPayLibrary
             sidebar = GetPOM<SidebarUser>(driver);
             base.Init(driver);
         }
-
+        //use property instead one-line method
         public string GetAddressesText()
         {
             return sidebar.GetAddressesText();
@@ -42,10 +42,10 @@ namespace EasyPayLibrary
             return sidebar.GetRateInspectorsText();
         }
 
-        public HomePageUser ChangeToUKR()
+        public HomePageUser ChangeToUA()
         {
             header.ChangeToUa();
-            return GetPOM<HomePageUser>(driver);
+            return TranslatePageToUA<HomePageUser>(driver);
         }
 
         public string GetMainPageTitleText()
@@ -60,36 +60,36 @@ namespace EasyPayLibrary
             return xTitle.GetText();
         }
 
-        public PaymentPage NavigateToPayment()
+        public PaymentPage NavigateToPaymentPage()
         {
             sidebar.ClickOnPayment();
             return GetPOM<PaymentPage>(driver);
         }
 
-        public PaymentsHistoryPage NavigateToPaymentHistory()
+        public PaymentsHistoryPage NavigateToPaymentHistoryPage()
         {
             sidebar.ClickOnPaymentHistory();
             return GetPOM<PaymentsHistoryPage>(driver);
         }
-
+        //Get List of what? function need to be able to say what it actualy returns
         public IEnumerable<WebElementWrapper> GetList()
         {
-            return sidebar.GetListOfSideBarComponents();
+            return sidebar.ListOfSideBarComponents;
         }
 
-        public AddAddressForm NavigateToAddresses()
+        public AddAddressForm NavigateToAddressesPage()
         {
             sidebar.ClickOnAddresses();
             return GetPOM<AddAddressForm>(driver);
         }
 
-        public ConnectedUtilitiesForm NavigateToUtilities()
+        public ConnectedUtilitiesPage NavigateToConnectedUtilitiesPage()
         {
             sidebar.ClickOnConnectedUtilities();
-            return GetPOM<ConnectedUtilitiesForm>(driver);
+            return GetPOM<ConnectedUtilitiesPage>(driver);
         }
 
-        public RateInspectorsPage NavigateToRateInspectors()
+        public RateInspectorsPage NavigateToRateInspectorsPage()
         {
             sidebar.ClickOnRateInspectorsPage();
             return GetPOM<RateInspectorsPage>(driver);

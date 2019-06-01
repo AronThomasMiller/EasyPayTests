@@ -48,8 +48,6 @@ namespace EasyPayLibrary
         public void ChangeToUa()
         {
             ClickOnLanguageDropdown();
-            btnUA = driver.GetByXpath("//a[@href='?lang=ua']");
-            btnUA.Click();
         }
     }
 }

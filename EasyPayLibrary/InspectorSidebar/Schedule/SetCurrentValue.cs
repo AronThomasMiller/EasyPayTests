@@ -13,7 +13,6 @@ namespace EasyPayLibrary.InspectorSidebar
 
         public override void Init(DriverWrapper driver)
         {
-
             fieldNewCurrentValue = driver.GetByXpath("//input[@id='newCurrentValue']");
             btnApply = driver.GetByXpath("//div[@class='modal fade in']//button[2]");
             base.Init(driver);

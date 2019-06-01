@@ -26,9 +26,7 @@ namespace DatabaseManipulation
 
         private void Init(string server, string port, string username, string password, string database)
         {
-            string conn_param = "Server=" + server + ";Port=" + port + "" +
-                ";User Id= " + username +";Password=" + password + 
-                ";Database="+ database +";";
+            string conn_param = $"Server={server};Port={port};User Id= {username};Password={password};Database={database};";
             conn = new NpgsqlConnection(conn_param);
         }
         public string TakeFromDB(string sql)

@@ -21,7 +21,7 @@ namespace EasyPayLibrary.ManagerSidebar
         {
             btnRemove.Click();
         }
-
+        
         public InspectorsListPage ConfirmRemoving()
         {
             ClickOnRemoveButton();

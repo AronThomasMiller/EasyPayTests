@@ -16,15 +16,15 @@ namespace EasyPayLibrary
         WebElementWrapper btnCreateAccount;
         WebElementWrapper errorAlert;
 
-        public string fieldEmailText { get { return fieldEmail.GetAttribute("placeholder"); } }
-        public string fieldPasswordText { get { return fieldPassword.GetAttribute("placeholder"); } }
-        public string btnLoginText { get { return btnLogin.GetAttribute("value"); } }
-        public string btnCreateAccountText { get { return btnCreateAccount.GetByXpath("./span").GetText(); } }
-        public string NewToSiteText { get { return driver.GetByXpath("//*[@data-locale-item='newToSite']").GetText(); } }
-        public string LostYourPassword { get { return driver.GetByXpath("//*[@data-locale-item='lostYourPassword']").GetText(); } }
-        public string HeaderText { get { return driver.GetByXpath("//*[@data-locale-item='login']/span").GetText(); } }
-        public string Or { get { return driver.GetByXpath("//*[@data-locale-item='or']/span").GetText(); } }
-        public string FooterText { get { return driver.GetByXpath("//*[@data-locale-item='copyright']/span").GetText(); } }
+        public string fieldEmailText => fieldEmail.GetAttribute("placeholder");
+        public string fieldPasswordText => fieldPassword.GetAttribute("placeholder");
+        public string btnLoginText => btnLogin.GetAttribute("value");
+        public string btnCreateAccountText => btnCreateAccount.GetByXpath("./span").GetText();
+        public string NewToSiteText => driver.GetByXpath("//*[@data-locale-item='newToSite']").GetText();
+        public string LostYourPassword => driver.GetByXpath("//*[@data-locale-item='lostYourPassword']").GetText();
+        public string HeaderText => driver.GetByXpath("//*[@data-locale-item='login']/span").GetText();
+        public string lblOr => driver.GetByXpath("//*[@data-locale-item='or']/span").GetText();
+        public string FooterText => driver.GetByXpath("//*[@data-locale-item='copyright']/span").GetText();
 
         public override void Init(DriverWrapper driver)
         {

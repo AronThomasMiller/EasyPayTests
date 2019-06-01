@@ -7,7 +7,8 @@ namespace EasyPayTests
 {
     [TestFixture]
     [Category("All")]
-    [Category("UnauthorizedUser")]    
+    [Category("UnauthorizedUser")]
+    [Parallelizable(ParallelScope.Fixtures)]
     public class UnauthorizedUser:BaseTest
     {
         [TestCase("Name", "Surname", "+380123456789", "gangstatester@gmail.com", "Fakesoft15")]

@@ -8,16 +8,16 @@ namespace EasyPayLibrary
         WebElementWrapper btnSignIn;
         WebElementWrapper btnSignUp;
 
-        WebElementWrapper Lead;
+        WebElementWrapper lblLead;
 
-        public string btnSignInText { get { return btnSignIn.GetByXpath("./span").GetText(); } }
-        public string btnSignUpText { get { return btnSignUp.GetByXpath("./span").GetText(); } }
-        public string LeadText { get { return Lead.GetText(); } }
-        public string FooterText { get { return driver.GetByXpath("//*[@class='mastfoot']/div[@class='inner']//p[2]").GetText(); } }
+        public string btnSignInText => btnSignIn.GetByXpath("./span").GetText();
+        public string btnSignUpText => btnSignUp.GetByXpath("./span").GetText();
+        public string lblLeadText => lblLead.GetText();
+        public string FooterText => driver.GetByXpath("//*[@class='mastfoot']/div[@class='inner']//p[2]").GetText();
 
         public override void Init(DriverWrapper driver)
         {
-            Lead = driver.GetByXpath("//p[@class='lead']");
+            lblLead = driver.GetByXpath("//p[@class='lead']");
 
             btnSignIn = driver.GetByXpath("//a[@id='Sign_in']");
             btnSignUp = driver.GetByXpath("//a[@id='Sign_up']");

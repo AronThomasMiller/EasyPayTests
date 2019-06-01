@@ -11,7 +11,8 @@ namespace EasyPayTests
 {
     [TestFixture]
     [Category("All")]
-    [Category("Failures")]    
+    [Category("Failures")]
+    [Parallelizable(ParallelScope.Fixtures)]
     class Failures:BaseTest
     {
         [Test]
@@ -35,7 +36,7 @@ namespace EasyPayTests
             LogProgress("User is logging as User");
             var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
             LogProgress("User is changing language to UKR");
-            homePage.ChangeToUKR();
+            homePage.ChangeToUA();
             homePage.Init(driver);
             var role = GeneralPage.GetRole(driver);
             StringAssert.AreEqualIgnoringCase(t.User, role, "Wrong role translation");
@@ -60,7 +61,7 @@ namespace EasyPayTests
         {
             welcomePage = welcomePage.TranslatePageToUA();
 
-            var WelcomePageTitle = welcomePage.LeadText;
+            var WelcomePageTitle = welcomePage.lblLeadText;
             StringAssert.AreEqualIgnoringCase(t.WelcomePageTitle, WelcomePageTitle);
             var WelcomePageFooter = welcomePage.FooterText;
             StringAssert.AreEqualIgnoringCase(t.WelcomePageFooter, WelcomePageFooter);
@@ -81,7 +82,7 @@ namespace EasyPayTests
             StringAssert.AreEqualIgnoringCase(t.Login, Login);
             var LostYourPassword = LoginPage.LostYourPassword;
             StringAssert.AreEqualIgnoringCase(t.LostYourPassword, LostYourPassword);
-            var Or = LoginPage.Or;
+            var Or = LoginPage.lblOr;
             StringAssert.AreEqualIgnoringCase(t.Or, Or);
             var NewToSite = LoginPage.NewToSiteText;
             StringAssert.AreEqualIgnoringCase(t.NewToSite, NewToSite);
@@ -92,7 +93,7 @@ namespace EasyPayTests
 
             var RegisterPage = LoginPage.NavigateToCreateAccountPage();
 
-            var RegisterPageHeader = RegisterPage.HeaderText;
+            var RegisterPageHeader = RegisterPage.lblHeaderText;
             StringAssert.AreEqualIgnoringCase(t.RegisterPageHeader, RegisterPageHeader);
             var Name = RegisterPage.fieldNameText;
             StringAssert.AreEqualIgnoringCase(t.Name, Name);
@@ -106,7 +107,7 @@ namespace EasyPayTests
             StringAssert.AreEqualIgnoringCase(t.ConfirmPassword, ConfirmPassword);
             var Submit = RegisterPage.btnSubmitText;
             StringAssert.AreEqualIgnoringCase(t.Submit, Submit);
-            var RegisterPageFooter = RegisterPage.FooterText;
+            var RegisterPageFooter = RegisterPage.lblFooterText;
             StringAssert.AreEqualIgnoringCase(t.RegisterPageFooter, RegisterPageFooter);
             SignIn = RegisterPage.btnSignInText;
             StringAssert.AreEqualIgnoringCase(t.SignIn, SignIn);
@@ -117,7 +118,7 @@ namespace EasyPayTests
         {
             var loginPage = welcomePage.SignIn();
             var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
-            var addresses = homePage.NavigateToAddresses();
+            var addresses = homePage.NavigateToAddressesPage();
             addresses.EnterAllFields("Небесної сотні", "4Б", "Небесної сотні", "Чернівці", "Чернівецька область", "12345", "Україна", "45");
             var error = addresses.Error();
             Assert.IsNull(error, "Address is not added");
@@ -129,7 +130,7 @@ namespace EasyPayTests
             var loginPage = welcomePage.SignIn();
             var homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
 
-            var utilities = homePage.NavigateToUtilities();
+            var utilities = homePage.NavigateToConnectedUtilitiesPage();
             utilities.CallInspector("Чернівці City, вулиця Толстого Str., 2/");
             var logOut = utilities.SubmitCall();
             var secondEnter = logOut.LogOut();
@@ -185,7 +186,7 @@ namespace EasyPayTests
             Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"));
             LogProgress("Succefully logined");
 
-            var paymentHistoryPage = homePage.NavigateToPaymentHistory();
+            var paymentHistoryPage = homePage.NavigateToPaymentHistoryPage();
             LogProgress("Navigating to payment history page");
 
             var address = region + ", " + city + ", " + street;
@@ -198,7 +199,7 @@ namespace EasyPayTests
             var oldPayTableRows = oldTableOfPayments.GetAllRows();
             LogProgress("Collecting rows of table");
 
-            var payPage = paymentHistoryPage.NavigateToPayment();
+            var payPage = paymentHistoryPage.NavigateToPaymentPage();
             LogProgress("Navigating to payment page");
             address = street + ", " + city + ", " + region;
             payPage.SelectAddress(address);
@@ -219,7 +220,7 @@ namespace EasyPayTests
             LogProgress($"Saving check url{urlOfCheck}");
             homePage = homePageAndUrlOfCheck.Item1;
             
-            paymentHistoryPage = homePage.NavigateToPaymentHistory();
+            paymentHistoryPage = homePage.NavigateToPaymentHistoryPage();
             LogProgress("Navigating to payment history page");
             address = region + ", " + city + ", " + street;
             paymentHistoryPage.SelectAddress(address);

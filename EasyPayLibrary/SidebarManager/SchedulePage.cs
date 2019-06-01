@@ -11,6 +11,7 @@ namespace EasyPayLibrary.ManagerSidebar
         WebElementWrapper btnAddScheduleItem;
         WebElementWrapper btnEditScheduleItem;
         WebElementWrapper btnDeleteScheduleItem;
+
         WebElementWrapper tabHistory;
         WebElementWrapper tabStatistics;
 
@@ -21,7 +22,7 @@ namespace EasyPayLibrary.ManagerSidebar
             tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");
             base.Init(driver);
         }
-
+        //you can use property for one-line method
         public WebElementWrapper GetAddScheduleItem()
         {
             return btnAddScheduleItem;
@@ -29,6 +30,9 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public WebElementWrapper GetTask()
         {
+            //it will return some task, not some specific
+            //it doesn't has logic if you checking is there some task
+            //it doesn't mean that it appeared by your manipulation
             return driver.GetByXpath("//span[@class='fc-title']");
         }
 
@@ -39,12 +43,14 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public void ClickOnEditScheduleButton()
         {
+            //GetTask has same xpath
             btnEditScheduleItem = driver.GetByXpath("//span[@class='fc-title']");
             btnEditScheduleItem.Click();
         }
 
         public void ClickOnDeleteScheduleButton()
         {
+            //it will delete some task, not specific one
             btnDeleteScheduleItem = driver.GetByXpath("//i[@class='fa fa-trash-o']");
             btnDeleteScheduleItem.Click();
         }

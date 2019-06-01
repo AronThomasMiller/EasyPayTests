@@ -14,6 +14,7 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
+            //Xpath By Text?
             btnCurrentMonth = driver.GetByXpath("//*[text()='Current month']");
             btnPreviousMonth = driver.GetByXpath("//*[text()='Previous month']");
             base.Init(driver);
@@ -24,27 +25,29 @@ namespace EasyPayLibrary.ManagerSidebar
             btnCurrentMonth.Click();
             return GetPOM<HistoryPage>(driver);
         }
-
+        //history doesn't mean it contains specific address or date, you have to rename it, or to make another logic like find table with addresses of current month
         public bool IsHistoryCurrentMonthVisible(string address,string date)
         {
             WebElementWrapper element;
             try
             {
                 element = driver.GetByXpath($"//table[@id='scheduleHistoryCurrent']//td[contains(text(),'{address}')]/following-sibling::td[contains(text(),'{date}')]");
+                return true;
             }
             catch (WebDriverTimeoutException)
             {
                 return false;
             }
-            return true;
         }
-
+        //In this case you choose previous month or select, but not just click
+        //you should to create separte POM for table of address(list of rows) which can navigate through 
+        //pages of this table and make some logic with rows
         public HistoryPage ClickOnPreviousMonthButton()
         {
             btnPreviousMonth.Click();
             return GetPOM<HistoryPage>(driver);
         }
-
+        //same as with current
         public bool IsHistoryPreviousMonthVisible(string date)
         {
             try

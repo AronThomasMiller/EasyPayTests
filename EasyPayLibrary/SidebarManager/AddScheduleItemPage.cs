@@ -8,8 +8,10 @@ namespace EasyPayLibrary.ManagerSidebar
 {
     public class AddScheduleItemPage : BasePageObject
     {
+        //Type of elements?
         WebElementWrapper chooseDateAndTime;
         WebElementWrapper chooseAddress;
+
         WebElementWrapper btnApply;
 
         public override void Init(DriverWrapper driver)
@@ -19,7 +21,7 @@ namespace EasyPayLibrary.ManagerSidebar
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
             base.Init(driver);
         }
-
+        //Create separate class DatePicker, put it in ther and name specific
         public void ChooseDateAndTime(string date)
         {
             chooseDateAndTime.Click();
@@ -49,6 +51,7 @@ namespace EasyPayLibrary.ManagerSidebar
             return GetPOM<SchedulePage>(driver);
         }
 
+        //try catch for case if it is not displayed, in this way you will get no exception
         public bool IsAddressFromScheduleDisplayed()
         {
             var element = driver.GetByXpath("//div[@class='fc-content']");

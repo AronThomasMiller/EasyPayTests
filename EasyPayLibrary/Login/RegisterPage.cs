@@ -7,8 +7,8 @@ namespace EasyPayLibrary.Pages.Common
 {
     public class RegisterPage:BasePageObject
     {
-        WebElementWrapper header;
-        WebElementWrapper footer;
+        WebElementWrapper lblHeader;
+        WebElementWrapper lblFooter;
 
         WebElementWrapper fieldName;
         WebElementWrapper fieldSurname;
@@ -21,22 +21,22 @@ namespace EasyPayLibrary.Pages.Common
         WebElementWrapper btnSignIn;
 
 
-        public string HeaderText { get { return header.GetText(); } }
-        public string FooterText { get { return footer.GetByXpath("./span").GetText(); } }
-        public string fieldNameText { get { return fieldName.GetAttribute("placeholder"); } }
-        public string fieldSurnameText { get { return fieldSurname.GetAttribute("placeholder"); } }
-        public string fieldEmailText { get { return fieldEmail.GetAttribute("placeholder"); } }
-        public string fieldPasswordText { get { return fieldPassword.GetAttribute("placeholder"); } }
-        public string fieldConfirmPasswordText { get { return fieldConfirmPassword.GetAttribute("placeholder"); } }
-        public string btnSubmitText { get { return btnSubmit.GetAttribute("value"); } }
-        public string btnSignInText { get { return btnSignIn.GetByXpath("./span").GetText(); } }
+        public string lblHeaderText => lblHeader.GetText();
+        public string lblFooterText => lblFooter.GetByXpath("./span").GetText();
+        public string fieldNameText => fieldName.GetAttribute("placeholder");
+        public string fieldSurnameText => fieldSurname.GetAttribute("placeholder");
+        public string fieldEmailText => fieldEmail.GetAttribute("placeholder");
+        public string fieldPasswordText => fieldPassword.GetAttribute("placeholder");
+        public string fieldConfirmPasswordText => fieldConfirmPassword.GetAttribute("placeholder");
+        public string btnSubmitText => btnSubmit.GetAttribute("value");
+        public string btnSignInText => btnSignIn.GetByXpath("./span").GetText();
 
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
 
-            header = driver.GetByXpath("//h1[@id='registrationName']");
-            footer = driver.GetByXpath("//span[@data-locale-item='haveAnAccount']");
+            lblHeader = driver.GetByXpath("//h1[@id='registrationName']");
+            lblFooter = driver.GetByXpath("//span[@data-locale-item='haveAnAccount']");
 
             fieldName = driver.GetByXpath("//input[@id='name']");
             fieldSurname = driver.GetByXpath("//input[@id='surname']");

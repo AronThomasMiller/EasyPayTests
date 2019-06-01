@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.InspectorSidebar
 {
+    //inheritance means that object is explicit from base class or has another implementation of methods
+    //not that step of pages
     public class UtilityPage : CheckCountersPage
     {
-
+        //what type of elements it is? prefix!
         public WebElementWrapper activateOrDeactivate;
         public WebElementWrapper fixedOrUnfixed;
         public WebElementWrapper setNewValue;
@@ -20,7 +22,7 @@ namespace EasyPayLibrary.InspectorSidebar
             setNewValue = driver.GetByXpath("//td/button[4]");
             base.Init(driver);
         }
-
+        //what action? single resposibility - one method = one job
         public WebElementWrapper DoSomeAction(string button, CheckCountersPage checkCounters)
         {
             if (button == "Activate")
@@ -33,7 +35,7 @@ namespace EasyPayLibrary.InspectorSidebar
             }
             return ErrorOrSuccess();
         }
-
+        //what with old one?)
         public void SelectNewAddress(string text)
         {
             var checkCounters = driver.GetByXpath("//span[@class='input-group-addon dropdown-toggle']");
@@ -48,9 +50,13 @@ namespace EasyPayLibrary.InspectorSidebar
             }
 
         }
-        // Change
+        //Change
         public SetCurrentValue ClickOnSetNewValue(string address)
         {
+            //idk what it do
+            //you need to make pre-condition using sql
+            //and then use specific button instead using something
+            //what will pass in any case
             if (fixedOrUnfixed.GetText() == "Set fixed" && activateOrDeactivate.GetText() == "Deactivate")
             {
                 setNewValue.Click();
@@ -90,7 +96,7 @@ namespace EasyPayLibrary.InspectorSidebar
 
             else return null;
         }
-
+        //name doesn't say anything
         public WebElementWrapper ErrorOrSuccess()
         {
             var errorOrSuccess = driver.GetByXpath("//h4[@class='ui-pnotify-title']");

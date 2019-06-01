@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.InspectorSidebar
 {
+    //It is class which describe only one row
     public class RateClientsRows : BasePageObject
     {
         string name;
@@ -20,11 +21,12 @@ namespace EasyPayLibrary.InspectorSidebar
             base.Init(driver);
         }
 
+        //use property instead one-line function
         public string GetName()
         {
             return name;
         }
-
+        //u know what to do here
         public WebElementWrapper Rate(int starNumber, bool andHalf = false)
         {            
             starNumber = starNumber * 12;

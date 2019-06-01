@@ -8,6 +8,7 @@ namespace EasyPayLibrary.Changes
 {
     public class ConnectedUtilitiesPage : GeneralPage
     {
+        //FormToManageAddress
         ConnectedUtilitiesForm selectAddresse;
 
         public override void Init(DriverWrapper driver)

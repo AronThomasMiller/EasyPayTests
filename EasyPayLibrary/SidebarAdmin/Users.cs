@@ -2,8 +2,11 @@
 
 namespace EasyPayLibrary
 {
+    //users? what object of this class means? Users like a list which contains name and password? Or smth else?
     public class Users : HomePageAdmin
     {
+        //create POM class for table of users which contains rows of users
+        //and there use Select by email, name or smth else, thus you can make SomeUsersPage.GetTableOfUsers().SelectUserByEmail(email).ChangeRole(Role)
         WebElementWrapper tableOfUsers;
         WebElementWrapper btnChangeRole;
         WebElementWrapper role;
@@ -18,7 +21,7 @@ namespace EasyPayLibrary
             tableOfUsers = driver.GetByXpath("//table[@id='user-list']");
             user = driver.GetByXpath("//td[text()='user1@gmail.com']");
         }
-
+        //it can take less space using property
         public bool TableOfUsersIsVisible()
         {
             return tableOfUsers.IsDisplayed();
@@ -29,6 +32,7 @@ namespace EasyPayLibrary
             return user.IsDisplayed();
         }
 
+        //This method and next ones you should put in UserRow class
         public void SelectRole(string myRole)
         {
             myRole = myRole.ToUpper();
