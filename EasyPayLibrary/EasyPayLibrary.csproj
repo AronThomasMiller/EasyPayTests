@@ -107,7 +107,7 @@
     <Compile Include="SidebarUser\AddressPage\AddressForm.cs" />
     <Compile Include="SidebarUser\ConnectedUtilities\ConnectedUtilitiesForm.cs" />
     <Compile Include="SidebarUser\ConnectedUtilities\ConnectedUtilitiesPage.cs" />
-    <Compile Include="SidebarUser\PaymentHistory\CheckPage.cs" />
+    <Compile Include="SidebarUser\PaymentHistory\CheckPDF.cs" />
     <Compile Include="SidebarUser\RateInspector\RateInspectorForm.cs" />
     <Compile Include="SidebarUser\RateInspector\RateInspectorPage.cs" />
     <Compile Include="Wrappers\ActionsWrapper.cs" />

@@ -236,16 +236,16 @@ namespace EasyPayTests
             LogProgress("Collecting last row of table");
             var newLastPay = newTableOfPayments.LastRow;
 
-            var newLastPayDate = newLastPay.GetDateFromRow();
+            var newLastPayDate = newLastPay.Date;
             Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");
 
-            var newLastPaySum = newLastPay.GetSumFromRow();
+            var newLastPaySum = newLastPay.Sum;
             Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");
 
             LogProgress("Opening check from last row of table");
-            newLastPay.ViewCheck();
-            var newLastPayCheck = driver.GetUrl();
-            StringAssert.Contains(newLastPayCheck, urlOfCheck, "Url of last check doesn't match today's url of check");
+            
+            var newLastPayCheckUrl = newLastPay.GetCheck().Url;
+            StringAssert.Contains(urlOfCheck, newLastPayCheckUrl, "Url of last check doesn't match today's url of check");
         }
     }
 }

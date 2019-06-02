@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary
 {
-    public abstract class BaseRow
+    public abstract class BaseRow:BasePageObject
     {
         
     }

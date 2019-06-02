@@ -9,18 +9,19 @@ namespace EasyPayLibrary
     {
         public override void Init(DriverWrapper driver)
         {
-            List<WebElementWrapper> tableOnPage;
+            List<WebElementWrapper> tbPayments;
             base.Init(driver);
             try
             {
-                tableOnPage = driver.GetElementsByXpath("//table[@id='historyTable']//tbody/tr",1);
+                tbPayments = driver.GetElementsByXpath("//table[@id='historyTable']//tbody/tr",1);
             }
             catch (WebDriverTimeoutException)
             {
+                Rows = new List<PaymentHistoryTableRow>();
                 return;
             }
 
-            Rows = tableOnPage.Select(element => new PaymentHistoryTableRow(element)).ToList();
+            Rows = tbPayments.Select(element => new PaymentHistoryTableRow(driver, element)).ToList();
         }
     }
 }

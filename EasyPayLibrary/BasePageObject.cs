@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary
 {
-    public class BasePageObject
+    public abstract class BasePageObject
     {
         protected DriverWrapper driver;
 
