@@ -10,11 +10,11 @@ namespace EasyPayLibrary.Pages
     public class SidebarUser: SidebarBase
     {
         //elements on page need prefix to describe what the type of element it is
-        WebElementWrapper lnkAddresses;
-        WebElementWrapper lnkConnectedUtilities;
-        WebElementWrapper lnkPayments;
-        WebElementWrapper lnkPaymentsHistory;
-        WebElementWrapper lnkRateInspectors;
+        WebElementWrapper addresses;
+        WebElementWrapper connectedUtilities;
+        WebElementWrapper payments;
+        WebElementWrapper paymentsHistory;
+        WebElementWrapper rateInspectors;
 
         public override void Init(DriverWrapper driver)
         {
@@ -25,7 +25,7 @@ namespace EasyPayLibrary.Pages
             lnkPaymentsHistory = driver.GetByXpath("//a[@href='/user/paymentsHistoryPage']");
             lnkRateInspectors = driver.GetByXpath("//a[@href='/user/rate/']");
         }
-        //property
+
         public string GetAddressesText()
         {
             return lnkAddresses.GetText();
