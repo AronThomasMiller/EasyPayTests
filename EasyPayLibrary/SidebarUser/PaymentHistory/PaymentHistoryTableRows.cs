@@ -3,18 +3,17 @@ using System.Threading;
 
 namespace EasyPayLibrary
 {
-    public class PaymentHistoryTableRow:BasePageObject
+    public class PaymentHistoryTableRow:BaseRow
     {
         string lblDate;
         string lblSum;
         WebElementWrapper btnViewCheck;
 
-        public PaymentHistoryTableRow(DriverWrapper driver, WebElementWrapper element)
+        public PaymentHistoryTableRow(WebElementWrapper element)
         {
             lblDate = element.GetByXpath(".//td[@class='historyDate']").GetText();
             lblSum = element.GetByXpath(".//td[@class='historySum']").GetText();
             btnViewCheck = element.GetByXpath(".//td[@class='historyView']/a");
-            base.Init(driver);
         }
 
         public DateTime GetDateFromRow()
@@ -49,7 +48,7 @@ namespace EasyPayLibrary
 
         public override int GetHashCode()
         {
-            return (int)GetSumFromRow() * 100 ^ DaysInDateOfPay();
+            return (int)(GetSumFromRow() * 100) ^ DaysInDateOfPay();
         }
     }
 }

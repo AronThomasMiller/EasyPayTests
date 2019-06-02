@@ -5,10 +5,8 @@ using System.Collections.Generic;
 
 namespace EasyPayLibrary
 {
-    public class PaymentHistoryTable:BasePageObject
+    public class PaymentHistoryTable:BaseTable<PaymentHistoryTableRow>
     {
-        List<PaymentHistoryTableRow> table;
-
         public override void Init(DriverWrapper driver)
         {
             List<WebElementWrapper> tableOnPage;
@@ -21,25 +19,8 @@ namespace EasyPayLibrary
             {
                 return;
             }
-            table = new List<PaymentHistoryTableRow>();
 
-            table = tableOnPage.Select(element => new PaymentHistoryTableRow(driver, element)).ToList();
-        }
-
-        public PaymentHistoryTableRow GetLastRow()
-        {
-            return table?[table.Count - 1];
-        }
-
-        public List<PaymentHistoryTableRow> GetAllRows()
-        {
-            return table;
-        }
-
-        public string GetLastPayInString()
-        {
-            PaymentHistoryTableRow last = GetLastRow();
-            return last.GetDateFromRow() + "_" + last.GetSumFromRow();
+            Rows = tableOnPage.Select(element => new PaymentHistoryTableRow(element)).ToList();
         }
     }
 }

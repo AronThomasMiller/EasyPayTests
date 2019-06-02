@@ -175,7 +175,7 @@ namespace EasyPayTests
 
 
         [Repeat(11)]
-        [TestCase("user1@gmail.com", "Admin123" , (float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"")]
+        [TestCase("user1@gmail.com", "Admin123" , (float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"",Description = "Googel disk of EasyPay is overflow, so no new checks can be printed")]
         public void PayAndCheckOneInPaymentHistory(string userEmail,string password, float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {
             LogProgress("Entering to login page");
@@ -196,7 +196,7 @@ namespace EasyPayTests
             LogProgress("Initing table of payments");
             var oldTableOfPayments = paymentHistoryPage.InitTable();
             LogProgress("Collecting rows from table");
-            var oldPayTableRows = oldTableOfPayments.GetAllRows();
+            var oldPayTableRows = oldTableOfPayments.Rows;
 
             LogProgress("Navigating to payment page");
             var payPage = paymentHistoryPage.NavigateToPaymentPage();
@@ -230,11 +230,11 @@ namespace EasyPayTests
             LogProgress("Initing table of payments");
             var newTableOfPayments = paymentHistoryPage.InitTable();
             LogProgress("Collecting rows from table");
-            var newPayTableRows = newTableOfPayments.GetAllRows();
+            var newPayTableRows = newTableOfPayments.Rows;
             CollectionAssert.AreNotEqual(oldPayTableRows, newPayTableRows, "All checks matches old ones, no new check added to history");
 
             LogProgress("Collecting last row of table");
-            var newLastPay = newTableOfPayments.GetLastRow();
+            var newLastPay = newTableOfPayments.LastRow;
 
             var newLastPayDate = newLastPay.GetDateFromRow();
             Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");

@@ -67,9 +67,9 @@ namespace EasyPayLibrary
             SetZipCode(zipCode);
 
             ClickSubmitButton();
-            driver.WaitUntillUrlContainString("drive.google.com",20);
+            //driver.WaitUntillUrlContainString("drive.google.com",20);
             var urlOfCheck = driver.GetUrl();
-            if (driver.GetTypeOfDriver() == typeof(FirefoxDriver)) driver.SwithToDefault();
+            //if (driver.GetTypeOfDriver() == typeof(FirefoxDriver)) driver.SwithToDefault();
             driver.GoToURL("http://localhost:8080/home");
             return new Tuple<HomePageUser, string>(GetPOM<HomePageUser>(driver), urlOfCheck);
         }

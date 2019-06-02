@@ -10,11 +10,11 @@ namespace EasyPayLibrary.Pages
     public class SidebarUser: SidebarBase
     {
         //elements on page need prefix to describe what the type of element it is
-        WebElementWrapper addresses;
-        WebElementWrapper connectedUtilities;
-        WebElementWrapper payments;
-        WebElementWrapper paymentsHistory;
-        WebElementWrapper rateInspectors;
+        WebElementWrapper lnkAddresses;
+        WebElementWrapper lnkConnectedUtilities;
+        WebElementWrapper lnkPayments;
+        WebElementWrapper lnkPaymentsHistory;
+        WebElementWrapper lnkRateInspectors;
 
         public override void Init(DriverWrapper driver)
         {

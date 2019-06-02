@@ -79,6 +79,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRow.cs" />
+    <Compile Include="BaseTable.cs" />
     <Compile Include="HomePages\HomePageInspector.cs" />
     <Compile Include="InspectorSidebar\Check counters\CheckCountersPage.cs" />
     <Compile Include="InspectorSidebar\Rate clients\RateClientsRows.cs" />
