@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
+﻿namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 {
     public class GmailEmailPage: BasePageObject
     {
@@ -18,7 +12,7 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
             btnNext = driver.GetByXpath("//div[@id='identifierNext']");
             base.Init(driver);
         }
-
+        
         public void SetEmail(string email)
         {
             fieldEmail.SendText(email);

@@ -177,64 +177,63 @@ namespace EasyPayTests
         [TestCase("user1@gmail.com", "Admin123" , (float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"")]
         public void PayAndCheckOneInPaymentHistory(string userEmail,string password, float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {
+            LogProgress("Entering to login page");
             var loginPage = welcomePage.SignIn();
-            LogProgress("Entered to login page");
-            var homePage = loginPage.LoginAsUser(userEmail, "Admin123");
             LogProgress($"Trying to login as user email:{userEmail}, password:{password}");
+            var homePage = loginPage.LoginAsUser(userEmail, "Admin123");
 
-            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"));
-            LogProgress("Succefully logined");
+            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"),"NotLoginedAsUser");
 
-            var paymentHistoryPage = homePage.NavigateToPaymentHistoryPage();
             LogProgress("Navigating to payment history page");
+            var paymentHistoryPage = homePage.NavigateToPaymentHistoryPage();
 
             var address = region + ", " + city + ", " + street;
-            paymentHistoryPage.SelectAddress(address);
             LogProgress($"Selecting address:{address}");
-            paymentHistoryPage.SelectUtility(utility);
+            paymentHistoryPage.SelectAddress(address);
             LogProgress($"Selecting utility:{utility}");
+            paymentHistoryPage.SelectUtility(utility);
+            LogProgress("Initing table of payments");
             var oldTableOfPayments = paymentHistoryPage.InitTable();
-            LogProgress("Initing table");
+            LogProgress("Collecting rows from table");
             var oldPayTableRows = oldTableOfPayments.GetAllRows();
-            LogProgress("Collecting rows of table");
 
-            var payPage = paymentHistoryPage.NavigateToPaymentPage();
             LogProgress("Navigating to payment page");
+            var payPage = paymentHistoryPage.NavigateToPaymentPage();
             address = street + ", " + city + ", " + region;
+            LogProgress($"Selecting address:{address}");
             payPage.SelectAddress(address);
-            LogProgress($"Selecting address:{address}");
 
-            var utilityDetails = payPage.NavigateToUtilityDetails(utility);
             LogProgress($"Navigating to utility:{utility} details");
-            var selectPaymentSum = utilityDetails.NavigateToSelectPaymentSum();
+            var utilityDetails = payPage.NavigateToUtilityDetails(utility);
             LogProgress("Navigating to select payment sum page");
-            selectPaymentSum.ChooseDownloadCheck();
+            var selectPaymentSum = utilityDetails.NavigateToSelectPaymentSum();
             LogProgress("Choosing \"Download check\" option");
+            selectPaymentSum.ChooseDownloadCheck();
 
-            var payFrame = selectPaymentSum.PayForSum(sumToPay);
             LogProgress("Navigating to pay frame");
-            var homePageAndUrlOfCheck = payFrame.Pay(userEmail, cardNumber, dateOfCard, cvc, zipCode);
+            var payFrame = selectPaymentSum.PayForSum(sumToPay);
             LogProgress($"Entering data - email:{userEmail}, cardnumber:{cardNumber}, date of card:{dateOfCard}, cvc:{cvc}, Zip code:{zipCode}");
+            var homePageAndUrlOfCheck = payFrame.Pay(userEmail, cardNumber, dateOfCard, cvc, zipCode);
+            LogProgress("Saving check url");
             var urlOfCheck = homePageAndUrlOfCheck.Item2;
-            LogProgress($"Saving check url{urlOfCheck}");
             homePage = homePageAndUrlOfCheck.Item1;
-            
-            paymentHistoryPage = homePage.NavigateToPaymentHistoryPage();
-            LogProgress("Navigating to payment history page");
-            address = region + ", " + city + ", " + street;
-            paymentHistoryPage.SelectAddress(address);
-            LogProgress($"Selecting address:{address}");
-            paymentHistoryPage.SelectUtility(utility);
-            LogProgress($"Selecting utility:{utility}");
 
+            LogProgress("Navigating to payment history page");
+            paymentHistoryPage = homePage.NavigateToPaymentHistoryPage();
+            address = region + ", " + city + ", " + street;
+            LogProgress($"Selecting address:{address}");
+            paymentHistoryPage.SelectAddress(address);
+            LogProgress($"Selecting utility:{utility}");
+            paymentHistoryPage.SelectUtility(utility);
+
+            LogProgress("Initing table of payments");
             var newTableOfPayments = paymentHistoryPage.InitTable();
-            LogProgress("Initing table");
+            LogProgress("Collecting rows from table");
             var newPayTableRows = newTableOfPayments.GetAllRows();
-            LogProgress("Collecting rows of table");
             CollectionAssert.AreNotEqual(oldPayTableRows, newPayTableRows, "All checks matches old ones, no new check added to history");
 
-            var newLastPay = newTableOfPayments.GetLastRow();
             LogProgress("Collecting last row of table");
+            var newLastPay = newTableOfPayments.GetLastRow();
 
             var newLastPayDate = newLastPay.GetDateFromRow();
             Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");
@@ -242,8 +241,8 @@ namespace EasyPayTests
             var newLastPaySum = newLastPay.GetSumFromRow();
             Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");
 
-            newLastPay.ViewCheck();
             LogProgress("Opening check from last row of table");
+            newLastPay.ViewCheck();
             var newLastPayCheck = driver.GetUrl();
             StringAssert.Contains(newLastPayCheck, urlOfCheck, "Url of last check doesn't match today's url of check");
         }
