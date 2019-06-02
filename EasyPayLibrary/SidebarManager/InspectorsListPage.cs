@@ -60,9 +60,7 @@ namespace EasyPayLibrary.Pages.Manager
         
         public string VerifyListOfInspectorsIsNotEmpty()
         {
-            panel = driver.GetByXpath("//div[@class='x_content']");
-            //for what in string
-            //if you look like this it will return something but not result which depends on table with inpectors
+            panel = driver.GetByXpath("//div[@id='tab-inspectors']//td[1]");
             return panel.ToString();
         }
     }

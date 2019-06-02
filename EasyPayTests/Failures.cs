@@ -39,21 +39,21 @@ namespace EasyPayTests
             homePage.ChangeToUA();
             homePage.Init(driver);
             var role = GeneralPage.GetRole(driver);
-            StringAssert.AreEqualIgnoringCase(t.User, role, "Wrong role translation");
+            StringAssert.AreEqualIgnoringCase(t.user, role, "Wrong role translation");
             var addresses = homePage.GetAddressesText();
-            StringAssert.AreEqualIgnoringCase(t.Addresses, addresses, "Wrong address translation");
+            StringAssert.AreEqualIgnoringCase(t.addresses, addresses, "Wrong address translation");
             var connectedUtilities = homePage.GetConnectedUtilitiesText();
-            StringAssert.AreEqualIgnoringCase(t.ConnectedUtilities, connectedUtilities, "Wrong connected utilities translation");
+            StringAssert.AreEqualIgnoringCase(t.connectedUtilities, connectedUtilities, "Wrong connected utilities translation");
             var payments = homePage.GetPaymentsText();
-            StringAssert.AreEqualIgnoringCase(t.Payments, payments, "Wrong payments translation");
+            StringAssert.AreEqualIgnoringCase(t.payments, payments, "Wrong payments translation");
             var paymentsHistory = homePage.GetPaymentsHistoryText();
-            StringAssert.AreEqualIgnoringCase(t.PaymentsHistory, paymentsHistory, "Wrong payments history translation");
+            StringAssert.AreEqualIgnoringCase(t.paymentsHistory, paymentsHistory, "Wrong payments history translation");
             var rateInspectors = homePage.GetRateInspectorsText();
-            StringAssert.AreEqualIgnoringCase(t.RateInspectors, rateInspectors, "Wrong rate inspectors translation");
+            StringAssert.AreEqualIgnoringCase(t.rateInspectors, rateInspectors, "Wrong rate inspectors translation");
             var mainPageTitle = homePage.GetMainPageTitleText();
-            StringAssert.AreEqualIgnoringCase(t.MainPage, mainPageTitle, "Wrong main title translation");
+            StringAssert.AreEqualIgnoringCase(t.mainPage, mainPageTitle, "Wrong main title translation");
             var xTitle = homePage.GetXTitleText();
-            StringAssert.AreEqualIgnoringCase(t.SomeText, xTitle, "Wrong xtitle translation");
+            StringAssert.AreEqualIgnoringCase(t.someText, xTitle, "Wrong xtitle translation");
         }
         
         [Test]
@@ -62,55 +62,55 @@ namespace EasyPayTests
             welcomePage = welcomePage.TranslatePageToUA();
 
             var WelcomePageTitle = welcomePage.lblLeadText;
-            StringAssert.AreEqualIgnoringCase(t.WelcomePageTitle, WelcomePageTitle);
+            StringAssert.AreEqualIgnoringCase(t.welcomePageTitle, WelcomePageTitle);
             var WelcomePageFooter = welcomePage.FooterText;
-            StringAssert.AreEqualIgnoringCase(t.WelcomePageFooter, WelcomePageFooter);
+            StringAssert.AreEqualIgnoringCase(t.welcomePageFooter, WelcomePageFooter);
             var SignIn = welcomePage.btnSignInText;
-            StringAssert.AreEqualIgnoringCase(t.SignIn, SignIn);
+            StringAssert.AreEqualIgnoringCase(t.signIn, SignIn);
             var SignUp = welcomePage.btnSignUpText;
-            StringAssert.AreEqualIgnoringCase(t.SignUp, SignUp);
+            StringAssert.AreEqualIgnoringCase(t.signUp, SignUp);
 
             var LoginPage = welcomePage.SignIn();
 
             var LoginPageHeader = LoginPage.HeaderText;
-            StringAssert.AreEqualIgnoringCase(t.Login, LoginPageHeader);
+            StringAssert.AreEqualIgnoringCase(t.login, LoginPageHeader);
             var Email = LoginPage.fieldEmailText;
-            StringAssert.AreEqualIgnoringCase(t.Email, Email);
+            StringAssert.AreEqualIgnoringCase(t.email, Email);
             var Password = LoginPage.fieldPasswordText;
-            StringAssert.AreEqualIgnoringCase(t.Password, Password);
+            StringAssert.AreEqualIgnoringCase(t.password, Password);
             var Login = LoginPage.btnLoginText;
-            StringAssert.AreEqualIgnoringCase(t.Login, Login);
+            StringAssert.AreEqualIgnoringCase(t.login, Login);
             var LostYourPassword = LoginPage.LostYourPassword;
-            StringAssert.AreEqualIgnoringCase(t.LostYourPassword, LostYourPassword);
+            StringAssert.AreEqualIgnoringCase(t.lostYourPassword, LostYourPassword);
             var Or = LoginPage.lblOr;
-            StringAssert.AreEqualIgnoringCase(t.Or, Or);
+            StringAssert.AreEqualIgnoringCase(t.or, Or);
             var NewToSite = LoginPage.NewToSiteText;
-            StringAssert.AreEqualIgnoringCase(t.NewToSite, NewToSite);
+            StringAssert.AreEqualIgnoringCase(t.newToSite, NewToSite);
             var CreateAccount = LoginPage.btnCreateAccountText;
-            StringAssert.AreEqualIgnoringCase(t.CreateAccount, CreateAccount);
+            StringAssert.AreEqualIgnoringCase(t.createAccount, CreateAccount);
             var LoginPageFooter = LoginPage.FooterText;
-            StringAssert.AreEqualIgnoringCase(t.LoginPageFooter, LoginPageFooter);
+            StringAssert.AreEqualIgnoringCase(t.loginPageFooter, LoginPageFooter);
 
             var RegisterPage = LoginPage.NavigateToCreateAccountPage();
 
             var RegisterPageHeader = RegisterPage.lblHeaderText;
-            StringAssert.AreEqualIgnoringCase(t.RegisterPageHeader, RegisterPageHeader);
+            StringAssert.AreEqualIgnoringCase(t.registerPageHeader, RegisterPageHeader);
             var Name = RegisterPage.fieldNameText;
-            StringAssert.AreEqualIgnoringCase(t.Name, Name);
+            StringAssert.AreEqualIgnoringCase(t.name, Name);
             var Surname = RegisterPage.fieldSurnameText;
-            StringAssert.AreEqualIgnoringCase(t.Surname, Surname);
+            StringAssert.AreEqualIgnoringCase(t.surname, Surname);
             Email = RegisterPage.fieldEmailText;
-            StringAssert.AreEqualIgnoringCase(t.Email, Email);
+            StringAssert.AreEqualIgnoringCase(t.email, Email);
             Password = RegisterPage.fieldPasswordText;
-            StringAssert.AreEqualIgnoringCase(t.Password, Password);
+            StringAssert.AreEqualIgnoringCase(t.password, Password);
             var ConfirmPassword = RegisterPage.fieldConfirmPasswordText;
-            StringAssert.AreEqualIgnoringCase(t.ConfirmPassword, ConfirmPassword);
+            StringAssert.AreEqualIgnoringCase(t.confirmPassword, ConfirmPassword);
             var Submit = RegisterPage.btnSubmitText;
-            StringAssert.AreEqualIgnoringCase(t.Submit, Submit);
+            StringAssert.AreEqualIgnoringCase(t.submit, Submit);
             var RegisterPageFooter = RegisterPage.lblFooterText;
-            StringAssert.AreEqualIgnoringCase(t.RegisterPageFooter, RegisterPageFooter);
+            StringAssert.AreEqualIgnoringCase(t.registerPageFooter, RegisterPageFooter);
             SignIn = RegisterPage.btnSignInText;
-            StringAssert.AreEqualIgnoringCase(t.SignIn, SignIn);
+            StringAssert.AreEqualIgnoringCase(t.signIn, SignIn);
         }
 
         [Test]
@@ -151,9 +151,9 @@ namespace EasyPayTests
             ProfilePage changed = profile.ChangeToUKR();
             profile.Init(driver);
             var name = profile.GetName();
-            StringAssert.AreEqualIgnoringCase(t.Mariya, name, "Wrong name translation");
+            StringAssert.AreEqualIgnoringCase(t.mariya, name, "Wrong name translation");
             var surname = profile.GetSurname();
-            StringAssert.AreEqualIgnoringCase(t.Chuikina, surname, "Wrong surname translation");
+            StringAssert.AreEqualIgnoringCase(t.chuikina, surname, "Wrong surname translation");
         }
 
         [Test]
@@ -169,7 +169,8 @@ namespace EasyPayTests
             profile.SetName("Василь");
             LogProgress("User is updating his profile ");
             profile.UpdateProfile();
-            Assert.IsFalse(profile.IsErrorAlertDisplayed(), "error alert isn't displayed");
+            var errorAlertDisplayed = profile.IsErrorAlertDisplayed();
+            Assert.AreEqual(false, errorAlertDisplayed, "error alert isn't displayed");
         }
 
 

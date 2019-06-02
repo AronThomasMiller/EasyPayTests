@@ -9,70 +9,71 @@ namespace EasyPayLibrary.Pages
 {
     public class SidebarUser: SidebarBase
     {
-        WebElementWrapper addresses;
-        WebElementWrapper connectedUtilities;
-        WebElementWrapper payments;
-        WebElementWrapper paymentsHistory;
-        WebElementWrapper rateInspectors;
+        //elements on page need prefix to describe what the type of element it is
+        WebElementWrapper lnkAddresses;
+        WebElementWrapper lnkConnectedUtilities;
+        WebElementWrapper lnkPayments;
+        WebElementWrapper lnkPaymentsHistory;
+        WebElementWrapper lnkRateInspectors;
 
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            addresses = driver.GetByXpath("//a[@href='/user/addresses']");
-            connectedUtilities = driver.GetByXpath("//a[@href='/user/connected-utilities/']");
-            payments = driver.GetByXpath("//a[@href='/user/paymentsPage']");
-            paymentsHistory = driver.GetByXpath("//a[@href='/user/paymentsHistoryPage']");
-            rateInspectors = driver.GetByXpath("//a[@href='/user/rate/']");
+            lnkAddresses = driver.GetByXpath("//a[@href='/user/addresses']");
+            lnkConnectedUtilities = driver.GetByXpath("//a[@href='/user/connected-utilities/']");
+            lnkPayments = driver.GetByXpath("//a[@href='/user/paymentsPage']");
+            lnkPaymentsHistory = driver.GetByXpath("//a[@href='/user/paymentsHistoryPage']");
+            lnkRateInspectors = driver.GetByXpath("//a[@href='/user/rate/']");
         }
-
+        //property
         public string GetAddressesText()
         {
-            return addresses.GetText();
+            return lnkAddresses.GetText();
         }
 
         public string GetConnectedUtilitiesText()
         {
-            return connectedUtilities.GetText();
+            return lnkConnectedUtilities.GetText();
         }
         
         public string GetPaymentsText()
         {
-            return payments.GetText();
+            return lnkPayments.GetText();
         }
 
         public string GetPaymentsHistoryText()
         {
-            return paymentsHistory.GetText();
+            return lnkPaymentsHistory.GetText();
         }
 
         public string GetRateInspectorsText()
         {
-            return rateInspectors.GetText();
+            return lnkRateInspectors.GetText();
         }
 
         public void ClickOnAddresses()
         {
-            addresses.Click();
+            lnkAddresses.Click();
         }
 
         public void ClickOnConnectedUtilities()
         {
-            connectedUtilities.Click();
+            lnkConnectedUtilities.Click();
         }
 
         public void ClickOnPayment()
         {
-            payments.Click();
+            lnkPayments.Click();
         }
 
         public void ClickOnPaymentHistory()
         {
-            paymentsHistory.Click();
+            lnkPaymentsHistory.Click();
         }       
         
         public void ClickOnRateInspectorsPage()
         {
-            rateInspectors.Click();            
+            lnkRateInspectors.Click();            
         }
     }
 }

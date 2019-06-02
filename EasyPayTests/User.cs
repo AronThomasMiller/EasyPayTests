@@ -47,8 +47,9 @@ namespace EasyPayTests
         [Test]
         public void UserIsAbleToLogin()
         {
-            LogProgress("User is logging");
-            Assert.AreEqual(GeneralPage.GetRole(driver), "USER","user isn't loged in");
+            LogProgress("Get role");
+            var role = GeneralPage.GetRole(driver);
+            Assert.AreEqual("USER", role,"user isn't loged in");
         }        
 
         [Test]
@@ -56,9 +57,12 @@ namespace EasyPayTests
         {
             LogProgress("User is going to profile");
             var profile = homePage.GoToProfile();
-            Assert.IsTrue(profile.NameIsVisible(),"Name isn't visible");
-            Assert.IsTrue(profile.SurnameIsVisible(), "Surname isn't visible");
-            Assert.IsTrue(profile.PhoneNumberIsVisible(), "PhoneNumber isn't visible");
+            var nameVisibility = profile.NameIsVisible();
+            Assert.AreEqual(true, nameVisibility,"Name isn't visible");
+            var SurnameVisibility = profile.SurnameIsVisible();
+            Assert.AreEqual(true, SurnameVisibility, "Surname isn't visible");
+            var phoneNumberVisibility = profile.PhoneNumberIsVisible();
+            Assert.AreEqual(true, phoneNumberVisibility, "PhoneNumber isn't visible");
         }
 
         [Test]
@@ -66,9 +70,12 @@ namespace EasyPayTests
         {
             LogProgress("User is going to profile");
             var profile = homePage.GoToProfile();
-            Assert.AreEqual("Masha",profile.GetName(), "Wrong name");
-            Assert.AreEqual("Chuikina", profile.GetSurname(), "Wrong surname");
-            Assert.AreEqual("+380968780876", profile.GetPhoneNumber(), "Wrong name");
+            var name = profile.GetName();
+            StringAssert.AreEqualIgnoringCase("Masha", name, "Wrong name");
+            var surname = profile.GetSurname();
+            StringAssert.AreEqualIgnoringCase("Chuikina", surname, "Wrong surname");
+            var phoneNumber = profile.GetPhoneNumber();
+            StringAssert.AreEqualIgnoringCase("+380968780876", phoneNumber, "Wrong name");
         }
 
         [Test]
@@ -79,9 +86,11 @@ namespace EasyPayTests
             LogProgress("User sets his name in profile");
             profile.SetName("Masha");
             LogProgress("User updates his profile");
-            profile.UpdateProfile();            
-            Assert.True(profile.IsSuccessAlertDisplayed());
-            Assert.AreEqual("Masha", profile.GetName(),"Name doesn't change");
+            profile.UpdateProfile();
+            var successAlertDiplayed = profile.IsSuccessAlertDisplayed();
+            Assert.AreEqual(true, successAlertDiplayed);
+            var name = profile.GetName();
+            Assert.AreEqual("Masha", name,"Name doesn't change");
         }
         
         [Test]
