@@ -79,5 +79,11 @@ namespace EasyPayLibrary.ManagerSidebar
             tabStatistics.Click();
             return GetPOM<StatisticsPage>(driver);
         }
+
+        public string StatusOfOperation()
+        {
+            var status = driver.GetByXpath("//h4[@class='ui-pnotify-title']").GetText();
+            return status;
+        }
     }
 }

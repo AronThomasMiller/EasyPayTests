@@ -49,7 +49,7 @@ namespace EasyPayTests
             var schedule = listOfInspectors.NavigateToInspectorsSchedule("Oleg Adamov");
             LogProgress("Manager is adding an item to inspector's schedule");
             var addItem = schedule.AddItem();
-            var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
+            var deleteItem = addItem.ApplyToAdd("20190624", "вулиця Руська 241/245, Чернівці, Чернівецька область");
             
             var isVisibleTask = schedule.GetTask().IsDisplayed();
             Assert.AreEqual(true, isVisibleTask, "Task isn't displayed");
@@ -70,11 +70,11 @@ namespace EasyPayTests
             // preCondition
             LogProgress("Manager is adding an item to inspector's schedule");
             var addItem = schedule.AddItem();
-            var chooseItemToEdit = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
+            var chooseItemToEdit = addItem.ApplyToAdd("20190624", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
             LogProgress("Manager is editing an item in inspector's schedule");
             var editItem = chooseItemToEdit.EditItem();
-            var deleteItem = editItem.ApplyToEdit("20190531", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
+            var deleteItem = editItem.ApplyToEdit("20190628", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
 
             var isVisibleTask = schedule.GetTask().IsDisplayed();
             Assert.AreEqual(true, isVisibleTask, "Task isn't displayed");            
@@ -96,11 +96,14 @@ namespace EasyPayTests
             //preCondition
             LogProgress("Manager is adding an item to inspector's schedule");
             var addItem = schedule.AddItem();
-            var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
+            var deleteItem = addItem.ApplyToAdd("20190624", "вулиця Руська 241/245, Чернівці, Чернівецька область");
 
             LogProgress("Manager is remowing an item from inspector's schedule");
             var confirm = deleteItem.DeleteItem();
-            confirm.ApplyToDelete();
+            var result = confirm.ApplyToDelete();
+            var status = result.StatusOfOperation();
+
+            Assert.AreEqual(status, "Success");
         }
 
         [Test]
@@ -109,8 +112,7 @@ namespace EasyPayTests
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
                 conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
-                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
+                conn.ChangeInDB("insert into users values(113, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
             }
 
             LogProgress("Manager is going to list of inspectors");
@@ -131,6 +133,12 @@ namespace EasyPayTests
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
+
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB("delete from users where user_id = 113");
+            }
         }
 
         [Test]
@@ -139,8 +147,7 @@ namespace EasyPayTests
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
                 conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
-                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
+                conn.ChangeInDB("insert into users values(113, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
             }
 
             LogProgress("Manager is going to list of inspectors");
@@ -153,7 +160,15 @@ namespace EasyPayTests
 
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
-            removeIvan.ConfirmRemoving();
+            var result = removeIvan.ConfirmRemoving();
+            var status = result.StatusOfOperation();
+            Assert.AreEqual(status, "Success");
+
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();
+                conn.ChangeInDB("delete from users where user_id = 113");
+            }
         }
 
         [Test]
@@ -162,8 +177,7 @@ namespace EasyPayTests
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
                 conn.Open();
-                conn.ChangeInDB("delete from users where user_id = 99");
-                conn.ChangeInDB("insert into users values(99, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
+                conn.ChangeInDB("insert into users values(113, null, null, 'inspector5@gmail.com', null, 'Ivan', 'Admin123', '+380968780876', 'INSPECTOR', 'Ivanov', 'ACTIVE')");
             }
 
             LogProgress("Manager is going to list of inspectors");
@@ -178,6 +192,12 @@ namespace EasyPayTests
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
             removeIvan.ConfirmRemoving();
+
+            using (var conn = new DatabaseManipulation.DatabaseMaster())
+            {
+                conn.Open();                
+                conn.ChangeInDB("delete from users where user_id = 113");
+            }
         }
 
         [Test]
@@ -201,11 +221,11 @@ namespace EasyPayTests
             LogProgress("Manager is setting a future price");
             setFuturePrice.ClickOnSetFuturePriceButton();
             var formSetFuturePrice = setFuturePrice.ClickOnSetFuturePriceButton();
-            formSetFuturePrice.SetFuturePrice("20", "2019-05-30");
+            formSetFuturePrice.SetFuturePrice("20", "2019-06-24");
             var actualPrice = setFuturePrice.GetFuturePrice();
             var actualActivationDate = setFuturePrice.GetActivationDate();
             Assert.AreEqual("Future price: ₴20", actualPrice, "Wrong price");
-            Assert.AreEqual("Next activation date: 30 MAY 2019", actualActivationDate, "Wrong  activation date");
+            Assert.AreEqual("Next activation date: 24 JUNE 2019", actualActivationDate, "Wrong  activation date");
         }
 
         [Test]
@@ -225,7 +245,7 @@ namespace EasyPayTests
             LogProgress("Manager is clicking on Add Schedule Item Button");
             var addScheduleItemPage = schedulePage.AddItem();
             LogProgress("Manager is entering date and address");
-            addScheduleItemPage.ApplyToAdd("2019-05-01", "Немирівська вулиця 1/2, Чернівці, Чернівецька область");
+            addScheduleItemPage.ApplyToAdd("2019-06-22", "Немирівська вулиця 1/2, Чернівці, Чернівецька область");
             var isAddressFromScheduleDisplayed = addScheduleItemPage.IsAddressFromScheduleDisplayed();
             Assert.AreEqual(true, isAddressFromScheduleDisplayed, "Address from schedule is not displayed");
         }
@@ -285,7 +305,7 @@ namespace EasyPayTests
             utilityPricePage.Init(driver);
             LogProgress("Manager is setting new future price");
             var formSetFuturePrice = utilityPricePage.ClickOnSetFuturePriceButton();
-            formSetFuturePrice.SetFuturePrice("30", "2019-05-01");
+            formSetFuturePrice.SetFuturePrice("30", "2019-06-24");
             Assert.AreEqual("Current price: ₴24", "Current price: ₴24", "Current price is not 24");
             Assert.AreEqual("Future price: ₴30", "Future price: ₴30", "Future price is not 30");
         }

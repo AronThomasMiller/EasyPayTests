@@ -16,6 +16,12 @@ namespace EasyPayLibrary.Pages.Manager
             base.Init(driver);
         }
 
+        public string StatusOfOperation()
+        {
+            var status = driver.GetByXpath("//h4[@class='ui-pnotify-title']").GetText();
+            return status;
+        }
+
         public WebElementWrapper GetInspector(string name)
         {
             return driver.GetByXpath($"//a[contains(text(),'{name}')]");
@@ -66,5 +72,7 @@ namespace EasyPayLibrary.Pages.Manager
             //if you look like this it will return something but not result which depends on table with inpectors
             return panel.ToString();
         }
+
+        
     }
 }
