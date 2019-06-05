@@ -1,4 +1,5 @@
 ﻿using EasyPayLibrary.HomePages;
+using EasyPayLibrary.InspectorSidebar.Check_counters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace EasyPayLibrary.InspectorSidebar
     public class CheckCountersPage : HomePageInspector
     {
         public WebElementWrapper dropdown;
-        public UtilityPage utility;
+        public UtilityPageRows utility;
 
         public override void Init(DriverWrapper driver)
         {
@@ -29,15 +30,15 @@ namespace EasyPayLibrary.InspectorSidebar
             return listOfDropdown;
         }
 
-        public UtilityPage SelectAddress(string text)
+        public UtilityPageTable SelectAddress(string text)
         {
             ClickOnDropDown();
             var addresses = ReturnListOfDropDown();
-            ForEach(addresses, text);
-            return GetPOM<UtilityPage>(driver);
+            ClickFromDropDown(addresses, text);
+            return GetPOM<UtilityPageTable>(driver);
         }
 
-        public void ForEach(IEnumerable<WebElementWrapper> addresses, string text)
+        public void ClickFromDropDown(IEnumerable<WebElementWrapper> addresses, string text)
         {
             foreach (var element in addresses)
             {

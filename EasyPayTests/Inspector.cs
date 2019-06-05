@@ -1,4 +1,5 @@
-﻿using EasyPayLibrary;
+﻿using DatabaseManipulation;
+using EasyPayLibrary;
 using EasyPayLibrary.HomePages;
 using EasyPayLibrary.InspectorSidebar;
 using EasyPayLibrary.Translations;
@@ -34,7 +35,8 @@ namespace EasyPayTests
         public void SignInInspectorCorrect()
         {
             var header = driver.GetByXpath("//h3[contains(text(),'Inspector')]");
-            Assert.AreEqual(header.GetText(), "INSPECTOR", "Inspector isn't loged in");
+            var headerText = header.GetText();
+            Assert.AreEqual("INSPECTOR", headerText, "Inspector isn't loged in");
         }
 
         //schedule Page
@@ -43,11 +45,10 @@ namespace EasyPayTests
         {
             LogProgress("Try navigate to Schedule page");
             var schedulePage = homePage.NavigateToSchedule();
-            var result = schedulePage.ScheduleIsDisplayed();
-            Assert.True(result, "Not found calendar");
+            var isDisplayed = schedulePage.ScheduleIsDisplayed();
+            Assert.AreEqual(true, isDisplayed, "Not found calendar");
         }
-
-
+        
         //Check counters Page
         [Test]
         public void AccessListAddresses()
@@ -59,7 +60,8 @@ namespace EasyPayTests
             var addresses = checkCounters.ReturnListOfDropDown();
             foreach (var element in addresses)
             {
-                Assert.True(element.IsDisplayed(), "Element not found");
+                var isDisplayed = element.IsDisplayed();
+                Assert.AreEqual(true, isDisplayed, "Element not found");                
             }
         }
 
@@ -71,8 +73,9 @@ namespace EasyPayTests
             LogProgress($"Try sellect address + {address}");
             var utility = checkCountersPage.SelectAddress(address);
             LogProgress("Try activate or deactivate metrix");
-            var result = utility.DoSomeAction("Activate", checkCountersPage);
-            Assert.AreEqual(result.GetText(), "Success");
+            var row = utility.GetFirstRow();
+            var isActivate = row.IsActivate();
+            Assert.AreEqual(true, isActivate, "Error message on page");
             driver.Refresh();
         }
 
@@ -84,8 +87,9 @@ namespace EasyPayTests
             LogProgress($"Try sellect address + {address}");
             var utility = checkCounters.SelectAddress(address);
             LogProgress("Try fix or unfixed metrix");
-            var result = utility.DoSomeAction("Fix", checkCounters);
-            Assert.AreEqual(result.GetText(), "Success");
+            var row = utility.GetFirstRow();
+            var isFixed = row.IsFixed();
+            Assert.AreEqual(true, isFixed, "Error message on page");
             driver.Refresh();
         }
 
@@ -97,13 +101,20 @@ namespace EasyPayTests
             LogProgress($"Try sellect address + {address}");
             var utility = checkCounters.SelectAddress(address);
             LogProgress("Try set new value metrix");
-            var setCurrentValue = utility.ClickOnSetNewValue(address);
+            var row = utility.GetFirstRow();
+
+            using (var db = new DatabaseMaster())
+            {
+                db.Open();
+                db.ChangeInDB("update counters set is_active = true, is_fixed = false where address_id = 9");
+            }            
+            var setCurrentValue = row.SetNewValueUtility(address);
             LogProgress("Try set value '44' metrix");
             setCurrentValue.FillNewCurrentValue("44");
             LogProgress("Try click on btn apply");
             setCurrentValue.ClickOnBtnApply();
-            var result = setCurrentValue.ErrorOrSuccess();
-            Assert.AreEqual(result.GetText(), "Success");
+            var isSuccsess = setCurrentValue.isSuccsess();
+            Assert.AreEqual(true, isSuccsess, "Error message on page");
         }
 
         [Test]
@@ -111,20 +122,20 @@ namespace EasyPayTests
         {
             LogProgress("Try navigate to Rate clients page");
             var rateClients = homePage.NavigateToRateClients();
-            var result = rateClients.ElementsIsDisplayed();
-            Assert.True(result, "List of clients empty");
+            var isDisplayed = rateClients.ElementsIsDisplayed();
+            Assert.AreEqual(true, isDisplayed, "List of clients empty");            
         }
 
-        [Test(Description = "Repeat 2 times")]
+        [Test]
         public void RateClients()
         {
             LogProgress("Try navigate to Rate clients page");
             var rateClients = homePage.NavigateToRateClients();
             var clientPage = rateClients.ReturnRateClients();
-            var firstRow = clientPage.GetLastRow();
+            var lastRow = clientPage.GetLastRow();
             LogProgress("Try click on stars rate");
-            var result = firstRow.Rate(4, true);
-            Assert.AreEqual(result.GetText(), "Success");
+            var isRated = lastRow.IsRated(4, true); 
+            Assert.AreEqual(true, isRated, "Error message on page");
         }
     }
 }
