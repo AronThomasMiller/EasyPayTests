@@ -261,3 +261,5 @@ __pycache__/
 *.pyc
 
 EasyPayTests/Test_Execution_Reports
+EasyPayTests/SimpleApiTests/SimpleAPi
+/SimpleApiTests/SimpleAPi
