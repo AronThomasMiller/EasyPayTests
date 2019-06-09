@@ -3,62 +3,54 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using static HttpLibrary.RequestWrapper;
 
 namespace SimpleApiTests
 {
     [Parallelizable(ParallelScope.Fixtures)]
-    public class ApiPosts : BaseApiTest
+    public class ApiPosts
     {
-        private List<Post> GetPosts()
-        {
-            string dataFile = "PostInfo.json";
-            var jsonString = Post.FromJsonFile(ApiDataPlace + dataFile);
-            return JsonConvert.DeserializeObject<List<Post>>(jsonString);
-        }
+        private readonly static string ApiResourse = "/api/posts";
+        protected string TestSuitDataPlace => ApiTestData.AllTestSuitesDataPlace + "ApiPosts\\";
 
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-            TestsuitDataPlace += @"ApiPosts\";
-            TestName = TestContext.CurrentContext.Test.MethodName;
-            request = new RequestWrapper("/api/posts");
-        }
 
         [Test(Author = "Boris")]
         public void TestGet()
         {
-            request.MethodOfRequest = Methods.GET;
+            var client = ClientFactory.GetClient(ApiTestData.Api.Url);
+            var request = new RequestWrapper(ApiResourse, Methods.GET);
+            
             var response = client.Execute(request);
             var status = response.StatusCode;
             Assert.AreEqual(HttpStatusCode.OK, status);
-            var expectedListOfPosts = GetPosts();
+            var expectedListOfPosts = ApiTestData.Api.GetFileDataFromAPI<Post>("PostInfo.json");
             var actualListOfPosts = JsonConvert.DeserializeObject<List<Post>>(response.Content);
             Assert.AreEqual(expectedListOfPosts, actualListOfPosts);
         }
-
+        
         [TestCase("2bf2a204-d089-4dd2-920e-da8550a7882d", Author = "Boris")]
         public void TestGetById(string inputId)
         {
-            request = new RequestWrapper($"/api/posts/{inputId}", Methods.GET);
-            var response = client.Execute(request);
-            var status = response.StatusCode;
-            Assert.AreEqual(HttpStatusCode.OK, status);
-            var responsePost = JsonConvert.DeserializeObject<Post>(response.Content);
+            var client = ClientFactory.GetClient(ApiTestData.Api.Url);
+            var getRequest = new RequestWrapper($"{ApiResourse}/{inputId}", Methods.GET);
+            var getResponse = client.Execute(getRequest);
+            var getStatus = getResponse.StatusCode;
+            Assert.AreEqual(HttpStatusCode.OK, getStatus);
+            var responsePost = JsonConvert.DeserializeObject<Post>(getResponse.Content);
             Assert.AreEqual(inputId, responsePost.Id);
         }
 
         [Test(Author = "Boris")]
         public void TestPost()
         {
-            var DataForTestPath = $@"{TestsuitDataPlace}{TestName}.json";
+            var DataForTestPath = $"{TestSuitDataPlace}TestPost.json";
             var testData = Post.FromJsonFile(DataForTestPath);
             Assert.NotNull(testData, "Test data is empty");
 
-            request.MethodOfRequest = Methods.POST;
+            var client = ClientFactory.GetClient(ApiTestData.Api.Url);
+            var request = new RequestWrapper(ApiResourse, Methods.POST);
+
             request.AddJsonFile(DataForTestPath);
 
             var postResponse = client.Execute(request);
@@ -71,25 +63,30 @@ namespace SimpleApiTests
         [Test(Author = "Boris")]
         public void TestPut()
         {
-            var DataForTestPath = $@"{TestsuitDataPlace}{TestName}.json";
+            var DataForTestPath = $"{TestSuitDataPlace}TestPut.json";
             var testData = Post.FromJsonFile(DataForTestPath);
             var fileSize = testData.Length;
             Assert.AreNotEqual(0, fileSize, "Test data is empty");
 
-            request.MethodOfRequest = Methods.PUT;
+            var client = ClientFactory.GetClient(ApiTestData.Api.Url);
+            var request = new RequestWrapper(ApiResourse, Methods.PUT);
+
             request.AddJsonFile(DataForTestPath);
             
-            var postResponse = client.Execute(request);
-            var postStatus = postResponse.StatusCode;
-            var postContent = postResponse.Content;
-            Assert.AreEqual(HttpStatusCode.OK, postStatus);
-            Assert.NotNull(postContent, "Nothing updated");
+            var putResponse = client.Execute(request);
+            var putStatus = putResponse.StatusCode;
+            var putContent = putResponse.Content;
+            Assert.AreEqual(HttpStatusCode.OK, putStatus);
+            Console.WriteLine(putContent);
+            Assert.NotNull(putContent, "Nothing updated");
         }
 
         [TestCase("a1af5731-2b80-4ba3-96e5-b06cd24e272c", Author = "Boris")]
         public void TestDelete(string inputId)
         {
-            request = new RequestWrapper($"/api/posts/?{inputId}", Methods.DELETE);
+            var client = ClientFactory.GetClient(ApiTestData.Api.Url);
+            var request = new RequestWrapper($"{ApiResourse}/?{inputId}", Methods.DELETE);
+
             var response = client.Execute(request);
             var status = response.StatusCode;
             Assert.AreEqual(HttpStatusCode.OK, status);

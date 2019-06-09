@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using System;
+using RestSharp;
 
 namespace HttpLibrary
 {
@@ -34,6 +35,11 @@ namespace HttpLibrary
             var data = Post.FromJsonFile(pathToFile);
             Request = Request.AddJsonBody(data);
             return this; 
+        }
+
+        public void AddHeader(string name, string value)
+        {
+            Request.AddHeader(name, value);
         }
     }
 }

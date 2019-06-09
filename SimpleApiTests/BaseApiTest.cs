@@ -4,7 +4,7 @@ using System.IO;
 
 namespace SimpleApiTests
 {
-    public class BaseTest
+    public class BaseApiTest
     {
         protected string ApiDataPlace;
         protected string TestsuitDataPlace;

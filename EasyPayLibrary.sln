@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumExtentReport", "Sel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManager", "DatabaseManager\DatabaseManager.csproj", "{080C8744-8B6E-408F-84EC-307D4D30B60E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleApiTests", "SimpleApiTests\SimpleApiTests.csproj", "{01AC2D6A-14CB-46A9-99C1-3CB4BF5D73D9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpLibrary", "HttpLibrary\HttpLibrary.csproj", "{49597CAF-5168-4FE6-B790-27DABA2418DD}"
 EndProject
 Global
@@ -37,10 +35,6 @@ Global
 		{080C8744-8B6E-408F-84EC-307D4D30B60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{080C8744-8B6E-408F-84EC-307D4D30B60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{080C8744-8B6E-408F-84EC-307D4D30B60E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01AC2D6A-14CB-46A9-99C1-3CB4BF5D73D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01AC2D6A-14CB-46A9-99C1-3CB4BF5D73D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01AC2D6A-14CB-46A9-99C1-3CB4BF5D73D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01AC2D6A-14CB-46A9-99C1-3CB4BF5D73D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49597CAF-5168-4FE6-B790-27DABA2418DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49597CAF-5168-4FE6-B790-27DABA2418DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49597CAF-5168-4FE6-B790-27DABA2418DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
