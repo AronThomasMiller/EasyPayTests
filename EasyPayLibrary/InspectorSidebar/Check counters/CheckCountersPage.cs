@@ -1,4 +1,5 @@
 ﻿using EasyPayLibrary.HomePages;
+using EasyPayLibrary.InspectorSidebar.Check_counters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace EasyPayLibrary.InspectorSidebar
     {
         //dropdown of what? first i thought it is dropdown of profile, write what contains in dropdown
         public WebElementWrapper dropdown;
-        //public UtilityPage utility;
+        public UtilityPageRows utility;
 
         public override void Init(DriverWrapper driver)
         {
@@ -30,16 +31,15 @@ namespace EasyPayLibrary.InspectorSidebar
             return listOfDropdown;
         }
 
-        public UtilityPage SelectAddress(string text)
+        public UtilityPageTable SelectAddress(string text)
         {
             ClickOnDropDown();
             var addresses = ReturnListOfDropDown();
-            ForEach(addresses, text);
-            return GetPOM<UtilityPage>(driver);
+            ClickFromDropDown(addresses, text);
+            return GetPOM<UtilityPageTable>(driver);
         }
 
-        //ForEach means that it will be lookout of whole IEnumerable type object, but in this fuction you click on specific address by text, so describe it meaningfully
-        public void ForEach(IEnumerable<WebElementWrapper> addresses, string text)
+        public void ClickFromDropDown(IEnumerable<WebElementWrapper> addresses, string text)
         {
             //forech construction can be more easily
             //var addressSelectedByText = addresses.First(element => element.GetText() == text);
