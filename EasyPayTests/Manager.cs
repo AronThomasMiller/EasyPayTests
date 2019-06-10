@@ -50,7 +50,7 @@ namespace EasyPayTests
             LogProgress("Manager is adding an item to inspector's schedule");
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190624", "вулиця Руська 241/245, Чернівці, Чернівецька область");
-            
+
             var isVisibleTask = schedule.GetTask().IsDisplayed();
             Assert.AreEqual(true, isVisibleTask, "Task isn't displayed");
             // postCondition
@@ -77,7 +77,7 @@ namespace EasyPayTests
             var deleteItem = editItem.ApplyToEdit("20190628", "вулиця Горіхівська 100/2, Чернівці, Чернівецька область");
 
             var isVisibleTask = schedule.GetTask().IsDisplayed();
-            Assert.AreEqual(true, isVisibleTask, "Task isn't displayed");            
+            Assert.AreEqual(true, isVisibleTask, "Task isn't displayed");
 
             // postCondition
             LogProgress("Manager is remowing an item from inspector's schedule");
@@ -184,10 +184,10 @@ namespace EasyPayTests
             var listOfInspectors = homePage.NavigateToInspectorsList();
             LogProgress("Manager is adding Ivan Ivanov to the list of inspectors");
             var addIvan = listOfInspectors.ClickToAddInspector();
-            addIvan.AddInspector("Ivan Ivanov");            
+            addIvan.AddInspector("Ivan Ivanov");
             var isInspectorDisplayed = listOfInspectors.GetInspector("Ivan Ivanov").IsDisplayed();
             Assert.AreEqual(true, isInspectorDisplayed, "Ivan Ivanov isn't displayed");
-            
+
             // postCondition
             LogProgress("Manager is removing Ivan Ivanov from the list of inspectors");
             var removeIvan = listOfInspectors.RemoveInspector("Ivan Ivanov");
@@ -195,7 +195,7 @@ namespace EasyPayTests
 
             using (var conn = new DatabaseManipulation.DatabaseMaster())
             {
-                conn.Open();                
+                conn.Open();
                 conn.ChangeInDB("delete from users where user_id = 113");
             }
         }
