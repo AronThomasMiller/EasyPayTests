@@ -30,6 +30,7 @@ namespace EasyPayLibrary
             title = driver.GetByXpath("//div[@class='title_left']//span");            
         }
 
+        //use property instead one-line method
         public bool NameIsVisible()
         {
             return nameInput.IsDisplayed();

@@ -14,9 +14,9 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            btnCurrentMonth = driver.GetByXpath("//*[text()='Current month']");
-            btnPreviousMonth = driver.GetByXpath("//*[text()='Previous month']");
             base.Init(driver);
+            btnCurrentMonth = driver.GetByXpath("//*[@data-locale-item='currentMonth']");
+            btnPreviousMonth = driver.GetByXpath("//*[@data-locale-item='previousMonth']");
         }
 
         public HistoryPage ClickOnCurrentMonthButton()
@@ -25,18 +25,18 @@ namespace EasyPayLibrary.ManagerSidebar
             return GetPOM<HistoryPage>(driver);
         }
 
-        public bool IsHistoryCurrentMonthVisible(string address,string date)
+        public bool CurrentMonthContainsAddress(string address, string date)
         {
             WebElementWrapper element;
             try
             {
                 element = driver.GetByXpath($"//table[@id='scheduleHistoryCurrent']//td[contains(text(),'{address}')]/following-sibling::td[contains(text(),'{date}')]");
+                return true;
             }
             catch (WebDriverTimeoutException)
             {
                 return false;
             }
-            return true;
         }
 
         public HistoryPage ClickOnPreviousMonthButton()
@@ -45,11 +45,11 @@ namespace EasyPayLibrary.ManagerSidebar
             return GetPOM<HistoryPage>(driver);
         }
 
-        public bool IsHistoryPreviousMonthVisible(string date)
+        public bool PreviousMonthContainsAddress(string date)
         {
             try
             {
-                var element = driver.GetByXpath($"//*[contains(text(),'{date}')]",1);
+                var element = driver.GetByXpath($"//*[contains(text(),'{date}')]", 1);
                 return true;
             }
             catch (WebDriverTimeoutException)

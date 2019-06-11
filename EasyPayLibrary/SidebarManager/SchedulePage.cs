@@ -16,10 +16,10 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            btnAddScheduleItem = driver.GetByXpath("//button[@class='fc-addScheduleItem-button fc-button fc-state-default fc-corner-left fc-corner-right']");
-            tabHistory = driver.GetByXpath("//a[@id='profile-tab2']");
-            tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");
             base.Init(driver);
+            btnAddScheduleItem = driver.GetByXpath("//button[@class='fc-addScheduleItem-button fc-button fc-state-default fc-corner-left fc-corner-right']",5);
+            tabHistory = driver.GetByXpath("//a[@id='profile-tab2']");
+            tabStatistics = driver.GetByXpath("//span[contains(text(),'Statistics')]");           
         }
 
         public WebElementWrapper GetAddScheduleItem()
@@ -29,7 +29,8 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public WebElementWrapper GetTask()
         {
-            return driver.GetByXpath("//span[@class='fc-title']");
+            btnEditScheduleItem = driver.GetByXpath("//span[@class='fc-title']");
+            return btnEditScheduleItem;
         }
 
         public void ClickOnAddScheduleButton()
@@ -77,6 +78,12 @@ namespace EasyPayLibrary.ManagerSidebar
         {
             tabStatistics.Click();
             return GetPOM<StatisticsPage>(driver);
+        }
+
+        public string StatusOfOperation()
+        {
+            var status = driver.GetByXpath("//h4[@class='ui-pnotify-title']").GetText();
+            return status;
         }
     }
 }

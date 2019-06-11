@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyPayLibrary.InspectorSidebar.Rate_clients
+namespace EasyPayLibrary.InspectorSidebar.Check_counters
 {
-    public class RateClientsTable : BasePageObject
+   public class UtilityPageTable : BasePageObject
     {
-        List<RateClientsRows> table;
+        List<UtilityPageRows> table;
 
         public override void Init(DriverWrapper driver)
         {
@@ -18,34 +18,33 @@ namespace EasyPayLibrary.InspectorSidebar.Rate_clients
 
             try
             {
-                tableOnPage = driver.GetElementsByXpath("//table[@class='table table-hover text-justify']//tbody//tr");
+                tableOnPage = driver.GetElementsByXpath("//table[@class='table table-hover schedule text-center']//tbody//tr");
             }
             catch (WebDriverTimeoutException)
             {
                 return;
             }
-            table = new List<RateClientsRows>();
+            table = new List<UtilityPageRows>();
 
             foreach (var element in tableOnPage)
             {
-                table.Add(new RateClientsRows(element, driver));
+                table.Add(new UtilityPageRows(element, driver));
             }
-            //table = tableOnPage.Select(element => new RateClientsRows(element, driver)).ToList();
-        }
+        }       
 
-        public RateClientsRows GetFirstRow()
+        public UtilityPageRows GetFirstRow()
         {
             return table.First();
         }
 
-        public RateClientsRows GetLastRow()
+        public UtilityPageRows GetLastRow()
         {
             return table.Last();
         }
 
-        public List<RateClientsRows> GetAllRows()
+        public List<UtilityPageRows> GetAllRows()
         {
             return table;
-        }        
+        }
     }
 }

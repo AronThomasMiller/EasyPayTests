@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.InspectorSidebar
 {
+    //It is class which describe only one row
     public class RateClientsRows : BasePageObject
     {
         string name;
@@ -20,20 +21,30 @@ namespace EasyPayLibrary.InspectorSidebar
             base.Init(driver);
         }
 
+        //use property instead one-line function
         public string GetName()
         {
             return name;
         }
 
-        public WebElementWrapper Rate(int starNumber, bool andHalf = false)
+        public void Rate(int starNumber, bool andHalf = false)
         {            
             starNumber = starNumber * 12;
             starNumber += (andHalf) ? 6 : 0;
-            var element = rate.GetByXpath(".//span");
+            var element = rate.GetByXpath("./span");
             var clickOnStar = new Actions(driver.GetDriver());
-            clickOnStar.MoveToElement(element.GetElement(), (starNumber), 5).Click().Build().Perform();
-            var errorOrSuccess = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
-            return errorOrSuccess;
+            clickOnStar.MoveToElement(element.GetElement(), (starNumber), 5).Click().Build().Perform();           
+        }
+
+        public bool IsRated(int starNumber, bool andHalf = false)
+        {
+            Rate(starNumber, andHalf);
+            var messageBox = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
+            var textOfMessageBox = messageBox.GetText();
+            if (textOfMessageBox == "Success")
+                return true;
+            else
+                return false;
         }
     }
 }

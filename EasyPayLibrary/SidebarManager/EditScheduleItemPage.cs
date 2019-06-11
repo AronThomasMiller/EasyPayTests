@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyPayLibrary.SidebarManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,36 +9,33 @@ namespace EasyPayLibrary.ManagerSidebar
 {
     public class EditScheduleItemPage : BasePageObject
     {
-        WebElementWrapper chooseDateAndTime;
-        WebElementWrapper deleteAddress;
-        WebElementWrapper chooseAddress;
+        WebElementWrapper fieldChooseDateAndTime;
+        WebElementWrapper fieldDeleteAddress;
+        WebElementWrapper fieldChooseAddress;
         WebElementWrapper btnApply;
 
         public override void Init(DriverWrapper driver)
         {
-            chooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker-edit']");
-            deleteAddress = driver.GetByXpath("//*[@id='edit-schedule-item-form']/div/div/span");
-            chooseAddress = driver.GetByXpath("//form[@id='edit-schedule-item-form']//input[@placeholder='Select a Address']");
+            fieldChooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker-edit']");
+            fieldDeleteAddress = driver.GetByXpath("//*[@id='edit-schedule-item-form']/div/div/span");
+            fieldChooseAddress = driver.GetByXpath("//form[@id='edit-schedule-item-form']//input[@placeholder='Select a Address']");
             btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-edit-apply']");
             base.Init(driver);
         }
 
         public void ChooseDateAndTime(string date)
         {
-            chooseDateAndTime.Click();
-            for(int i = 0; i <= 7; i++)
-            {
-                chooseDateAndTime.sendBackSpace();
-            }
-            chooseDateAndTime.SendText(date);
+            fieldChooseDateAndTime.Click();
+            DatePicker.DatePickerFunc(fieldChooseDateAndTime);
+            fieldChooseDateAndTime.SendText(date);
         }
 
         public void ChooseAddressToEdit(string address)
         {
-            deleteAddress.Click();
-            chooseAddress.Click();
-            chooseAddress.SendText(address);
-            chooseAddress.sendEnter();
+            fieldDeleteAddress.Click();
+            fieldChooseAddress.Click();
+            fieldChooseAddress.SendText(address);
+            fieldChooseAddress.sendEnter();
         }
 
         public void ClickOnApplyButton()

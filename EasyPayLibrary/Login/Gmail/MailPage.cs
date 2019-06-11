@@ -6,17 +6,18 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
 {
     public class MailPage:BasePageObject
     {
-        WebElementWrapper confirmationLink;
+        WebElementWrapper hrefConfirmationLink;
 
         public override void Init(DriverWrapper driver)
         {
-            confirmationLink = driver.GetByXpath("//div[contains(text(),'To confirm your account registration, click on the link:')]//a");
+            var listOfLinks = driver.GetElementsByXpath("//div[contains(text(),'To confirm your account registration, click on the link:')]//a");
+            hrefConfirmationLink = listOfLinks[0];
             base.Init(driver);
         }
 
         public void ClickOnLastLink()
         {
-            confirmationLink.Click();
+            hrefConfirmationLink.Click();
         }
 
         public void DeleteAllMails()
@@ -28,9 +29,7 @@ namespace EasyPayLibrary.Pages.UnauthorizedUserPages.Gmail
         public LoginPage ConfirmEmail()
         {
             ClickOnLastLink();
-            
             DeleteAllMails();
-
             driver.SwitchToWindow();
             return GetPOM<LoginPage>(driver);
         }

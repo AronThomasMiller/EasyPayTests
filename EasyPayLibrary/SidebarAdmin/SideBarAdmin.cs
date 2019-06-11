@@ -2,6 +2,7 @@
 {
     public class SidebarAdmin : SidebarBase
     {
+        //type of elements? prefix!
         WebElementWrapper utilities;
         WebElementWrapper users;
         WebElementWrapper registerUser;

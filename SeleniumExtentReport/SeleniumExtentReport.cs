@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-
 using AventStack.ExtentReports;
 using System.IO;
 using AventStack.ExtentReports.Reporter;
@@ -44,20 +43,19 @@ namespace SeleniumExtentReportTest
 #else
                 dir = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
 #endif
-                DirectoryInfo di = Directory.CreateDirectory(dir + "\\Test_Execution_Reports");
+                DirectoryInfo di = Directory.CreateDirectory($"{dir}\\Test_Execution_Reports");
 
-                screenFolder = dir + "\\Test_Execution_Reports\\Screen";
+                screenFolder = $"{dir}\\Test_Execution_Reports\\Screen";
                 di = Directory.CreateDirectory(screenFolder);
 
-
-                var outputDir = dir + "\\Test_Execution_Reports" + "\\" + TestClassName + "\\";
-
-                var htmlReporter = new ExtentHtmlReporter(outputDir + "Automation_Report" + ".html");
+                var date = DateTime.Now.ToString(" dd-MM-yyyy_(HH_mm_ss)");
+                var outputDir = $"{dir}\\Test_Execution_Reports\\{TestClassName}{date}\\";
+                var param = "Automation_Report.html";
+                var htmlReporter = new ExtentHtmlReporter($"{outputDir}{param}");
 
                 htmlTestSuitReport.AddSystemInfo("Who want to ATQC?", "");
                 htmlTestSuitReport.AttachReporter(htmlReporter);
             }
-
             catch (Exception e)
             {
                 throw (e);
@@ -88,20 +86,17 @@ namespace SeleniumExtentReportTest
                 test.stacktrace = "" + TestContext.CurrentContext.Result.StackTrace + "";
                 test.errorMessage = TestContext.CurrentContext.Result.Message;
                 var output = TestExecutionContext.CurrentContext.CurrentResult.Output;
-                MediaEntityModelProvider mediaModel = null;
 
                 if (test.status == Status.Fail)
                 {
                     string screenShotPath = driver.GetScreenshot(screenFolder);
-                    AddTestHTML(test, screenShotPath, output, mediaModel);
+                    AddTestHTML(test, output, screenShotPath);
                 }
                 else
                 {
-                    AddTestHTML(test, output, mediaModel);
+                    AddTestHTML(test, output);
                 }
-
             }
-
             catch (Exception e)
             {
                 throw (e);
@@ -136,32 +131,17 @@ namespace SeleniumExtentReportTest
 
         private void AddScreenShotHTML(Status logstatus, string screenShotPath)
         {
-            htmlTestReport.Log(logstatus, "Snapshot below: " + htmlTestReport.AddScreenCaptureFromPath(screenShotPath));
+            htmlTestReport.Log(logstatus, $"Snapshot below: {htmlTestReport.AddScreenCaptureFromPath(screenShotPath)}");
         }
 
-        private void AddTestHTML(ContextOfTest test, string output, MediaEntityModelProvider mediaModel)
+        private void AddTestHTML(ContextOfTest test, string output = null, string screenShotPath = null)
         {
             var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
             var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
-
-            htmlTestReport.Log(test.status,
-          "Test ended with " + test.status +
-          (!isStackTraceNullOrEmpty ? "\n<br>\n<br>" + test.stacktrace + "\n<br>\n<br>" : "\n<br>\n<br>")
-          + (!isErrorMessageNullOrEmpty ? test.errorMessage + "\n<br>\n<br>" : string.Empty)
-          + output, mediaModel);
-        }
-
-        private void AddTestHTML(ContextOfTest test, string screenShotPath, string output, MediaEntityModelProvider mediaModel)
-        {
-            var isStackTraceNullOrEmpty = string.IsNullOrEmpty(test.stacktrace);
-            var isErrorMessageNullOrEmpty = string.IsNullOrEmpty(test.errorMessage);
-
-            htmlTestReport.Log(test.status,
-          "Test ended with " + test.status +
-          (!isStackTraceNullOrEmpty ? "\n<br>\n<br>" + test.stacktrace + "\n<br>\n<br>" : "\n<br>\n<br>")
-          + (!isErrorMessageNullOrEmpty ? test.errorMessage + "\n<br>\n<br>" : string.Empty)
-          + output, mediaModel);
-            AddScreenShotHTML(test.status, screenShotPath);
+            var res1 = (!isStackTraceNullOrEmpty ? $"\n<br>\n<br>{test.stacktrace}\n<br>\n<br>" : "\n<br>\n<br>");
+            var res2 = (!isErrorMessageNullOrEmpty ?$"{test.errorMessage}\n<br>\n<br>" : string.Empty);
+            htmlTestReport.Log(test.status, $"Test ended with {test.status}{res1}{res2}{output}");
+            if (screenShotPath != null) AddScreenShotHTML(test.status, screenShotPath);
         }
     }
 }

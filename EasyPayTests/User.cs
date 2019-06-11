@@ -102,21 +102,21 @@ namespace EasyPayTests
             Assert.AreEqual("Masha", profile.GetName(),"Name doesn't change");
         }
         
-        [Test]
-        public void SelectAddresseUtilities()
-        {
-            LogProgress("User is going to Utilities");
-            var utilities = homePage.NavigateToUtilities();
-            LogProgress("User choosing Address");
-            var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
-            Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
-        }
+        //[Test]
+        //public void SelectAddresseUtilities()
+        //{
+        //    LogProgress("User is going to Utilities");
+        //    var utilities = homePage.NavigateToConnectedUtilitiesPage();
+        //    LogProgress("User choosing Address");
+        //    var result = utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
+        //    Assert.AreEqual("Чернівці City, вулиця Шевченка Str., 44/54", result,"Address is not selected");
+        //}
 
         [Test]
         public void RateInspectors()
         {
             LogProgress("User is going to RateInspectors");
-            var rateInspectors = homePage.NavigateToRateInspectors();
+            var rateInspectors = homePage.NavigateToRateInspectorsPage();
             LogProgress("Return RateInspectors Page");
             var inspectorsPage = rateInspectors.ReturnRateInspectors();
             LogProgress("User is going to RateInspectors");
@@ -128,37 +128,37 @@ namespace EasyPayTests
         public void SelectAddresseOnPaymentsHistory()
         {
             LogProgress("User is going to PaymentHistory");
-            var paymentsHistory = homePage.NavigateToPaymentHistory();
+            var paymentsHistory = homePage.NavigateToPaymentHistoryPage();
             LogProgress("User choosing address ");
             var result = paymentsHistory.SelectAddress("Чернівецька область, Чернівці, вулиця Пушкіна 12");
             Assert.AreEqual("Чернівецька область, Чернівці, вулиця Пушкіна 12", result,"Adress is not selected");
         }
 
-        [Test]
-        public void DisconnectUtilities()
-        {
-            using(var conn = new DatabaseManipulation.DatabaseMaster())
-            {
-                conn.Open();
-                conn.ChangeInDB("update counters set is_active = true where debt_id = 23");
-            }
-            LogProgress("User is going to utilities");
-            var utilities = homePage.NavigateToUtilities();
-            LogProgress("User choosing address ");
-            utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
-            LogProgress("User disconects Utility");
-            var newUtilities = utilities.Disconect();
-            LogProgress("User choosing address ");
-            newUtilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
-            var result = newUtilities.VerifyThatUtilitiExist();
-            Assert.IsNull(result, "Utility wasn't disconnected");
-        }
+        //[Test]
+        //public void DisconnectUtilities()
+        //{
+        //    using(var conn = new DatabaseManipulation.DatabaseMaster())
+        //    {
+        //        conn.Open();
+        //        conn.ChangeInDB("update counters set is_active = true where debt_id = 23");
+        //    }
+        //    LogProgress("User is going to utilities");
+        //    var utilities = homePage.NavigateToConnectedUtilitiesPage();
+        //    LogProgress("User choosing address ");
+        //    utilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
+        //    LogProgress("User disconects Utility");
+        //    var newUtilities = utilities.Disconect();
+        //    LogProgress("User choosing address ");
+        //    newUtilities.SelectAddress("Чернівці City, вулиця Шевченка Str., 44/54");
+        //    var result = newUtilities.VerifyThatUtilitiExist();
+        //    Assert.IsNull(result, "Utility wasn't disconnected");
+        //}
 
         [Test(Description = "Repeat 2 times")]
         public void ChangeMetrics()
         {
             LogProgress("User is going to Payment ");
-            var pay = homePage.NavigateToPayment();
+            var pay = homePage.NavigateToPaymentPage();
             LogProgress("User is changing metrics ");
             pay.ChangeMetrics("вулиця Нагірна 5, Чернівці, Чернівецька область", "42");
             LogProgress("User choosing address ");
@@ -170,14 +170,14 @@ namespace EasyPayTests
         public void ListOfInspectorsNotEmpty()
         {
             LogProgress("User is going to Rate Inspectors ");
-            var rateinspectors = homePage.NavigateToRateInspectors();
+            var rateinspectors = homePage.NavigateToRateInspectorsPage();
             LogProgress("User is going to log out ");
             var logOut = rateinspectors.LogOut();
             LogProgress("User is logging as Manager ");
             var loginManager = logOut.LoginAsManager("manager1@gmail.com", "Admin123");
             LogProgress("User is going to Inspectors List ");
             var rateInspectors = loginManager.NavigateToInspectorsList();
-            var res = rateInspectors.VerifyListOfInspectorsNotEmpty();
+            var res = rateInspectors.VerifyListOfInspectorsIsNotEmpty();
             Assert.IsNotEmpty(res, "List of Inspector is empty");
         }
 
@@ -185,7 +185,7 @@ namespace EasyPayTests
         public void ListOfUtilitiesNotEmpty()
         {
             LogProgress("User is going to Payment History ");
-            var paymentsHistory = homePage.NavigateToPaymentHistory();
+            var paymentsHistory = homePage.NavigateToPaymentHistoryPage();
             LogProgress("User is going to log out ");
             var logOut = paymentsHistory.LogOut();
             LogProgress("User is logging as Admin ");

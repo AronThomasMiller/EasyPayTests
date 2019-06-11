@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.Changes
 {
-    public class ConnectedUtilitiesForm : BasePageObject
+    public class ConnectedUtilitiesForm : HomePageUser
     {
-        WebElementWrapper btnConnectedUtilities;
         WebElementWrapper btnDisconnect;
         WebElementWrapper addressesDropdown;
         WebElementWrapper btnCallinspector;
@@ -21,13 +20,7 @@ namespace EasyPayLibrary.Changes
         public override void Init(DriverWrapper driver)
         {
             base.Init(driver);
-            btnConnectedUtilities = driver.GetByXpath("//a[@href='/user/connected-utilities/']");
             addressesDropdown = driver.GetByXpath("//select[@id='selectAddress']");           
-        }
-
-        public void ClickOnConnectedUtilities()
-        {
-            btnConnectedUtilities.Click();
         }
 
         public string SelectAddress(string address)

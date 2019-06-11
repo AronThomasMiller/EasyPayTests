@@ -37,32 +37,32 @@ namespace EasyPayLibrary.Changes
 
         public void SetAddress(string address)
         {
-            fieldAddress.Click();
+            //fieldAddress.Click();
             fieldAddress.SendText(address);
             fieldAddress.sendEnter();
         }
 
         public void SetHouse(string house)
         {
-            fieldHouse.Click();
+            //fieldHouse.Click();
             fieldHouse.SendText(house);
         }
 
         public void SetStreet(string street)
         {
-            fieldStreet.Click();
+            //fieldStreet.Click();
             fieldStreet.SendText(street);
         }
 
         public void SetCity(string city)
         {
-            fieldCity.Click();
+            //fieldCity.Click();
             fieldCity.SendText(city);
         }
 
         public void SetRegion(string region)
         {
-            fieldRegion.Click();
+            //fieldRegion.Click();
             fieldRegion.SendText(region);
         }
 
@@ -85,7 +85,7 @@ namespace EasyPayLibrary.Changes
         {
             fieldFlat.SendText(flat);
         }
-
+        //Change to name of button
         public void Submit()
         {
             btnAddAddresse.Click();
@@ -101,8 +101,10 @@ namespace EasyPayLibrary.Changes
             fieldRegion.SendText(region);
             fieldZipCode.SendText(zipCode);
             fieldCountry.SendText(country);
+            //
             btnCheck.Click();
             fieldFlat.SendText(flat);
+            //use methods below
             btnAddAddresse.Click();
         }
 

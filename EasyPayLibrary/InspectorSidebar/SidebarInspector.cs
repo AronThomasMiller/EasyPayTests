@@ -8,6 +8,7 @@ namespace EasyPayLibrary.InspectorSidebar
 {
     public class SidebarInspector: SidebarBase
     {
+        //type of elements - prefix
         public WebElementWrapper schedule;
         public WebElementWrapper checkCounters;
         public WebElementWrapper rateClients;

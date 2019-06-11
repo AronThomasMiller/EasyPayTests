@@ -17,9 +17,6 @@ namespace EasyPayLibrary
             }
         }
 
-        public IEnumerable<WebElementWrapper> GetListOfSideBarComponents()
-        {
-            return driver.GetElementsByXpath("//ul[@class='nav side-menu']/li/a//span");
-        }
+        public IEnumerable<WebElementWrapper> ListOfSideBarComponents => driver.GetElementsByXpath("//ul[@class='nav side-menu']/li/a//span");
     }
 }

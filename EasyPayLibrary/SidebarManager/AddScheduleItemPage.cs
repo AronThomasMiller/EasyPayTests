@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EasyPayLibrary.SidebarManager;
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,32 +10,28 @@ namespace EasyPayLibrary.ManagerSidebar
 {
     public class AddScheduleItemPage : BasePageObject
     {
-        WebElementWrapper chooseDateAndTime;
-        WebElementWrapper chooseAddress;
+        WebElementWrapper fieldChooseDateAndTime;
+        WebElementWrapper fieldChooseAddress;
         WebElementWrapper btnApply;
 
         public override void Init(DriverWrapper driver)
         {
-            chooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker']");
-            chooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
-            btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
             base.Init(driver);
+            fieldChooseDateAndTime = driver.GetByXpath("//input[@id='datetimepicker']");
+            fieldChooseAddress = driver.GetByXpath("//form[@id='add-schedule-item-form']//input[@placeholder='Select a Address']");
+            btnApply = driver.GetByXpath("//button[@class='btn btn-primary js-add-apply']");
         }
-
         public void ChooseDateAndTime(string date)
         {
-            chooseDateAndTime.Click();
-            for (int i = 0; i <= 7; i++)
-            {
-                chooseDateAndTime.sendBackSpace();
-            }
-            chooseDateAndTime.SendText(date);
+            fieldChooseDateAndTime.Click();
+            DatePicker.DatePickerFunc(fieldChooseDateAndTime);
+            fieldChooseDateAndTime.SendText(date);
         }
 
         public void ChooseAddress(string address)
         {
-            chooseAddress.SendText(address);
-            chooseAddress.sendEnter();
+            fieldChooseAddress.SendText(address);
+            fieldChooseAddress.sendEnter();
         }
 
         public void ClickOnApplyButton()
@@ -51,8 +49,15 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public bool IsAddressFromScheduleDisplayed()
         {
-            var element = driver.GetByXpath("//div[@class='fc-content']");
-            return element.IsDisplayed();
+            try
+            {
+                var element = driver.GetByXpath("//div[@class='fc-content']");
+                return element.IsDisplayed();
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
         }
     }
 }
