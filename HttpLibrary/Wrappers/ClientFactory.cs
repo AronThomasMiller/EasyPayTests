@@ -1,16 +1,13 @@
 ﻿using HttpLibrary;
-using RestSharp;
 using System.Configuration;
 
-namespace SimpleApiTests
+namespace HttpLibrary
 {
-    public class ClientFactory
+    public static class ClientFactory
     {
         public static ClientWrapper GetClient(string apiUrl)
         {
-            return (apiUrl == null)
-                ? new ClientWrapper(ConfigurationManager.AppSettings.Get("ApiUrl"))
-                : new ClientWrapper(apiUrl);
+            return new ClientWrapper(apiUrl);
         }
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleApiTests
+namespace HttpLibrary.Containers
 {
-    public class ApiPostRate
+    class ApiUser:UserData
     {
-
+        public string Token { get; set; }
     }
 }

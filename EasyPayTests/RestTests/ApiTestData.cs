@@ -1,6 +1,7 @@
 ﻿using HttpLibrary;
 using NUnit.Framework;
 using System;
+using System.Configuration;
 using System.IO;
 
 namespace SimpleApiTests
@@ -9,6 +10,7 @@ namespace SimpleApiTests
     {
         public static Api Api { get; }
         public static readonly string AllTestSuitesDataPlace;
+        public static readonly string FilesToReplace;
 
         static ApiTestData()
         {
@@ -18,10 +20,12 @@ namespace SimpleApiTests
 #else
                 projectLocation = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
 #endif
-            AllTestSuitesDataPlace = $"{projectLocation}\\TestData\\";
+            AllTestSuitesDataPlace = $"{projectLocation}TestData";
+            FilesToReplace = $"{AllTestSuitesDataPlace}\\FilesToReplace";
 
             var apiUrl = TestContext.Parameters.Get("ApiUrl");
-            var apiPath = $"{projectLocation}\\SimpleApi\\";
+            apiUrl = (apiUrl == null) ? ConfigurationManager.AppSettings.Get("ApiUrl") : apiUrl;
+            var apiPath = $"{projectLocation}SimpleApi";
             Api = new Api(apiUrl, apiPath);
         }
     }

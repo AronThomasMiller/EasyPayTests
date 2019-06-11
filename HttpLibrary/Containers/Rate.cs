@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleApiTests
+namespace HttpLibrary.Containers
 {
-    public class ApiPostRate
+    public class Rate:BasePostRate
     {
-
+        public string Id { get; set; }
     }
 }

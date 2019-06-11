@@ -1,4 +1,6 @@
 ﻿using System;
+using FileManager;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace HttpLibrary
@@ -25,6 +27,13 @@ namespace HttpLibrary
             Request = new RestRequest(source, (Method)method);
         }
 
+        public RequestWrapper AddJsonBody<T>(T obj)
+        {
+            var serializedToJson = JsonConvert.SerializeObject(obj);
+            Request.AddJsonBody(serializedToJson);
+            return this;
+        }
+
         public RequestWrapper(string source)
         {
             Request = new RestRequest(source);
@@ -32,7 +41,7 @@ namespace HttpLibrary
 
         public RequestWrapper AddJsonFile(string pathToFile)
         {
-            var data = Post.FromJsonFile(pathToFile);
+            var data = FileMaster.GetAllTextFromFile(pathToFile);
             Request = Request.AddJsonBody(data);
             return this; 
         }

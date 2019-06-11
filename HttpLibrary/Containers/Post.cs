@@ -1,18 +1,17 @@
-﻿using System;
+﻿using HttpLibrary.Containers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HttpLibrary
+namespace HttpLibrary.Containers
 {
-    public class Post
+    public class Post: BasePost
     {
         public string Id { get; set; }
         public float Rate { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -24,16 +23,6 @@ namespace HttpLibrary
             {
                 return false;
             }
-        }
-
-        public static string FromJsonFile(string pathToFile)
-        {
-            string data;
-            using (StreamReader sr = new StreamReader(pathToFile))
-            {
-                data = sr.ReadToEnd();
-            }
-            return data;
         }
 
         public override int GetHashCode()

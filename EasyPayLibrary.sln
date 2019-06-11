@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManager", "Database
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpLibrary", "HttpLibrary\HttpLibrary.csproj", "{49597CAF-5168-4FE6-B790-27DABA2418DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\FileManager.csproj", "{9EC040F2-ED0F-4F08-87A5-50589AA02ECB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{49597CAF-5168-4FE6-B790-27DABA2418DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49597CAF-5168-4FE6-B790-27DABA2418DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49597CAF-5168-4FE6-B790-27DABA2418DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC040F2-ED0F-4F08-87A5-50589AA02ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC040F2-ED0F-4F08-87A5-50589AA02ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC040F2-ED0F-4F08-87A5-50589AA02ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC040F2-ED0F-4F08-87A5-50589AA02ECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -85,8 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
-    <Compile Include="RestTests\ApiPostRate.cs" />
     <Compile Include="RestTests\ApiPosts.cs" />
+    <Compile Include="RestTests\ApiPostsRate.cs" />
     <Compile Include="RestTests\ApiTestData.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="Failures.cs" />
@@ -122,6 +122,10 @@
     <ProjectReference Include="..\EasyPayLibrary\EasyPayLibrary.csproj">
       <Project>{648B9F8D-963A-4D2B-8CB7-3F8B57ECEB73}</Project>
       <Name>EasyPayLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileManager\FileManager.csproj">
+      <Project>{9ec040f2-ed0f-4f08-87a5-50589aa02ecb}</Project>
+      <Name>FileManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\HttpLibrary\HttpLibrary.csproj">
       <Project>{49597CAF-5168-4FE6-B790-27DABA2418DD}</Project>

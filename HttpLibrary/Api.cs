@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FileManager;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,39 +12,34 @@ namespace HttpLibrary
     public class Api
     {
         private readonly string location;
-        private readonly string dataPlace;
-        public string Url { get; }
+        public readonly string DataPlace;
+        public readonly string Url;
 
         public Api(string url, string path)
         {
             location = path;
-            dataPlace = $"{location}\\Data\\";
+            DataPlace = $"{location}\\Data";
             Url = url;
         }
 
-        public List<T> GetFileDataFromAPI<T>(string name) where T : Post
+        public List<T> GetFileDataFromAPI<T>(string name) where T : class
         {
-            var jsonString = Post.FromJsonFile(dataPlace + name);
+            var jsonString = FileMaster.GetAllTextFromFile($"{DataPlace}\\{name}");
             return JsonConvert.DeserializeObject<List<T>>(jsonString);
         }
 
-        public void WriteToApiDataFile(string pathToFile, string nameOfFile, string format)
+        public void WriteToApiDataFile(string pathToFile, string name, string format)
         {
-            var pathOfInput = $"{pathToFile}{nameOfFile}.{format}";
-            string data;
-            using (StreamReader sw = new StreamReader(pathOfInput, true))
-            {
-                data = sw.ReadToEnd();
-            }
+            var pathOfInput = $"{pathToFile}\\{name}.{format}";
+            var pathOfOutput = $"{DataPlace}\\{name}.{format}";
+            DeleteDataFile($"{name}.{ format}");
+            File.Copy(pathOfInput, pathOfOutput);
+        }
 
-            var pathOfOutput = $"{dataPlace}{nameOfFile}.{format}";
-            using (var fileStream = File.Open(pathOfOutput, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-            {
-                using (StreamWriter sw = new StreamWriter(pathOfOutput, true))
-                {
-                    sw.Write(data);
-                }
-            }
+        public void DeleteDataFile(string name)
+        {
+            var pathToFile = $"{DataPlace}\\{name}";
+            FileMaster.DeleteFile(pathToFile);
         }
     }
 }

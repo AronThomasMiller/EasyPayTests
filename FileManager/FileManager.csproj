@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49597CAF-5168-4FE6-B790-27DABA2418DD}</ProjectGuid>
+    <ProjectGuid>{9EC040F2-ED0F-4F08-87A5-50589AA02ECB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HttpLibrary</RootNamespace>
-    <AssemblyName>HttpLibrary</AssemblyName>
+    <RootNamespace>FileManager</RootNamespace>
+    <AssemblyName>FileManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,16 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=106.6.9.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.6.9\lib\net452\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,35 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api.cs" />
-    <Compile Include="Containers\AddApiUser.cs" />
-    <Compile Include="Containers\ApiUser.cs" />
-    <Compile Include="Containers\BasePost.cs" />
-    <Compile Include="Containers\BasePostRate.cs" />
-    <Compile Include="Containers\CommentBase.cs" />
-    <Compile Include="Containers\CommentInfo.cs" />
-    <Compile Include="Containers\LoginModel.cs" />
-    <Compile Include="Containers\Rate.cs" />
-    <Compile Include="Containers\UserData.cs" />
-    <Compile Include="SOM\Api\PostSource.cs" />
-    <Compile Include="Wrappers\ClientFactory.cs" />
-    <Compile Include="Wrappers\ClientWrapper.cs" />
-    <Compile Include="Containers\Post.cs" />
+    <Compile Include="FileMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wrappers\RequestWrapper.cs" />
-    <Compile Include="Wrappers\ResponseWrapper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FileManager\FileManager.csproj">
-      <Project>{9ec040f2-ed0f-4f08-87a5-50589aa02ecb}</Project>
-      <Name>FileManager</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SOM\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
