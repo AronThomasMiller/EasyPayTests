@@ -29,10 +29,13 @@ namespace EasyPayTests
             base.PreCondition();
             LogProgress("User is going to login page");
             var loginPage = welcomePage.SignIn();
+            LogProgress("User is going to Home page");
             homePage = loginPage.LoginAsUser("user1@gmail.com", "Admin123");
         }
         
-
+/// <summary>
+/// 
+/// </summary>
         [Test]
         public void ScheduleNotAvailable()
         {
@@ -40,37 +43,52 @@ namespace EasyPayTests
             var list = homePage.GetList();
             foreach (var element in list)
             {
-                Assert.False(element.GetText() == "Schedule", "Element found");
+                Assert.AreEqual(element.GetText() == "Schedule", "Element found");
             }
         }
-        
+/////////        
         [Test]
         public void UserIsAbleToLogin()
         {
             LogProgress("User is logging");
-            Assert.AreEqual(GeneralPage.GetRole(driver), "USER","user isn't loged in");
+            var actualRole = GeneralPage.GetRole(driver);
+            var expectedRole = "USER";
+            Assert.AreEqual(expectedRole, actualRole, "User isn't loged in");
         }        
-
+         
         [Test]
         public void PersonalCabinetAccess()
         {
             LogProgress("User is going to profile");
-            var profile = homePage.GoToProfile();
-            Assert.IsTrue(profile.NameIsVisible(),"Name isn't visible");
-            Assert.IsTrue(profile.SurnameIsVisible(), "Surname isn't visible");
-            Assert.IsTrue(profile.PhoneNumberIsVisible(), "PhoneNumber isn't visible");
+            var profilePage = homePage.GoToProfile();
+            var userNameIsVisible = profilePage.NameIsVisible();
+            var userSurnameIsVisible = profilePage.SurnameIsVisible();
+            var userPhoneNumberIsVisible = profilePage.PhoneNumberIsVisible();
+            Assert.IsTrue(userNameIsVisible, "User`s name isn't visible in profile page");
+            Assert.IsTrue(userSurnameIsVisible, "User`s Surname isn't visible in profile page");
+            Assert.IsTrue(userPhoneNumberIsVisible, "User`s PhoneNumber isn't visible in profile page");
         }
-
+/// <summary>
+/// /
+/// </summary>
         [Test]
         public void PersonalInfoMatch()
         {
             LogProgress("User is going to profile");
-            var profile = homePage.GoToProfile();
-            Assert.AreEqual("Masha",profile.GetName(), "Wrong name");
-            Assert.AreEqual("Chuikina", profile.GetSurname(), "Wrong surname");
-            Assert.AreEqual("+380968780876", profile.GetPhoneNumber(), "Wrong name");
+            var profilePage = homePage.GoToProfile();
+            var actualName = profilePage.GetName();
+            var actualSurname = profilePage.GetSurname();
+            var actualPhomeNumber = profilePage.GetPhoneNumber();
+            var expectedName = "Masha";
+            var expectedSurname = "Chuikina";
+            var expectedPhomeNumber = "+380968780876";
+            Assert.AreEqual(expectedName, actualName, "Wrong name");
+            Assert.AreEqual(expectedSurname, actualSurname, "Wrong surname");
+            Assert.AreEqual(expectedPhomeNumber, actualPhomeNumber, "Wrong name");
         }
-
+/// <summary>
+/// //
+/// </summary>
         [Test]
         public void IsNameChanging()
         {

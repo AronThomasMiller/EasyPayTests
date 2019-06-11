@@ -90,6 +90,13 @@
     <Compile Include="LanguageChanger.cs" />
     <Compile Include="Login\LoginPage.cs" />
     <Compile Include="Login\WelcomePage.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\Pop-ups\BanUser.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\Pop-ups\ChangeRole.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\RowOfTableUser.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\TableOfUsers.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\Pop-up\ChangeManagerPage.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\RowOfTableUtilities.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\TableOfUtilities.cs" />
     <Compile Include="SidebarManager\AddInspectorsPage.cs" />
     <Compile Include="SidebarManager\AddScheduleItemPage.cs" />
     <Compile Include="SidebarManager\DeleteScheduleItemPage.cs" />
@@ -114,8 +121,8 @@
     <Compile Include="Header\Header.cs" />
     <Compile Include="HomePages\HomePageAdmin.cs" />
     <Compile Include="SidebarAdmin\RegisterUser.cs" />
-    <Compile Include="SidebarAdmin\Users.cs" />
-    <Compile Include="SidebarAdmin\Utilities.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\UsersPage.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\UtilitiesPage.cs" />
     <Compile Include="HomePages\HomePageUser.cs" />
     <Compile Include="SidebarUser\SidebarUser.cs" />
     <Compile Include="BasePageObject.cs" />

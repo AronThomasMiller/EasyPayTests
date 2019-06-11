@@ -35,6 +35,7 @@ namespace EasyPayTests
             var schedule = listOfInspectors.NavigateToInspectorsSchedule("Oleg Adamov");
             var btnAddInspector = schedule.GetAddScheduleItem();
             Assert.IsTrue(btnAddInspector.IsDisplayed());
+            
         }
 
         [Test]
@@ -44,7 +45,7 @@ namespace EasyPayTests
             var schedule = listOfInspectors.NavigateToInspectorsSchedule("Oleg Adamov");
             var addItem = schedule.AddItem();
             var deleteItem = addItem.ApplyToAdd("20190530", "вулиця Руська 241/245, Чернівці, Чернівецька область");
-
+            
             Assert.IsTrue(schedule.GetTask().IsDisplayed(),"Schedule isn't dosplayed");
             // postCondition
             var confirm = deleteItem.DeleteItem();
