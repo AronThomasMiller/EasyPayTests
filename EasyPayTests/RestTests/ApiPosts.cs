@@ -4,15 +4,15 @@ using HttpLibrary.Containers;
 using HttpLibrary.SOM.Api;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using SimpleApiTests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using static HttpLibrary.RequestWrapper;
 
-namespace SimpleApiTests
+namespace EasyPayTests.RestTests
 {
-    [Parallelizable(ParallelScope.Fixtures)]
     public class ApiPosts
     {
         protected string TestSuitDataPlace => $"{ApiTestData.AllTestSuitesDataPlace}\\ApiPosts";
@@ -34,7 +34,7 @@ namespace SimpleApiTests
             var expectedList = StartPosts;
             Assert.That(expectedList, Is.Not.Empty, "Mock data for api is empty");
 
-            var postSource = new PostSource(client);
+            var postSource = new PostsSource(client);
             var actualList = postSource.GetAllPosts();
             Assert.That(actualList, Is.Not.Empty, "Api sourse isn't empty, but api returns nothing");
             CollectionAssert.AreEqual(expectedList, actualList);
@@ -44,7 +44,7 @@ namespace SimpleApiTests
         public void TestGetById()
         {
             string inputId = StartPosts.First().Id;
-            var postSource = new PostSource(client);
+            var postSource = new PostsSource(client);
             var postByIdFromSource = postSource.GetPostById(inputId);
             var expectedId = inputId;
             var actualId = postByIdFromSource.Id;
@@ -55,7 +55,7 @@ namespace SimpleApiTests
         public void TestGetByIdNegative()
         {
             var inputId = StartPosts.First().Id;
-            var postSource = new PostSource(client);
+            var postSource = new PostsSource(client);
             var postWasDeleted = postSource.DeletePost(inputId);
             Assert.That(postWasDeleted, Is.True, "Problems with deleting post");
             
@@ -73,7 +73,7 @@ namespace SimpleApiTests
             var fileSize = testDataJson.Length;
             Assert.That(fileSize, Is.Not.EqualTo(0), "Test data is empty");
 
-            var postSource = new PostSource(client);
+            var postSource = new PostsSource(client);
             var testDataPost = JsonConvert.DeserializeObject<BasePost>(testDataJson);
 
             var postResult = postSource.AddPost(testDataPost);
@@ -91,7 +91,7 @@ namespace SimpleApiTests
             var fileSize = testDataJson.Length;
             Assert.That(fileSize, Is.Not.Zero, "Test data is empty");
 
-            var postSource = new PostSource(client);
+            var postSource = new PostsSource(client);
             var testDataPost = JsonConvert.DeserializeObject<Post>(testDataJson);
 
             var putReponse = postSource.UpdatePost(testDataPost);
@@ -110,7 +110,7 @@ namespace SimpleApiTests
             var postToDeleteId = StartPosts.First().Id;
             var expectedList = StartPosts.Where(x => x.Id != postToDeleteId);
 
-            var postSource = new PostSource(client);
+            var postSource = new PostsSource(client);
             var postWasDeleted = postSource.DeletePost(postToDeleteId);
             Assert.That(postWasDeleted, Is.True, "Problems with deleting post");
 
@@ -130,7 +130,7 @@ namespace SimpleApiTests
 
             var expectedList = StartPosts.Where(x => x.Id != postToDeleteId);
 
-            var postSource = new PostSource(client);
+            var postSource = new PostsSource(client);
             var postWasDeleted = postSource.DeletePost(postToDeleteId);
             Assert.That(postWasDeleted, Is.Not.True, "Api \"can\" delete non-existing post");
 

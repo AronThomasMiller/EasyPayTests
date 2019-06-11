@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HttpLibrary.Containers
+namespace HttpLibrary.SOM
 {
-    public class ApiUser:UserData
+    public class BaseSOM
     {
-        public string Token { get; set; }
+        protected ClientWrapper client;
+        protected string source;
     }
 }

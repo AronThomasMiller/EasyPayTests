@@ -60,7 +60,12 @@
     <Compile Include="Containers\LoginModel.cs" />
     <Compile Include="Containers\Rate.cs" />
     <Compile Include="Containers\UserData.cs" />
-    <Compile Include="SOM\Api\PostSource.cs" />
+    <Compile Include="SOM\Api\PostsSource.cs" />
+    <Compile Include="SOM\Api\PostsRatesSource.cs" />
+    <Compile Include="SOM\BaseSOM.cs" />
+    <Compile Include="SOM\Users\Login\LoginSource.cs" />
+    <Compile Include="SOM\Users\TestAuth\TestAuthSource.cs" />
+    <Compile Include="SOM\Users\UsersSource.cs" />
     <Compile Include="Wrappers\ClientFactory.cs" />
     <Compile Include="Wrappers\ClientWrapper.cs" />
     <Compile Include="Containers\Post.cs" />
@@ -77,8 +82,6 @@
       <Name>FileManager</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SOM\Users\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

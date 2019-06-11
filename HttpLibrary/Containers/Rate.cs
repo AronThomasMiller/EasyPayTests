@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HttpLibrary.Containers
 {
-    public class Rate:BasePostRate
+    public class PostRate:BasePostRate
     {
         public string Id { get; set; }
     }

@@ -1,60 +1,52 @@
 ﻿using FileManager;
 using HttpLibrary;
 using HttpLibrary.Containers;
+using HttpLibrary.SOM.Api;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using SimpleApiTests;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using static HttpLibrary.RequestWrapper;
 
-namespace SimpleApiTests
+namespace EasyPayTests.RestTests
 {
     class ApiPostsRate
     {
-        private readonly static string ApiResourse = "/api/posts/rate";
         protected string TestSuitDataPlace => ApiTestData.AllTestSuitesDataPlace + "\\ApiPostsRate";
-
+        protected ClientWrapper client;
         [SetUp]
         public void SetUp()
         {
+            client = ClientFactory.GetClient(ApiTestData.Api.Url);
             ApiTestData.Api.DeleteDataFile("PostRate.json");
+            ApiTestData.Api.WriteToApiDataFile(ApiTestData.FilesToReplace, "PostInfo", "json");
         }
 
-        //[Test]
-        //public void TestPost()
-        //{
-        //    var client = ClientFactory.GetClient(ApiTestData.Api.Url);
+        [Test]
+        public void AddRate()
+        {
+            var testData = FileMaster.GetAllTextFromFile($"{TestSuitDataPlace}\\TestPost.json");
+            var postRateData = JsonConvert.DeserializeObject<List<BasePostRate>>(testData);
 
-        //    var testData = FileMaster.GetAllTextFromFile($"{TestSuitDataPlace}\\TestPost.json");
-        //    var startList = JsonConvert.DeserializeObject<List<BasePostRate>>(testData);
-        //    float expectedAvgOfRates = 0;
-        //    foreach (var rate in startList)
-        //    {
-        //        expectedAvgOfRates += rate.Rate;
-        //        var postRequest = new RequestWrapper(ApiResourse, Methods.POST);
-        //        postRequest.AddJsonBody(rate);
-        //        var response = client.Execute(postRequest);
+            float expectedAvgOfRates = 0;
+            foreach (var rate in postRateData)
+            {
+                expectedAvgOfRates += rate.Rate;
 
-        //        var reponseCode = response.StatusCode;
-        //        Assert.AreEqual(HttpStatusCode.OK, reponseCode);
-        //        var reponseContent = response.Content;
-        //        var postedRate = JsonConvert.DeserializeObject<Post>(reponseContent);
+                var rateSource = new PostsRatesSource(client);
+                var postedRate = rateSource.AddRate(rate);
 
-        //        Assert.AreEqual(rate.PostId, postedRate.Id);
-        //    }
-        //    expectedAvgOfRates /= startList.Count;
+                Assert.That(postedRate.Id, Is.EqualTo(rate.PostId), "");
+            }
+            expectedAvgOfRates /= postRateData.Count;
 
-        //    var postIdOfAddedRates = startList.First().PostId;
-        //    var getRequest = new RequestWrapper($"{ApiPosts.ApiResourse}/{postIdOfAddedRates}", Methods.GET);
-        //    var getResponse = client.Execute(getRequest);
-        //    var getStatus = getResponse.StatusCode;
-        //    Assert.AreEqual(HttpStatusCode.OK, getStatus);
-
-        //    var getContent = getResponse.Content;
-        //    var getResultPost = JsonConvert.DeserializeObject<Post>(getContent);
-        //    var actualAvgOfRates = getResultPost.Rate;
-        //    Assert.AreEqual(expectedAvgOfRates, actualAvgOfRates);
-        //}
+            var postIdOfAddedRates = postRateData.First().PostId;
+            var postSource = new PostsSource(client);
+            var getResultPost = postSource.GetPostById(postIdOfAddedRates);
+            var actualAvgOfRates = getResultPost.Rate;
+            Assert.That(actualAvgOfRates, Is.EqualTo(expectedAvgOfRates));
+        }
     }
 }

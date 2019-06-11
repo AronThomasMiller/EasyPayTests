@@ -92,6 +92,9 @@
     <Compile Include="Failures.cs" />
     <Compile Include="Inspector.cs" />
     <Compile Include="Manager.cs" />
+    <Compile Include="RestTests\TestAuth.cs" />
+    <Compile Include="RestTests\User.cs" />
+    <Compile Include="RestTests\UserLogin.cs" />
     <Compile Include="Translations\TranslationProvider.cs" />
     <Compile Include="Translations\TranslationValues.cs" />
     <Compile Include="User.cs" />

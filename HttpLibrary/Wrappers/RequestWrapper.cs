@@ -27,10 +27,9 @@ namespace HttpLibrary
             Request = new RestRequest(source, (Method)method);
         }
 
-        public RequestWrapper AddJsonBody<T>(T obj)
+        public RequestWrapper AddJsonBody(object obj)
         {
-            var serializedToJson = JsonConvert.SerializeObject(obj);
-            Request.AddJsonBody(serializedToJson);
+            Request.AddJsonBody(obj);
             return this;
         }
 
