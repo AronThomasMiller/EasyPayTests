@@ -10,21 +10,16 @@ using static HttpLibrary.RequestWrapper;
 
 namespace HttpLibrary.SOM.Api
 {
-    public class PostsSource:BaseSOM
+    public class PostsResource:BaseROM
     {
-        private PostsSource(string source)
-        {
-            this.source = source;
-        }
-
-        public PostsSource(ClientWrapper client):this("/api/posts")
+        public PostsResource(ClientWrapper client):base("/api/posts")
         {
             this.client = client;
         }
 
-        public IEnumerable<Post> GetAllPosts()
+        public IEnumerable<PostInfo> GetAllPosts()
         {
-            var getRequest = new RequestWrapper(source, Methods.GET);
+            var getRequest = new RequestWrapper(resource, Methods.GET);
             
             var getResponse = client.Execute(getRequest);
             var getStatus = getResponse.StatusCode;
@@ -32,14 +27,14 @@ namespace HttpLibrary.SOM.Api
             if (getStatus != HttpStatusCode.OK) return null;
 
             var responseListOfPosts = getResponse.Content;
-            var list = JsonConvert.DeserializeObject<IEnumerable<Post>>(responseListOfPosts);
+            var list = JsonConvert.DeserializeObject<IEnumerable<PostInfo>>(responseListOfPosts);
 
             return list;
         }
 
-        public Post GetPostById(string id)
+        public PostInfo GetPostById(string id)
         {
-            var getRequest = new RequestWrapper($"{source}/{id}", Methods.GET);
+            var getRequest = new RequestWrapper($"{resource}/{id}", Methods.GET);
 
             var getResponse = client.Execute(getRequest);
             var getStatus = getResponse.StatusCode;
@@ -47,13 +42,13 @@ namespace HttpLibrary.SOM.Api
             if (getStatus != HttpStatusCode.OK) return null;
 
             var responsePost = getResponse.Content;
-            var postById = JsonConvert.DeserializeObject<Post>(responsePost);
+            var postById = JsonConvert.DeserializeObject<PostInfo>(responsePost);
             return postById;
         }
 
-        public Post AddPost(BasePost post)
+        public PostInfo AddPost(BasePost post)
         {
-            var request = new RequestWrapper(source, Methods.POST);
+            var request = new RequestWrapper(resource, Methods.POST);
             request.AddJsonBody(post);
 
             var postResponse = client.Execute(request);
@@ -62,13 +57,13 @@ namespace HttpLibrary.SOM.Api
             if (postStatus != HttpStatusCode.OK) return null;
 
             var postContent = postResponse.Content;
-            var deserContent = JsonConvert.DeserializeObject<Post>(postContent);
+            var deserContent = JsonConvert.DeserializeObject<PostInfo>(postContent);
             return deserContent;
         }
 
-        public Post UpdatePost(Post post)
+        public PostInfo UpdatePost(PostInfo post)
         {
-            var request = new RequestWrapper(source, Methods.PUT);
+            var request = new RequestWrapper(resource, Methods.PUT);
 
             request.AddJsonBody(post);
 
@@ -78,13 +73,13 @@ namespace HttpLibrary.SOM.Api
             if (putStatus != HttpStatusCode.OK) return null;
 
             var putContent = putResponse.Content;
-            var deserContent = JsonConvert.DeserializeObject<Post>(putContent);
+            var deserContent = JsonConvert.DeserializeObject<PostInfo>(putContent);
             return deserContent;
         }
 
         public bool DeletePost(string id)
         {
-            var deleteRequest = new RequestWrapper($"{source}/{id}", Methods.DELETE);
+            var deleteRequest = new RequestWrapper($"{resource}/{id}", Methods.DELETE);
             var deleteResponse = client.Execute(deleteRequest);
             var deleteStatus = (int)deleteResponse.StatusCode;
             return deleteStatus <= 400;

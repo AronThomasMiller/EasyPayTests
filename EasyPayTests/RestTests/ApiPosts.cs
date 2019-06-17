@@ -15,8 +15,8 @@ namespace EasyPayTests.RestTests
 {
     public class ApiPosts
     {
-        protected string TestSuitDataPlace => $"{ApiTestData.AllTestSuitesDataPlace}\\ApiPosts";
-        protected IEnumerable<Post> StartPosts;
+        protected string TestSuitDataPlace => $"{ApiTestData.AllTestSuitesDataPlace}\\Api\\Posts";
+        protected IEnumerable<PostInfo> StartPosts;
         private ClientWrapper client;
 
         [SetUp]
@@ -25,7 +25,7 @@ namespace EasyPayTests.RestTests
             client = ClientFactory.GetClient(ApiTestData.Api.Url);
             ApiTestData.Api.WriteToApiDataFile(ApiTestData.FilesToReplace, "PostInfo", "json");
             var jsonString = FileMaster.GetAllTextFromFile($"{ApiTestData.FilesToReplace}\\PostInfo.json");
-            StartPosts = JsonConvert.DeserializeObject<IEnumerable<Post>>(jsonString);
+            StartPosts = JsonConvert.DeserializeObject<IEnumerable<PostInfo>>(jsonString);
         }
 
         [Test(Author = "Boris")]
@@ -34,7 +34,7 @@ namespace EasyPayTests.RestTests
             var expectedList = StartPosts;
             Assert.That(expectedList, Is.Not.Empty, "Mock data for api is empty");
 
-            var postSource = new PostsSource(client);
+            var postSource = new PostsResource(client);
             var actualList = postSource.GetAllPosts();
             Assert.That(actualList, Is.Not.Empty, "Api sourse isn't empty, but api returns nothing");
             CollectionAssert.AreEqual(expectedList, actualList);
@@ -44,7 +44,7 @@ namespace EasyPayTests.RestTests
         public void TestGetById()
         {
             string inputId = StartPosts.First().Id;
-            var postSource = new PostsSource(client);
+            var postSource = new PostsResource(client);
             var postByIdFromSource = postSource.GetPostById(inputId);
             var expectedId = inputId;
             var actualId = postByIdFromSource.Id;
@@ -55,7 +55,7 @@ namespace EasyPayTests.RestTests
         public void TestGetByIdNegative()
         {
             var inputId = StartPosts.First().Id;
-            var postSource = new PostsSource(client);
+            var postSource = new PostsResource(client);
             var postWasDeleted = postSource.DeletePost(inputId);
             Assert.That(postWasDeleted, Is.True, "Problems with deleting post");
             
@@ -73,7 +73,7 @@ namespace EasyPayTests.RestTests
             var fileSize = testDataJson.Length;
             Assert.That(fileSize, Is.Not.EqualTo(0), "Test data is empty");
 
-            var postSource = new PostsSource(client);
+            var postSource = new PostsResource(client);
             var testDataPost = JsonConvert.DeserializeObject<BasePost>(testDataJson);
 
             var postResult = postSource.AddPost(testDataPost);
@@ -91,8 +91,8 @@ namespace EasyPayTests.RestTests
             var fileSize = testDataJson.Length;
             Assert.That(fileSize, Is.Not.Zero, "Test data is empty");
 
-            var postSource = new PostsSource(client);
-            var testDataPost = JsonConvert.DeserializeObject<Post>(testDataJson);
+            var postSource = new PostsResource(client);
+            var testDataPost = JsonConvert.DeserializeObject<PostInfo>(testDataJson);
 
             var putReponse = postSource.UpdatePost(testDataPost);
 
@@ -110,7 +110,7 @@ namespace EasyPayTests.RestTests
             var postToDeleteId = StartPosts.First().Id;
             var expectedList = StartPosts.Where(x => x.Id != postToDeleteId);
 
-            var postSource = new PostsSource(client);
+            var postSource = new PostsResource(client);
             var postWasDeleted = postSource.DeletePost(postToDeleteId);
             Assert.That(postWasDeleted, Is.True, "Problems with deleting post");
 
@@ -130,7 +130,7 @@ namespace EasyPayTests.RestTests
 
             var expectedList = StartPosts.Where(x => x.Id != postToDeleteId);
 
-            var postSource = new PostsSource(client);
+            var postSource = new PostsResource(client);
             var postWasDeleted = postSource.DeletePost(postToDeleteId);
             Assert.That(postWasDeleted, Is.Not.True, "Api \"can\" delete non-existing post");
 

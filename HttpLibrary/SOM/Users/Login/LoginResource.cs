@@ -8,30 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using static HttpLibrary.RequestWrapper;
 
-namespace HttpLibrary.SOM.Users
+namespace HttpLibrary.SOM.Users.Login
 {
-    public class UsersSource : BaseSOM
+    public class LoginResource:BaseROM
     {
-        private UsersSource(string source)
-        {
-            this.source = source;
-        }
-
-        public UsersSource(ClientWrapper client) : this("/Users")
+        public LoginResource(ClientWrapper client) : base("/Users/Login")
         {
             this.client = client;
         }
 
-        public UserData AddUser(AddApiUser user)
+        public ApiUser Login(LoginModel user)
         {
-            var request = new RequestWrapper(source, Methods.POST);
+            var request = new RequestWrapper(resource, Methods.POST);
             request.AddJsonBody(user);
             var response = client.Execute(request);
 
             var postStatus = response.StatusCode;
             if (postStatus != HttpStatusCode.OK) return null;
 
-            return JsonConvert.DeserializeObject<UserData>(response.Content);
+            return JsonConvert.DeserializeObject<ApiUser>(response.Content);
         }
     }
 }

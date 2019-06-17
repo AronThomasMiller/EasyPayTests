@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace HttpLibrary.SOM
 {
-    public class BaseSOM
+    public class BaseROM
     {
+        protected BaseROM(string source)
+        {
+            this.resource = source;
+        }
+
         protected ClientWrapper client;
-        protected string source;
+        protected string resource;
     }
 }

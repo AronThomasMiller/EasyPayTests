@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace HttpLibrary.Containers
 {
-    public class Post: BasePost
+    public class PostInfo: BasePost
     {
         public string Id { get; set; }
         public float Rate { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (obj is Post cast)
+            if (obj is PostInfo cast)
             {
                 return (cast.Id == Id);
             }

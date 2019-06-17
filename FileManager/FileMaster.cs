@@ -7,12 +7,34 @@ namespace FileManager
         public static string GetAllTextFromFile(string pathToFile)
         {
             string data;
-            using (StreamReader sr = new StreamReader(pathToFile))
-            {
+            var sr = new StreamReader(pathToFile);//using(StreamReader sr = new StreamReader(pathToFile))
+
+            try
+            {//{
                 data = sr.ReadToEnd();
+            }//}
+            finally
+            {
+                sr.Dispose();
             }
             return data;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public static void DeleteFile(string pathToFile)
         {

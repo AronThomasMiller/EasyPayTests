@@ -2,6 +2,7 @@
 using HttpLibrary;
 using HttpLibrary.Containers;
 using HttpLibrary.SOM.Users;
+using HttpLibrary.SOM.Users.Login;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using SimpleApiTests;
@@ -28,10 +29,19 @@ namespace EasyPayTests.RestTests
         [Test]
         public void AddUser()
         {
-            var usersSource = new UsersSource(client);
+            var usersSource = new UsersResource(client);
             var jsonString = FileMaster.GetAllTextFromFile($"{TestSuitDataPlace}\\TestPost.json");
             var user = JsonConvert.DeserializeObject<AddApiUser>(jsonString);
-            usersSource.AddUser(user);
+            var addedUser = usersSource.AddUser(user);
+            var addedUserEqualUser = user.Equals(addedUser);
+            Assert.That(addedUserEqualUser, Is.True, "Response user data doesn't match original data");
+        }
+        
+        [Test]
+        public void AddExistingUserNegative()
+        {
+            AddUser();
+            AddUser();
         }
     }
 }

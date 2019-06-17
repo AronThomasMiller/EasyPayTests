@@ -28,7 +28,7 @@ namespace EasyPayTests.RestTests
         [Test]
         public void TestAuthentication()
         {
-            var loginSource = new LoginSource(client);
+            var loginSource = new LoginResource(client);
 
             var testData = FileMaster.GetAllTextFromFile($"{UserLogin.TestSuitDataPlace}\\TestPost.json");
             var userData = JsonConvert.DeserializeObject<LoginModel>(testData);
@@ -37,10 +37,21 @@ namespace EasyPayTests.RestTests
             Assert.That(loginedUser, Is.Not.Null, "Logined unsuccesful");
             Assert.That(loginedUser.Email, Is.EqualTo(userData.Email), "Logined unsuccesful");
 
-            var testAuthSource = new TestAuthSource(client);
+            var testAuthSource = new TestAuthResource(client);
             var canLogin = testAuthSource.TestAuthentication(loginedUser.Token);
 
-            Assert.That(canLogin, Is.True, $"User with email: {loginedUser.Email} can not login");
+            Assert.That(canLogin, Is.True, $"User with email: {loginedUser.Email} can not auth");
+        }
+
+        [Test]
+        public void TestAuthenticationNegative()
+        {
+            string invalidToken = "00";
+
+            var testAuthSource = new TestAuthResource(client);
+            var canLogin = testAuthSource.TestAuthentication(invalidToken);
+
+            Assert.That(canLogin, Is.True, $"Invalid token: {invalidToken}");
         }
     }
 }

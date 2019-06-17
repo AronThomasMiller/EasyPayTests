@@ -19,5 +19,13 @@ namespace HttpLibrary.Containers
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1475640943;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Text);
+            return hashCode;
+        }
     }
 }

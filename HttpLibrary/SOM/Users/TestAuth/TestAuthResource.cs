@@ -8,22 +8,16 @@ using static HttpLibrary.RequestWrapper;
 
 namespace HttpLibrary.SOM.Users.TestAuth
 {
-    public class TestAuthSource:BaseSOM
+    public class TestAuthResource:BaseROM
     {
-
-        private TestAuthSource(string source)
-        {
-            this.source = source;
-        }
-
-        public TestAuthSource(ClientWrapper client) : this("/Users/TestAuth")
+        public TestAuthResource(ClientWrapper client) : base("/Users/TestAuth")
         {
             this.client = client;
         }
 
         public bool TestAuthentication(string token)
         {
-            var request = new RequestWrapper(source, Methods.GET);
+            var request = new RequestWrapper(resource, Methods.GET);
             request.AddHeader("Authorization", $"Bearer {token}");
             var response = client.Execute(request);
             var status = response.StatusCode;

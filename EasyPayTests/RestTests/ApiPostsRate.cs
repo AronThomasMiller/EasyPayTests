@@ -14,7 +14,7 @@ namespace EasyPayTests.RestTests
 {
     class ApiPostsRate
     {
-        protected string TestSuitDataPlace => ApiTestData.AllTestSuitesDataPlace + "\\ApiPostsRate";
+        protected string TestSuitDataPlace => ApiTestData.AllTestSuitesDataPlace + "\\Api\\Posts\\Rates";
         protected ClientWrapper client;
         [SetUp]
         public void SetUp()
@@ -35,7 +35,7 @@ namespace EasyPayTests.RestTests
             {
                 expectedAvgOfRates += rate.Rate;
 
-                var rateSource = new PostsRatesSource(client);
+                var rateSource = new PostsRatesResource(client);
                 var postedRate = rateSource.AddRate(rate);
 
                 Assert.That(postedRate.Id, Is.EqualTo(rate.PostId), "");
@@ -43,7 +43,7 @@ namespace EasyPayTests.RestTests
             expectedAvgOfRates /= postRateData.Count;
 
             var postIdOfAddedRates = postRateData.First().PostId;
-            var postSource = new PostsSource(client);
+            var postSource = new PostsResource(client);
             var getResultPost = postSource.GetPostById(postIdOfAddedRates);
             var actualAvgOfRates = getResultPost.Rate;
             Assert.That(actualAvgOfRates, Is.EqualTo(expectedAvgOfRates));

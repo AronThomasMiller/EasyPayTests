@@ -33,9 +33,9 @@ namespace HttpLibrary
             return this;
         }
 
-        public RequestWrapper(string source)
+        public RequestWrapper(string resource)
         {
-            Request = new RestRequest(source);
+            Request = new RestRequest(resource);
         }
 
         public RequestWrapper AddJsonFile(string pathToFile)

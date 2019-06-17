@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
+    <Compile Include="RestTests\ApiComments.cs" />
     <Compile Include="RestTests\ApiPosts.cs" />
     <Compile Include="RestTests\ApiPostsRate.cs" />
     <Compile Include="RestTests\ApiTestData.cs" />
@@ -112,6 +113,15 @@
     <None Include="RunCriticalFirefox.bat" />
     <None Include="Run_Inspector_Chrome.bat" />
     <None Include="Run_Inspector_Firefox.bat" />
+    <None Include="TestData\Api\Comments\TestPost.json" />
+    <None Include="TestData\Api\Posts\Rates\TestPost.json" />
+    <None Include="TestData\Api\Posts\TestPost.json" />
+    <None Include="TestData\Api\Posts\TestPut.json" />
+    <None Include="TestData\FilesToReplace\CommentInfo.json" />
+    <None Include="TestData\FilesToReplace\PostInfo.json" />
+    <None Include="TestData\FilesToReplace\UserData.json" />
+    <None Include="TestData\User\Login\TestPost.json" />
+    <None Include="TestData\User\TestPost.json" />
     <None Include="Translations\dictionaries\dict.en.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

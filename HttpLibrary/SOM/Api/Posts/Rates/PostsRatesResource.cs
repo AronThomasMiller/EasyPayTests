@@ -10,21 +10,16 @@ using static HttpLibrary.RequestWrapper;
 
 namespace HttpLibrary.SOM.Api
 {
-    public class PostsRatesSource : BaseSOM
+    public class PostsRatesResource : BaseROM
     {
-        private PostsRatesSource(string source)
-        {
-            this.source = source;
-        }
-
-        public PostsRatesSource(ClientWrapper client) : this("/api/posts/rate")
+        public PostsRatesResource(ClientWrapper client) : base("/api/posts/rate")
         {
             base.client = client;
         }
 
-        public Post AddRate(BasePostRate rate)
+        public PostInfo AddRate(BasePostRate rate)
         {
-            var postRequest = new RequestWrapper(source, Methods.POST);
+            var postRequest = new RequestWrapper(resource, Methods.POST);
             postRequest.AddJsonBody(rate);
             var response = client.Execute(postRequest);
 
@@ -33,7 +28,7 @@ namespace HttpLibrary.SOM.Api
             if (reponseCode != HttpStatusCode.OK) return null;
 
             var reponseContent = response.Content;
-            var postedRate = JsonConvert.DeserializeObject<Post>(reponseContent);
+            var postedRate = JsonConvert.DeserializeObject<PostInfo>(reponseContent);
             return postedRate;
         }
     }

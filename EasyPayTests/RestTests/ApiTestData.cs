@@ -14,12 +14,8 @@ namespace SimpleApiTests
 
         static ApiTestData()
         {
-            string projectLocation;
-#if DEBUG
-            projectLocation = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "");
-#else
-                projectLocation = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Release", "");
-#endif
+            string projectLocation = AppDomain.CurrentDomain.BaseDirectory;
+
             AllTestSuitesDataPlace = $"{projectLocation}TestData";
             FilesToReplace = $"{AllTestSuitesDataPlace}\\FilesToReplace";
 
