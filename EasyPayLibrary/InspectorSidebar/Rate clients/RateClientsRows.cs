@@ -32,7 +32,7 @@ namespace EasyPayLibrary.InspectorSidebar
             starNumber = starNumber * 12;
             starNumber += (andHalf) ? 6 : 0;
             var element = rate.GetByXpath("./span");
-            var clickOnStar = new Actions(driver.GetDriver());
+            var clickOnStar = new Actions(driver.GetDriver);
             clickOnStar.MoveToElement(element.GetElement(), (starNumber), 5).Click().Build().Perform();           
         }
 

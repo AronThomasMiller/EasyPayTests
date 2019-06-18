@@ -26,8 +26,8 @@ namespace EasyPayLibrary
             email = element.GetByXpath(".//td[4]");
             phoneNumber = element.GetByXpath(".//td[5]");
             btnChangeRole = element.GetByXpath(".//td[6]//button");
-            btnSaveChange = element.GetByXpath(".//td[7]//button");
-            btnBan = element.GetByXpath(".//td[7]//button");
+            btnSaveChange = element.GetByXpath(".//td[7]//a");
+            btnBan = element.GetByXpath(".//td[7]//a");
         }
         public RowOfTableUser()
         {

@@ -13,20 +13,20 @@ namespace EasyPayTests
     [Category("All")]
     [Category("Failures")]
     [Parallelizable(ParallelScope.Fixtures)]
-    class Failures:BaseTest
+    class Failures : BaseTest
     {
-        [Test]
-        public void VerifyThatAdminCanEditManager()
-        {
-            var login = welcomePage.SignIn();
-            var home = login.LoginAsAdmin("admin1@gmail.com", "Admin123");
-            var utilities = home.NavigateToUtilities();
-            utilities.ClickOnChangeManager();
-            utilities.SetKeywordToTextBox();
-            utilities.SelectManager("Viktoriya Radashko");
-            utilities.ClickOnConfirm();
-            Assert.AreEqual("Viktoriya Radashko", utilities.getTextFromManagerField(), "Viktoriya Radashko isn't assigned as manager");
-        }
+        //[Test]
+        //public void VerifyThatAdminCanEditManager()
+        //{
+        //    var login = welcomePage.SignIn();
+        //    var home = login.LoginAsAdmin("admin1@gmail.com", "Admin123");
+        //    var utilities = home.NavigateToUtilities();
+        //    utilities.ClickOnChangeManager();
+        //    utilities.SetKeywordToTextBox();
+        //    utilities.SelectManager("Viktoriya Radashko");
+        //    utilities.ClickOnConfirm();
+        //    Assert.AreEqual("Viktoriya Radashko", utilities.getTextFromManagerField(), "Viktoriya Radashko isn't assigned as manager");
+        //}
 
         [Test]
         public void CheckTranslationOnHomeUsersPage()
@@ -55,7 +55,7 @@ namespace EasyPayTests
             var xTitle = homePage.GetXTitleText();
             StringAssert.AreEqualIgnoringCase(t.someText, xTitle, "Wrong xtitle translation");
         }
-        
+
         [Test]
         public void Localization()
         {
@@ -123,7 +123,7 @@ namespace EasyPayTests
             var error = addresses.Error();
             Assert.IsNull(error, "Address is not added");
         }
-        
+
         [Test]
         public void CallInspectorForConcreteDate()
         {
@@ -175,15 +175,15 @@ namespace EasyPayTests
 
 
         [Repeat(11)]
-        [TestCase("user1@gmail.com", "Admin123" , (float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"",Description = "Googel disk of EasyPay is overflow, so no new checks can be printed")]
-        public void PayAndCheckOneInPaymentHistory(string userEmail,string password, float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
+        [TestCase("user1@gmail.com", "Admin123", (float)12.4, "4242424242424242", "012020", "434", "58004", "Чернівецька область", "Чернівці", "вулиця Сковороди 43/65", "Pat \"Chernivtsihaz\"", Description = "Googel disk of EasyPay is overflow, so no new checks can be printed")]
+        public void PayAndCheckOneInPaymentHistory(string userEmail, string password, float sumToPay, string cardNumber, string dateOfCard, string cvc, string zipCode, string region, string city, string street, string utility)
         {
             LogProgress("Entering to login page");
             var loginPage = welcomePage.SignIn();
             LogProgress($"Trying to login as user email:{userEmail}, password:{password}");
             var homePage = loginPage.LoginAsUser(userEmail, "Admin123");
 
-            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"),"NotLoginedAsUser");
+            Assert.IsTrue(driver.GetUrl().Contains("http://localhost:8080/home"), "NotLoginedAsUser");
 
             LogProgress("Navigating to payment history page");
             var paymentHistoryPage = homePage.NavigateToPaymentHistoryPage();
@@ -243,7 +243,7 @@ namespace EasyPayTests
             Assert.AreEqual(DateTime.Today, newLastPayDate, "Date of last pay doesn't match today date");
 
             LogProgress("Opening check from last row of table");
-            
+
             var newLastPayCheckUrl = newLastPay.GetCheck().Url;
             StringAssert.Contains(urlOfCheck, newLastPayCheckUrl, "Url of last check doesn't match today's url of check");
         }

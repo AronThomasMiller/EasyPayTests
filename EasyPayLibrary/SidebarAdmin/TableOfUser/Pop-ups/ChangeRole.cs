@@ -28,7 +28,7 @@ namespace EasyPayLibrary
             myRole = myRole.ToUpper();
             var role = driver.GetByXpath("//select[@id='role']").SelectElement();
             role.SelectByText(myRole);
-            driver.Refresh();
+            //driver.Refresh();
             return ClickOnSave();           
         }
 
