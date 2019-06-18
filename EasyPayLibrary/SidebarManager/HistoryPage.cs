@@ -14,10 +14,9 @@ namespace EasyPayLibrary.ManagerSidebar
 
         public override void Init(DriverWrapper driver)
         {
-            //Xpath By Text?
-            btnCurrentMonth = driver.GetByXpath("//*[text()='Current month']");
-            btnPreviousMonth = driver.GetByXpath("//*[text()='Previous month']");
             base.Init(driver);
+            btnCurrentMonth = driver.GetByXpath("//*[@data-locale-item='currentMonth']");
+            btnPreviousMonth = driver.GetByXpath("//*[@data-locale-item='previousMonth']");
         }
 
         public HistoryPage ClickOnCurrentMonthButton()
@@ -25,8 +24,8 @@ namespace EasyPayLibrary.ManagerSidebar
             btnCurrentMonth.Click();
             return GetPOM<HistoryPage>(driver);
         }
-        //history doesn't mean it contains specific address or date, you have to rename it, or to make another logic like find table with addresses of current month
-        public bool IsHistoryCurrentMonthVisible(string address,string date)
+
+        public bool CurrentMonthContainsAddress(string address, string date)
         {
             WebElementWrapper element;
             try
@@ -39,20 +38,18 @@ namespace EasyPayLibrary.ManagerSidebar
                 return false;
             }
         }
-        //In this case you choose previous month or select, but not just click
-        //you should to create separte POM for table of address(list of rows) which can navigate through 
-        //pages of this table and make some logic with rows
+
         public HistoryPage ClickOnPreviousMonthButton()
         {
             btnPreviousMonth.Click();
             return GetPOM<HistoryPage>(driver);
         }
-        //same as with current
-        public bool IsHistoryPreviousMonthVisible(string date)
+
+        public bool PreviousMonthContainsAddress(string date)
         {
             try
             {
-                var element = driver.GetByXpath($"//*[contains(text(),'{date}')]",1);
+                var element = driver.GetByXpath($"//*[contains(text(),'{date}')]", 1);
                 return true;
             }
             catch (WebDriverTimeoutException)

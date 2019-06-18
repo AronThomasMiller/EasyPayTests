@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasyPayLibrary.InspectorSidebar
 {
-    public class SetCurrentValue : UtilityPage
+    public class SetCurrentValuePage : BasePageObject
     {
         public WebElementWrapper fieldNewCurrentValue;
         public WebElementWrapper btnApply;
@@ -26,6 +26,16 @@ namespace EasyPayLibrary.InspectorSidebar
         public void ClickOnBtnApply()
         {
             btnApply.Click();
+        }
+
+        public bool isSuccsess()
+        {
+            var messageBox = driver.GetByXpath("//h4[@class='ui-pnotify-title']");
+            var textOfMessageBox = messageBox.GetText();
+            if (textOfMessageBox == "Success")
+                return true;
+            else
+                return false;
         }
     }
 }

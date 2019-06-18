@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EasyPayLibrary</RootNamespace>
     <AssemblyName>EasyPayLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
@@ -83,23 +83,34 @@
     <Compile Include="BaseTable.cs" />
     <Compile Include="HomePages\HomePageInspector.cs" />
     <Compile Include="InspectorSidebar\Check counters\CheckCountersPage.cs" />
+    <Compile Include="InspectorSidebar\Check counters\UtilityPageTable.cs" />
     <Compile Include="InspectorSidebar\Rate clients\RateClientsRows.cs" />
     <Compile Include="InspectorSidebar\Rate clients\RateClientsPage.cs" />
     <Compile Include="InspectorSidebar\Rate clients\RateClientsTable.cs" />
     <Compile Include="InspectorSidebar\Schedule\SchedulePage.cs" />
-    <Compile Include="InspectorSidebar\Schedule\SetCurrentValue.cs" />
-    <Compile Include="InspectorSidebar\Schedule\UtilityPage.cs" />
+    <Compile Include="InspectorSidebar\Check counters\SetCurrentValuePage.cs" />
+    <Compile Include="InspectorSidebar\Check counters\UtilityPageRows.cs" />
     <Compile Include="InspectorSidebar\SidebarInspector.cs" />
     <Compile Include="LanguageChanger.cs" />
     <Compile Include="Login\LoginPage.cs" />
     <Compile Include="Login\WelcomePage.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\Pop-ups\BanUser.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\Pop-ups\ChangeRole.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\RowOfTableUser.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\TableOfUsers.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\Pop-up\ChangeManagerPage.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\RowOfTableUtilities.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\TableOfUtilities.cs" />
     <Compile Include="SidebarManager\AddInspectorsPage.cs" />
     <Compile Include="SidebarManager\AddScheduleItemPage.cs" />
+    <Compile Include="SidebarManager\DatePicker.cs" />
     <Compile Include="SidebarManager\DeleteScheduleItemPage.cs" />
     <Compile Include="SidebarManager\EditScheduleItemPage.cs" />
     <Compile Include="SidebarManager\HistoryPage.cs" />
     <Compile Include="SidebarManager\RemoveInspectorPage.cs" />
     <Compile Include="SidebarManager\SchedulePage.cs" />
+    <Compile Include="SidebarManager\SetFuturePriceForm.cs" />
+    <Compile Include="SidebarManager\SetNewPriceForm.cs" />
     <Compile Include="SidebarManager\StatisticsPage.cs" />
     <Compile Include="SidebarManager\UtilityPricePage.cs" />
     <Compile Include="SidebarBase.cs" />
@@ -117,8 +128,8 @@
     <Compile Include="Header\Header.cs" />
     <Compile Include="HomePages\HomePageAdmin.cs" />
     <Compile Include="SidebarAdmin\RegisterUser.cs" />
-    <Compile Include="SidebarAdmin\Users.cs" />
-    <Compile Include="SidebarAdmin\Utilities.cs" />
+    <Compile Include="SidebarAdmin\TableOfUser\UsersPage.cs" />
+    <Compile Include="SidebarAdmin\TableOfUtilities\UtilitiesPage.cs" />
     <Compile Include="HomePages\HomePageUser.cs" />
     <Compile Include="SidebarUser\SidebarUser.cs" />
     <Compile Include="BasePageObject.cs" />
@@ -148,6 +159,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseManager\DatabaseManager.csproj">
+      <Project>{080C8744-8B6E-408F-84EC-307D4D30B60E}</Project>
+      <Name>DatabaseManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -155,9 +172,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets'))" />
-    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.17134\build\Selenium.WebDriver.MicrosoftWebDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
   </Target>
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.74.0.3729.6\build\Selenium.WebDriver.ChromeDriver.targets')" />

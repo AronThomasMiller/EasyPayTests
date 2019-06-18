@@ -10,16 +10,16 @@
             sidebar = GetPOM<SidebarAdmin>(driver);         
         }
 
-        public Utilities NavigateToUtilities()
+        public UtilitiesPage NavigateToUtilities()
         {
             sidebar.ClickOnUtilities();
-            return GetPOM<Utilities>(driver);
+            return GetPOM<UtilitiesPage>(driver);
         }
 
-        public Users NavigateToUsers()
+        public UsersPage NavigateToUsers()
         {
             sidebar.ClickOnUsers();
-            return GetPOM<Users>(driver);
+            return GetPOM<UsersPage>(driver);
         }
 
         public RegisterUser NavigateToRegisterUser()

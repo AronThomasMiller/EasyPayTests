@@ -14,87 +14,107 @@ namespace EasyPayTests
     [Category("All")]
     [Category("Admin")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class Admin:BaseTest
+    public class AdminPage:BaseTest
     {
-        HomePageAdmin home;
+        HomePageAdmin homePage;
 
         [SetUp]
         public override void PreCondition()
         {
             base.PreCondition();
             LogProgress("Admin is going to Login Page ");
-            var login = welcomePage.SignIn();
+            var loginPage = welcomePage.SignIn();
             LogProgress("Admin is going to his Home Page");
-            home = login.LoginAsAdmin("admin1@gmail.com", "Admin123");
+            homePage = loginPage.LoginAsAdmin("admin1@gmail.com", "Admin123");
         }
 
         [Test]
         public void LoginAsAdminWithValidData()
         {
             LogProgress("Getting role from AdminSideBar");
-            var role = GeneralPage.GetRole(driver);
-            Assert.AreEqual("ADMIN", role,"not logined as admin");
-        }
-
-       
+            var actualRole = GeneralPage.GetRole(driver);
+            var expectedRole = "ADMIN";
+            Assert.AreEqual(expectedRole, actualRole, "Not logined as admin");
+        }      
 
         [Test]
         public void VerifyThatAdminHasAbilityToAccessHisProfile()
         {
             LogProgress("Admin navigating to his profile");
-            var prof = home.GoToProfile();
-            Assert.AreEqual("Profile", prof.GetTitle(),"Profile is not avaliable");
+            var profilePage = homePage.GoToProfile();
+            var actualTitle = profilePage.GetTitle();
+            var expectedTitle = "Profile";
+            Assert.AreEqual(expectedTitle, actualTitle, "Profile page is not avaliable");
         }
 
         [Test]
         public void VerifyThatAdminHasAbilityToChangeHisProfileInfo()
         {
             LogProgress("Admin navigating to his profile");
-            var prof = home.GoToProfile();
+            var profilePage = homePage.GoToProfile();
             LogProgress("Admin editing his data");
-            prof.EditData("Ivan", "Petrov", "+380938780876", "Admin123", "Admin1234");
-            Assert.AreEqual("Success", prof.GetSuccessText(),"Admin can't change his profile data");
+            profilePage.EditData("Ivan", "Petrov", "+380938780876", "Admin123", "Admin1234");
+            var actualPopupText = profilePage.GetSuccessText();
+            var expectedPopupText = "Success";
+            Assert.AreEqual(expectedPopupText, actualPopupText, "Admin can't change his profile data");
 
-            LogProgress("Admin returns his old data");
-            prof.EditPassword("Admin1234", "Admin123");
-            Assert.AreEqual("Success", prof.GetSuccessText(), "Admin can't change his profile data");
+            LogProgress("Post condition: Admin returns his previous data");
+            profilePage.EditPassword("Admin1234", "Admin123");
+            actualPopupText = profilePage.GetSuccessText();
+            expectedPopupText = "Success";
+            Assert.AreEqual(expectedPopupText, actualPopupText, "Admin can't change his profile data to previous");
+            LogProgress("Post condition is successful");
         }
 
         [Test]
         public void VerifyThatAdminCanChangeRole()
         {
             LogProgress("Admin navigating to User Page");
-            var user = home.NavigateToUsers();
+            var userPage = homePage.NavigateToUsers();
             LogProgress("Admin change role to Manager");
-            user.ChangeRole("user3@gmail.com", "MANAGER");
-            Assert.AreNotEqual("USER", user.GetRole("user3@gmail.com"),"Role isn't changing");
+            var rowsPage = userPage.ReturnUsersTable();
+            var rowWithEmail = rowsPage.GetRowByEmail("user3@gmail.com");
+            var changeRolePopUp = rowWithEmail.GetChangeRolePopUp();
+            userPage = changeRolePopUp.SelectRole("MANAGER");
+            rowsPage = userPage.ReturnUsersTable();
+            rowWithEmail = rowsPage.GetRowByEmail("user3@gmail.com");
+            var actualRole = rowWithEmail.GetRole();
+            var expectedRole = "MANAGER";
+            Assert.AreEqual(expectedRole, actualRole, "Admin changed user`s role to Manager");
 
-            LogProgress("Admin returns role to User");
-            user.ChangeRole("user3@gmail.com", "USER");
+            LogProgress("Post condition: Admin returns role to User");
+            rowsPage = userPage.ReturnUsersTable();
+            rowWithEmail = rowsPage.GetRowByEmail("user3@gmail.com");
+            changeRolePopUp = rowWithEmail.GetChangeRolePopUp();
+            userPage = changeRolePopUp.SelectRole("USER");
+            LogProgress("Post condition is successful");
         }
 
         [Test]
         public void VerifyThatListOfUsersIsVisibleForAdmin()
         {
             LogProgress("Admin navigating to User Page");
-            var user = home.NavigateToUsers();
-            Assert.IsTrue(user.TableOfUsersIsVisible(),"Table of users isn't visible");
+            var userPage = homePage.NavigateToUsers();
+            var tbOfUsersIsVisible = userPage.TableOfUsersIsVisible();
+            Assert.IsTrue(tbOfUsersIsVisible, "Table of users doesn't visible for Admin");
         }
 
         [Test]
         public void VerifyThatListOfUtilitiesIsVisibleForAdmin()
         {
             LogProgress("Admin navigating to Utilities Page");
-            var utilities = home.NavigateToUtilities();
-            Assert.IsTrue(utilities.TableOfUtilitiesIsVisible(),"Table of utilities isn't visible");
+            var utilitiesPage = homePage.NavigateToUtilities();
+            var tbOfUtilitiesIsVisible = utilitiesPage.TableOfUtilitiesIsVisible();
+            Assert.IsTrue(tbOfUtilitiesIsVisible, "Table of utilities doesn't visible for Admin");
         }
 
         [Test]
         public void IsUserSignedUp()
         {
             LogProgress("Admin navigating to User Page");
-            var user = home.NavigateToUsers();
-            Assert.IsTrue(user.UserIsVisible(),"User isn't visible");
+            var userPage = homePage.NavigateToUsers();
+            var userIsVisible = userPage.TableOfUsersIsVisible();
+            Assert.IsTrue(userIsVisible, "User`s table doesn`t contain specific user");
         }
     }
 }
